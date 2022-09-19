@@ -2,6 +2,8 @@
 
 Easy HAN - IoT on easy
 
+- [```edpbox```: contadores inteligentes](./edpbox/)
+
 ![Easy HAN](./easy-han-5.jpg)
 
 # Home Assistant
