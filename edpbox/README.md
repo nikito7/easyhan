@@ -55,7 +55,7 @@ https://www.e-redes.pt/pt-pt/transicao-energetica/redes-do-futuro/acesso-porta-s
 
 # Home Assistant
 
-![Home Assistant](./ha.png)
+![Home Assistant](../ha.png)
 
 https://www.home-assistant.io/
 
