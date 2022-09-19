@@ -20,6 +20,10 @@ E no forum:
 
 - https://forum.cpha.pt/t/easy-han-tasmota-configuracao-wifi-mqtt/10486
 
+Tutorial WiFi e MQTT:
+
+https://forum.cpha.pt/t/easy-han-tasmota-configuracao-wifi-mqtt/10486
+
 # Contadores
 > Testados com alimentação directa na HAN
 
