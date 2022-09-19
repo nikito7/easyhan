@@ -59,7 +59,9 @@ if cnt==40
 then
 smlj=1
 tper=11
-=>UfsRun discovery.txt
+=>UfsRun discovery1.txt
+=>Delay 100
+=>UfsRun discovery2.txt
 endif
 
 if cnt<99
