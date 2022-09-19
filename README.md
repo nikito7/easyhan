@@ -4,6 +4,8 @@ Easy HAN - IoT on easy
 
 - [```edpbox```: contadores inteligentes](./edpbox/)
 
+- [```growatt```: inversor solar](./growatt/)
+
 ![Easy HAN](./easy-han-5.jpg)
 
 # Home Assistant
