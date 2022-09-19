@@ -2,7 +2,7 @@
 
 Easy HAN - IoT on easy
 
-![Easy HAN](./edpbox/easy-han-5.jpg)
+![Easy HAN](./easy-han-5.jpg)
 
 # Home Assistant
 
