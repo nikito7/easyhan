@@ -1,4 +1,4 @@
-# Easy HAN
+# Easy HAN WiFi
 
 Leitor/Medidor da porta HAN.
 
@@ -6,7 +6,7 @@ Acesso aos dados do contador.
 
 Adaptador Modbus para WiFi.
 
-![edpbox: o seu contador inteligente, é mais que um contador](../easy-han-5.jpg)
+![edpbox: o seu contador inteligente, é mais que um contador](./edpbox.jpg)
 
 <i>Imagem demonstrativa</i>
 
