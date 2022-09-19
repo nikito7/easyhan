@@ -160,5 +160,5 @@ Tarifa {m} %ttext%
 ; eof meter
 #
 ; eof script
-; check code 12:16
+; check code 23:08
 
