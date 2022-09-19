@@ -49,8 +49,6 @@ https://www.e-redes.pt/pt-pt/transicao-energetica/redes-do-futuro/acesso-porta-s
 
 # Imagens
 
-![Easy HAN RS485 foto ](./easy-han-5.jpg)
-
 ![Easy HAN RS485 tasmota](./easy-han-2.jpg)
 
 ![Easy HAN RS485 tasmota](./easy-han-3.jpg)
