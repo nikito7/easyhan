@@ -1,4 +1,4 @@
-# Easy HAN
+**Easy HAN**
 
 Easy HAN - IoT on easy
 
@@ -10,12 +10,16 @@ Easy HAN - IoT on easy
 
 ![Easy HAN](./easy-han-5.jpg)
 
-Home Assistant:
+**Home Assistant:**
 
 ![Home Assistant](./ha.png)
 
 https://www.home-assistant.io/
 
-Site:
+**Site:**
 
 https://easyhan.pt/?git
+
+**Dev:**
+
+https://github.com/nikito7/modbus/
