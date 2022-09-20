@@ -22,4 +22,4 @@ https://easyhan.pt/?git
 
 **Dev:**
 
-https://github.com/nikito7/modbus/
+https://github.com/nikito7/edpbox/
