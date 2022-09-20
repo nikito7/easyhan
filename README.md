@@ -2,9 +2,11 @@
 
 Easy HAN - IoT on easy
 
-- [```edpbox```: contadores inteligentes](./edpbox/)
+- [```edpbox``` contadores inteligentes](./edpbox/)
 
-- [```growatt```: inversor solar](./growatt/)
+- [```growatt``` inversor solar](./growatt/)
+
+- [```wled``` board](./wled/)
 
 ![Easy HAN](./easy-han-5.jpg)
 
