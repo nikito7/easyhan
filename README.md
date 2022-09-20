@@ -1,4 +1,4 @@
-**Easy HAN**
+# Easy HAN
 
 Easy HAN - IoT on easy
 
