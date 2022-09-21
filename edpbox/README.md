@@ -14,11 +14,9 @@ Mais info no [```discord```](https://discord.gg/Mh9mTEA) da CPHA.
 
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
 
-E no forum:
+Forum:
 
-- https://forum.cpha.pt/t/easy-han-rs485-edpbox-modbus/9977
-
-- https://forum.cpha.pt/t/easy-han-tasmota-configuracao-wifi-mqtt/10486
+https://forum.cpha.pt/t/easy-han-rs485-edpbox-modbus/9977
 
 Tutorial WiFi e MQTT:
 
