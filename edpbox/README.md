@@ -6,7 +6,7 @@ Acesso aos dados do contador.
 
 Adaptador Modbus para WiFi.
 
-![edpbox: o seu contador inteligente, é mais que um contador](./edpbox.jpg)
+![edpbox: o seu contador inteligente, é mais que um contador](./edpbox1.jpg)
 
 <i>Imagem demonstrativa</i>
 
