@@ -11,9 +11,7 @@ Easy HAN - IoT on easy
 ![Easy HAN](./easy-han-5.jpg)
 
 **Home Assistant:**
-
 ![Home Assistant](./ha.png)
-
 https://www.home-assistant.io/
 
 **Site:**
