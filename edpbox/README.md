@@ -22,10 +22,6 @@ Tutorial WiFi e MQTT:
 
 https://forum.cpha.pt/t/easy-han-tasmota-configuracao-wifi-mqtt/10486
 
-OLX:
-
-https://m.olx.pt/d/anuncio/leitor-medidor-da-porta-han-contadores-inteligentes-modbus-solar-IDHlpzJ.html
-
 # Contadores
 > Testados com alimentação directa na HAN
 
