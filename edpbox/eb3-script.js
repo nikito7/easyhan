@@ -13,7 +13,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:pwrm=0 6
+m:pwrm=0 6
 m:p:pwrh=0 60
 pwr=0
 strh=""
@@ -85,7 +85,7 @@ endif
 if chg[mm]>0
 and cnt>30
 then
-pwrh=pwrm
+pwrh=pwrm[-2]
 strh="cnt"+s(mm-3)+"/4"
 print Saving Vars
 svars
