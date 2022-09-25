@@ -1,4 +1,4 @@
-; modbus watchdog block begin
+; janz wtd
 
 clk=s(2.0mm)+s(2.0ss)
 
@@ -17,11 +17,11 @@ then
 wtd=0
 if old==clk
 then
-print Easy HAN: modbus error !!!
+print modbus error !!!
 ; 
 =>Restart -3
 ; 
 endif
 endif
 
-; modbus watchdog block end
+; janz wtd eof
