@@ -84,7 +84,7 @@ if chg[mm]>0
 and cnt>30
 then
 gpwr=pwr
-cstr="cnt"+s(mm)+"/4"
+cstr="cnt"+s(mm-2)+"/4"
 print Saving Vars
 svars
 endif
