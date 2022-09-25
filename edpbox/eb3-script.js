@@ -13,7 +13,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-M:p:gpwr=0 30
+M:p:gpwr=0 60
 pwr=0
 cstr=""
 
@@ -52,18 +52,6 @@ case 3
 ttext="Cheias"
 ends
 
-; charts
-
-pwr=?#Power
-gpwr=pwr
-cstr="cnt0"
-
-if chg[mm]>0
-then
-print Saving Vars
-svars
-endif
-
 >S
 
 time=st(tstamp T 2)
@@ -84,6 +72,19 @@ endif
 if cnt<99
 then
 cnt+=1
+endif
+
+; charts
+
+pwr=?#Power
+
+if chg[mm]>0
+and cnt>30
+then
+gpwr=pwr
+cstr="cnt"+s(mm)+"/4"
+print Saving Vars
+svars
 endif
 
 ; janz wtd
@@ -108,7 +109,7 @@ $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Power Import 5min [W]',
+$title:'Power Import 1h [W]',
 $};
 $gc(e)
 
