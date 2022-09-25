@@ -86,7 +86,7 @@ if chg[mm]>0
 and cnt>30
 then
 pwrh=pwrm[-2]
-strh="cnt"+s(mm-3)+"/4"
+strh="cnt"+s(mm-1)
 print Saving Vars
 svars
 endif
