@@ -16,6 +16,7 @@ ttext=""
 m:p:pwrm=0 6
 m:p:pwrh=0 60
 pwr=0
+strm=""
 strh=""
 
 >B
@@ -57,6 +58,7 @@ ends
 
 pwr=?#Power
 pwrm=pwr
+strm="cnt"+s(ss)
 
 >S
 
@@ -108,7 +110,7 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt pwrm "wr" "powerm")
+$gc(lt pwrm "wr" "powerm" strm)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
