@@ -8,6 +8,7 @@ wfc=""
 wfp=0
 cnt=0
 wtd=0
+hh=0
 mm=0
 ss=0
 tariff=0
@@ -19,7 +20,7 @@ ttext=""
 =>Delay 100
 =>Delay 100
 
-tper=31
+tper=25
 smlj=0
 
 =>Delay 100
@@ -52,13 +53,14 @@ ends
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
+hh=sml[1]
 mm=sml[2]
 ss=sml[3]
 
-if cnt==40
+if cnt==30
 then
 smlj=1
-tper=11
+tper=10
 =>UfsRun discovery1.txt
 =>Delay 100
 =>UfsRun discovery2.txt
@@ -82,6 +84,7 @@ endif
 @<br>
 <br>
 Tarifa {m} %ttext%
+<br>
 
 ; EB3 Trifasico apenas !
 
