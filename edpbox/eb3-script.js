@@ -13,9 +13,10 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:gpwr=0 60
+m:p:pwrm=0 6
+m:p:pwrh=0 60
 pwr=0
-cstr=""
+strh=""
 
 >B
 
@@ -55,6 +56,7 @@ ends
 ; charts
 
 pwr=?#Power
+pwrm=pwr
 
 >S
 
@@ -83,8 +85,8 @@ endif
 if chg[mm]>0
 and cnt>30
 then
-gpwr=pwr
-cstr="cnt"+s(mm-2)+"/4"
+pwrh=pwrm
+strh="cnt"+s(mm-3)+"/4"
 print Saving Vars
 svars
 endif
@@ -106,7 +108,7 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt gpwr "wr" "power" cstr)
+$gc(lt pwrh "wr" "power" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
