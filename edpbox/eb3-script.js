@@ -13,6 +13,9 @@ mm=0
 ss=0
 tariff=0
 ttext=""
+M:p:gpwr=0 720
+pwr=0
+cstr=""
 
 >B
 
@@ -48,6 +51,18 @@ ttext="Ponta"
 case 3
 ttext="Cheias"
 ends
+
+; charts
+
+pwr=?#Power
+gpwr=pwr
+cstr="cnt0"
+
+if chg[mm]>0
+then
+print Saving Vars
+svars
+endif
 
 >S
 
@@ -85,6 +100,18 @@ endif
 <br>
 Tarifa {m} %ttext%
 <br>
+
+; charts
+
+$<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt gpwr "wr" "power" cstr)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Power Import [W]',
+$};
+$gc(e)
 
 ; EB3 Trifasico apenas !
 
