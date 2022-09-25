@@ -13,7 +13,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-M:p:gpwr=0 60
+m:p:gpwr=0 60
 pwr=0
 cstr=""
 
@@ -52,6 +52,10 @@ case 3
 ttext="Cheias"
 ends
 
+; charts
+
+pwr=?#Power
+
 >S
 
 time=st(tstamp T 2)
@@ -75,8 +79,6 @@ cnt+=1
 endif
 
 ; charts
-
-pwr=?#Power
 
 if chg[mm]>0
 and cnt>30
