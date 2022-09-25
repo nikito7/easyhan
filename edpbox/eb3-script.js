@@ -86,9 +86,8 @@ then
 cnt+=1
 endif
 
-; modbus watchdog block begin
-
-; modbus watchdog block end
+; janz wtd
+; janz wtd eof
 
 >W
 
