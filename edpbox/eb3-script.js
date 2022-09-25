@@ -13,7 +13,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-M:p:gpwr=0 720
+M:p:gpwr=0 180
 pwr=0
 cstr=""
 
@@ -109,7 +109,7 @@ $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Power Import [W]',
+$title:'Power Import 30min [W]',
 $};
 $gc(e)
 
