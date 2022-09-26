@@ -1,0 +1,18 @@
+; switch
+Publish2 homeassistant/switch/nikito7-PV1/restart/config {"name":"PV1 ESP Restart","unique_id":"PV1_ESP_Switch","command_topic":"cmnd/pv1/restart","payload_on":"1","payload_off":"1","icon":"mdi:restart","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+; sensor
+; esp
+Publish2 homeassistant/sensor/nikito7-PV1/uptime/config {"name":"PV1 ESP Uptime","unique_id":"PV1_ESP_Uptime","state_topic":"tele/pv1/STATE","value_template":"{{ ( value_json.UptimeSec / 3600 ) | round(1) }}","unit_of_measurement":"h","icon":"mdi:alarm","availability_topic":"tele/pv1/LWT","payload_available":"Online","payload_not_available":"Offline","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+Publish2 homeassistant/sensor/nikito7-PV1/freeheap/config {"name":"PV1 ESP Free Heap","unique_id":"PV1_ESP_Heap","state_topic":"tele/pv1/STATE","value_template":"{{ value_json.Heap }}","unit_of_measurement":"kB","icon":"mdi:chip","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+Publish2 homeassistant/sensor/nikito7-PV1/signal/config {"name":"PV1 ESP Signal","unique_id":"PV1_ESP_Signal","state_topic":"tele/pv1/STATE","value_template":"{{ value_json.Wifi.Signal }}","unit_of_measurement":"dB","device_class":"signal_strength","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+Publish2 homeassistant/sensor/nikito7-PV1/vcc/config {"name":"PV1 ESP Vcc","unique_id":"PV1_ESP_Vcc","state_topic":"tele/pv1/STATE","value_template":"{{ value_json.Vcc|float(0.000) }}","unit_of_measurement":"V","device_class":"voltage","state_class":"measurement","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+; PV Total kWh
+Publish2 homeassistant/sensor/nikito7-PV1/totalkwh/config {"name":"PV1 Total Energy","unique_id":"PV1_TotEne","state_topic":"tele/pv1/SENSOR","value_template":"{%% set x = value_json.PV1.PV_Energy|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+; Inverter Status
+Publish2 homeassistant/sensor/nikito7-PV1/status/config {"name":"PV1 Inverter Status","unique_id":"PV1_inv_status","state_topic":"tele/pv1/SENSOR","value_template":"{%% set x = value_json.PV1.PV_Status|int(0) %%} {%% if x == 0 %%} {{ 'Em espera' }} {%% elif x == 1 %%} {{ 'Normal' }} {%% elif x == 3 %%} {{ 'Falha' }} {%% endif %%}","icon":"mdi:counter","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+; Power
+Publish2 homeassistant/sensor/nikito7-PV1/powinput/config {"name":"PV1 Input Power","unique_id":"PV1_InpPower","state_topic":"tele/pv1/SENSOR","value_template":"{%% set x = value_json['PV1']['InputPower']|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_measurement":"W","device_class":"power","state_class":"measurement","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+Publish2 homeassistant/sensor/nikito7-PV1/powoutput/config {"name":"PV1 Output Power","unique_id":"PV1_OutPower","state_topic":"tele/pv1/SENSOR","value_template":"{%% set x = value_json['PV1']['Power']|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_measurement":"W","device_class":"power","state_class":"measurement","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+; eof
+; check code 14:45
+
