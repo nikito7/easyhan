@@ -15,8 +15,7 @@ m:p:pwrm=0 6
 m:p:pwrh=0 60
 pwr=0
 strh=""
-m:p:lpih=0 4
-m:p:lpid=0 24
+m:p:lpid=0 96
 lpi=0
 lpmm=0
 strd=""
@@ -61,11 +60,12 @@ ends
 pwr=?#Power
 pwrm=pwr
 lpmm=?#LP1_MM
+lpi=?#LP3_IMP
 
 if chg[lpmm]>0
 then
-lpi=?#LP3_IMP
-lpim=lpi*4
+strd="cnt"+s(hh-1)
+lpid=lpi
 endif
 
 >S
@@ -97,13 +97,6 @@ pwrh=pwrm[-2]
 strh="cnt"+s(mm-5)
 print Saving Vars
 svars
-endif
-
-if chg[hh]>0
-and cnt>30
-then
-strd="cnt"+s(hh-1)
-lpid=lpih[-2]
 endif
 
 ; janz wtd
