@@ -131,7 +131,7 @@ $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Load Profile Import [Wh]',
+$title:'Load Profile Import 24h (96) [Wh]',
 $};
 $gc(e)
 
@@ -220,8 +220,8 @@ $gc(e)
 1,01441dxxxxxxuu@i7:1,Day,,LP1_D,0
 1,01441dxxxxxxxxxxuu@i7:1,Hour,h,LP1_HH,0
 1,01441dxxxxxxxxxxxxuu@i7:1,Minute,m,LP1_MM,0
-1,01441dxxxxxxxxxxxxxxxxxxxxxxuu@i7:1,Summer,,LP1_DST,0
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxuu@i7:1,AMR Profile Status,,LP2_AMR,0
+; summer
+; amr
 1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
 1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,+Ri Inc,VArh,LP4,0
 1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,-Rc Inc,VArh,LP5,0
