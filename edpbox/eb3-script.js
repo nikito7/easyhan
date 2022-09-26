@@ -14,18 +14,13 @@ tariff=0
 ttext=""
 m:p:ipwrm=0 6
 m:p:ipwrh=0 60
+m:p:ipwrd=0 24
 m:p:epwrm=0 6
 m:p:epwrh=0 60
+m:p:epwrd=0 24
 ipwr=0
 epwr=0
 strh=""
-m:p:lpid=0 24
-m:p:lpih=0 4
-m:p:lped=0 24
-m:p:lpeh=0 4
-lpi=0
-lpe=0
-lpmm=0
 strd=""
 
 >B
@@ -67,9 +62,6 @@ ends
 
 ipwr=?#Power
 epwr=?#APE
-lpmm=?#LP1_MM
-lpi=?#LP3_IMP
-lpe=?#LP6_EXP
 
 >S
 
@@ -100,17 +92,10 @@ ipwrm=ipwr
 epwrm=epwr
 endif
 
-if chg[lpmm]>0
-and cnt>30
-then
-lpih=lpi
-lpeh=lpe
-print Array: lpih lpeh
-endif
-
 if chg[mm]>0
 and cnt>30
 then
+strh="cnt"+s(mm)
 ;
 ipwrh=ipwrm[-2]
 print Array: ipwrh
@@ -118,7 +103,6 @@ print Array: ipwrh
 epwrh=epwrm[-2]
 print Array: epwrh
 ;
-strh="cnt"+s(mm)
 print Saving Vars
 svars
 endif
@@ -129,9 +113,13 @@ if chg[hour]>0
 and cnt>30
 then
 strd="cnt"+s(hh)
-lpid=lpih[0]+lpih[1]+lpih[2]+lpih[3]
-lped=lpeh[0]+lpeh[1]+lpeh[2]+lpeh[3]
-print Array: lpid lped
+;
+ipwrd=ipwrh[-2]
+print Array: ipwrd
+;
+epwrd=epwrh[-2]
+print Array: epwrd
+;
 endif
 
 ; janz wtd
@@ -168,7 +156,6 @@ endif
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Vars </b> ipwr=%0ipwr% epwr=%0epwr% hour=%0hour%
-@<b>Vars </b> lpi=%0lpi% lpe=%0lpe% lpmm=%0lpmm%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
@@ -198,22 +185,22 @@ $};
 $gc(e)
 
 $<div id="chart3" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt lpid "wr" "Import" strd)
+$gc(lt ipwrd "wr" "Import" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Energy Import 24h [Wh]',
+$title:'Power Import 24h [Wh]',
 $};
 $gc(e)
 
 $<div id="chart4" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt lped "wr" "Export" strd)
+$gc(lt epwrd "wr" "Export" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Energy Export 24h [Wh]',
+$title:'Power Export 24h [Wh]',
 $};
 $gc(e)
 
