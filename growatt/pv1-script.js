@@ -4,7 +4,8 @@ bug="fix"
 wfc=""
 wfp=0
 cnt=0
-m:p:ipwrh=0 180
+m:p:ipwrm=0 60
+m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
 hour=0
@@ -53,7 +54,8 @@ if upsecs%tper==0
 and cnt>30
 then
 str="cnt0"
-ipwrh=ipwr
+ipwrm=ipwr
+ipwrh=ipwrm[-2]
 endif
 
 hour=int(time/60)
