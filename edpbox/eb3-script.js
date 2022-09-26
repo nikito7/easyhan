@@ -1,5 +1,6 @@
 >D
 
+hour=0
 clk=""
 old=""
 wfc=""
@@ -107,7 +108,9 @@ print Saving Vars
 svars
 endif
 
-if chg[hh]>0
+hour=int(time/60)
+
+if chg[hour]>0
 and cnt>30
 then
 strd="cnt"+s(hh)
@@ -147,7 +150,7 @@ endif
 
 @<b>NTP </b> %tstamp%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
-@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
+@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old% hour=%0hour%
 @<b>Vars </b> pwr=%0pwr% lpmm=%0lpmm% lpi=%0lpi%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
@@ -181,7 +184,7 @@ $gc(e)
 
 >M 1
 
-+1,3,mN1,1,9600,EB3,1,11,r010400010001,r0104006C0007,r010400730007,r0104007A0006,r010400260003,r010400160006,r0104000B0004,r01440601
++1,3,mN1,1,9600,EB3,1,10,r010400010001,r0104006C0007,r010400730007,r0104007A0006,r010400260003,r010400160006,r0104000B0004,r01440601
 
 ; 01
 
@@ -269,8 +272,8 @@ $gc(e)
 1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,-Rc Inc,VArh,LP5,0
 1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
 
-; eof load profile
+; eof lp
 ; eof meter
 #
 ; eof script
-; check code 12:14
+; check code 16:51
