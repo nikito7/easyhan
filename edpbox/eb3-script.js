@@ -16,6 +16,7 @@ m:ipwrm=0 60
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
+strm=""
 strh=""
 strd=""
 
@@ -80,6 +81,7 @@ endif
 
 if cnt>30
 then
+strm="cnt"+s(ss)
 ipwrm=ipwr
 endif
 
@@ -145,7 +147,7 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrm "wr" "Import" strh)
+$gc(lt ipwrm "wr" "Import" strm)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
