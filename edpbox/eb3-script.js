@@ -15,7 +15,8 @@ m:p:pwrm=0 6
 m:p:pwrh=0 60
 pwr=0
 strh=""
-m:p:lpid=0 72
+m:p:lpid=0 24
+m:p:lpih=0 4
 lpi=0
 lpmm=0
 strd=""
@@ -64,8 +65,7 @@ lpi=?#LP3_IMP
 
 if chg[lpmm]>0
 then
-strd="cnt0"
-lpid=lpi
+lpih=lpi
 endif
 
 >S
@@ -97,6 +97,12 @@ pwrh=pwrm[-2]
 strh="cnt"+s(mm-5)
 print Saving Vars
 svars
+endif
+
+if chg[hh]>0
+then
+strd="cnt"+s(hh-1)
+lpid=lpih[0]+lpih[1]+lpih[2]+lpih[3]
 endif
 
 ; janz wtd
@@ -153,12 +159,12 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt lpid "wr" "Load Profile Inc" strd)
+$gc(lt lpid "wr" "Import Inc" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Load Profile Import 18h [Wh]',
+$title:'Load Profile Import 24h [Wh]',
 $};
 $gc(e)
 
