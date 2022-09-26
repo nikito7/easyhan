@@ -1,6 +1,7 @@
 >D
 
-hour=0
+time=""
+date=""
 clk=""
 old=""
 wfc=""
@@ -16,6 +17,7 @@ m:ipwrm=0 60
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
+hour=0
 strm=""
 strh=""
 strd=""
@@ -58,6 +60,9 @@ ends
 ipwr=?#Power
 
 >S
+
+time=st(tstamp T 2)
+date=st(tstamp T 1)
 
 hh=sml[1]
 mm=sml[2]
@@ -135,7 +140,7 @@ endif
 
 >W
 
-@<b>NTP </b> %tstamp%
+@<b>NTP </b> %date% %time%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
