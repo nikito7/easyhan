@@ -63,8 +63,6 @@ pwrm=pwr
 lpmm=?#LP1_MM
 lpi=?#LP3_IMP
 
-print Vars: pwr %0pwr% lpmm %0lpmm% lpi %0lpi%
-
 if chg[lpmm]>0
 then
 lpih=lpi
@@ -143,6 +141,7 @@ endif
 @<b>NTP </b> %tstamp%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
+@<b>Vars </b> pwr=%0pwr% lpmm=%0lpmm% lpi=%0lpi%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
