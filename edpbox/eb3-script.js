@@ -178,7 +178,7 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrh "wr" "Power Import" strh)
+$gc(lt ipwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
@@ -188,12 +188,32 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt lpid "wr" "Import Inc" strd)
+$gc(lt epwrh "wr" "Export" strh)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Power Export 1h [W]',
+$};
+$gc(e)
+
+$<div id="chart3" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt lpid "wr" "Import" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
 $title:'Energy Import 24h [Wh]',
+$};
+$gc(e)
+
+$<div id="chart4" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt lped "wr" "Export" strd)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Energy Export 24h [Wh]',
 $};
 $gc(e)
 
