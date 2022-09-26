@@ -178,22 +178,22 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt2 ipwrh epwrh "wr" "Power Import" "Power Export" strh)
+$gc(lt ipwrh "wr" "Power Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Power Import & Export 1h [W]',
+$title:'Power Import 1h [W]',
 $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt2 lpid lped "wr" "Import Inc" "Export Inc" strd)
+$gc(lt lpid "wr" "Import Inc" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Energy Import & Export 24h [Wh]',
+$title:'Energy Import 24h [Wh]',
 $};
 $gc(e)
 
