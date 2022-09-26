@@ -64,6 +64,8 @@ then
 strd="cnt"+s(hour)
 ipwrd=ipwrh[-2]
 print Array: ipwrd
+print Saving Vars
+svars
 endif
 
 >W
