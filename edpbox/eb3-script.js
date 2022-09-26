@@ -13,7 +13,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:ipwrm=0 60
+m:p:ipwrm=0 6
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
@@ -84,9 +84,10 @@ endif
 
 ; charts
 
-if cnt>30
+if upsecs%tper==0
+and cnt>30
 then
-strm="cnt"+s(ss)
+strm="cnt0"
 ipwrm=ipwr
 endif
 
