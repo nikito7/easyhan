@@ -59,11 +59,17 @@ ends
 ; charts
 
 pwr=?#Power
-pwrm=pwr
 lpmm=?#LP1_MM
 lpi=?#LP3_IMP
 
+if upsecs%tper==0
+and cnt>30
+then
+pwrm=pwr
+endif
+
 if chg[lpmm]>0
+and cnt>30
 then
 lpih=lpi
 print Array: lpih
@@ -102,6 +108,7 @@ svars
 endif
 
 if chg[hh]>0
+and cnt>30
 then
 strd="cnt"+s(hh)
 lpid=lpih[0]+lpih[1]+lpih[2]+lpih[3]
