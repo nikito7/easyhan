@@ -1,4 +1,200 @@
+>D
 
+hour=0
+clk=""
+old=""
+wfc=""
+wfp=0
+cnt=0
+wtd=0
+hh=0
+mm=0
+ss=0
+tariff=0
+ttext=""
+m:p:ipwrm=0 6
+m:p:ipwrh=0 60
+m:p:epwrm=0 6
+m:p:epwrh=0 60
+ipwr=0
+epwr=0
+strh=""
+m:p:lpid=0 24
+m:p:lpih=0 4
+m:p:lped=0 24
+m:p:lpeh=0 4
+lpi=0
+lpe=0
+lpmm=0
+strd=""
+
+>B
+
+=>Delay 100
+=>Delay 100
+=>Delay 100
+
+tper=25
+smlj=0
+
+=>Delay 100
+=>SerialLog 0
+=>WifiConfig
+=>WifiPower
+
+=>Delay 100
+=>Sensor53 r
+
+>E
+
+wfc=WifiConfig#?
+wfp=WifiPower
+
+>T
+
+tariff=?#Tariff
+
+switch tariff
+case 1
+ttext="Vazio"
+case 2
+ttext="Ponta"
+case 3
+ttext="Cheias"
+ends
+
+; charts
+
+ipwr=?#Power
+epwr=?#APE
+lpmm=?#LP1_MM
+lpi=?#LP3_IMP
+lpe=?#LP3_EXP
+
+if upsecs%tper==0
+and cnt>30
+then
+ipwrm=ipwr
+epwrm=epwr
+endif
+
+if chg[lpmm]>0
+and cnt>30
+then
+lpih=lpi
+lpeh=lpe
+print Array: lpih lpeh
+endif
+
+>S
+
+hh=sml[1]
+mm=sml[2]
+ss=sml[3]
+
+if cnt==30
+then
+smlj=1
+tper=10
+=>UfsRun discovery1.txt
+=>Delay 100
+=>UfsRun discovery2.txt
+endif
+
+if cnt<99
+then
+cnt+=1
+endif
+
+; charts
+
+if chg[mm]>0
+and cnt>30
+then
+;
+ipwrh=ipwrm[-2]
+print Array: ipwrh
+;
+epwrh=epwrm[-2]
+print Array: epwrh
+;
+strh="cnt"+s(mm)
+print Saving Vars
+svars
+endif
+
+hour=int(time/60)
+
+if chg[hour]>0
+and cnt>30
+then
+strd="cnt"+s(hh)
+lpid=lpih[0]+lpih[1]+lpih[2]+lpih[3]
+lped=lpeh[0]+lpeh[1]+lpeh[2]+lpeh[3]
+print Array: lpid lped
+endif
+
+; janz wtd
+
+clk=s(2.0mm)+s(2.0ss)
+
+if cnt==99
+then
+wtd+=1
+endif
+
+if wtd==1
+then
+old=clk
+endif
+
+if wtd==90
+then
+wtd=0
+if old==clk
+then
+print modbus error !!!
+; 
+=>Restart -3
+; 
+endif
+endif
+
+; janz wtd eof
+
+>W
+
+@<b>NTP </b> %tstamp%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% hour=%0hour%
+@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
+@<b>Vars </b> ipwr=%0ipwr% epwr=%0epwr% lpmm=%0lpmm% lpi=%0lpi% lpe=%0lpe%
+@<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
+@<br>
+<br>
+Tarifa {m} %ttext%
+<br>
+
+; charts
+
+$<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt2 ipwrh epwrh "wr" "Power Import" "Power Export" strh)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Power Import & Export 1h [W]',
+$};
+$gc(e)
+
+$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt2 lpid lped "wr" "Import Inc" "Export Inc" strd)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Energy Import & Export 24h [Wh]',
+$};
+$gc(e)
 
 ; EB1 monofasico
 
