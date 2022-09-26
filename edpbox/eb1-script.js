@@ -69,7 +69,7 @@ ipwr=?#Power
 epwr=?#APE
 lpmm=?#LP1_MM
 lpi=?#LP3_IMP
-lpe=?#LP3_EXP
+lpe=?#LP6_EXP
 
 if upsecs%tper==0
 and cnt>30
@@ -200,7 +200,7 @@ $gc(e)
 
 >M 1
 
-+1,3,mN1,1,9600,EBx,1,15,r010400010001,r0104006C0002,r010400160002,r010400260003,r010400790003,r0104007F0002,r0104000B0002,r01440301
++1,3,mN1,1,9600,EB1,1,10,r010400010001,r0104006C0002,r010400160002,r010400260003,r010400790003,r0104007F0002,r0104000B0002,r01440301
 
 ; r01440601 Imp+Exp
 ; r01440301 Imp
@@ -262,16 +262,16 @@ $gc(e)
 1,014411xxxxxxuu@i7:1,Day,,LP1_D,0
 1,014411xxxxxxxxxxuu@i7:1,Hour,h,LP1_HH,0
 1,014411xxxxxxxxxxxxuu@i7:1,Minute,m,LP1_MM,0
-1,014411xxxxxxxxxxxxxxxxxxxxxxuu@i7:1,Summer,,LP1_DST,0
-1,014411xxxxxxxxxxxxxxxxxxxxxxxxuu@i7:1,AMR Profile Status,,LP2_AMR,0
+; summer
+; amr
 1,014411xxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
-;1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,+Ri Inc,VArh,LP4,0
-;1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,-Rc Inc,VArh,LP5,0
-;1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
+1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,+Ri Inc,VArh,LP4,0
+1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,-Rc Inc,VArh,LP5,0
+1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
 
-; eof load profile
+; eof lp
 ; eof meter
 #
 ; eof script
-; check code 23:08
+; check code 17:59
 
