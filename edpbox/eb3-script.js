@@ -12,7 +12,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:ipwrm=0 60
+m:ipwrm=0 6
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
@@ -78,7 +78,8 @@ endif
 
 ; charts
 
-if cnt>30
+if upsecs%tper==0
+and cnt>30
 then
 ipwrm=ipwr
 endif
@@ -136,7 +137,6 @@ endif
 @<b>NTP </b> %tstamp%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
-@<b>Vars </b> ipwr=%0ipwr% epwr=%0epwr% hour=%0hour%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
