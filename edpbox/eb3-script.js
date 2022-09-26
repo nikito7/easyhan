@@ -12,7 +12,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:ipwrm=0 6
+m:ipwrm=0 60
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
@@ -78,8 +78,7 @@ endif
 
 ; charts
 
-if upsecs%tper==0
-and cnt>30
+if cnt>30
 then
 ipwrm=ipwr
 endif
@@ -166,7 +165,7 @@ $};
 $gc(e)
 
 $<div id="chart3" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt epwrh "wr" "Import" strh)
+$gc(lt ipwrd "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
