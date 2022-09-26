@@ -12,14 +12,10 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:ipwrm=0 6
+m:ipwrm=0 60
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
-m:p:epwrm=0 6
-m:p:epwrh=0 60
-m:p:epwrd=0 24
 ipwr=0
-epwr=0
 strh=""
 strd=""
 
@@ -58,10 +54,7 @@ case 3
 ttext="Cheias"
 ends
 
-; charts
-
 ipwr=?#Power
-epwr=?#APE
 
 >S
 
@@ -85,24 +78,17 @@ endif
 
 ; charts
 
-if upsecs%tper==0
-and cnt>30
+if cnt>30
 then
 ipwrm=ipwr
-epwrm=epwr
 endif
 
 if chg[mm]>0
 and cnt>30
 then
 strh="cnt"+s(mm)
-;
 ipwrh=ipwrm[-2]
 print Array: ipwrh
-;
-epwrh=epwrm[-2]
-print Array: epwrh
-;
 print Saving Vars
 svars
 endif
@@ -113,13 +99,8 @@ if chg[hour]>0
 and cnt>30
 then
 strd="cnt"+s(hh)
-;
 ipwrd=ipwrh[-2]
 print Array: ipwrd
-;
-epwrd=epwrh[-2]
-print Array: epwrd
-;
 endif
 
 ; janz wtd
@@ -165,6 +146,16 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt ipwrm "wr" "Import" strh)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Power Import 60s [W]',
+$};
+$gc(e)
+
+$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
 $gc(lt ipwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
@@ -174,33 +165,13 @@ $title:'Power Import 1h [W]',
 $};
 $gc(e)
 
-$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt epwrh "wr" "Export" strh)
-$var options = {
-$chartArea:{left:40,width:'80%%'},
-$width:'300px',
-$legend:'none',
-$title:'Power Export 1h [W]',
-$};
-$gc(e)
-
 $<div id="chart3" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrd "wr" "Import" strd)
+$gc(lt epwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Power Import 24h [Wh]',
-$};
-$gc(e)
-
-$<div id="chart4" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt epwrd "wr" "Export" strd)
-$var options = {
-$chartArea:{left:40,width:'80%%'},
-$width:'300px',
-$legend:'none',
-$title:'Power Export 24h [Wh]',
+$title:'Power Import 24h [W]',
 $};
 $gc(e)
 
