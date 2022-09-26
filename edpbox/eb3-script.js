@@ -165,9 +165,10 @@ endif
 >W
 
 @<b>NTP </b> %tstamp%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% hour=%0hour%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
-@<b>Vars </b> ipwr=%0ipwr% epwr=%0epwr% lpmm=%0lpmm% lpi=%0lpi% lpe=%0lpe%
+@<b>Vars </b> ipwr=%0ipwr% epwr=%0epwr% hour=%0hour%
+@<b>Vars </b> lpi=%0lpi% lpe=%0lpe% lpmm=%0lpmm%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
