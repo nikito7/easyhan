@@ -66,6 +66,7 @@ lpi=?#LP3_IMP
 if chg[lpmm]>0
 then
 lpih=lpi
+print Array: lpih
 endif
 
 >S
@@ -94,6 +95,7 @@ if chg[mm]>0
 and cnt>30
 then
 pwrh=pwrm[-2]
+print Array: pwrh
 strh="cnt"+s(mm-5)
 print Saving Vars
 svars
@@ -103,6 +105,7 @@ if chg[hh]>0
 then
 strd="cnt"+s(hh-1)
 lpid=lpih[0]+lpih[1]+lpih[2]+lpih[3]
+print Array: lpid
 endif
 
 ; janz wtd
@@ -164,7 +167,7 @@ $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Load Profile Import 24h [Wh]',
+$title:'Energy Import 24h [Wh]',
 $};
 $gc(e)
 
