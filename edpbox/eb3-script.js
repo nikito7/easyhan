@@ -15,7 +15,7 @@ m:p:pwrm=0 6
 m:p:pwrh=0 60
 pwr=0
 strh=""
-m:p:lpid=0 96
+m:p:lpid=0 72
 lpi=0
 lpmm=0
 strd=""
@@ -64,7 +64,7 @@ lpi=?#LP3_IMP
 
 if chg[lpmm]>0
 then
-strd="cnt"+s(hh-1)
+strd="cnt"+s(hh)+s(mm*10)
 lpid=lpi
 endif
 
@@ -131,7 +131,7 @@ $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Load Profile Import 24h (96) [Wh]',
+$title:'Load Profile Import 18h [Wh]',
 $};
 $gc(e)
 
