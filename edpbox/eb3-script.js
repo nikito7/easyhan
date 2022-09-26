@@ -16,7 +16,12 @@ ttext=""
 m:p:pwrm=0 6
 m:p:pwrh=0 60
 pwr=0
-strm=""
+strh=""
+m:p:lpih=0 4
+m:p:pwrd=0 24
+lpi=0
+lpmm=0
+strd=""
 
 >B
 
@@ -57,6 +62,13 @@ ends
 
 pwr=?#Power
 pwrm=pwr
+lpmm=?#LP1_MM
+
+if chg[lpmm]>0
+then
+lpi=?#LP3_IMP
+lpim=lpi*4
+endif
 
 >S
 
@@ -91,6 +103,13 @@ print Saving Vars
 svars
 endif
 
+if chg[hh]>0
+and cnt>30
+then
+strd="cnt"+s(hh-1)
+lpid=lpih[-2]
+endif
+
 ; janz wtd
 ; janz wtd eof
 
@@ -114,6 +133,16 @@ $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
 $title:'Power Import 1h [W]',
+$};
+$gc(e)
+
+$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt lpid "wr" "lpid" strd)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Load Profile Import [Wh]',
 $};
 $gc(e)
 
