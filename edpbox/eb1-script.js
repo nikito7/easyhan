@@ -1,65 +1,3 @@
->D
-
-time=""
-date=""
-clk=""
-old=""
-wfc=""
-wfp=0
-cnt=0
-wtd=0
-mm=0
-ss=0
-tariff=0
-ttext=""
-
->B
-
-=>Delay 100
-=>Delay 100
-=>Delay 100
-
-tper=31
-smlj=0
-
-=>Delay 100
-=>SerialLog 0
-=>WifiConfig
-=>WifiPower
-
-=>Delay 100
-=>Sensor53 r
-
->E
-
-wfc=WifiConfig#?
-wfp=WifiPower
-
->T
-
-tariff=?#Tariff
-
-switch tariff
-case 1
-ttext="Vazio"
-case 2
-ttext="Ponta"
-case 3
-ttext="Cheias"
-ends
-
->S
-
-time=st(tstamp T 2)
-date=st(tstamp T 1)
-mm=sml[2]
-ss=sml[3]
-
-if cnt==40
-then
-smlj=1
-tper=11
-=>UfsRun discovery1.txt
 =>Delay 100
 =>UfsRun discovery2.txt
 endif
@@ -69,19 +7,79 @@ then
 cnt+=1
 endif
 
-; modbus watchdog block begin
+; charts
 
-; modbus watchdog block end
+if chg[mm]>0
+and cnt>30
+then
+pwrh=pwrm[-2]
+strh="cnt"+s(mm-5)
+print Saving Vars
+svars
+endif
+
+; janz wtd
+; janz wtd
+
+clk=s(2.0mm)+s(2.0ss)
+
+if cnt==99
+then
+wtd+=1
+endif
+
+if wtd==1
+then
+old=clk
+endif
+
+if wtd==90
+then
+wtd=0
+if old==clk
+then
+print modbus error !!!
+; 
+=>Restart -3
+; 
+endif
+endif
+
+; janz wtd eof
+; janz wtd eof
 
 >W
 
-@<b>NTP </b> %date% %time%
+@<b>NTP </b> %tstamp%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
 Tarifa {m} %ttext%
+<br>
+
+; charts
+
+$<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt pwrh "wr" "powerh" strh)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Power Import 1h [W]',
+$};
+$gc(e)
+
+$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$gc(lt lpid "wr" "lpid" strd)
+$var options = {
+$chartArea:{left:40,width:'80%%'},
+$width:'300px',
+$legend:'none',
+$title:'Load Profile Import 18h [Wh]',
+$};
+$gc(e)
 
 ; EB1 monofasico
 
