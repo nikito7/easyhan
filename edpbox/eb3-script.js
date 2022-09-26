@@ -64,7 +64,7 @@ lpi=?#LP3_IMP
 
 if chg[lpmm]>0
 then
-strd="cnt"+s(hh)+s(mm*10)
+strd="cnt0/12"
 lpid=lpi
 endif
 
