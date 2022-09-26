@@ -63,10 +63,12 @@ pwrm=pwr
 lpmm=?#LP1_MM
 lpi=?#LP3_IMP
 
+print Vars: pwr %0pwr% lpmm %0lpmm% lpi %0lpi%
+
 if chg[lpmm]>0
 then
 lpih=lpi
-print Array: lpih %lpih[0]%
+print Array: lpih
 endif
 
 >S
@@ -95,20 +97,19 @@ if chg[mm]>0
 and cnt>30
 then
 pwrh=pwrm[-2]
-print Array: pwrh pwrm %pwrm[0]%
-strh="cnt"+s(mm-5)
+print Array: pwrh
+strh="cnt"+s(mm)
 print Saving Vars
 svars
 endif
 
 if chg[hh]>0
 then
-strd="cnt"+s(hh-1)
+strd="cnt"+s(hh)
 lpid=lpih[0]+lpih[1]+lpih[2]+lpih[3]
 print Array: lpid
 endif
 
-; janz wtd
 ; janz wtd
 
 clk=s(2.0mm)+s(2.0ss)
@@ -135,7 +136,6 @@ print modbus error !!!
 endif
 endif
 
-; janz wtd eof
 ; janz wtd eof
 
 >W
