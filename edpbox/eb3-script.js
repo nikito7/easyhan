@@ -69,7 +69,7 @@ ipwr=?#Power
 epwr=?#APE
 lpmm=?#LP1_MM
 lpi=?#LP3_IMP
-lpe=?#LP3_EXP
+lpe=?#LP6_EXP
 
 if upsecs%tper==0
 and cnt>30
