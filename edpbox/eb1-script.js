@@ -1,3 +1,84 @@
+>D
+
+clk=""
+old=""
+wfc=""
+wfp=0
+cnt=0
+wtd=0
+hh=0
+mm=0
+ss=0
+tariff=0
+ttext=""
+m:p:pwrm=0 6
+m:p:pwrh=0 60
+pwr=0
+strh=""
+m:p:lpid=0 72
+lpi=0
+lpmm=0
+strd=""
+
+>B
+
+=>Delay 100
+=>Delay 100
+=>Delay 100
+
+tper=25
+smlj=0
+
+=>Delay 100
+=>SerialLog 0
+=>WifiConfig
+=>WifiPower
+
+=>Delay 100
+=>Sensor53 r
+
+>E
+
+wfc=WifiConfig#?
+wfp=WifiPower
+
+>T
+
+tariff=?#Tariff
+
+switch tariff
+case 1
+ttext="Vazio"
+case 2
+ttext="Ponta"
+case 3
+ttext="Cheias"
+ends
+
+; charts
+
+pwr=?#Power
+pwrm=pwr
+lpmm=?#LP1_MM
+lpi=?#LP3_IMP
+
+if chg[lpmm]>0
+then
+strd="cnt0"
+lpid=lpi
+endif
+
+>S
+
+hh=sml[1]
+mm=sml[2]
+ss=sml[3]
+
+if cnt==30
+then
+smlj=1
+tper=10
+=>UfsRun discovery1.txt
 =>Delay 100
 =>UfsRun discovery2.txt
 endif
