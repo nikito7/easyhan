@@ -66,7 +66,7 @@ lpi=?#LP3_IMP
 if chg[lpmm]>0
 then
 lpih=lpi
-print Array: lpih
+print Array: lpih insa(lpih)
 endif
 
 >S
@@ -95,7 +95,7 @@ if chg[mm]>0
 and cnt>30
 then
 pwrh=pwrm[-2]
-print Array: pwrh
+print Array: pwrh pwrm insa(pwrm)
 strh="cnt"+s(mm-5)
 print Saving Vars
 svars
