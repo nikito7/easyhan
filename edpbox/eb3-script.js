@@ -127,7 +127,7 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt pwrh "wr" "powerh" strh)
+$gc(c pwrh "wr" "powerh" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
@@ -137,7 +137,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt lpid "wr" "lpid" strd)
+$gc(c lpid "wr" "lpid" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
