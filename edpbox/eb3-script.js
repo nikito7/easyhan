@@ -71,21 +71,6 @@ lpmm=?#LP1_MM
 lpi=?#LP3_IMP
 lpe=?#LP6_EXP
 
-if upsecs%tper==0
-and cnt>30
-then
-ipwrm=ipwr
-epwrm=epwr
-endif
-
-if chg[lpmm]>0
-and cnt>30
-then
-lpih=lpi
-lpeh=lpe
-print Array: lpih lpeh
-endif
-
 >S
 
 hh=sml[1]
@@ -107,6 +92,21 @@ cnt+=1
 endif
 
 ; charts
+
+if upsecs%tper==0
+and cnt>30
+then
+ipwrm=ipwr
+epwrm=epwr
+endif
+
+if chg[lpmm]>0
+and cnt>30
+then
+lpih=lpi
+lpeh=lpe
+print Array: lpih lpeh
+endif
 
 if chg[mm]>0
 and cnt>30
