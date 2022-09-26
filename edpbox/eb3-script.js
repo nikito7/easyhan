@@ -12,11 +12,11 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:pwrm=0 6
-m:p:pwrh=0 60
+m:p:ipwrm=0 6
+m:p:ipwrh=0 60
 m:p:epwrm=0 6
 m:p:epwrh=0 60
-pwr=0
+ipwr=0
 epwr=0
 strh=""
 m:p:lpid=0 24
@@ -65,7 +65,7 @@ ends
 
 ; charts
 
-pwr=?#Power
+ipwr=?#Power
 epwr=?#APE
 lpmm=?#LP1_MM
 lpi=?#LP3_IMP
@@ -74,7 +74,7 @@ lpe=?#LP3_EXP
 if upsecs%tper==0
 and cnt>30
 then
-pwrm=pwr
+ipwrm=ipwr
 epwrm=epwr
 endif
 
@@ -112,8 +112,8 @@ if chg[mm]>0
 and cnt>30
 then
 ;
-pwrh=pwrm[-2]
-print Array: pwrh
+ipwrh=ipwrm[-2]
+print Array: ipwrh
 ;
 epwrh=epwrm[-2]
 print Array: epwrh
@@ -165,9 +165,9 @@ endif
 >W
 
 @<b>NTP </b> %tstamp%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
-@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old% hour=%0hour%
-@<b>Vars </b> pwr=%0pwr% lpmm=%0lpmm% lpi=%0lpi%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% hour=%0hour%
+@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
+@<b>Vars </b> ipwr=%0ipwr% epwr=%0epwr% lpmm=%0lpmm% lpi=%0lpi% lpe=%0lpe%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
@@ -177,22 +177,22 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt pwrh epwrh "wr" "Power Import" "Power Export" strh)
+$gc(lt2 ipwrh epwrh "wr" "Power Import" "Power Export" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Power 1h [W]',
+$title:'Power Import & Export 1h [W]',
 $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt lpid lped "wr" "Import Inc" "Export Inc" strd)
+$gc(lt2 lpid lped "wr" "Import Inc" "Export Inc" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Energy 24h [Wh]',
+$title:'Energy Import & Export 24h [Wh]',
 $};
 $gc(e)
 
@@ -292,4 +292,4 @@ $gc(e)
 ; eof meter
 #
 ; eof script
-; check code 16:51
+; check code 17:26
