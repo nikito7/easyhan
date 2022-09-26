@@ -13,7 +13,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:ipwrm=0 60
+m:p:ipwrm=0 6
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
@@ -84,9 +84,10 @@ endif
 
 ; charts
 
-if cnt>30
+if upsecs%tper==0
+and cnt>30
 then
-strm="cnt"+s(ss)
+strm="cnt0"
 ipwrm=ipwr
 endif
 
@@ -112,30 +113,6 @@ endif
 
 ; janz wtd
 
-clk=s(2.0mm)+s(2.0ss)
-
-if cnt==99
-then
-wtd+=1
-endif
-
-if wtd==1
-then
-old=clk
-endif
-
-if wtd==90
-then
-wtd=0
-if old==clk
-then
-print modbus error !!!
-; 
-=>Restart -3
-; 
-endif
-endif
-
 ; janz wtd eof
 
 >W
@@ -149,19 +126,7 @@ endif
 Tarifa {m} %ttext%
 <br>
 
-; charts
-
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrm "wr" "Import" strm)
-$var options = {
-$chartArea:{left:40,width:'80%%'},
-$width:'300px',
-$legend:'none',
-$title:'Power Import 60s [W]',
-$};
-$gc(e)
-
-$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
 $gc(lt ipwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
@@ -171,7 +136,7 @@ $title:'Power Import 1h [W]',
 $};
 $gc(e)
 
-$<div id="chart3" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
 $gc(lt ipwrd "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
