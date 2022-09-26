@@ -1,7 +1,5 @@
 >D
 
-time=""
-date=""
 clk=""
 old=""
 wfc=""
@@ -72,8 +70,6 @@ endif
 
 >S
 
-time=st(tstamp T 2)
-date=st(tstamp T 1)
 hh=sml[1]
 mm=sml[2]
 ss=sml[3]
@@ -115,7 +111,7 @@ endif
 
 >W
 
-@<b>NTP </b> %date% %time%
+@<b>NTP </b> %tstamp%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
@@ -127,7 +123,7 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(c pwrh "wr" "powerh" strh)
+$gc(lt pwrh "wr" "powerh" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
@@ -137,7 +133,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(c lpid "wr" "lpid" strd)
+$gc(lt lpid "wr" "lpid" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
