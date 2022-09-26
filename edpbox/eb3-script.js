@@ -14,11 +14,17 @@ tariff=0
 ttext=""
 m:p:pwrm=0 6
 m:p:pwrh=0 60
+m:p:epwrm=0 6
+m:p:epwrh=0 60
 pwr=0
+epwr=0
 strh=""
 m:p:lpid=0 24
 m:p:lpih=0 4
+m:p:lped=0 24
+m:p:lpeh=0 4
 lpi=0
+lpe=0
 lpmm=0
 strd=""
 
@@ -60,20 +66,24 @@ ends
 ; charts
 
 pwr=?#Power
+epwr=?#APE
 lpmm=?#LP1_MM
 lpi=?#LP3_IMP
+lpe=?#LP3_EXP
 
 if upsecs%tper==0
 and cnt>30
 then
 pwrm=pwr
+epwrm=epwr
 endif
 
 if chg[lpmm]>0
 and cnt>30
 then
 lpih=lpi
-print Array: lpih
+lpeh=lpe
+print Array: lpih lpeh
 endif
 
 >S
@@ -101,8 +111,13 @@ endif
 if chg[mm]>0
 and cnt>30
 then
+;
 pwrh=pwrm[-2]
 print Array: pwrh
+;
+epwrh=epwrm[-2]
+print Array: epwrh
+;
 strh="cnt"+s(mm)
 print Saving Vars
 svars
@@ -115,7 +130,8 @@ and cnt>30
 then
 strd="cnt"+s(hh)
 lpid=lpih[0]+lpih[1]+lpih[2]+lpih[3]
-print Array: lpid
+lped=lpeh[0]+lpeh[1]+lpeh[2]+lpeh[3]
+print Array: lpid lped
 endif
 
 ; janz wtd
@@ -161,22 +177,22 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt pwrh "wr" "Power Import" strh)
+$gc(lt pwrh epwrh "wr" "Power Import" "Power Export" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Power Import 1h [W]',
+$title:'Power 1h [W]',
 $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt lpid "wr" "Import Inc" strd)
+$gc(lt lpid lped "wr" "Import Inc" "Export Inc" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
 $legend:'none',
-$title:'Energy Import 24h [Wh]',
+$title:'Energy 24h [Wh]',
 $};
 $gc(e)
 
