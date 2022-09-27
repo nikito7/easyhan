@@ -9,7 +9,7 @@ mm=0
 ss=0
 wfp=0
 cnt=0
-m:p:ipwrm=0 6
+m:ipwrm=0 6
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
@@ -50,7 +50,7 @@ ss=st(time : 3)
 if cnt==30
 then
 smlj=1
-tper=20
+tper=10
 =>UfsRun discovery.txt
 endif
 
@@ -64,13 +64,13 @@ endif
 if upsecs%tper==0
 and cnt>30
 then
-strh="cnt0"
 ipwrm=ipwr
 endif
 
-if upsecs%60==0
+if chg[mm]>0
 and cnt>30
 then
+strh="cnt"+s(mm)
 ipwrh=ipwrm[-2]
 print Array: ipwrh
 print Saving Vars
@@ -87,7 +87,7 @@ endif
 
 >W
 
-@<b>NTP </b> %date% %time% - %0hh% %0mm% %0ss%
+@<b>NTP </b> %date% %time%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
