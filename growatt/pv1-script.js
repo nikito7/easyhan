@@ -61,9 +61,6 @@ endif
 
 ; charts
 
-strh="cnt"+s(mm-1)
-strd="cnt"+s(hh-1)
-
 if upsecs%tper==0
 and cnt>30
 then
@@ -73,6 +70,7 @@ endif
 if chg[mm]>0
 and cnt>30
 then
+strh="cnt"+s(mm-1)
 ipwrh=ipwrm[-2]
 print Array: ipwrh
 print Saving Vars
@@ -82,6 +80,7 @@ endif
 if chg[hh]>0
 and cnt>30
 then
+strd="cnt"+s(hh-1)
 ipwrd=ipwrh[-2]
 print Array: ipwrd
 endif
