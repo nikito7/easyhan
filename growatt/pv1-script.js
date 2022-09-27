@@ -102,7 +102,7 @@ $title:'Power 1h [W]',
 $};
 $gc(e)
 
-$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$<div id="chart2" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
 $gc(lt ipwrd "wr" "Power" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
