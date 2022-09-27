@@ -13,11 +13,10 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:ipwrm=0 6
+m:ipwrm=0 6
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
-hour=0
 strm=""
 strh=""
 strd=""
@@ -101,9 +100,7 @@ print Saving Vars
 svars
 endif
 
-hour=int(time/60)
-
-if chg[hour]>0
+if chg[hh]>0
 and cnt>30
 then
 strd="cnt"+s(hh)
@@ -126,6 +123,8 @@ endif
 Tarifa {m} %ttext%
 <br>
 
+; charts
+
 $<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
 $gc(lt ipwrh "wr" "Import" strh)
 $var options = {
@@ -137,7 +136,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrd "wr" "Import" strh)
+$gc(lt ipwrd "wr" "Import" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
