@@ -126,11 +126,11 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
-$gc(ct ipwrh "wr" "Import" strh)
+$gc(ct 30 ipwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import 1h [W]',
+$title:'Power Import 30min [W]',
 $};
 $gc(e)
 
