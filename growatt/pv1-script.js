@@ -1,7 +1,12 @@
 >D
 
 bug="fix"
+time=""
+date=""
 wfc=""
+hh=0
+mm=0
+ss=0
 wfp=0
 cnt=0
 m:p:ipwrm=0 6
@@ -35,6 +40,13 @@ wfp=WifiPower
 ipwr=?#Power
 
 >S
+
+time=st(tstamp T 2)
+date=st(tstamp T 1)
+
+hh=st(time : 1)
+mm=st(time : 2)
+ss=st(time : 3)
 
 if cnt==30
 then
@@ -78,6 +90,7 @@ endif
 
 >W
 
+@<b>NTP </b> %date% %time% - %0hh% %0mm% %0ss%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
