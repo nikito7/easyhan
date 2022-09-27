@@ -126,7 +126,7 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
-$gc(ct 30 ipwrh "wr" "Import" strh)
+$gc(lt 30 ipwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
@@ -135,7 +135,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
-$gc(ct ipwrd "wr" "Import" strd)
+$gc(lt ipwrd "wr" "Import" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
