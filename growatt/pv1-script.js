@@ -13,7 +13,6 @@ m:p:ipwrm=0 6
 m:p:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
-hour=0
 strh=""
 strd=""
 
@@ -78,12 +77,10 @@ print Saving Vars
 svars
 endif
 
-hour=int(time/60)
-
-if chg[hour]>0
+if chg[hh]>0
 and cnt>30
 then
-strd="cnt"+s(hour)
+strd="cnt"+s(hh)
 ipwrd=ipwrh[-2]
 print Array: ipwrd
 endif
