@@ -1,7 +1,7 @@
 >D
 
-time=""
 date=""
+time=""
 clk=""
 old=""
 wfc=""
@@ -14,7 +14,7 @@ ss=0
 tariff=0
 ttext=""
 m:ipwrm=0 6
-m:p:ipwrh=0 60
+m:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
 strm=""
@@ -83,9 +83,6 @@ endif
 
 ; charts
 
-strh="cnt"+s(mm-1)
-strd="cnt"+s(hh-1)
-
 if upsecs%tper==0
 and cnt>30
 then
@@ -96,22 +93,23 @@ endif
 if chg[mm]>0
 and cnt>30
 then
+strh="cnt"+s(mm)
 ipwrh=ipwrm[-2]
 print Array: ipwrh
-print Saving Vars
-svars
 endif
 
 if chg[hh]>0
 and cnt>30
 then
+strd="cnt"+s(hh)
 ipwrd=ipwrh[-2]
 print Array: ipwrd
+print Saving Vars
+svars
 endif
 
-; janz wtd
-
-; janz wtd eof
+; janz wtd begin
+; janz wtd end
 
 >W
 
@@ -126,22 +124,20 @@ Tarifa {m} %ttext%
 
 ; charts
 
-$<div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$<div id="chart1" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
 $gc(lt ipwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
-$width:'300px',
-$legend:'none',
+$width:'100%%',legend:'none',
 $title:'Power Import 1h [W]',
 $};
 $gc(e)
 
-$<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
+$<div id="chart2" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
 $gc(lt ipwrd "wr" "Import" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
-$width:'300px',
-$legend:'none',
+$width:'100%%',legend:'none',
 $title:'Power Import 24h [W]',
 $};
 $gc(e)
