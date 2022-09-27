@@ -14,7 +14,7 @@ ss=0
 tariff=0
 ttext=""
 m:ipwrm=0 6
-m:p:ipwrh=0 60
+m:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
 strm=""
@@ -96,8 +96,6 @@ then
 strh="cnt"+s(mm)
 ipwrh=ipwrm[-2]
 print Array: ipwrh
-print Saving Vars
-svars
 endif
 
 if chg[hh]>0
@@ -106,6 +104,8 @@ then
 strd="cnt"+s(hh)
 ipwrd=ipwrh[-2]
 print Array: ipwrd
+print Saving Vars
+svars
 endif
 
 ; janz wtd begin
