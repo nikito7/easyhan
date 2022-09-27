@@ -1,4 +1,4 @@
-; janz wtd
+; janz wtd begin
 
 clk=s(2.0mm)+s(2.0ss)
 
@@ -24,4 +24,4 @@ print modbus error !!!
 endif
 endif
 
-; janz wtd eof
+; janz wtd end
