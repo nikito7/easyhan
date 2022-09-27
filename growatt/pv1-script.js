@@ -1,8 +1,7 @@
 >D
 
-bug="fix"
-time=""
 date=""
+time=""
 wfc=""
 hh=0
 mm=0
@@ -10,8 +9,8 @@ ss=0
 wfp=0
 cnt=0
 m:ipwrm=0 6
-m:p:ipwrh=0 60
-m:p:ipwrd=0 25
+m:ipwrh=0 60
+m:p:ipwrd=0 24
 ipwr=0
 strh=""
 strd=""
@@ -73,8 +72,6 @@ then
 strh="cnt"+s(mm-1)
 ipwrh=ipwrm[-2]
 print Array: ipwrh
-print Saving Vars
-svars
 endif
 
 if chg[hh]>0
@@ -83,6 +80,8 @@ then
 strd="cnt"+s(hh-1)
 ipwrd=ipwrh[-2]
 print Array: ipwrd
+print Saving Vars
+svars
 endif
 
 >W
@@ -95,7 +94,7 @@ endif
 ; charts
 
 $<br><div id="chart1" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
-$gc(ct 30 ipwrh "wr" "Power" strh)
+$gc(lt ipwrh "wr" "Power" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
@@ -104,7 +103,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(ct ipwrd "wr" "Power" strd)
+$gc(lt ipwrd "wr" "Power" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
