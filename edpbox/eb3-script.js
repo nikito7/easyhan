@@ -106,7 +106,7 @@ hour=int(time/60)
 if chg[hour]>0
 and cnt>30
 then
-strd="cnt"+s(hh)
+strd="cnt"+s(hour)
 ipwrd=ipwrh[-2]
 print Array: ipwrd
 endif
