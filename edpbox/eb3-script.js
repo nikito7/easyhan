@@ -1,7 +1,7 @@
 >D
 
-time=""
 date=""
+time=""
 clk=""
 old=""
 wfc=""
@@ -15,7 +15,7 @@ tariff=0
 ttext=""
 m:ipwrm=0 6
 m:p:ipwrh=0 60
-m:p:ipwrd=0 25
+m:p:ipwrd=0 24
 ipwr=0
 strm=""
 strh=""
@@ -125,11 +125,11 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
-$gc(lt 30 ipwrh "wr" "Import" strh)
+$gc(lt ipwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import 30min [W]',
+$title:'Power Import 1h [W]',
 $};
 $gc(e)
 
