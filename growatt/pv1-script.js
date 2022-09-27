@@ -11,7 +11,7 @@ wfp=0
 cnt=0
 m:ipwrm=0 6
 m:p:ipwrh=0 60
-m:p:ipwrd=0 24
+m:p:ipwrd=0 25
 ipwr=0
 strh=""
 strd=""
@@ -95,22 +95,20 @@ endif
 
 ; charts
 
-$<br><div id="chart1" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrh "wr" "Power" strh)
+$<br><div id="chart1" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
+$gc(ct 30 ipwrh "wr" "Power" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
-$width:'300px',
-$legend:'none',
+$width:'100%%',legend:'none',
 $title:'Power 1h [W]',
 $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrd "wr" "Power" strd)
+$gc(ct ipwrd "wr" "Power" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
-$width:'300px',
-$legend:'none',
+$width:'100%%',legend:'none',
 $title:'Power 24h [W]',
 $};
 $gc(e)
