@@ -160,7 +160,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:300px;height:200px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrd "wr" "Import" strh)
+$gc(lt ipwrd "wr" "Import" strd)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'300px',
