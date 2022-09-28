@@ -1,6 +1,6 @@
 >D
 
-ver=1252
+ver=1257
 date=""
 time=""
 clk=""
@@ -97,7 +97,7 @@ endif
 
 >W
 
-@<b>NTP </b> %date% %time%
+@<b>NTP </b> %date% %time% <b> Heap </b> %0heap%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
