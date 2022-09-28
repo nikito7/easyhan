@@ -102,8 +102,8 @@ print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]%
 print Array: ipwrh %0ipwrh[-1]% %1ipwrh[-2]%
 print Array: ipwrd %0ipwrd[-1]% %1ipwrd[-2]%
 ; save to file
-fr=fo("test.txt" w)
-fwa(ipwrm fr)
+fr=fo("test.txt" 1)
+fr=fwa(ipwrm fr)
 fc(fr)
 endif
 
