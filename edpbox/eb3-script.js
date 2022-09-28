@@ -13,13 +13,13 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:ipwrm=0 6
-m:ipwrh=0 60
-m:p:ipwrd=0 24
+M:ipwrm=0 6
+M:ipwrh=0 60
+M:p:ipwrd=0 24
 ipwr=0
-strm=""
-strh=""
-strd=""
+strm="cnt0"
+strh="cnt0"
+strd="cnt0"
 tmp=0
 
 >B
@@ -39,30 +39,9 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
-print Array: ipwrm %ipwrm[-1]%
-print Array: ipwrh %ipwrh[-1]%
-print Array: ipwrd %ipwrd[-1]$
-
-if ipwrm[-1]<6
-then
-for tmp 0 5 1
-ipwrm[tmp]=-1
-next
-endif
-
-if ipwrh[-1]<60
-then
-for tmp 0 59 1
-ipwrh[tmp]=-1
-next
-endif
-
-if ipwrd[-1]<24
-then
-for tmp 0 23 1
-ipwrd[tmp]=-1
-next
-endif
+print Array: ipwrm %0ipwrm[-1]%
+print Array: ipwrh %0ipwrh[-1]%
+print Array: ipwrd %0ipwrd[-1]$
 
 >E
 
