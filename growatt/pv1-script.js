@@ -1,5 +1,6 @@
 >D
 
+ver=1605
 date=""
 time=""
 wfc=""
@@ -8,12 +9,12 @@ mm=0
 ss=0
 wfp=0
 cnt=0
-m:ipwrm=0 6
-m:ipwrh=0 60
-m:p:ipwrd=0 24
+m:ipwrm=0 60
 ipwr=0
-strh=""
-strd=""
+m:epwrm=0 60
+epwr=0
+strm="cnt0"
+fheap=0
 
 >B
 
@@ -35,7 +36,8 @@ wfp=WifiPower
 
 >T
 
-ipwr=?#Power
+ipwr=?#InputPower
+epwr=?#Power
 
 >S
 
@@ -58,30 +60,14 @@ then
 cnt+=1
 endif
 
-; charts
-
-if upsecs%tper==0
-and cnt>30
-then
-ipwrm=ipwr
-endif
-
 if chg[mm]>0
 and cnt>30
 then
-strh="cnt"+s(mm-1)
-ipwrh=ipwrm[-2]
-print Array: ipwrh
-endif
-
-if chg[hh]>0
-and cnt>30
-then
-strd="cnt"+s(hh-1)
-ipwrd=ipwrh[-2]
-print Array: ipwrd
-print Saving Vars
-svars
+strm="cnt"+s(mm)
+ipwrm=ipwr
+print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
+epwrm=epwr
+print Array: epwrm %0ipwrm[-1]% [ %epwrm[-2]% ]
 endif
 
 >W
@@ -91,23 +77,12 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 
-; charts
-
-$<br><div id="chart1" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrh "wr" "Power" strh)
+$<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
+$gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
-$chartArea:{left:40,width:'80%%'},
+$chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power 1h [W]',
-$};
-$gc(e)
-
-$<div id="chart2" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrd "wr" "Power" strd)
-$var options = {
-$chartArea:{left:40,width:'80%%'},
-$width:'100%%',legend:'none',
-$title:'Power 24h [W]',
+$title:'Input Power & Output Power 1h [W]',
 $};
 $gc(e)
 
@@ -115,7 +90,7 @@ $gc(e)
 
 >M 1
 
-+1,3,mN1,1,9600,PV1,1,15,r010400000003,r010400230003,r010400370002,r0104005D0003
++1,3,mN1,1,9600,PV1,1,10,r010400000003,r010400230003,r010400370002,r0104005D0003
 
 ; 0x0000 0,1,2
 
@@ -140,9 +115,5 @@ $gc(e)
 1,010406xxxxxxxxUUuu@i3:10,Temp 3,°C,*,1
 
 ; eof meter
-
 #
-
-; eof script 
-; check code 12:08
-
+; eof script
