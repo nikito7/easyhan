@@ -110,7 +110,7 @@ Tarifa {m} %ttext%
 $<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
-$chartArea:{left:40,width:'80%%'},
+$chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
 $title:'Active Power Import & Export 1h [W]',
 $};
