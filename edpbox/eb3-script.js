@@ -85,14 +85,13 @@ endif
 if upsecs%tper==0
 and cnt>30
 then
-strm="cnt"+s(mm)+"/6"
 ipwrm=ipwr
 endif
 
 if chg[mm]>0
 and cnt>30
 then
-print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]%
+print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]% %ipwrm[-3]%
 ; save to file
 fr=fo("test2.txt" 1)
 fwa(ipwrm fr)
