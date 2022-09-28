@@ -39,9 +39,9 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
-print Array: ipwrm ipwrm[-1]
-print Array: ipwrh ipwrh[-1]
-print Array: ipwrd ipwrd[-1]
+print Array: ipwrm %ipwrm[-1]%
+print Array: ipwrh %ipwrh[-1]%
+print Array: ipwrd %ipwrd[-1]$
 
 if ipwrm[-1]<6
 then
