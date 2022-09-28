@@ -88,9 +88,9 @@ and cnt>30
 then
 strm="cnt"+s(mm)
 ipwrm=ipwr
-print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-3]% ]
+print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
 epwrm=epwr
-print Array: epwrm %0ipwrm[-1]% [ %epwrm[-3]% ]
+print Array: epwrm %0ipwrm[-1]% [ %epwrm[-2]% ]
 endif
 
 ; janz wtd begin
@@ -107,12 +107,12 @@ endif
 Tarifa {m} %ttext%
 <br>
 
-$<div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div><br><br>
+$<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Active Power 1h [W]',
+$title:'Active Power Import & Export 1h [W]',
 $};
 $gc(e)
 
