@@ -13,9 +13,9 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:ipwrh=0 320
+m:ipwrm=0 90
 ipwr=0
-strh="cnt0"
+strm="cnt0"
 tmp=0
 fr=0
 res=0
@@ -85,19 +85,17 @@ endif
 if upsecs%tper==0
 and cnt>30
 then
-strh="cnt"+s(mm)+"/6"
-ipwrh=ipwr
+strm="cnt"+s(mm)+"/6"
+ipwrm=ipwr
 endif
 
 if chg[mm]>0
 and cnt>30
 then
 print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]%
-print Array: ipwrh %0ipwrh[-1]% %1ipwrh[-2]%
-print Array: ipwrd %0ipwrd[-1]% %1ipwrd[-2]%
 ; save to file
-fr=fo("test1.txt" 1)
-fwa(ipwrh fr)
+fr=fo("test2.txt" 1)
+fwa(ipwrm fr)
 fc(fr)
 endif
 
@@ -124,11 +122,11 @@ Tarifa {m} %ttext%
 ; charts
 
 $<div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div>
-$gc(lt ipwrh "wr" "Import" strh)
+$gc(lt ipwrm "wr" "Import" strm)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import 1h [W]',
+$title:'Power Import 15min [W]',
 $};
 $gc(e)
 
