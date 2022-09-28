@@ -106,7 +106,7 @@ and cnt>30
 then
 strd="cnt"+s(hh)
 ipwrd=ipwrh[-2]
-print Array: ipwrd
+print Array: ipwrd updated
 print Saving Vars
 svars
 endif
