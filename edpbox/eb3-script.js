@@ -14,11 +14,8 @@ ss=0
 tariff=0
 ttext=""
 m:ipwrh=0 360
-m:ipwrd=0 24
 ipwr=0
-strm="cnt0"
 strh="cnt0"
-strd="cnt0"
 tmp=0
 fr=0
 res=0
@@ -99,18 +96,15 @@ print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]%
 print Array: ipwrh %0ipwrh[-1]% %1ipwrh[-2]%
 print Array: ipwrd %0ipwrd[-1]% %1ipwrd[-2]%
 ; save to file
-svars
 fr=fo("test1.txt" 1)
-fwa(ipwrm fr)
+fwa(ipwrh fr)
 fc(fr)
 endif
 
 if chg[hh]>0
 and cnt>30
 then
-strd="cnt"+s(hh)
-ipwrd=ipwrh[-2]
-print Array: ipwrd updated
+print Array: hh
 endif
 
 ; janz wtd begin
@@ -135,15 +129,6 @@ $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
 $title:'Power Import 1h [W]',
-$};
-$gc(e)
-
-$<div id="chart2" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrd "wr" "Import" strd)
-$var options = {
-$chartArea:{left:40,width:'80%%'},
-$width:'100%%',legend:'none',
-$title:'Power Import 24h [W]',
 $};
 $gc(e)
 
