@@ -1,6 +1,6 @@
 >D
 
-ver=1257
+ver=1304
 date=""
 time=""
 clk=""
@@ -16,6 +16,8 @@ tariff=0
 ttext=""
 m:ipwrm=0 60
 ipwr=0
+m:epwrm=0 60
+epwr=0
 strm="cnt0"
 fheap=0
 
@@ -55,6 +57,7 @@ ttext="Cheias"
 ends
 
 ipwr=?#Power
+epwr=?#APE
 
 >S
 
@@ -85,13 +88,9 @@ and cnt>30
 then
 strm="cnt"+s(mm)
 ipwrm=ipwr
-print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]% %ipwrm[-3]%
-endif
-
-if chg[hh]>0
-and cnt>30
-then
-print Array: hh
+print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-3]% ]
+epwrm=epwr
+print Array: epwrm %0ipwrm[-1]% [ %epwrm[-3]% ]
 endif
 
 ; janz wtd begin
@@ -109,11 +108,11 @@ Tarifa {m} %ttext%
 <br>
 
 $<div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div><br><br>
-$gc(lt ipwrm "wr" "Import" strm)
+$gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import 1h [W]',
+$title:'Active Power 1h [W]',
 $};
 $gc(e)
 
