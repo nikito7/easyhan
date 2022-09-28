@@ -1,4 +1,4 @@
->D 48
+>D
 
 date=""
 time=""
@@ -13,12 +13,9 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:ipwrm=0 90
+m:ipwrm=0 60
 ipwr=0
 strm="cnt0"
-tmp=0
-fr=0
-res=0
 
 >B
 
@@ -80,22 +77,12 @@ then
 cnt+=1
 endif
 
-; charts
-
-if upsecs%tper==0
-and cnt>30
-then
-ipwrm=ipwr
-endif
-
 if chg[mm]>0
 and cnt>30
 then
+strm="cnt"+s(mm)
+ipwrm=ipwr
 print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]% %ipwrm[-3]%
-; save to file
-fr=fo("test2.txt" 1)
-fwa(ipwrm fr)
-fc(fr)
 endif
 
 if chg[hh]>0
@@ -118,14 +105,12 @@ endif
 Tarifa {m} %ttext%
 <br>
 
-; charts
-
-$<div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div>
+$<div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div><br>
 $gc(lt ipwrm "wr" "Import" strm)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import 15min [W]',
+$title:'Power Import 1h [W]',
 $};
 $gc(e)
 
