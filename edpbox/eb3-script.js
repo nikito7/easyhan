@@ -103,9 +103,8 @@ endif
 @<br>
 <br>
 Tarifa {m} %ttext%
-<br>
 
-$<div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div><br>
+$<hr><div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div><hr>
 $gc(lt ipwrm "wr" "Import" strm)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
@@ -210,4 +209,4 @@ $gc(e)
 ; eof meter
 #
 ; eof script
-; check code 17:26
+; check code 12:38
