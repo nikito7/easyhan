@@ -114,6 +114,8 @@ $gc(e)
 1,010406xxxxUUuu@i3:10,Temp 2,°C,*,1
 1,010406xxxxxxxxUUuu@i3:10,Temp 3,°C,*,1
 
+1,=h<br>
+
 ; eof meter
 #
 ; eof script
