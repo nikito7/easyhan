@@ -39,23 +39,27 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
+print Array: ipwrm ipwrm[-1]
+print Array: ipwrh ipwrh[-1]
+print Array: ipwrd ipwrd[-1]
+
 if ipwrm[-1]<6
 then
-for tmp 1 6 1
+for tmp 0 5 1
 ipwrm[tmp]=-1
 next
 endif
 
 if ipwrh[-1]<60
 then
-for tmp 1 60 1
+for tmp 0 59 1
 ipwrh[tmp]=-1
 next
 endif
 
 if ipwrd[-1]<24
 then
-for tmp 1 24 1
+for tmp 0 23 1
 ipwrd[tmp]=-1
 next
 endif
