@@ -1,5 +1,6 @@
 >D
 
+ver=1251
 date=""
 time=""
 clk=""
@@ -103,8 +104,9 @@ endif
 @<br>
 <br>
 Tarifa {m} %ttext%
+<br>
 
-$<hr><div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div><hr>
+$<div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div><br><br>
 $gc(lt ipwrm "wr" "Import" strm)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
@@ -209,4 +211,3 @@ $gc(e)
 ; eof meter
 #
 ; eof script
-; check code 12:38
