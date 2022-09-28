@@ -13,7 +13,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:p:ipwrh=0 90
+m:p:ipwrh=0 320
 ipwr=0
 strh="cnt0"
 tmp=0
@@ -123,7 +123,7 @@ Tarifa {m} %ttext%
 
 ; charts
 
-$<div id="chart1" style="width:300px;height:100%%;padding:0px;text-align:center"></div><br><br>
+$<div id="chart1" style="width:300px;height:250px;padding:0px;text-align:center"></div>
 $gc(lt ipwrh "wr" "Import" strh)
 $var options = {
 $chartArea:{left:40,width:'80%%'},
