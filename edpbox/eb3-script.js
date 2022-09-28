@@ -41,21 +41,21 @@ smlj=0
 
 if ipwrm[-1]<6
 then
-for tmp 1 ipwrm[-1] 1
+for tmp 1 6 1
 ipwrm[tmp]=-1
 next
 endif
 
 if ipwrh[-1]<60
 then
-for tmp 1 ipwrh[-1] 1
+for tmp 1 60 1
 ipwrh[tmp]=-1
 next
 endif
 
 if ipwrd[-1]<24
 then
-for tmp 1 ipwrd[-1] 1
+for tmp 1 24 1
 ipwrd[tmp]=-1
 next
 endif
