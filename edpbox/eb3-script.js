@@ -39,10 +39,6 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
-print Array: ipwrm %0ipwrm[-1]%
-print Array: ipwrh %0ipwrh[-1]%
-print Array: ipwrd %0ipwrd[-1]$
-
 >E
 
 wfc=WifiConfig#?
@@ -100,7 +96,9 @@ and cnt>30
 then
 strh="cnt"+s(mm)
 ipwrh=ipwrm[-2]
-print Array: ipwrh
+print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]%
+print Array: ipwrh %0ipwrh[-1]% %1ipwrh[-2]%
+print Array: ipwrd %0ipwrd[-1]% %1ipwrd[-2]%
 endif
 
 if chg[hh]>0
