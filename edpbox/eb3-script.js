@@ -1,4 +1,4 @@
->D
+>D 48
 
 date=""
 time=""
@@ -15,12 +15,14 @@ tariff=0
 ttext=""
 m:ipwrm=0 6
 m:ipwrh=0 60
-m:p:ipwrd=0 24
+m:ipwrd=0 24
 ipwr=0
 strm="cnt0"
 strh="cnt0"
 strd="cnt0"
 tmp=0
+fr=0
+res=0
 
 >B
 
@@ -99,6 +101,10 @@ ipwrh=ipwrm[-2]
 print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]%
 print Array: ipwrh %0ipwrh[-1]% %1ipwrh[-2]%
 print Array: ipwrd %0ipwrd[-1]% %1ipwrd[-2]%
+; save to file
+fr=fo("test.txt" w)
+fwa(ipwrm fr)
+fc(fr)
 endif
 
 if chg[hh]>0
