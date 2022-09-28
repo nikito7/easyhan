@@ -1,6 +1,6 @@
 >D
 
-ver=1304
+ver=1611
 date=""
 time=""
 clk=""
@@ -112,7 +112,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Active Power Import & Export 1h [W]',
+$title:'Power Import & Power Export 1h [W]',
 $};
 $gc(e)
 
