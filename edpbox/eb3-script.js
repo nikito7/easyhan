@@ -103,7 +103,7 @@ print Array: ipwrh %0ipwrh[-1]% %1ipwrh[-2]%
 print Array: ipwrd %0ipwrd[-1]% %1ipwrd[-2]%
 ; save to file
 fr=fo("test.txt" 1)
-fr=fwa(ipwrm fr)
+res=fwa(ipwrm fr)
 fc(fr)
 endif
 
@@ -113,8 +113,6 @@ then
 strd="cnt"+s(hh)
 ipwrd=ipwrh[-2]
 print Array: ipwrd updated
-print Saving Vars
-svars
 endif
 
 ; janz wtd begin
