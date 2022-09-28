@@ -17,6 +17,7 @@ ttext=""
 m:ipwrm=0 60
 ipwr=0
 strm="cnt0"
+fheap=0
 
 >B
 
@@ -59,6 +60,7 @@ ipwr=?#Power
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
+fheap=heap/1024
 
 hh=sml[1]
 mm=sml[2]
@@ -97,7 +99,7 @@ endif
 
 >W
 
-@<b>NTP </b> %date% %time% <b> Heap </b> %0heap%
+@<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
