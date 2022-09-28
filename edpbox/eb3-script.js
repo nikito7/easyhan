@@ -13,8 +13,7 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:ipwrm=0 6
-m:ipwrh=0 60
+m:ipwrh=0 360
 m:ipwrd=0 24
 ipwr=0
 strm="cnt0"
@@ -89,15 +88,13 @@ endif
 if upsecs%tper==0
 and cnt>30
 then
-strm="cnt0"
-ipwrm=ipwr
+strh="cnt"+s(mm)+"/6"
+ipwrh=ipwr
 endif
 
 if chg[mm]>0
 and cnt>30
 then
-strh="cnt"+s(mm)
-ipwrh=ipwrm[-2]
 print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]%
 print Array: ipwrh %0ipwrh[-1]% %1ipwrh[-2]%
 print Array: ipwrd %0ipwrd[-1]% %1ipwrd[-2]%
