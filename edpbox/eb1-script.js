@@ -17,9 +17,10 @@ m:ipwrm=0 6
 m:ipwrh=0 60
 m:p:ipwrd=0 24
 ipwr=0
-strm=""
-strh=""
-strd=""
+strm="cnt0"
+strh="cnt0"
+strd="cnt0"
+tmp=0
 
 >B
 
@@ -95,7 +96,9 @@ and cnt>30
 then
 strh="cnt"+s(mm)
 ipwrh=ipwrm[-2]
-print Array: ipwrh
+print Array: ipwrm %0ipwrm[-1]% %1ipwrm[-2]%
+print Array: ipwrh %0ipwrh[-1]% %1ipwrh[-2]%
+print Array: ipwrd %0ipwrd[-1]% %1ipwrd[-2]%
 endif
 
 if chg[hh]>0
@@ -103,7 +106,7 @@ and cnt>30
 then
 strd="cnt"+s(hh)
 ipwrd=ipwrh[-2]
-print Array: ipwrd
+print Array: ipwrd updated
 print Saving Vars
 svars
 endif
