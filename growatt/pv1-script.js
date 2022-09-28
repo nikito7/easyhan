@@ -1,6 +1,6 @@
 >D
 
-ver=1610
+ver=2150
 date=""
 time=""
 wfc=""
@@ -43,6 +43,7 @@ epwr=?#Power
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
+fheap=heap/1024
 
 hh=st(time : 1)
 mm=st(time : 2)
@@ -72,8 +73,8 @@ endif
 
 >W
 
-@<b>NTP </b> %date% %time%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj%
+@<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 
