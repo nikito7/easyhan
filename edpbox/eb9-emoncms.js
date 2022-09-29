@@ -1,4 +1,5 @@
 ; emoncms begin
+
 if upsecs%tper==0
 and cnt>30
 then
@@ -11,4 +12,5 @@ key="fa12c4d2ebee895c3cb3b0fedcde35f6"
 print WebSend !
 
 endif
+
 ; emoncms end
