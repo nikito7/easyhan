@@ -23,6 +23,8 @@ fheap=0
 ws=""
 node=""
 key=""
+ikw=0
+ekw=0
 
 >B
 
@@ -61,6 +63,8 @@ ends
 
 ipwr=?#Power
 epwr=?#APE
+ikw=?#TEI
+ekw=?#TEE
 
 >S
 
