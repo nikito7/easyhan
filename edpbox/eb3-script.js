@@ -1,4 +1,4 @@
->D
+>D 32
 
 ver=1611
 date=""
@@ -20,6 +20,9 @@ m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
+ws=""
+node=""
+key=""
 
 >B
 
@@ -95,6 +98,8 @@ endif
 
 ; janz wtd begin
 ; janz wtd end
+; emoncms begin
+; emoncms end
 
 >W
 
