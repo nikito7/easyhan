@@ -1,6 +1,6 @@
 >D 32
 
-ver=1611
+ver=1245
 date=""
 time=""
 clk=""
