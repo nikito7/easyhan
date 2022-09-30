@@ -1,6 +1,6 @@
 >D
 
-ver=30.1733
+ver=30.1754
 date=""
 time=""
 wfc=""
@@ -9,9 +9,9 @@ mm=0
 ss=0
 wfp=0
 cnt=0
-M:p:ipwrm=0 60
+m:ipwrm=0 60
 ipwr=0
-M:p:epwrm=0 60
+m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
@@ -30,16 +30,14 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
-#ireset
 for tmp 1 ipwrm[-1] 1
-ipwrm[tmp]=0
+ipwrm[tmp]=-1
 next
-svars
 
-#mreset
 for tmp 1 epwrm[-1] 1
-epwrm[tmp]=0
+epwrm[tmp]=-1
 next
+
 svars
 
 >E
