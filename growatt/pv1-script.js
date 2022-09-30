@@ -1,6 +1,6 @@
 >D
 
-ver=2150
+ver=30.1717
 date=""
 time=""
 wfc=""
@@ -15,6 +15,7 @@ m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
+tmp=0
 
 >B
 
@@ -28,6 +29,14 @@ smlj=0
 
 =>Delay 100
 =>Sensor53 r
+
+for tmp 1 ipwrm[-1] 1
+ipwrm[tmp]=0
+next
+
+for tmp 1 epwrm[-1] 1
+epwrm[tmp]=0
+next
 
 >E
 
@@ -61,10 +70,16 @@ then
 cnt+=1
 endif
 
+if hh==0
+then
+strm="cntm"+s(1.0((24-1+hh)*240)+(mm*4))+"/240"
+else
+strm="cntm"+s(1.0((hh-1)*240)+(mm*4))+"/240"
+endif
+
 if chg[mm]>0
 and cnt>30
 then
-strm="cnt"+s(mm)
 ipwrm=ipwr
 print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
 epwrm=epwr
