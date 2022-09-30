@@ -1,6 +1,6 @@
 >D
 
-ver=30.1856
+ver=30.1956
 date=""
 time=""
 wfc=""
@@ -9,14 +9,13 @@ mm=0
 ss=0
 wfp=0
 cnt=0
-m:ipwrm=0 360
+m:ipwrm=0 60
 ipwr=0
-m:epwrm=0 360
+m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
-tmp=0
-hour=0
+
 
 >B
 
@@ -51,16 +50,6 @@ hh=st(time : 1)
 mm=st(time : 2)
 ss=st(time : 3)
 
-if cnt==15
-then
-for tmp 1 ipwrm[-1] 1
-ipwrm[tmp]=0
-next
-for tmp 1 epwrm[-1] 1
-epwrm[tmp]=0
-next
-endif
-
 if cnt==30
 then
 smlj=1
@@ -76,15 +65,7 @@ endif
 if chg[mm]>0
 and cnt>30
 then
-; labels
-hour=hh-4
-if hour<0
-then
-strm="cnth"+s(1.0((24-4)*240)+(mm*4))+"/240"
-else
-strm="cnth"+s(1.0((hh-4)*240)+(mm*4))+"/240"
-endif
-; arrays
+strm="cnt"+s(mm)
 ipwrm=ipwr
 print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
@@ -103,7 +84,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Input Power & Output Power 4h [W]',
+$title:'Input Power & Output Power 1h [W]',
 $};
 $gc(e)
 
