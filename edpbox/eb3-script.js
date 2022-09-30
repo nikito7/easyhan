@@ -1,6 +1,6 @@
 >D 32
 
-ver=30.1939
+ver=30.1946
 date=""
 time=""
 clk=""
@@ -18,7 +18,6 @@ m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
-hour=0
 ws=""
 node=""
 key=""
@@ -82,15 +81,7 @@ endif
 if chg[mm]>0
 and cnt>30
 then
-; labels
-hour=hh-1
-if hour<0
-then
-strm="cnth"+s(1.0((24-1)*240)+(mm*4))+"/240"
-else
-strm="cnth"+s(1.0((hh-1)*240)+(mm*4))+"/240"
-endif
-; arrays
+strm="cnt"+s(mm)
 ipwrm=ipwr
 print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
 epwrm=epwr
