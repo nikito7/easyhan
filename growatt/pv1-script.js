@@ -9,9 +9,9 @@ mm=0
 ss=0
 wfp=0
 cnt=0
-m:ipwrm=0 60
+m:p:ipwrm=0 60
 ipwr=0
-m:epwrm=0 60
+m:p:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
@@ -30,10 +30,12 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
+#ireset
 for tmp 1 ipwrm[-1] 1
 ipwrm[tmp]=0
 next
 
+#mreset
 for tmp 1 epwrm[-1] 1
 epwrm[tmp]=0
 next
@@ -80,10 +82,21 @@ endif
 if chg[mm]>0
 and cnt>30
 then
+; labels
+if hh==0
+then
+strm="cnth"+s(1.0((24-1+hh)*240)+(mm*4))+"/240"
+else
+strm="cnth"+s(1.0((hh-1)*240)+(mm*4))+"/240"
+endif
+; arrays
 ipwrm=ipwr
 print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
 epwrm=epwr
 print Array: epwrm %0ipwrm[-1]% [ %epwrm[-2]% ]
+; save
+print Saving Vars
+svars
 endif
 
 >W
