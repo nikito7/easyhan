@@ -1,6 +1,6 @@
 >D
 
-ver=30.1809
+ver=30.1846
 date=""
 time=""
 wfc=""
@@ -9,9 +9,9 @@ mm=0
 ss=0
 wfp=0
 cnt=0
-m:ipwrm=0 60
+m:ipwrm=0 120
 ipwr=0
-m:epwrm=0 60
+m:epwrm=0 120
 epwr=0
 strm="cnt0"
 fheap=0
@@ -31,11 +31,11 @@ smlj=0
 =>Sensor53 r
 
 for tmp 1 ipwrm[-1] 1
-ipwrm[tmp]=-1
+ipwrm[tmp]=0
 next
 
 for tmp 1 epwrm[-1] 1
-epwrm[tmp]=-1
+epwrm[tmp]=0
 next
 
 >E
