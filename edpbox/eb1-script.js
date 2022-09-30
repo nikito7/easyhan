@@ -187,5 +187,3 @@ $gc(e)
 ; eof meter
 #
 ; eof script
-; check code 17:59
-
