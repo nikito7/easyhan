@@ -9,13 +9,14 @@ mm=0
 ss=0
 wfp=0
 cnt=0
-m:ipwrm=0 120
+m:ipwrm=0 360
 ipwr=0
-m:epwrm=0 120
+m:epwrm=0 360
 epwr=0
 strm="cnt0"
 fheap=0
 tmp=0
+hour=0
 
 >B
 
@@ -74,11 +75,12 @@ if chg[mm]>0
 and cnt>30
 then
 ; labels
-if hh==0
+hour=hh-4
+if hour<0
 then
-strm="cnth"+s(1.0((24-1+hh)*240)+(mm*4))+"/240"
+strm="cnth"+s(1.0((24+hour)*240)+(mm*4))+"/240"
 else
-strm="cnth"+s(1.0((hh-1)*240)+(mm*4))+"/240"
+strm="cnth"+s(1.0((hh-hour)*240)+(mm*4))+"/240"
 endif
 ; arrays
 ipwrm=ipwr
@@ -99,7 +101,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Input Power & Output Power 1h [W]',
+$title:'Input Power & Output Power 4h [W]',
 $};
 $gc(e)
 
