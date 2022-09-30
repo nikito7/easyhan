@@ -78,9 +78,9 @@ then
 hour=hh-4
 if hour<0
 then
-strm="cnth"+s(1.0((24+hour)*240)+(mm*4))+"/240"
+strm="cnth"+s(1.0((24-4)*240)+(mm*4))+"/240"
 else
-strm="cnth"+s(1.0((hh-hour)*240)+(mm*4))+"/240"
+strm="cnth"+s(1.0((hh-4)*240)+(mm*4))+"/240"
 endif
 ; arrays
 ipwrm=ipwr
