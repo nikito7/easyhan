@@ -1,6 +1,6 @@
 >D
 
-ver=30.1717
+ver=30.1726
 date=""
 time=""
 wfc=""
