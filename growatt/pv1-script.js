@@ -1,6 +1,6 @@
 >D
 
-ver=30.1956
+ver=2225
 date=""
 time=""
 wfc=""
@@ -75,7 +75,7 @@ endif
 >W
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%4ver%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 
