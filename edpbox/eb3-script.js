@@ -14,9 +14,9 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:ipwrm=0 240
+m:ipwrm=0 120
 ipwr=0
-m:epwrm=0 240
+m:epwrm=0 120
 epwr=0
 strm="cnt0"
 fheap=0
@@ -107,12 +107,12 @@ if chg[mm]>0
 and cnt>30
 then
 ; labels
-hour=hh-4
+hour=hh-2
 if hour<0
 then
-strm="cnth"+s(1.0((24-4)*240)+(mm*4))+"/240"
+strm="cnth"+s(1.0((24-2)*480)+(mm*4))+"/480"
 else
-strm="cnth"+s(1.0((hh-4)*240)+(mm*4))+"/240"
+strm="cnth"+s(1.0((hh-2)*480)+(mm*4))+"/480"
 endif
 ; arrays
 ipwrm=ipwr
@@ -142,7 +142,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import & Power Export 4h [W]',
+$title:'Power Import & Power Export 2h [W]',
 $};
 $gc(e)
 
