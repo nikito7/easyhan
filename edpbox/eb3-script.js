@@ -20,11 +20,14 @@ m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
+tmp=0
+hour=0
 ws=""
 node=""
 key=""
 ikw=0
 ekw=0
+
 
 >B
 
@@ -76,6 +79,16 @@ hh=sml[1]
 mm=sml[2]
 ss=sml[3]
 
+if cnt==15
+then
+for tmp 1 ipwrm[-1] 1
+ipwrm[tmp]=0
+next
+for tmp 1 epwrm[-1] 1
+epwrm[tmp]=0
+next
+endif
+
 if cnt==30
 then
 smlj=1
@@ -93,7 +106,15 @@ endif
 if chg[mm]>0
 and cnt>30
 then
-strm="cnt"+s(mm)
+; labels
+hour=hh-1
+if hour<0
+then
+strm="cnth"+s(1.0((24-1)*240)+(mm*4))+"/240"
+else
+strm="cnth"+s(1.0((hh-1)*240)+(mm*4))+"/240"
+endif
+; arrays
 ipwrm=ipwr
 print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
 epwrm=epwr
