@@ -1,9 +1,6 @@
 >D 32
 
-IP=10.1.0.200
-SB=5120
-
-ver=1737
+ver=30.1913
 date=""
 time=""
 clk=""
@@ -111,7 +108,7 @@ endif
 >W
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%4ver%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
