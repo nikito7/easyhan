@@ -72,9 +72,9 @@ endif
 
 if hh==0
 then
-strm="cntm"+s(1.0((24-1+hh)*240)+(mm*4))+"/240"
+strm="cnth"+s(1.0((24-1+hh)*240)+(mm*4))+"/240"
 else
-strm="cntm"+s(1.0((hh-1)*240)+(mm*4))+"/240"
+strm="cnth"+s(1.0((hh-1)*240)+(mm*4))+"/240"
 endif
 
 if chg[mm]>0
