@@ -31,14 +31,6 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
-for tmp 1 ipwrm[-1] 1
-ipwrm[tmp]=0
-next
-
-for tmp 1 epwrm[-1] 1
-epwrm[tmp]=0
-next
-
 >E
 
 wfc=WifiConfig#?
@@ -58,6 +50,16 @@ fheap=heap/1024
 hh=st(time : 1)
 mm=st(time : 2)
 ss=st(time : 3)
+
+if cnt==15
+then
+for tmp 1 ipwrm[-1] 1
+ipwrm[tmp]=0
+next
+for tmp 1 epwrm[-1] 1
+epwrm[tmp]=0
+next
+endif
 
 if cnt==30
 then
