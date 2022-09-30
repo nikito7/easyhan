@@ -34,11 +34,13 @@ smlj=0
 for tmp 1 ipwrm[-1] 1
 ipwrm[tmp]=0
 next
+svars
 
 #mreset
 for tmp 1 epwrm[-1] 1
 epwrm[tmp]=0
 next
+svars
 
 >E
 
@@ -102,7 +104,7 @@ endif
 >W
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%ver%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 
