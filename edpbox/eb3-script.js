@@ -1,6 +1,6 @@
 >D 32
 
-ver=30.1928
+ver=30.1935
 date=""
 time=""
 clk=""
@@ -110,9 +110,9 @@ then
 hour=hh-1
 if hour<0
 then
-strm="cnth"+s(1.0((24-1)*60)+(mm*4))+"/60"
+strm="cnth"+s(1.0((24-1)*240)+(mm*4))+"/240"
 else
-strm="cnth"+s(1.0((hh-1)*60)+(mm*4))+"/60"
+strm="cnth"+s(1.0((hh-1)*240)+(mm*4))+"/240"
 endif
 ; arrays
 ipwrm=ipwr
