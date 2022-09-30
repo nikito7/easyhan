@@ -1,6 +1,6 @@
 >D 32
 
-ver=30.1946
+ver=2237
 date=""
 time=""
 clk=""
@@ -83,9 +83,9 @@ and cnt>30
 then
 strm="cnt"+s(mm)
 ipwrm=ipwr
-print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
+print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
-print Array: epwrm %0ipwrm[-1]% [ %epwrm[-2]% ]
+print Array: epwrm %0ipwrm[-1]%
 endif
 
 ; janz wtd begin
@@ -96,7 +96,7 @@ endif
 >W
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%4ver%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
