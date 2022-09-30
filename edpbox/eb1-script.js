@@ -1,6 +1,6 @@
->D
+>D 32
 
-ver=1611
+ver=2237
 date=""
 time=""
 clk=""
@@ -12,14 +12,17 @@ wtd=0
 hh=0
 mm=0
 ss=0
-tariff=0
-ttext=""
 m:ipwrm=0 60
 ipwr=0
 m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
+ws=""
+node=""
+key=""
+ikw=0
+ekw=0
 
 >B
 
@@ -45,19 +48,10 @@ wfp=WifiPower
 
 >T
 
-tariff=?#Tariff
-
-switch tariff
-case 1
-ttext="Vazio"
-case 2
-ttext="Ponta"
-case 3
-ttext="Cheias"
-ends
-
 ipwr=?#Power
 epwr=?#APE
+ikw=?#TEI
+ekw=?#TEE
 
 >S
 
@@ -88,13 +82,15 @@ and cnt>30
 then
 strm="cnt"+s(mm)
 ipwrm=ipwr
-print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
+print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
-print Array: epwrm %0ipwrm[-1]% [ %epwrm[-2]% ]
+print Array: epwrm %0ipwrm[-1]%
 endif
 
 ; janz wtd begin
 ; janz wtd end
+; emoncms begin
+; emoncms end
 
 >W
 
@@ -103,8 +99,6 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
-<br>
-Tarifa {m} %ttext%
 <br>
 
 $<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
