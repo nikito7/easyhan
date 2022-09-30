@@ -1,6 +1,6 @@
 >D
 
-ver=30.1754
+ver=30.1809
 date=""
 time=""
 wfc=""
@@ -38,8 +38,6 @@ for tmp 1 epwrm[-1] 1
 epwrm[tmp]=-1
 next
 
-svars
-
 >E
 
 wfc=WifiConfig#?
@@ -72,13 +70,6 @@ then
 cnt+=1
 endif
 
-if hh==0
-then
-strm="cnth"+s(1.0((24-1+hh)*240)+(mm*4))+"/240"
-else
-strm="cnth"+s(1.0((hh-1)*240)+(mm*4))+"/240"
-endif
-
 if chg[mm]>0
 and cnt>30
 then
@@ -91,12 +82,9 @@ strm="cnth"+s(1.0((hh-1)*240)+(mm*4))+"/240"
 endif
 ; arrays
 ipwrm=ipwr
-print Array: ipwrm %0ipwrm[-1]% [ %ipwrm[-2]% ]
+print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
-print Array: epwrm %0ipwrm[-1]% [ %epwrm[-2]% ]
-; save
-print Saving Vars
-svars
+print Array: epwrm %0ipwrm[-1]%
 endif
 
 >W
