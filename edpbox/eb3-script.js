@@ -1,6 +1,6 @@
 >D 32
 
-ver=30.1918
+ver=30.1928
 date=""
 time=""
 clk=""
@@ -14,9 +14,9 @@ mm=0
 ss=0
 tariff=0
 ttext=""
-m:ipwrm=0 120
+m:ipwrm=0 60
 ipwr=0
-m:epwrm=0 120
+m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
@@ -107,12 +107,12 @@ if chg[mm]>0
 and cnt>30
 then
 ; labels
-hour=hh-2
+hour=hh-1
 if hour<0
 then
-strm="cnth"+s(1.0((24-2)*480)+(mm*4))+"/480"
+strm="cnth"+s(1.0((24-1)*60)+(mm*4))+"/60"
 else
-strm="cnth"+s(1.0((hh-2)*480)+(mm*4))+"/480"
+strm="cnth"+s(1.0((hh-1)*60)+(mm*4))+"/60"
 endif
 ; arrays
 ipwrm=ipwr
