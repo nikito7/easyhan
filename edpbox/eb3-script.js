@@ -1,6 +1,6 @@
 >D 32
 
-ver=30.1935
+ver=30.1939
 date=""
 time=""
 clk=""
@@ -12,15 +12,12 @@ wtd=0
 hh=0
 mm=0
 ss=0
-tariff=0
-ttext=""
 m:ipwrm=0 60
 ipwr=0
 m:epwrm=0 60
 epwr=0
 strm="cnt0"
 fheap=0
-tmp=0
 hour=0
 ws=""
 node=""
@@ -53,17 +50,6 @@ wfp=WifiPower
 
 >T
 
-tariff=?#Tariff
-
-switch tariff
-case 1
-ttext="Vazio"
-case 2
-ttext="Ponta"
-case 3
-ttext="Cheias"
-ends
-
 ipwr=?#Power
 epwr=?#APE
 ikw=?#TEI
@@ -78,16 +64,6 @@ fheap=heap/1024
 hh=sml[1]
 mm=sml[2]
 ss=sml[3]
-
-if cnt==15
-then
-for tmp 1 ipwrm[-1] 1
-ipwrm[tmp]=0
-next
-for tmp 1 epwrm[-1] 1
-epwrm[tmp]=0
-next
-endif
 
 if cnt==30
 then
@@ -134,15 +110,13 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-Tarifa {m} %ttext%
-<br>
 
 $<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import & Power Export 2h [W]',
+$title:'Power Import & Power Export 1h [W]',
 $};
 $gc(e)
 
