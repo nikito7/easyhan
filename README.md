@@ -10,6 +10,8 @@ Easy HAN - IoT on easy
 
 ![Easy HAN](./easy-han-5.jpg)
 
+[![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
+
 **Home Assistant:**
 ![Home Assistant](./ha.png)
 https://www.home-assistant.io/
