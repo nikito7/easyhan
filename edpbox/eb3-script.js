@@ -44,12 +44,12 @@ smlj=0
 
 fr=fo("/node.txt" 0)
 res=fr(node fr)
-print Read: %fr% %res%
+print Read: %res%
 fc(fr)
 
 fr=fo("/key.txt" 0)
 res=fr(key fr)
-print Read: %fr% %res%
+print Read: %res%
 fc(fr)
 
 >E
