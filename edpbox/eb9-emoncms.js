@@ -1,5 +1,3 @@
-; emoncms begin
-
 if upsecs%tper==0
 and cnt>30
 then
@@ -13,4 +11,4 @@ ws="WebSend [emoncms.ssn.pt:80]"
 
 endif
 
-; emoncms end
+; --
