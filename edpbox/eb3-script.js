@@ -23,8 +23,8 @@ node=""
 key=""
 ikw=0
 ekw=0
-fr=""
-res=""
+fr=0
+res=0
 
 >B
 
