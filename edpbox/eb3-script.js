@@ -23,6 +23,7 @@ node=""
 key=""
 ikw=0
 ekw=0
+fr=""
 res=""
 
 >B
@@ -42,14 +43,14 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
-fr=fo("/node.txt" 0)
+fr=fo("node.txt" 0)
 res=fr(node fr)
-print Read: %res%
+print Read: %fr% / %res%
 fc(fr)
 
-fr=fo("/key.txt" 0)
+fr=fo("key.txt" 0)
 res=fr(key fr)
-print Read: %res%
+print Read: %fr% / %res%
 fc(fr)
 
 >E
