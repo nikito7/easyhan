@@ -1,6 +1,6 @@
 >D 32
 
-ver=2237
+ver=1647
 date=""
 time=""
 clk=""
@@ -23,7 +23,7 @@ node=""
 key=""
 ikw=0
 ekw=0
-
+res=""
 
 >B
 
@@ -41,6 +41,14 @@ smlj=0
 
 =>Delay 100
 =>Sensor53 r
+
+fr=fo("node.txt" 0)
+res=fr(node fr)
+fc(fr)
+
+fr=fo("key.txt" 0)
+res=fr(key fr)
+fc(fr)
 
 >E
 
