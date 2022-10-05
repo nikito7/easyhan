@@ -1,5 +1,3 @@
-; janz wtd begin
-
 clk=s(2.0mm)+s(2.0ss)
 
 if cnt==99
@@ -24,4 +22,4 @@ print modbus error !!!
 endif
 endif
 
-; janz wtd end
+; --
