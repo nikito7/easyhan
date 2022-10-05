@@ -1,6 +1,6 @@
 >D 32
 
-ver=2237
+ver=2038
 date=""
 time=""
 clk=""
@@ -13,8 +13,8 @@ hh=0
 mm=0
 ss=0
 m:ipwrm=0 60
-ipwr=0
 m:epwrm=0 60
+ipwr=0
 epwr=0
 strm="cnt0"
 fheap=0
@@ -23,6 +23,8 @@ node=""
 key=""
 ikw=0
 ekw=0
+fr=0
+res=0
 
 >B
 
@@ -35,11 +37,22 @@ smlj=0
 
 =>Delay 100
 =>SerialLog 0
+=>WebLog 4
 =>WifiConfig
 =>WifiPower
 
 =>Delay 100
 =>Sensor53 r
+
+fr=fo("node.txt" 0)
+res=fr(node fr)
+print Read: %0res% [%node%]
+fc(fr)
+
+fr=fo("key.txt" 0)
+res=fr(key fr)
+print Read: %0res% [%key%]
+fc(fr)
 
 >E
 
@@ -114,7 +127,7 @@ $gc(e)
 
 >M 1
 
-+1,3,mN1,1,9600,EB1,1,10,r010400010001,r0104006C0002,r010400160002,r010400260003,r010400790003,r0104007F0002,r0104000B0002,r01440301
++1,3,mN1,1,9600,EB1,1,15,r010400010001,r0104006C0002,r010400160002,r010400260003,r010400790003,r0104007F0002,r0104000B0002,r01440301
 
 ; r01440601 Imp+Exp
 ; r01440301 Imp
