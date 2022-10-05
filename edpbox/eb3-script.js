@@ -1,6 +1,6 @@
 >D 32
 
-ver=1647
+ver=1658
 date=""
 time=""
 clk=""
@@ -13,8 +13,8 @@ hh=0
 mm=0
 ss=0
 m:ipwrm=0 60
-ipwr=0
 m:epwrm=0 60
+ipwr=0
 epwr=0
 strm="cnt0"
 fheap=0
@@ -42,12 +42,14 @@ smlj=0
 =>Delay 100
 =>Sensor53 r
 
-fr=fo("node.txt" 0)
+fr=fo("/node.txt" 0)
 res=fr(node fr)
+print Read: %fr% %res%
 fc(fr)
 
-fr=fo("key.txt" 0)
+fr=fo("/key.txt" 0)
 res=fr(key fr)
+print Read: %fr% %res%
 fc(fr)
 
 >E
