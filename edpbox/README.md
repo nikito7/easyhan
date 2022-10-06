@@ -10,11 +10,9 @@ Adaptador Modbus para WiFi.
 
 <i>Imagem demonstrativa</i>
 
-Mais info no [```discord```](https://discord.gg/Mh9mTEA) da CPHA.
-
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
 
-Forum:
+Mais info no forum:
 
 https://forum.cpha.pt/t/easy-han-rs485-edpbox-modbus/9977
 
