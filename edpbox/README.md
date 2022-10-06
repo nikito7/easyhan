@@ -55,4 +55,8 @@ https://www.e-redes.pt/pt-pt/transicao-energetica/redes-do-futuro/acesso-porta-s
 
 ![Easy HAN RS485 tasmota](./tasmota4.jpg)
 
+# Emoncms
+
+Para testes apenas: https://emoncms.ssn.pt
+
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
