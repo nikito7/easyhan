@@ -99,8 +99,6 @@ then
 strm="cnt"+s(mm)
 ipwrm=ipwr
 epwrm=epwr
-tmp=ikw-ikwh
-print Debug: ikw=%ikw% ikwh=%ikwh% tmp=%tmp%
 endif
 
 if ikwh==0
