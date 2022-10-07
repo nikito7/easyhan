@@ -27,10 +27,11 @@ ekw=0
 fr=0
 res=0
 tmp=0
+idx=0
 p:ikwh=0
 p:ekwh=0
-m:ikwd=0 24
-m:ekwd=0 24
+m:p:ikwd=0 24
+m:p:ekwd=0 24
 
 >B
 
@@ -95,8 +96,6 @@ endif
 if chg[mm]>0
 and cnt>30
 then
-strm="cnt"+s(mm+1)
-strd="cnt"+s(hh+1)
 ipwrm=ipwr
 epwrm=epwr
 tmp=ikw-ikwh
@@ -110,12 +109,22 @@ ikwh=ikw
 svars
 endif
 
+if hh==0
+then
+idx=24
+else
+idx=hh
+endif
+
+strm="cnt"+s(mm)
+strd="cnt"+s(idx)
+ikwd[idx]=idx
+
 if chg[hh]>0
 and cnt>30
 then
-ikwd=ikw-ikwh
-tmp=ikw-ikwh
-print i24h: %ikw% %ikwh% %tmp%
+ikwd[idx]=ikw-ikwh
+print i24h: %ikw% %ikwh% idx=%idx%
 ikwh=ikw
 svars
 endif
