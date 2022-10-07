@@ -12,11 +12,11 @@ wtd=0
 hh=0
 mm=0
 ss=0
-m:ipwrm=0 60
-m:epwrm=0 60
+m:p:ipwrm=0 60
+m:p:epwrm=0 60
 ipwr=0
 epwr=0
-strm="cnt0"
+strm="cnt1"
 fheap=0
 ws=""
 node=""
@@ -25,8 +25,8 @@ ikw=0
 ekw=0
 fr=0
 res=0
-m:ikwh=0 2
-m:ekwh=0 2
+m:p:ikwh=0 2
+m:p:ekwh=0 2
 m:p:ikwd=0 24
 m:p:ekwd=0 24
 m:p:ikww=0 7
@@ -100,11 +100,11 @@ endif
 if chg[mm]>0
 and cnt>30
 then
-strm="cnt"+s(mm)
+strm="cnt"+s(mm+1)
 ipwrm=ipwr
-print Array: ipwrm %0ipwrm[-1]%
+print Array: ipwrm
 epwrm=epwr
-print Array: epwrm %0ipwrm[-1]%
+print Array: epwrm
 endif
 
 if chg[hh]>0
@@ -112,6 +112,10 @@ and cnt>30
 and ikw>0
 then
 ikwh=ikw
+print Array: ikwh[0] %ikwh[0]%
+print Array: ikwh[1] %ikwh[1]%
+print Array: ikwh[2] %ikwh[2]%
+print Array: ikwh[4] %ikwh[4]%
 endif
 
 if chg[hh]>0
@@ -120,6 +124,7 @@ and ikwh[1]>0
 and ikwh[2]>0
 then
 ikwd[hh+1]=ikwh[1]-ikwh[2]
+print Array: ikwd
 svars
 endif
 
@@ -137,7 +142,7 @@ endif
 @<br>
 <br>
 
-$<div id="chart1" style="width:350px;height:250px;padding:0px;"></div><br><br>
+$<div id="chart1" style="width:330px;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
@@ -146,7 +151,7 @@ $title:'Power Import & Power Export 1h [W]',
 $};
 $gc(e)
 
-$<div id="chart2" style="width:350px;height:250px;padding:0px;"></div><br><br>
+$<div id="chart2" style="width:330px;height:250px;padding:0px;"></div><br><br>
 $gc(ct ikwd "wr" "Energy I" "cnt1")
 $var options = {
 $chartArea:{left:50,width:'80%%'},
