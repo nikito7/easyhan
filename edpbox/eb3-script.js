@@ -135,7 +135,7 @@ endif
 @<br>
 <br>
 
-$<div id="chart1" style="width:90%;height:250px;padding:0px;"></div><br><br>
+$<div id="chart1" style="width:90%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
@@ -144,7 +144,7 @@ $title:'Power Import & Power Export 1h [W]',
 $};
 $gc(e)
 
-$<div id="chart2" style="width:90%;height:250px;padding:0px;"></div><br><br>
+$<div id="chart2" style="width:90%%;height:250px;padding:0px;"></div><br><br>
 $gc(ct ikwd "wr" "Energy I" "cnt1")
 $var options = {
 $chartArea:{left:50,width:'80%%'},
