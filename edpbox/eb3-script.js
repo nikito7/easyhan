@@ -103,7 +103,7 @@ endif
 
 if chg[ss]>0
 then
-print %2.0mm%:%2.0ss%
+print han %2.0hh%:%2.0mm%:%2.0ss%
 endif
 
 if chg[mm]>0
