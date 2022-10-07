@@ -1,6 +1,6 @@
 >D 32
 
-ver=1313
+ver=1441
 date=""
 time=""
 clk=""
@@ -25,6 +25,12 @@ ikw=0
 ekw=0
 fr=0
 res=0
+m:ikwh=0 2
+m:ekwh=0 2
+m:p:ikwd=0 24
+m:p:ekwd=0 24
+m:p:ikww=0 7
+m:p:ekww=0 7
 
 >B
 
@@ -101,6 +107,21 @@ epwrm=epwr
 print Array: epwrm %0ipwrm[-1]%
 endif
 
+if chg[hh]>0
+and cnt>30
+and ikw>0
+then
+ikwh=ikw
+endif
+
+if chg[hh]>0
+and cnt>30
+and ikwh[1]>0
+and ikwh[2]>0
+then
+ikwd[hh+1]=ikwh[1]-ikwh[2]
+endif
+
 ; janz wtd begin
 ; janz wtd end
 ; emoncms begin
@@ -115,12 +136,21 @@ endif
 @<br>
 <br>
 
-$<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
+$<div id="chart1" style="width:350px;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
 $title:'Power Import & Power Export 1h [W]',
+$};
+$gc(e)
+
+$<div id="chart2" style="width:350px;height:250px;padding:0px;"></div><br><br>
+$gc(ct ikwd "wr" "Energy I" "cnt0")
+$var options = {
+$chartArea:{left:50,width:'80%%'},
+$width:'100%%',legend:'none',
+$title:'Energy Import 24h [kWh]',
 $};
 $gc(e)
 
