@@ -26,6 +26,7 @@ ikw=0
 ekw=0
 fr=0
 res=0
+tmp=0
 p:ikwh=0
 p:ekwh=0
 m:ikwd=0 24
@@ -98,20 +99,23 @@ strm="cnt"+s(mm+1)
 strd="cnt"+s(hh+1)
 ipwrm=ipwr
 epwrm=epwr
-print Debug: ikw=%ikw% ikwh=%ikwh%
+tmp=ikw-ikwh
+print Debug: ikw=%ikw% ikwh=%ikwh% tmp=%tmp%
 endif
 
 if ikwh==0
 and cnt>30
 then
 ikwh=ikw
+svars
 endif
 
 if chg[hh]>0
 and cnt>30
 then
 ikwd=ikw-ikwh
-print i24h: %ikw% %ikwh% %ikwd[0]%
+tmp=ikw-ikwh
+print i24h: %ikw% %ikwh% %tmp%
 ikwh=ikw
 svars
 endif
