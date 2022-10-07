@@ -107,13 +107,13 @@ then
 strm="cnt"+s(mm)
 ipwrm=ipwr
 epwrm=epwr
+print mm=%0mm% ikw=%ikw% ikwh=%ikwh%
 endif
 
 if ikwh==0
 and cnt>30
 then
 ikwh=ikw
-svars
 endif
 
 if hh==0
@@ -130,12 +130,11 @@ and cnt>30
 then
 tmp=ikw-ikwh
 ikwd[idx]=tmp
-print i24h: %ikw% %ikwh% idx=%idx% tmp=%tmp%
+print i24h: idx=%0idx% ikw=%ikw% ikwh=%ikwh%
 ikwh=ikw
 svars
+print i24h: idx=%0idx% ikw=%ikw% ikwh=%ikwh%
 endif
-
-print Debug: %ikw% %ikwh% idx=%idx% tmp=%tmp%
 
 ; janz wtd begin
 ; janz wtd end
@@ -161,9 +160,9 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(ct ikwd "wr" "Energy I" strd)
+$gc(ct ikwd "wr" "Energy" strd)
 $var options = {
-$chartArea:{left:50,width:'80%%'},
+$chartArea:{left:50,width:'78%%'},
 $width:'100%%',legend:'none',
 $title:'Energy Import 24h [kWh]',
 $};
