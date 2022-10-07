@@ -127,8 +127,9 @@ ikwd[idx]=tmp
 print i24h: %ikw% %ikwh% idx=%idx% tmp=%tmp%
 ikwh=ikw
 svars
-print i24h: %ikw% %ikwh% idx=%idx% tmp=%tmp%
 endif
+
+print Debug: %ikw% %ikwh% idx=%idx% tmp=%tmp%
 
 ; janz wtd begin
 ; janz wtd end
