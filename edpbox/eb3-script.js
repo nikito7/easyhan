@@ -12,8 +12,8 @@ wtd=0
 hh=0
 mm=0
 ss=0
-m:p:ipwrm=0 60
-m:p:epwrm=0 60
+m:ipwrm=0 60
+m:epwrm=0 60
 ipwr=0
 epwr=0
 strm="cnt1"
@@ -25,12 +25,10 @@ ikw=0
 ekw=0
 fr=0
 res=0
-m:p:ikwh=0 2
-m:p:ekwh=0 2
+m:p:ikwh=0 4
+m:p:ekwh=0 4
 m:p:ikwd=0 24
 m:p:ekwd=0 24
-m:p:ikww=0 7
-m:p:ekww=0 7
 
 >B
 
@@ -109,11 +107,12 @@ print Array? epwrm %0epwrm[-1]%
 print Array? ikwh %0ikwh[-1]%
 print Array? ekwh %0ekwh[-1]%
 print Array? ikwd %0ikwd[-1]%
-print Array? ekwh %0ekwh[-1]%
+print Array? ekwd %0ekwd[-1]%
 ; debug
 print Array: ikwh[0] %ikwh[0]%
 print Array: ikwh[1] %ikwh[1]%
 print Array: ikwh[2] %ikwh[2]%
+print Array: ikwh[3] %ikwh[3]%
 print Array: ikwh[4] %ikwh[4]%
 ; save vars
 svars
@@ -124,10 +123,6 @@ and cnt>30
 and ikw>0
 then
 ikwh=ikw
-print Array: ikwh[0] %ikwh[0]%
-print Array: ikwh[1] %ikwh[1]%
-print Array: ikwh[2] %ikwh[2]%
-print Array: ikwh[4] %ikwh[4]%
 endif
 
 if chg[hh]>0
