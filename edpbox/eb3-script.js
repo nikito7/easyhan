@@ -17,6 +17,7 @@ m:epwrm=0 60
 ipwr=0
 epwr=0
 strm="cnt1"
+strd="cnt1"
 fheap=0
 ws=""
 node=""
@@ -30,7 +31,7 @@ p:ekwh=0
 m:p:ikwd=0 24
 m:p:ekwd=0 24
 tmp=0
-idx=0
+p:idx=0
 
 >B
 
@@ -94,13 +95,14 @@ endif
 if cnt<99
 then
 cnt+=1
-print Script: cnt=%0cnt%
+print Debug: cnt=%0cnt%
 endif
 
 if chg[mm]>0
 and cnt>30
 then
 strm="cnt"+s(mm+1)
+strd="cnt"+s(hh+1)
 ipwrm=ipwr
 epwrm=epwr
 print Debug: ikw=%ikw% ikwh=%ikwh%
@@ -118,8 +120,8 @@ and cnt>30
 and ikw>0
 and ikwh>0
 then
-ikwd[mm+1]=ikw-ikwh
-print i24h: %ikw% - %ikwh% = %ikwd[mm+1]%
+ikwd=ikw-ikwh
+print i24h: %ikw% %ikwh% %ikwd[0]%
 ikwh=ikw
 svars
 endif
@@ -148,7 +150,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(ct ikwd "wr" "Energy I" "cnt1")
+$gc(ct ikwd "wr" "Energy I" strd)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
