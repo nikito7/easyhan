@@ -1,6 +1,6 @@
 >D 32
 
-ver=2238
+ver=2315
 date=""
 time=""
 clk=""
@@ -28,27 +28,21 @@ fr=0
 res=0
 p:ikwh=0
 p:ekwh=0
-m:p:ikwd=0 24
-m:p:ekwd=0 24
-tmp=0
-p:idx=0
+m:ikwd=0 24
+m:ekwd=0 24
 
 >B
 
-=>Delay 100
-=>Delay 100
-=>Delay 100
+=>Delay 500
 
 tper=25
 smlj=0
 
-=>Delay 100
 =>SerialLog 0
 =>WebLog 4
 =>WifiConfig
 =>WifiPower
 
-=>Delay 100
 =>Sensor53 r
 
 fr=fo("node.txt" 0)
@@ -88,14 +82,13 @@ then
 smlj=1
 tper=10
 =>UfsRun discovery1.txt
-=>Delay 100
 =>UfsRun discovery2.txt
 endif
 
 if cnt<99
 then
 cnt+=1
-print Debug: cnt=%0cnt%
+print cnt=%0cnt%
 endif
 
 if chg[mm]>0
@@ -108,17 +101,14 @@ epwrm=epwr
 print Debug: ikw=%ikw% ikwh=%ikwh%
 endif
 
-if chg[hh]>0
+if ikwh==0
 and cnt>30
-and ikw>0
 then
 ikwh=ikw
 endif
 
-if chg[mm]>0
+if chg[hh]>0
 and cnt>30
-and ikw>0
-and ikwh>0
 then
 ikwd=ikw-ikwh
 print i24h: %ikw% %ikwh% %ikwd[0]%
