@@ -122,10 +122,12 @@ strd="cnt"+s(idx)
 if chg[hh]>0
 and cnt>30
 then
-ikwd[idx]=ikw-ikwh
-print i24h: %ikw% %ikwh% idx=%idx%
+tmp=ikw-ikwh
+ikwd[idx]=tmp
+print i24h: %ikw% %ikwh% idx=%idx% tmp=%tmp%
 ikwh=ikw
 svars
+print i24h: %ikw% %ikwh% idx=%idx% tmp=%tmp%
 endif
 
 ; janz wtd begin
