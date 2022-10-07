@@ -101,6 +101,11 @@ cnt+=1
 print cnt=%0cnt%
 endif
 
+if chg[ss]>0
+then
+print %2.0mm%:%2.0ss%
+endif
+
 if chg[mm]>0
 and cnt>30
 then
