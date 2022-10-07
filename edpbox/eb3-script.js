@@ -27,8 +27,10 @@ fr=0
 res=0
 p:ikwh=0
 p:ekwh=0
-m:p:ikwd=0 24
-m:p:ekwd=0 24
+m:p:ikwd=0 60
+m:p:ekwd=0 60
+tmp=0
+idx=0
 
 >B
 
@@ -111,13 +113,13 @@ then
 ikwh=ikw
 endif
 
-if chg[hh]>0
+if chg[mm]>0
 and cnt>30
 and ikw>0
 and ikwh>0
 then
-ikwd[hh+1]=ikw-ikwh
-print i24h: %ikw% - %ikwh% = %ikwh[hh+1]%
+ikwd[mm+1]=ikw-ikwh
+print i24h: %ikw% - %ikwh% = %ikwd[mm+1]%
 ikwh=ikw
 svars
 endif
