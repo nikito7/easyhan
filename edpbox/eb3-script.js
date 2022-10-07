@@ -25,8 +25,8 @@ ikw=0
 ekw=0
 fr=0
 res=0
-m:p:ikwh=0 4
-m:p:ekwh=0 4
+m:ikwh=0 2
+m:ekwh=0 2
 m:p:ikwd=0 24
 m:p:ekwd=0 24
 
@@ -101,19 +101,10 @@ then
 strm="cnt"+s(mm+1)
 ipwrm=ipwr
 epwrm=epwr
-; arrays size
-print Array? ipwrm %0ipwrm[-1]%
-print Array? epwrm %0epwrm[-1]%
-print Array? ikwh %0ikwh[-1]%
-print Array? ekwh %0ekwh[-1]%
-print Array? ikwd %0ikwd[-1]%
-print Array? ekwd %0ekwd[-1]%
 ; debug
 print Array: ikwh[0] %ikwh[0]%
 print Array: ikwh[1] %ikwh[1]%
 print Array: ikwh[2] %ikwh[2]%
-print Array: ikwh[3] %ikwh[3]%
-print Array: ikwh[4] %ikwh[4]%
 ; save vars
 svars
 endif
@@ -131,7 +122,9 @@ and ikwh[1]>0
 and ikwh[2]>0
 then
 ikwd[hh+1]=ikwh[2]-ikwh[1]
-print Array: ikwd
+print Array: ikwh[0] %ikwh[0]%
+print Array: ikwh[1] %ikwh[1]%
+print Array: ikwh[2] %ikwh[2]%
 endif
 
 ; janz wtd begin
