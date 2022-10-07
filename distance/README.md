@@ -10,7 +10,7 @@ SerialLog 0;
 OtaUrl http://u.easyhan.pt/han/tasmota4M.bin.gz; 
 Hostname Easy-HAN-SRx; 
 MqttClient Easy_HAN_%06X; 
-Template {"NAME":"Easy HAN","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
+Template {"NAME":"Easy HAN SR","GPIO":[1,1,1,1,1888,1856,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
 WifiConfig 2; 
 SaveData 2; 
 Module 0; 
