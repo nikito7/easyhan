@@ -146,7 +146,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:350px;height:250px;padding:0px;"></div><br><br>
-$gc(ct ikwd "wr" "Energy I" "cnt0")
+$gc(ct ikwd "wr" "Energy I" "cnt1")
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
