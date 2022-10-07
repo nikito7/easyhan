@@ -57,6 +57,7 @@ res=fr(key fr)
 print Read: %0res% [%key%]
 fc(fr)
 
+; console: script>=#reset
 #reset
 for tmp 1 ikwd[-1] 1
 ikwd[tmp]=0
