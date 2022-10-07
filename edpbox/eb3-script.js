@@ -104,12 +104,12 @@ strm="cnt"+s(mm+1)
 ipwrm=ipwr
 epwrm=epwr
 ; load arrays ?
-print Array? ipwrm %0ipwrm[-1]
-print Array? epwrm %0epwrm[-1]
-print Array? ikwh %0ikwh[-1]
-print Array? ekwh %0ekwh[-1]
-print Array? ikwd %0ikwd[-1]
-print Array? ekwh %0ekwh[-1]
+print Array? ipwrm %0ipwrm[-1]%
+print Array? epwrm %0epwrm[-1]%
+print Array? ikwh %0ikwh[-1]%
+print Array? ekwh %0ekwh[-1]%
+print Array? ikwd %0ikwd[-1]%
+print Array? ekwh %0ekwh[-1]%
 ; debug
 print Array: ikwh[0] %ikwh[0]%
 print Array: ikwh[1] %ikwh[1]%
