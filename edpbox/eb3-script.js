@@ -120,6 +120,7 @@ and ikwh[1]>0
 and ikwh[2]>0
 then
 ikwd[hh+1]=ikwh[1]-ikwh[2]
+svars
 endif
 
 ; janz wtd begin
