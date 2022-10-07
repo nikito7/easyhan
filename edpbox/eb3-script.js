@@ -1,6 +1,6 @@
 >D 32
 
-ver=2038
+ver=1313
 date=""
 time=""
 clk=""
@@ -88,6 +88,7 @@ endif
 if cnt<99
 then
 cnt+=1
+print Script: cnt=%0cnt%
 endif
 
 if chg[mm]>0
