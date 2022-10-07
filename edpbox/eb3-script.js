@@ -115,6 +115,8 @@ print Array: ikwh[0] %ikwh[0]%
 print Array: ikwh[1] %ikwh[1]%
 print Array: ikwh[2] %ikwh[2]%
 print Array: ikwh[4] %ikwh[4]%
+; save vars
+svars
 endif
 
 if chg[hh]>0
@@ -135,7 +137,6 @@ and ikwh[2]>0
 then
 ikwd[hh+1]=ikwh[1]-ikwh[2]
 print Array: ikwd
-svars
 endif
 
 ; janz wtd begin
