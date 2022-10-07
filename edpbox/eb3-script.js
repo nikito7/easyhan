@@ -16,8 +16,8 @@ m:ipwrm=0 60
 m:epwrm=0 60
 ipwr=0
 epwr=0
-strm="cnt1"
-strd="cnt1"
+strm="cnt0"
+strd="cnt0"
 fheap=0
 ws=""
 node=""
@@ -28,8 +28,8 @@ fr=0
 res=0
 tmp=0
 idx=0
-p:ikwh=0
-p:ekwh=0
+ikwh=0
+ekwh=0
 m:p:ikwd=0 24
 m:p:ekwd=0 24
 
@@ -96,6 +96,7 @@ endif
 if chg[mm]>0
 and cnt>30
 then
+strm="cnt"+s(mm)
 ipwrm=ipwr
 epwrm=epwr
 tmp=ikw-ikwh
@@ -111,14 +112,12 @@ endif
 
 if hh==0
 then
-idx=24
+idx=23
 else
-idx=hh
+idx=hh-1
 endif
 
-strm="cnt"+s(mm)
 strd="cnt"+s(idx)
-ikwd[idx]=idx
 
 if chg[hh]>0
 and cnt>30
