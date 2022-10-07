@@ -1,6 +1,6 @@
 >D 32
 
-ver=1846
+ver=1923
 date=""
 time=""
 clk=""
@@ -101,6 +101,7 @@ then
 strm="cnt"+s(mm+1)
 ipwrm=ipwr
 epwrm=epwr
+print Debug: ikw=%ikw% ikwh=%ikwh%
 endif
 
 if chg[hh]>0
@@ -135,7 +136,7 @@ endif
 @<br>
 <br>
 
-$<div id="chart1" style="width:90%%;height:250px;padding:0px;"></div><br><br>
+$<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
@@ -144,7 +145,7 @@ $title:'Power Import & Power Export 1h [W]',
 $};
 $gc(e)
 
-$<div id="chart2" style="width:90%%;height:250px;padding:0px;"></div><br><br>
+$<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
 $gc(ct ikwd "wr" "Energy I" "cnt1")
 $var options = {
 $chartArea:{left:50,width:'80%%'},
