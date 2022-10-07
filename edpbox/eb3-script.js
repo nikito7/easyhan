@@ -1,6 +1,6 @@
 >D 32
 
-ver=1923
+ver=2238
 date=""
 time=""
 clk=""
@@ -27,8 +27,8 @@ fr=0
 res=0
 p:ikwh=0
 p:ekwh=0
-m:p:ikwd=0 60
-m:p:ekwd=0 60
+m:p:ikwd=0 24
+m:p:ekwd=0 24
 tmp=0
 idx=0
 
