@@ -57,6 +57,13 @@ res=fr(key fr)
 print Read: %0res% [%key%]
 fc(fr)
 
+#reset
+for tmp 1 ikwd[-1] 1
+ikwd[tmp]=0
+next
+svars
+print: ikwd reset
+
 >E
 
 wfc=WifiConfig#?
