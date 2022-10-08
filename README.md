@@ -6,6 +6,8 @@ Easy HAN - IoT on easy
 
 - [```growatt``` inversor solar](./growatt/)
 
+- [```ultra sonic``` distance, water level](./ultrasonic/)
+
 - [```wled``` board](./wled/)
 
 ![Easy HAN RS485](./easy-han-5.jpg)
