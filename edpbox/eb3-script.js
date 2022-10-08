@@ -1,6 +1,6 @@
 >D 32
 
-ver=0029
+ver=109
 date=""
 time=""
 clk=""
@@ -17,7 +17,6 @@ m:epwrm=0 60
 ipwr=0
 epwr=0
 strm="cnt0"
-strd="cnt0"
 fheap=0
 ws=""
 node=""
@@ -26,12 +25,6 @@ ikw=0
 ekw=0
 fr=0
 res=0
-tmp=0
-idx=0
-ikwh=0
-ekwh=0
-m:p:ikwd=0 24
-m:p:ekwd=0 24
 
 >B
 
@@ -56,14 +49,6 @@ fr=fo("key.txt" 0)
 res=fr(key fr)
 print Read: %0res% [%key%]
 fc(fr)
-
-; console: script>=#reset
-#reset
-for tmp 1 ikwd[-1] 1
-ikwd[tmp]=0
-next
-svars
-print: ikwd reset
 
 >E
 
@@ -112,33 +97,6 @@ then
 strm="cnt"+s(mm)
 ipwrm=ipwr
 epwrm=epwr
-print mm=%0mm% ikw=%ikw% ikwh=%ikwh%
-endif
-
-if ikwh==0
-and cnt>30
-then
-ikwh=ikw
-endif
-
-if hh==0
-then
-idx=23
-else
-idx=hh-1
-endif
-
-strd="cnt"+s(idx)
-
-if chg[hh]>0
-and cnt>30
-then
-tmp=ikw-ikwh
-ikwd[idx]=tmp
-print i24h: idx=%0idx% ikw=%ikw% ikwh=%ikwh%
-ikwh=ikw
-svars
-print i24h: idx=%0idx% ikw=%ikw% ikwh=%ikwh%
 endif
 
 ; janz wtd begin
@@ -161,15 +119,6 @@ $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
 $title:'Power Import & Power Export 1h [W]',
-$};
-$gc(e)
-
-$<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(ct ikwd "wr" "Energy" strd)
-$var options = {
-$chartArea:{left:50,width:'78%%'},
-$width:'100%%',legend:'none',
-$title:'Energy Import 24h [kWh]',
 $};
 $gc(e)
 
