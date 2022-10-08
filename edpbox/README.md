@@ -57,4 +57,10 @@ https://www.e-redes.pt/pt-pt/transicao-energetica/redes-do-futuro/acesso-porta-s
 
 Para testes apenas: https://emoncms.ssn.pt
 
+![Easy HAN emoncms](./emon1.jpg)
+
+![Easy HAN emoncms](./emon2.jpg)
+
+---
+
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
