@@ -61,6 +61,10 @@ Para testes apenas: https://emoncms.ssn.pt
 
 ![Easy HAN emoncms](./emon2.jpg)
 
+# Home Assistant
+
+![Easy HAN HA](./ha1.jpg)
+
 ---
 
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
