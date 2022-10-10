@@ -1,6 +1,6 @@
 >D 32
 
-ver=109
+ver=139
 date=""
 time=""
 clk=""
@@ -76,6 +76,10 @@ if cnt==30
 then
 smlj=1
 tper=10
+endif
+
+if cnt==45
+then
 =>UfsRun discovery1.txt
 =>UfsRun discovery2.txt
 endif
