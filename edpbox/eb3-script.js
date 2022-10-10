@@ -40,16 +40,6 @@ smlj=0
 
 =>Sensor53 r
 
-fr=fo("node.txt" 0)
-res=fr(node fr)
-print Read: %0res% [%node%]
-fc(fr)
-
-fr=fo("key.txt" 0)
-res=fr(key fr)
-print Read: %0res% [%key%]
-fc(fr)
-
 >E
 
 wfc=WifiConfig#?
