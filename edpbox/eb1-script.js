@@ -1,6 +1,6 @@
 >D 32
 
-ver=2038
+ver=139
 date=""
 time=""
 clk=""
@@ -28,31 +28,17 @@ res=0
 
 >B
 
-=>Delay 100
-=>Delay 100
-=>Delay 100
+=>Delay 500
 
 tper=25
 smlj=0
 
-=>Delay 100
 =>SerialLog 0
 =>WebLog 4
 =>WifiConfig
 =>WifiPower
 
-=>Delay 100
 =>Sensor53 r
-
-fr=fo("node.txt" 0)
-res=fr(node fr)
-print Read: %0res% [%node%]
-fc(fr)
-
-fr=fo("key.txt" 0)
-res=fr(key fr)
-print Read: %0res% [%key%]
-fc(fr)
 
 >E
 
@@ -80,14 +66,23 @@ if cnt==30
 then
 smlj=1
 tper=10
+endif
+
+if cnt==45
+then
 =>UfsRun discovery1.txt
-=>Delay 100
 =>UfsRun discovery2.txt
 endif
 
 if cnt<99
 then
 cnt+=1
+print cnt=%0cnt%
+endif
+
+if chg[ss]>0
+then
+print han %2.0hh%:%2.0mm%:%2.0ss%
 endif
 
 if chg[mm]>0
@@ -95,9 +90,7 @@ and cnt>30
 then
 strm="cnt"+s(mm)
 ipwrm=ipwr
-print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
-print Array: epwrm %0ipwrm[-1]%
 endif
 
 ; janz wtd begin
@@ -114,7 +107,7 @@ endif
 @<br>
 <br>
 
-$<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
+$<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
