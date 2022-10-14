@@ -37,6 +37,8 @@ Trifásicos:
 
 - ```Janz B2801 GPRS```
 
+- ```Landis+Gyr```
+
 - ```Sagemcom CX2000```
 
 Notas:
