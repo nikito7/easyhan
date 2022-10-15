@@ -1,6 +1,6 @@
 >D 32
 
-ver=1939
+ver=2021
 date=""
 time=""
 clk=""
@@ -25,10 +25,6 @@ ikw=0
 ekw=0
 fr=0
 res=0
-ebf=""
-ebs=""
-lpyr=0
-lpmt=0
 
 >B
 
@@ -57,8 +53,6 @@ ipwr=?#Power
 epwr=?#APE
 ikw=?#TEI
 ekw=?#TEE
-lpyr=?#LP1_Y
-lpmt=?#LP1_M
 
 >S
 
@@ -99,17 +93,6 @@ then
 strm="cnt"+s(mm)
 ipwrm=ipwr
 epwrm=epwr
-endif
-
-if chg[ss]>0
-and cnt>50
-then
-ebf=s(0lpyr)+"-"+s(0lpmt)+".csv"
-ebs="test"
-fr=fo(ebf 1)
-res=fw(ebs fr)
-print Saving: %res% %ebf% %ebs%
-fc(fr)
 endif
 
 ; janz wtd begin
