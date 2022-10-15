@@ -26,8 +26,9 @@ ekw=0
 fr=0
 res=0
 ebf=""
-yr=0
-mt=0
+ebs=""
+lpyr=0
+lpmt=0
 
 >B
 
@@ -56,8 +57,8 @@ ipwr=?#Power
 epwr=?#APE
 ikw=?#TEI
 ekw=?#TEE
-yr=?#LP1_Y
-mt=?#LP1_M
+lpyr=?#LP1_Y
+lpmt=?#LP1_M
 
 >S
 
@@ -105,13 +106,14 @@ endif
 ; emoncms begin
 ; emoncms end
 
-if chg[mm]>0
-and cnt>30
+if chg[ss]>0
+and cnt>50
 then
 ebf=s(yr)+"-"+s(mt)+".csv"
+ebs="test"
 fr=fo(ebf a)
-res=fw("test" fr)
-print Saving: %fr% %ebf% test
+res=fw(ebs fr)
+print Saving: %fr% %ebf% %ebs%
 fc(fr)
 endif
 
