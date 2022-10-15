@@ -101,21 +101,21 @@ ipwrm=ipwr
 epwrm=epwr
 endif
 
+if chg[ss]>0
+and cnt>50
+then
+ebf=s(0lpyr)+"-"+s(0lpmt)+".csv"
+ebs="test"
+fr=fo(ebf 1)
+res=fw(ebs fr)
+print Saving: %res% %ebf% %ebs%
+fc(fr)
+endif
+
 ; janz wtd begin
 ; janz wtd end
 ; emoncms begin
 ; emoncms end
-
-if chg[ss]>0
-and cnt>50
-then
-ebf=s(yr)+"-"+s(mt)+".csv"
-ebs="test"
-fr=fo(ebf a)
-res=fw(ebs fr)
-print Saving: %fr% %ebf% %ebs%
-fc(fr)
-endif
 
 >W
 
