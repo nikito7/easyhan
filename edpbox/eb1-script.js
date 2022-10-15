@@ -1,6 +1,6 @@
 >D 32
 
-ver=139
+ver=2021
 date=""
 time=""
 clk=""
@@ -28,7 +28,9 @@ res=0
 
 >B
 
-=>Delay 500
+=>Delay 100
+=>Delay 100
+=>Delay 100
 
 tper=25
 smlj=0
