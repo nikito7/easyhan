@@ -1,6 +1,6 @@
 >D 32
 
-ver=139
+ver=1939
 date=""
 time=""
 clk=""
@@ -31,7 +31,9 @@ mt=0
 
 >B
 
-=>Delay 500
+=>Delay 100
+=>Delay 100
+=>Delay 100
 
 tper=25
 smlj=0
@@ -107,6 +109,10 @@ if chg[mm]>0
 and cnt>30
 then
 ebf=s(yr)+"-"+s(mt)+".csv"
+fr=fo(ebf a)
+res=fw("test" fr)
+print Saving: %fr% %ebf% test
+fc(fr)
 endif
 
 >W
