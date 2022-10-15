@@ -25,6 +25,9 @@ ikw=0
 ekw=0
 fr=0
 res=0
+ebf=""
+yr=0
+mt=0
 
 >B
 
@@ -51,6 +54,8 @@ ipwr=?#Power
 epwr=?#APE
 ikw=?#TEI
 ekw=?#TEE
+yr=?#LP1_Y
+mt=?#LP1_M
 
 >S
 
@@ -97,6 +102,12 @@ endif
 ; janz wtd end
 ; emoncms begin
 ; emoncms end
+
+if chg[mm]>0
+and cnt>30
+then
+ebf=s(yr)+"-"+s(mt)+".csv"
+endif
 
 >W
 
