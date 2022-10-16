@@ -53,6 +53,8 @@ Landis+Gyr: Serial mN1/mN2.
 
 https://www.e-redes.pt/pt-pt/transicao-energetica/redes-do-futuro/acesso-porta-serie-de-comunicacao
 
+https://forum.cpha.pt/t/pedido-da-porta-han-e-redes-pt-2022/10869
+
 # Imagens
 
 ![Easy HAN RS485 tasmota](./tasmota3.jpg)
