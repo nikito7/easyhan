@@ -1,6 +1,6 @@
 >D 48
 
-ver=105
+ver=106
 date=""
 time=""
 clk=""
@@ -112,7 +112,7 @@ epwrm=epwr
 endif
 
 if chg[lp1mm]>0
-and cnt>30
+and cnt>50
 then
 lps=s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+":00,"+s(0lp3i)+","+s(0lp6e)+"\n"
 lpf="zlp-"+s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+".txt"
