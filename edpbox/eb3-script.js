@@ -1,6 +1,6 @@
 >D 32
 
-ver=2021
+ver=102
 date=""
 time=""
 clk=""
@@ -25,6 +25,13 @@ ikw=0
 ekw=0
 fr=0
 res=0
+lp1y=0
+lp1m=0
+lp1d=0
+lp1hh=0
+lp1mm=0
+lp3i=0
+lp6e=0
 
 >B
 
@@ -53,6 +60,13 @@ ipwr=?#Power
 epwr=?#APE
 ikw=?#TEI
 ekw=?#TEE
+lp1y=?#LP1_Y
+lp1m=?#LP1_M
+lp1d=?#LP1_D
+lp1hh=?#LP1_HH
+lp1mm=?#LP1_MM
+lp3i=?#LP3_IMP
+lp6e=?#LP6_EXP
 
 >S
 
@@ -93,6 +107,12 @@ then
 strm="cnt"+s(mm)
 ipwrm=ipwr
 epwrm=epwr
+endif
+
+if chg[lp1mm]>0
+and cnt>30
+then
+print test
 endif
 
 ; janz wtd begin
