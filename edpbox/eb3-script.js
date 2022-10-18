@@ -32,6 +32,8 @@ lp1hh=0
 lp1mm=0
 lp3i=0
 lp6e=0
+lps=""
+lpf=""
 
 >B
 
@@ -112,7 +114,12 @@ endif
 if chg[lp1mm]>0
 and cnt>30
 then
-print test
+lps="demo"
+lpf="zlp-"+s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+".txt"
+fr=fo(lpf 2)
+res=fw(lps fr)
+print Saving: %0res% [%lpf%] [%lps%]
+fc(fr)
 endif
 
 ; janz wtd begin
