@@ -114,7 +114,7 @@ endif
 if chg[lp1mm]>0
 and cnt>30
 then
-lps="demo"
+lps=s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+":00\t"+s(0lp3i)+s(0lp6e)+"\n"
 lpf="zlp-"+s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+".txt"
 fr=fo(lpf 2)
 res=fw(lps fr)
