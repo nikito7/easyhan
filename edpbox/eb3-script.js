@@ -1,6 +1,6 @@
->D 48
+>D 70
 
-ver=110
+ver=111
 date=""
 time=""
 clk=""
