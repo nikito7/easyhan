@@ -1,6 +1,6 @@
 >D 48
 
-ver=108
+ver=109
 date=""
 time=""
 clk=""
@@ -114,13 +114,17 @@ endif
 if chg[lp1mm]>0
 and cnt>50
 then
-; if no file ...
-; DateTime,ImportInc,ExportInc,TotalImport,TotalExport,!\n
-
 lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+":00,"+s(5.0lp3i)+","+s(5.0lp6e)+","s(ikw)+","+s(ekw)+",!\n"
 lpf="zlp-"+s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+".txt"
+;
 fr=fo(lpf 2)
-res=fw(lps fr)
+;
+res=fz(fr)
+if res==0
+then
+res=fw("DateTime,ImportInc,ExportInc,TotalImport,TotalExport,!\n" fr)
+endif
+;
 print Saving: %0res% [%lpf%] [%lps%]
 fc(fr)
 endif
