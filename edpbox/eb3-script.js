@@ -1,6 +1,6 @@
 >D 70
 
-ver=111
+ver=112
 date=""
 time=""
 clk=""
@@ -125,6 +125,7 @@ then
 res=fw("DateTime,ImportInc,ExportInc,TotalImport,TotalExport,!\n" fr)
 endif
 ;
+res=fw(lps fr)
 print Saving: %0res% [%lpf%] [%lps%]
 fc(fr)
 endif
