@@ -1,6 +1,9 @@
 >D 48
 
 ver=115
+PF="Power Factor"
+AP="Active Power"
+TE="Total Energy"
 date=""
 time=""
 clk=""
