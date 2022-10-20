@@ -1,6 +1,6 @@
 >D 48
 
-ver=119
+ver=120
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -237,7 +237,7 @@ $gc(e)
 
 1,=h<br>
 1,=hDiagrama de Carga (15min)
-1,=h<br><br>
+1,=h<br>
 
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
 1,01441dxxxxuu@i7:1,Month,,LP1_M,0
