@@ -1,6 +1,6 @@
 >D 48
 
-ver=123
+ver=124
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
