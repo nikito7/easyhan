@@ -1,6 +1,6 @@
 >D 48
 
-ver=114
+ver=115
 date=""
 time=""
 clk=""
@@ -114,7 +114,7 @@ endif
 if chg[lp1mm]>0
 and cnt>50
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(8.0lp3i)+","+s(8.0lp6e)+",!\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(5.0lp3i)+","+s(5.0lp6e)+",,\n"
 lpf="zlp-"+s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+".csv"
 ;
 fr=fo(lpf 2)
@@ -122,7 +122,9 @@ fr=fo(lpf 2)
 res=fz(fr)
 if res==0
 then
-res=fw("DateTime,ImportInc,ExportInc,!\n" fr)
+res=fw("Date Time,Import Inc,Export Inc,,\n" fr)
+fc(fr)
+fr=fo(lpf 2)
 endif
 ;
 res=fw(lps fr)
