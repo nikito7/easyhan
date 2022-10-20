@@ -1,6 +1,6 @@
 >D 48
 
-ver=121
+ver=122
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -236,8 +236,9 @@ $gc(e)
 ; lp
 
 1,=h<br>
-1,=hDiagrama de Carga (15min)
+1,=hLoad Profile (15min)
 1,=h<br>
+1,=h<a href="/ufs/%lpf%">%lpf%</a>
 
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
 1,01441dxxxxuu@i7:1,Month,,LP1_M,0
