@@ -235,7 +235,7 @@ $gc(e)
 
 ; lp
 
-1,=h<br>Diagrama de Carga (15min)<br>
+1,=h<p>Diagrama de Carga (15min) </p>
 1,=h<br>
 
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
