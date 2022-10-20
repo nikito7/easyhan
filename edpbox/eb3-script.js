@@ -203,26 +203,26 @@ $gc(e)
 
 1,01040eUUuuUUuu@i3:1,Active Power Export,W,APE,0
 
-1,01040exxxxxxxxUUuu@i3:1000,Power Factor,φ,Factor,3
-1,01040exxxxxxxxxxxxUUuu@i3:1000,Power Factor L1,φ,PF1,3
-1,01040exxxxxxxxxxxxxxxxUUuu@i3:1000,Power Factor L2,φ,PF2,3
-1,01040exxxxxxxxxxxxxxxxxxxxUUuu@i3:1000,Power Factor L3,φ,PF3,3
-1,01040exxxxxxxxxxxxxxxxxxxxxxxxUUuu@i3:10,Frequency,Hz,Frequency,1
+1,01040ex4UUuu@i3:1000,Power Factor,φ,Factor,3
+1,01040ex4xxxxUUuu@i3:1000,Power Factor L1,φ,PF1,3
+1,01040ex4xxxxxxxxUUuu@i3:1000,Power Factor L2,φ,PF2,3
+1,01040ex4xxxxxxxxxxxxUUuu@i3:1000,Power Factor L3,φ,PF3,3
+1,01040ex4xxxxxxxxxxxxxxxxUUuu@i3:10,Frequency,Hz,Frequency,1
 
 1,=h<br>
 
 ; 26
 
 1,01040CUUuuUUuu@i4:1000,Total Energy T1 Vazio,kWh,TET1,2
-1,01040CxxxxxxxxUUuuUUuu@i4:1000,Total Energy T2 Ponta,kWh,TET2,2
-1,01040CxxxxxxxxxxxxxxxxUUuuUUuu@i4:1000,Total Energy T3 Cheias,kWh,TET3,2
+1,01040Cx4UUuuUUuu@i4:1000,Total Energy T2 Ponta,kWh,TET2,2
+1,01040Cx4xxxxxxxxUUuuUUuu@i4:1000,Total Energy T3 Cheias,kWh,TET3,2
 
 1,=h<br>
 
 ; 16
 
 1,010418UUuuUUuu@i5:1000,Total Energy Import,kWh,TEI,2
-1,010418xxxxxxxxUUuuUUuu@i5:1000,Total Energy Export,kWh,TEE,2
+1,010418x4UUuuUUuu@i5:1000,Total Energy Export,kWh,TEE,2
 
 1,=h<br>
 
