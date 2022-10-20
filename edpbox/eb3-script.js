@@ -1,6 +1,6 @@
 >D 48
 
-ver=122
+ver=123
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -114,11 +114,12 @@ ipwrm=ipwr
 epwrm=epwr
 endif
 
+lpf="zlp-"+s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+".csv"
+
 if chg[lp1mm]>0
 and cnt>50
 then
 lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(5.0lp3i)+","+s(5.0lp6e)+",,\n"
-lpf="zlp-"+s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+".csv"
 ;
 fr=fo(lpf 2)
 ;
@@ -147,6 +148,8 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
+<br>
+Today: <a href="/ufs/%lpf%">%lpf%</a>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
@@ -238,7 +241,6 @@ $gc(e)
 1,=h<br>
 1,=hLoad Profile (15min)
 1,=h<br>
-1,=h<a href="/ufs/%lpf%">%lpf%</a>
 
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
 1,01441dxxxxuu@i7:1,Month,,LP1_M,0
