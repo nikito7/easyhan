@@ -1,6 +1,6 @@
 >D 48
 
-ver=120
+ver=121
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -38,7 +38,7 @@ lp6e=0
 lps=""
 lpf=""
 
->B
+>BS
 
 =>Delay 100
 =>Delay 100
@@ -49,8 +49,6 @@ smlj=0
 
 =>SerialLog 0
 =>WebLog 4
-=>WifiConfig
-=>WifiPower
 
 =>Sensor53 r
 
@@ -85,6 +83,8 @@ ss=sml[3]
 
 if cnt==30
 then
+=>WifiConfig
+=>WifiPower
 smlj=1
 tper=10
 endif
