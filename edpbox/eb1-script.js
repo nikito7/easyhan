@@ -1,6 +1,9 @@
->D 32
+>D 48
 
-ver=2021
+ver=124
+PF="Power Factor"
+AP="Active Power"
+TE="Total Energy"
 date=""
 time=""
 clk=""
@@ -25,8 +28,17 @@ ikw=0
 ekw=0
 fr=0
 res=0
+lp1y=0
+lp1m=0
+lp1d=0
+lp1hh=0
+lp1mm=0
+lp3i=0
+lp6e=0
+lps=""
+lpf=""
 
->B
+>BS
 
 =>Delay 100
 =>Delay 100
@@ -37,8 +49,6 @@ smlj=0
 
 =>SerialLog 0
 =>WebLog 4
-=>WifiConfig
-=>WifiPower
 
 =>Sensor53 r
 
@@ -53,6 +63,13 @@ ipwr=?#Power
 epwr=?#APE
 ikw=?#TEI
 ekw=?#TEE
+lp1y=?#LP1_Y
+lp1m=?#LP1_M
+lp1d=?#LP1_D
+lp1hh=?#LP1_HH
+lp1mm=?#LP1_MM
+lp3i=?#LP3_IMP
+lp6e=?#LP6_EXP
 
 >S
 
@@ -66,6 +83,8 @@ ss=sml[3]
 
 if cnt==30
 then
+=>WifiConfig
+=>WifiPower
 smlj=1
 tper=10
 endif
@@ -95,10 +114,32 @@ ipwrm=ipwr
 epwrm=epwr
 endif
 
-; janz wtd begin
-; janz wtd end
-; emoncms begin
-; emoncms end
+lpf="zlp-"+s(4.0lp1y)+s(2.0lp1m)+s(2.0lp1d)+".csv"
+
+if chg[lp1mm]>0
+and cnt>50
+then
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(5.0lp3i)+","+s(5.0lp6e)+",,\n"
+;
+fr=fo(lpf 2)
+;
+res=fz(fr)
+if res==0
+then
+res=fw("Date Time,Import Inc,Export Inc,,\n" fr)
+fc(fr)
+fr=fo(lpf 2)
+endif
+;
+res=fw(lps fr)
+print Saving: %0res% [%lpf%] [%lps%]
+fc(fr)
+endif
+
+; janz begin
+; janz end
+; emon begin
+; emon end
 
 >W
 
@@ -107,6 +148,8 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
+<br>
+Today: <a href="/ufs/%lpf%">%lpf%</a>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
