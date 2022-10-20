@@ -132,10 +132,10 @@ print Saving: %0res% [%lpf%] [%lps%]
 fc(fr)
 endif
 
-; janz wtd begin
-; janz wtd end
-; emoncms begin
-; emoncms end
+; janz begin
+; janz end
+; emon begin
+; emon end
 
 >W
 
@@ -230,9 +230,9 @@ $gc(e)
 
 1,01040euu@i6:1,Tariff,,Tariff,0
 
-; load profile
+; lp
 
-1,=h<br>Load Profile (15min)<br>
+1,=h<br>Diagrama de Carga (15min)<br>
 1,=h<br>
 
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
@@ -240,12 +240,12 @@ $gc(e)
 1,01441dxxxxxxuu@i7:1,Day,,LP1_D,0
 1,01441dxxxxxxxxxxuu@i7:1,Hour,h,LP1_HH,0
 1,01441dxxxxxxxxxxxxuu@i7:1,Minute,m,LP1_MM,0
-; summer
+; dst
 ; amr
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,+Ri Inc,VArh,LP4,0
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,-Rc Inc,VArh,LP5,0
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
+1,01441dx8x4xxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
+1,01441dx8x4x4xxUUuuUUuu@i7:1,+Ri Inc,VArh,LP4,0
+1,01441dx8x4x4xxxxxxxxxxUUuuUUuu@i7:1,-Rc Inc,VArh,LP5,0
+1,01441dx8x4x4xxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
 
 ; eof lp
 ; eof meter
