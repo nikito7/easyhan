@@ -25,7 +25,8 @@ OLX:
 https://m.olx.pt/d/anuncio/leitor-da-porta-han-modbus-rs485-easyhan-pt-IDHnjLr.html
 
 # Contadores
-> Testados com alimentação directa na HAN
+> Testados com alimentação directa na HAN.
+> Sem modem gprs externo.
 
 Monofásicos:
 
