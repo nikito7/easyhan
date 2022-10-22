@@ -72,7 +72,7 @@ Para testes apenas: https://emoncms.ssn.pt
 
 # Home Assistant
 
-![Easy HAN HA](./ha1.jpg)
+![Easy HAN HA](./ha1-221022.jpg)
 
 ---
 
