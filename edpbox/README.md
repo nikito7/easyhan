@@ -62,14 +62,6 @@ https://forum.cpha.pt/t/pedido-da-porta-han-e-redes-pt-2022/10869
 
 ![Easy HAN RS485 tasmota](./tasmota4.jpg)
 
-# Emoncms
-
-Para testes apenas: https://emoncms.ssn.pt
-
-![Easy HAN emoncms](./emon1.jpg)
-
-![Easy HAN emoncms](./emon2.jpg)
-
 # Home Assistant
 
 ![Easy HAN HA](./ha1-221022.jpg)
