@@ -10,3 +10,6 @@ Easy HAN - IoT on easy
 
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
 
+PayPal:
+
+https://www.paypal.com/paypalme/easyhanpt/?country.x=PT
