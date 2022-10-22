@@ -4,6 +4,8 @@ Leitor e medidor da porta HAN.
 
 Acesso aos dados do contador.
 
+Acesso ao Diagrama de Carga (netmetering)
+
 Adaptador Modbus para WiFi.
 
 ![edpbox: o seu contador inteligente, é mais que um contador](./edpbox1.jpg)
