@@ -1,6 +1,6 @@
 >D 48
 
-ver=125
+ver=127
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -114,7 +114,7 @@ ipwrm=ipwr
 epwrm=epwr
 endif
 
-lpf="LP-"+s(4.0lp1y)+s(2.0lp1m)+".csv"
+lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 
 if chg[lp1mm]>0
 and cnt>50
@@ -149,7 +149,7 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>
+<center><a href="/ufs/%lpf%">%lpf%</a></center>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
