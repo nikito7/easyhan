@@ -58,11 +58,13 @@ https://www.e-redes.pt/pt-pt/transicao-energetica/redes-do-futuro/acesso-porta-s
 
 https://forum.cpha.pt/t/pedido-da-porta-han-e-redes-pt-2022/10869
 
-# Imagens
+# Tasmota
 
-![Easy HAN RS485 tasmota](./tasmota3.jpg)
+![Easy HAN tasmota](./tasmota1-20221024.jpg)
 
-![Easy HAN RS485 tasmota](./tasmota4.jpg)
+![Easy HAN tasmota](./tasmota2-20221024.jpg)
+
+![Easy HAN tasmota](./tasmota3-20221024.jpg)
 
 # Home Assistant
 
