@@ -1,6 +1,8 @@
 # Easy HAN RS485
 
-Leitor e medidor da porta HAN.
+Leitor da porta HAN.
+
+Medidor de consumo via porta HAN. 
 
 Acesso aos dados do contador.
 
