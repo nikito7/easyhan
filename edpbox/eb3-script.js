@@ -1,6 +1,6 @@
 >D 48
 
-ver=127
+ver=128
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -149,7 +149,7 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-<center><a href="/ufs/%lpf%">%lpf%</a></center>
+Last: <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
