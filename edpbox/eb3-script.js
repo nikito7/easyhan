@@ -1,6 +1,6 @@
 >D 48
 
-ver=129
+ver=10130
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -119,14 +119,14 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 and cnt>50
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+",,\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+"\n"
 ;
 fr=fo(lpf 2)
 ;
 res=fz(fr)
 if res==0
 then
-res=fw("Date Time,Import Inc,Export Inc,,\n" fr)
+res=fw("Date,Import Inc,Export Inc\n" fr)
 fc(fr)
 fr=fo(lpf 2)
 endif
