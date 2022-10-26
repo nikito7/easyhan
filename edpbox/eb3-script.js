@@ -1,6 +1,6 @@
 >D 48
 
-ver=10141
+ver=10142
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -163,8 +163,8 @@ endif
 @<br>
 ;
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
-. {m}<a href="/ufs/chart1.html">Chart1</a>
+<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/chart1.html">Chart1</a>
+<a href="/ufsd">More</a>
 <br>
 Index{m}%0idx%
 A importar {m}%0ipwr% W
