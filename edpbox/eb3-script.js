@@ -1,6 +1,6 @@
 >D 48
 
-ver=10137
+ver=10138
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -159,18 +159,19 @@ endif
 
 >W
 
-@<hr>
-@A importar %0ipwr% W
-@A exportar %0epwr% W
+@<b>A importar</b> %0ipwr% W
+@<b>A exportar</b> %0epwr% W
 @<br>
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
-@<hr>
+@<br>
 ;
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
+Index{m}%0idx%
+Array{m}%0ipwrm[0]%
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
