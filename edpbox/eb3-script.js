@@ -1,6 +1,6 @@
 >D 48
 
-ver=10138
+ver=10139
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -15,9 +15,9 @@ wtd=0
 hh=0
 mm=0
 ss=0
-M:p:ipwrm=0 90
-M:p:epwrm=0 90
-idx=1
+m:p:ipwrm=0 90
+m:p:epwrm=0 90
+p:idx=1
 ipwr=0
 epwr=0
 strm="cnt0"
@@ -170,6 +170,7 @@ endif
 ;
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
+<br>
 Index{m}%0idx%
 Array{m}%0ipwrm[0]%
 <br>
