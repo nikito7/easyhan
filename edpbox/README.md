@@ -10,7 +10,7 @@ Acesso ao Diagrama de Carga (netmetering)
 
 Adaptador Modbus para WiFi.
 
-![edpbox: o seu contador inteligente, é mais que um contador](./edpbox1.jpg)
+![edpbox: o seu contador inteligente, é mais que um contador](./edpbox1-20221026.jpg)
 
 <i>Imagem demonstrativa</i>
 
