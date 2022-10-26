@@ -1,6 +1,6 @@
 >D 48
 
-ver=10131
+ver=10132
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -112,6 +112,7 @@ then
 strm="cnt"+s(mm)
 ipwrm=ipwr
 epwrm=epwr
+svars
 endif
 
 lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
@@ -143,9 +144,11 @@ endif
 
 >W
 
-@ A importar{m}%0ipwr% W
-@ A exportar{m}%0epwr% W
-@ <br>{m}<br>
+@<div style="color: red">
+@A importar %0ipwr% W
+@A exportar %0epwr% W
+@</div>
+;
 <b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
 <b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 <b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
