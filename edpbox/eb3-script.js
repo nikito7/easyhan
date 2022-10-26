@@ -1,6 +1,6 @@
 >D 48
 
-ver=10135
+ver=10137
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -17,6 +17,7 @@ mm=0
 ss=0
 M:p:ipwrm=0 90
 M:p:epwrm=0 90
+idx=1
 ipwr=0
 epwr=0
 strm="cnt0"
@@ -51,6 +52,9 @@ smlj=0
 =>WebLog 4
 
 =>Sensor53 r
+
+ipwrm[0]=idx
+epwrm[0]=idx
 
 >E
 
@@ -106,12 +110,23 @@ then
 print han %2.0hh%:%2.0mm%:%2.0ss%
 endif
 
-if chg[mm]>0
+if upsecs%tper==0
 and cnt>30
 then
-strm="cnt"+s(mm)
+strm="cnt"+s(idx)
 ipwrm=ipwr
 epwrm=epwr
+idx+=1
+;
+if idx>ipwrm[-1]
+then
+idx=1
+endif
+;
+endif
+
+if chg[mm]>0
+then
 svars
 endif
 
