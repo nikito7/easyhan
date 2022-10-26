@@ -1,6 +1,6 @@
 >D 48
 
-ver=10139
+ver=10140
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -106,14 +106,11 @@ print cnt=%0cnt%
 endif
 
 if chg[ss]>0
-then
-print han %2.0hh%:%2.0mm%:%2.0ss%
-endif
-
-if upsecs%tper==0
 and cnt>30
 then
-strm="cnt"+s(idx)
+print han %2.0hh%:%2.0mm%:%2.0ss%
+;
+strm="cnt"+s(idx-1)
 ipwrm=ipwr
 epwrm=epwr
 idx+=1
@@ -135,7 +132,7 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 and cnt>50
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+"\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+" "+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+"\n"
 ;
 fr=fo(lpf 2)
 ;
@@ -170,9 +167,11 @@ endif
 ;
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
+<a href="/ufs/chart1.html">Chart1</a>
 <br>
 Index{m}%0idx%
-Array{m}%0ipwrm[0]%
+Import{m}%0ipwr% W
+Export{m}%0epwr% W
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
