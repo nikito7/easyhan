@@ -1,6 +1,6 @@
 >D 48
 
-ver=10132
+ver=10133
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -144,17 +144,20 @@ endif
 
 >W
 
-@<div style="color: red">
+@<div style="border: 1px">
 @A importar %0ipwr% W
 @A exportar %0epwr% W
 @</div>
 ;
+<div style="border: 1px">
 <b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
 <b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 <b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 <b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
+<a href="/ufs/%lpf%">%lpf%</a>
+<a href="/ufsd">More</a>
+</div>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
