@@ -1,6 +1,6 @@
 >D 48
 
-ver=10134
+ver=10135
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -15,8 +15,8 @@ wtd=0
 hh=0
 mm=0
 ss=0
-M:p:ipwrm=0 60
-M:p:epwrm=0 60
+M:p:ipwrm=0 90
+M:p:epwrm=0 90
 ipwr=0
 epwr=0
 strm="cnt0"
@@ -144,7 +144,7 @@ endif
 
 >W
 
-@<div style="border: 1px; border-color: red">
+@<hr>
 @A importar %0ipwr% W
 @A exportar %0epwr% W
 @<br>
@@ -152,8 +152,7 @@ endif
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
-@</div>
-<br>
+@<hr>
 ;
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
@@ -164,7 +163,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import & Power Export 1h [W]',
+$title:'Power Import & Export [W] (90 datapoints)',
 $};
 $gc(e)
 
