@@ -1,6 +1,6 @@
 >D 48
 
-ver=10143
+ver=10144
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -15,8 +15,8 @@ wtd=0
 hh=0
 mm=0
 ss=0
-m:p:ipwrm=0 90
-m:p:epwrm=0 90
+m:p:ipwrm=0 50
+m:p:epwrm=0 50
 p:idx=1
 ipwr=0
 epwr=0
@@ -180,7 +180,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import & Export [W] (90 datapoints)',
+$title:'Power Import & Export [ Watts ] ( 50 datapoints )',
 $};
 $gc(e)
 
