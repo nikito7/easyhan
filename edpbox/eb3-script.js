@@ -184,9 +184,6 @@ $title:'Power Import & Export [ Watts ] ( 50 datapoints )',
 $};
 $gc(e)
 
->w1 "test"
-Test
-
 ; EB3 only !
 
 >M 1
