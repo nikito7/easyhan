@@ -1,6 +1,6 @@
 >D 48
 
-ver=129
+ver=10145
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -15,8 +15,9 @@ wtd=0
 hh=0
 mm=0
 ss=0
-m:ipwrm=0 60
-m:epwrm=0 60
+m:p:ipwrm=0 50
+m:p:epwrm=0 50
+p:idx=1
 ipwr=0
 epwr=0
 strm="cnt0"
@@ -50,7 +51,12 @@ smlj=0
 =>SerialLog 0
 =>WebLog 4
 
+=>Delay 100
 =>Sensor53 r
+
+=>Delay 100
+ipwrm[0]=idx
+epwrm[0]=idx
 
 >E
 
@@ -92,7 +98,9 @@ endif
 if cnt==45
 then
 =>UfsRun discovery1.txt
+=>Delay 100
 =>UfsRun discovery2.txt
+=>Delay 100
 endif
 
 if cnt<99
@@ -102,16 +110,25 @@ print cnt=%0cnt%
 endif
 
 if chg[ss]>0
+and cnt>30
 then
 print han %2.0hh%:%2.0mm%:%2.0ss%
+;
+strm="cnt"+s(idx-1)
+ipwrm=ipwr
+epwrm=epwr
+idx+=1
+;
+if idx>ipwrm[-1]
+then
+idx=1
+endif
+;
 endif
 
 if chg[mm]>0
-and cnt>30
 then
-strm="cnt"+s(mm)
-ipwrm=ipwr
-epwrm=epwr
+svars
 endif
 
 lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
@@ -119,14 +136,14 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 and cnt>50
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+",,\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(0lp3i)+","+s(0lp6e)+"\n"
 ;
 fr=fo(lpf 2)
 ;
 res=fz(fr)
 if res==0
 then
-res=fw("Date Time,Import Inc,Export Inc,,\n" fr)
+res=fw("Date Time,Import Inc,Export Inc\n" fr)
 fc(fr)
 fr=fo(lpf 2)
 endif
@@ -148,8 +165,14 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
+;
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
+<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/chart1.html">Chart1</a>
+<a href="/ufsd">More</a>
+<br>
+Index{m}%0idx%
+A importar {m}%0ipwr% W
+A exportar {m}%0epwr% W
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
@@ -157,7 +180,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import & Power Export 1h [W]',
+$title:'Power Import & Export [ Watts ] ( 50 datapoints )',
 $};
 $gc(e)
 
