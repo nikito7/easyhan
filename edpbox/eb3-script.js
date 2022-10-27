@@ -1,6 +1,6 @@
 >D 48
 
-ver=10142
+ver=10143
 PF="Power Factor"
 AP="Active Power"
 TE="Total Energy"
@@ -51,8 +51,10 @@ smlj=0
 =>SerialLog 0
 =>WebLog 4
 
+=>Delay 100
 =>Sensor53 r
 
+=>Delay 100
 ipwrm[0]=idx
 epwrm[0]=idx
 
@@ -96,7 +98,9 @@ endif
 if cnt==45
 then
 =>UfsRun discovery1.txt
+=>Delay 100
 =>UfsRun discovery2.txt
+=>Delay 100
 endif
 
 if cnt<99
@@ -132,14 +136,14 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 and cnt>50
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+" "+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+"\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(0lp3i)+","+s(0lp6e)+"\n"
 ;
 fr=fo(lpf 2)
 ;
 res=fz(fr)
 if res==0
 then
-res=fw("Date,Import Inc,Export Inc\n" fr)
+res=fw("Date Time,Import Inc,Export Inc\n" fr)
 fc(fr)
 fr=fo(lpf 2)
 endif
