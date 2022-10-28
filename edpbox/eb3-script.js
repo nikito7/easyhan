@@ -1,9 +1,9 @@
 >D 48
 
-ver=10145
-PF="Power Factor"
-AP="Active Power"
-TE="Total Energy"
+ver=10147
+PF="Factor de Potência"
+AP="Potência Activa"
+TE="Energia Total"
 date=""
 time=""
 clk=""
@@ -171,16 +171,17 @@ endif
 <a href="/ufsd">More</a>
 <br>
 Index{m}%0idx%
-A importar {m}%0ipwr% W
-A exportar {m}%0epwr% W
+Potência Importada{m}%0ipwr% W
+Potência Exportada{m}%0epwr% W
+Potência Solar{m}-1 W
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
+$gc(lt ipwrm epwrm "wr" "Imp" "Exp" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import & Export [ Watts ] ( 50 datapoints )',
+$title:'Potência Importada & Exportada ( Watts ) ( 50 datapoints )',
 $};
 $gc(e)
 
@@ -262,7 +263,7 @@ $gc(e)
 ; lp
 
 1,=h<br>
-1,=hLoad Profile (15min)
+1,=hDiagrama de Carga (15min)
 1,=h<br>
 
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
