@@ -1,9 +1,9 @@
 >D 48
 
-ver=10147
+ver=10148
 PF="Factor de Potência"
-AP="Potência Activa"
-TE="Energia Total"
+AP="Potência"
+TE="Energia"
 date=""
 time=""
 clk=""
@@ -179,7 +179,7 @@ $gc(lt ipwrm epwrm "wr" "Imp" "Exp" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Potência Importada & Exportada ( Watts ) ( 50 datapoints )',
+$title:'Potência Importada & Exportada ( Watts ) ( 10min )',
 $};
 $gc(e)
 
