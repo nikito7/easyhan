@@ -20,7 +20,7 @@ m:p:epwrm=0 50
 p:idx=1
 ipwr=0
 epwr=0
-strm="cnt0"
+strm="cnt1"
 fheap=0
 ws=""
 node=""
@@ -29,6 +29,7 @@ ikw=0
 ekw=0
 fr=0
 res=0
+;
 lp1y=0
 lp1m=0
 lp1d=0
@@ -38,6 +39,14 @@ lp3i=0
 lp6e=0
 lps=""
 lpf=""
+;
+m:p:ikwd=0 24
+m:p:ekwd=0 24
+p:idxk=1
+strd="cnt1"
+p:ikwo=0
+p:ekwo=0
+tmp=0
 
 >B
 
@@ -57,6 +66,8 @@ smlj=0
 =>Delay 100
 ipwrm[0]=idx
 epwrm[0]=idx
+ikwd[0]=idxk
+ekwd[0]=idxk
 
 >E
 
@@ -126,6 +137,41 @@ endif
 ;
 endif
 
+if chg[hh]>0
+and cnt>50
+then
+;
+if ikwo==0
+then
+ikwo=ikw
+endif
+if ekwo==0
+then
+ekwo=ekw
+endif
+;
+if hh==0
+then
+tmp=24
+else
+tmp=hh
+endif
+;
+if tmp==1
+then
+strd="cnt"+s(24)
+else
+strd="cnt"+s(tmp-1)
+endif
+;
+ikwd=ikw-ikwo
+ekwd=ekw-ekwo
+idxk=tmp-1
+ikwo=ikw
+ekwo=ekw
+;
+endif
+
 if chg[mm]>0
 then
 svars
@@ -168,7 +214,8 @@ endif
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/chart1.html">Chart1</a>
 <a href="/ufsd">More</a>
 <br>
-Index{m}%0idx%
+Index D{m}%0idx%
+Index M{m}%0idxk%
 <br>
 Potência Importada{m}%0ipwr% W
 Potência Exportada{m}%0epwr% W
