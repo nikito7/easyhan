@@ -1,6 +1,6 @@
 >D 48
 
-ver=10152
+ver=10155
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -217,9 +217,6 @@ endif
 Index M{m}%0idx%
 Index D{m}%0idxk%
 <br>
-Potência Importada{m}%0ipwr% W
-Potência Exportada{m}%0epwr% W
-<br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Imp" "Exp" strm)
@@ -231,11 +228,11 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt ikwd ekwd "wr" "Imp" "Exp" strd)
+$gc(ct ikwd ekwd "wr" "Imp" "Exp" strd)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'( kWh ) ( 24h )',
+$title:'Energia Total ( kWh ) ( 24h )',
 $};
 $gc(e)
 
