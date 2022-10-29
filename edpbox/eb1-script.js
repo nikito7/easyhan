@@ -1,9 +1,9 @@
 >D 48
 
-ver=10145
-PF="Power Factor"
-AP="Active Power"
-TE="Total Energy"
+ver=10150
+PF="Factor de Potência"
+AP="Potência"
+TE="Energia"
 date=""
 time=""
 clk=""
@@ -39,7 +39,7 @@ lp6e=0
 lps=""
 lpf=""
 
->BS
+>B
 
 =>Delay 100
 =>Delay 100
@@ -97,8 +97,8 @@ endif
 
 if cnt==45
 then
-=>UfsRun discovery1.txt
 =>Delay 100
+=>UfsRun discovery1.txt
 =>UfsRun discovery2.txt
 =>Delay 100
 endif
@@ -143,7 +143,7 @@ fr=fo(lpf 2)
 res=fz(fr)
 if res==0
 then
-res=fw("Date Time,Import Inc,Export Inc\n" fr)
+res=fw("Date,Import Inc,Export Inc\n" fr)
 fc(fr)
 fr=fo(lpf 2)
 endif
@@ -153,10 +153,8 @@ print Saving: %0res% [%lpf%] [%lps%]
 fc(fr)
 endif
 
-; janz begin
-; janz end
-; emon begin
-; emon end
+; extras
+; extras
 
 >W
 
@@ -171,16 +169,17 @@ endif
 <a href="/ufsd">More</a>
 <br>
 Index{m}%0idx%
-A importar {m}%0ipwr% W
-A exportar {m}%0epwr% W
+<br>
+Potência Importada{m}%0ipwr% W
+Potência Exportada{m}%0epwr% W
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
+$gc(lt ipwrm epwrm "wr" "Imp" "Exp" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Power Import & Export [ Watts ] ( 50 datapoints )',
+$title:'Potência Importada & Exportada ( Watts ) ( 10min )',
 $};
 $gc(e)
 
