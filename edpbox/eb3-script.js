@@ -1,6 +1,6 @@
 >D 48
 
-ver=10155
+ver=10158
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -20,7 +20,7 @@ m:p:epwrm=0 50
 p:idx=1
 ipwr=0
 epwr=0
-strm="cnt1"
+strm="cnt0"
 fheap=0
 ws=""
 node=""
@@ -43,7 +43,7 @@ lpf=""
 m:p:ikwd=0 24
 m:p:ekwd=0 24
 p:idxk=1
-strd="cnt1"
+strd="cnt0"
 p:ikwo=0
 p:ekwo=0
 hour=0
@@ -106,7 +106,7 @@ smlj=1
 tper=10
 endif
 
-if cnt==45
+if cnt==40
 then
 =>Delay 100
 =>UfsRun discovery1.txt
@@ -117,7 +117,6 @@ endif
 if cnt<99
 then
 cnt+=1
-print cnt=%0cnt%
 endif
 
 if chg[ss]>0
@@ -195,7 +194,6 @@ fr=fo(lpf 2)
 endif
 ;
 res=fw(lps fr)
-print Saving: %0res% [%lpf%] [%lps%]
 fc(fr)
 endif
 
@@ -223,7 +221,7 @@ $gc(lt ipwrm epwrm "wr" "Imp" "Exp" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Potência Importada & Exportada ( Watts ) ( 10min )',
+$title:'Potência ( Watts ) ( 10min )',
 $};
 $gc(e)
 
@@ -232,7 +230,7 @@ $gc(ct ikwd ekwd "wr" "Imp" "Exp" strd)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Energia Total ( kWh ) ( 24h )',
+$title:'Energia ( kWh ) ( 24h )',
 $};
 $gc(e)
 
@@ -253,8 +251,8 @@ $gc(e)
 ; 6C
 
 1,01040EUUuu@i1:10,Voltage L1,V,VL1,1
-1,01040ExxxxxxxxUUuu@i1:10,Voltage L2,V,VL2,1
-1,01040ExxxxxxxxxxxxxxxxUUuu@i1:10,Voltage L3,V,VL3,1
+1,01040Ex4UUuu@i1:10,Voltage L2,V,VL2,1
+1,01040Ex8UUuu@i1:10,Voltage L3,V,VL3,1
 
 1,=h<br>
 
@@ -312,10 +310,6 @@ $gc(e)
 1,01040euu@i6:1,Tarifa,,Tariff,0
 
 ; lp
-
-1,=h<br>
-1,=hDiagrama de Carga (15min)
-1,=h<br>
 
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
 1,01441dxxxxuu@i7:1,Month,,LP1_M,0
