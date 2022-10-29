@@ -1,6 +1,6 @@
 >D 48
 
-ver=10150
+ver=10159
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -29,6 +29,7 @@ ikw=0
 ekw=0
 fr=0
 res=0
+;
 lp1y=0
 lp1m=0
 lp1d=0
@@ -38,6 +39,14 @@ lp3i=0
 lp6e=0
 lps=""
 lpf=""
+;
+m:p:ikwd=0 24
+m:p:ekwd=0 24
+p:idxk=1
+strd="cnt0"
+p:ikwo=0
+p:ekwo=0
+hour=0
 
 >B
 
@@ -57,6 +66,8 @@ smlj=0
 =>Delay 100
 ipwrm[0]=idx
 epwrm[0]=idx
+ikwd[0]=idxk
+ekwd[0]=idxk
 
 >E
 
@@ -95,7 +106,7 @@ smlj=1
 tper=10
 endif
 
-if cnt==45
+if cnt==40
 then
 =>Delay 100
 =>UfsRun discovery1.txt
@@ -106,7 +117,6 @@ endif
 if cnt<99
 then
 cnt+=1
-print cnt=%0cnt%
 endif
 
 if chg[ss]>0
@@ -123,6 +133,41 @@ if idx>ipwrm[-1]
 then
 idx=1
 endif
+;
+endif
+
+if hh==0
+then
+hour=24
+else
+hour=hh
+endif
+
+if hour==1
+then
+strd="cnt"+s(24)
+else
+strd="cnt"+s(hour-1)
+endif
+
+if chg[hh]>0
+and cnt>50
+then
+;
+if ikwo==0
+then
+ikwo=ikw
+endif
+if ekwo==0
+then
+ekwo=ekw
+endif
+;
+ikwd=ikw-ikwo
+ekwd=ekw-ekwo
+idxk=hour-1
+ikwo=ikw
+ekwo=ekw
 ;
 endif
 
@@ -149,7 +194,6 @@ fr=fo(lpf 2)
 endif
 ;
 res=fw(lps fr)
-print Saving: %0res% [%lpf%] [%lps%]
 fc(fr)
 endif
 
@@ -168,10 +212,8 @@ endif
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/chart1.html">Chart1</a>
 <a href="/ufsd">More</a>
 <br>
-Index{m}%0idx%
-<br>
-Potência Importada{m}%0ipwr% W
-Potência Exportada{m}%0epwr% W
+Index M{m}%0idx%
+Index D{m}%0idxk%
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
@@ -179,7 +221,17 @@ $gc(lt ipwrm epwrm "wr" "Imp" "Exp" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Potência Importada & Exportada ( Watts ) ( 10min )',
+$title:'Potência ( Watts ) ( 10min )',
+$};
+$gc(e)
+
+$<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
+$gc(ct ikwd ekwd "wr" "Imp" "Exp" strd)
+$var options = {
+$chartArea:{left:50,width:'80%%'},
+$width:'100%%',legend:'none',
+$bar: {groupWidth: "95%%"},
+$title:'Energia ( kWh ) ( 24h )',
 $};
 $gc(e)
 
