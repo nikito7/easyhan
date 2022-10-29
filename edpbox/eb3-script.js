@@ -46,7 +46,7 @@ p:idxk=1
 strd="cnt1"
 p:ikwo=0
 p:ekwo=0
-tmp=0
+hour=0
 
 >B
 
@@ -137,6 +137,20 @@ endif
 ;
 endif
 
+if hh==0
+then
+hour=24
+else
+hour=hh
+endif
+
+if hour==1
+then
+strd="cnt"+s(24)
+else
+strd="cnt"+s(hour-1)
+endif
+
 if chg[hh]>0
 and cnt>50
 then
@@ -150,23 +164,9 @@ then
 ekwo=ekw
 endif
 ;
-if hh==0
-then
-tmp=24
-else
-tmp=hh
-endif
-;
-if tmp==1
-then
-strd="cnt"+s(24)
-else
-strd="cnt"+s(tmp-1)
-endif
-;
 ikwd=ikw-ikwo
 ekwd=ekw-ekwo
-idxk=tmp-1
+idxk=hour-1
 ikwo=ikw
 ekwo=ekw
 ;
