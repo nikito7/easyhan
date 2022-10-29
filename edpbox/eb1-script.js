@@ -238,7 +238,8 @@ $gc(e)
 
 ; load profile
 
-1,=h<br>Diagrama de Carga (15min)<br>
+1,=h<br>
+1,=hDiagrama de Carga (15min)
 1,=h<br>
 
 ; 01441d Imp+Exp
