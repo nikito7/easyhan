@@ -214,8 +214,8 @@ endif
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/chart1.html">Chart1</a>
 <a href="/ufsd">More</a>
 <br>
-Index D{m}%0idx%
-Index M{m}%0idxk%
+Index M{m}%0idx%
+Index D{m}%0idxk%
 <br>
 Potência Importada{m}%0ipwr% W
 Potência Exportada{m}%0epwr% W
