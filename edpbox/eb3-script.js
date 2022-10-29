@@ -1,6 +1,6 @@
 >D 48
 
-ver=10148
+ver=10150
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -39,7 +39,7 @@ lp6e=0
 lps=""
 lpf=""
 
->BS
+>B
 
 =>Delay 100
 =>Delay 100
@@ -97,8 +97,8 @@ endif
 
 if cnt==45
 then
-=>UfsRun discovery1.txt
 =>Delay 100
+=>UfsRun discovery1.txt
 =>UfsRun discovery2.txt
 =>Delay 100
 endif
@@ -143,7 +143,7 @@ fr=fo(lpf 2)
 res=fz(fr)
 if res==0
 then
-res=fw("Date Time,Import Inc,Export Inc\n" fr)
+res=fw("Date,Import Inc,Export Inc\n" fr)
 fc(fr)
 fr=fo(lpf 2)
 endif
@@ -169,9 +169,9 @@ endif
 <a href="/ufsd">More</a>
 <br>
 Index{m}%0idx%
+<br>
 Potência Importada{m}%0ipwr% W
 Potência Exportada{m}%0epwr% W
-Potência Solar{m}-1 W
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
@@ -249,14 +249,14 @@ $gc(e)
 
 ; 16
 
-1,010418UUuuUUuu@i5:1000,%TE% Import,kWh,TEI,2
-1,010418x4UUuuUUuu@i5:1000,%TE% Export,kWh,TEE,2
+1,010418UUuuUUuu@i5:1000,%TE% Total Import,kWh,TEI,2
+1,010418x4UUuuUUuu@i5:1000,%TE% Total Export,kWh,TEE,2
 
 1,=h<br>
 
 ; 0B
 
-1,01040euu@i6:1,Tariff,,Tariff,0
+1,01040euu@i6:1,Tarifa,,Tariff,0
 
 ; lp
 
@@ -272,8 +272,8 @@ $gc(e)
 ; dst
 ; amr
 1,01441dx8x4xxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
-1,01441dx8x4x4xxUUuuUUuu@i7:1,+Ri Inc,VArh,LP4,0
-1,01441dx8x4x4xxxxxxxxxxUUuuUUuu@i7:1,-Rc Inc,VArh,LP5,0
+; lp4
+; lp5
 1,01441dx8x4x4xxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
 
 ; eof lp
