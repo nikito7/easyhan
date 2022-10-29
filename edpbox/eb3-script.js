@@ -1,6 +1,6 @@
 >D 48
 
-ver=10151
+ver=10152
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -227,6 +227,15 @@ $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
 $title:'Potência Importada & Exportada ( Watts ) ( 10min )',
+$};
+$gc(e)
+
+$<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
+$gc(lt ikwd ekwd "wr" "Imp" "Exp" strd)
+$var options = {
+$chartArea:{left:50,width:'80%%'},
+$width:'100%%',legend:'none',
+$title:'( kWh ) ( 24h )',
 $};
 $gc(e)
 
