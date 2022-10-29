@@ -210,24 +210,24 @@ $gc(e)
 
 ; 16
 
-1,010408UUuuUUuu@i2:1000,Total Energy Import ,kWh,TEI,2
-1,010408xxxxxxxxUUuuUUuu@i2:1000,Total Energy Export ,kWh,TEE,2
+1,010408UUuuUUuu@i2:1000,%TE% Total Import ,kWh,TEI,2
+1,010408xxxxxxxxUUuuUUuu@i2:1000,%TE% Total Export ,kWh,TEE,2
 
 1,=h<br>
 
 ; 26
 
-1,01040CUUuuUUuu@i3:1000,Total Energy T1 Vazio ,kWh,TET1,2
-1,01040CxxxxxxxxUUuuUUuu@i3:1000,Total Energy T2 Ponta ,kWh,TET2,2
-1,01040CxxxxxxxxxxxxxxxxUUuuUUuu@i3:1000,Total Energy T3 Cheias ,kWh,TET3,2
+1,01040CUUuuUUuu@i3:1000,%TE% T1 Vazio ,kWh,TET1,2
+1,01040CxxxxxxxxUUuuUUuu@i3:1000,%TE% T2 Ponta ,kWh,TET2,2
+1,01040CxxxxxxxxxxxxxxxxUUuuUUuu@i3:1000,%TE% T3 Cheias ,kWh,TET3,2
 
 1,=h<br>
 
 ; 79
 
-1,01040aUUuuUUuu@i4:1,Active Power Import ,W,Power,0
-1,01040axxxxxxxxUUuuUUuu@i4:1,Active Power Export ,W,Active Power Export,0
-1,01040axxxxxxxxxxxxxxxxUUuu@i4:1000,Power Factor ,φ,Factor,3
+1,01040aUUuuUUuu@i4:1,%AP% Import ,W,Power,0
+1,01040axxxxxxxxUUuuUUuu@i4:1,%AP% Export ,W,Active Power Export,0
+1,01040axxxxxxxxxxxxxxxxUUuu@i4:1000,%PF% ,φ,Factor,3
 
 ; 7F
 
@@ -239,7 +239,7 @@ $gc(e)
 
 ; load profile
 
-1,=h<br>Load Profile (15min)<br>
+1,=h<br>Diagrama de Carga (15min)<br>
 1,=h<br>
 
 ; 01441d Imp+Exp
@@ -253,8 +253,8 @@ $gc(e)
 ; summer
 ; amr
 1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,+Ri Inc,VArh,LP4,0
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,-Rc Inc,VArh,LP5,0
+; lp4
+; lp5
 1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
 
 ; eof lp
