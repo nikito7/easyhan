@@ -1,6 +1,6 @@
 >D 48
 
-ver=10184
+ver=10185
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -104,6 +104,7 @@ then
 =>WifiPower
 smlj=1
 tper=10
+; fix array corruption?
 ikwd[idxk]=ikwd[idxk]
 ekwd[idxk]=ekwd[idxk]
 endif
