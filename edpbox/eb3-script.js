@@ -1,6 +1,6 @@
 >D 48
 
-ver=10191
+ver=10192
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -91,13 +91,14 @@ lp6e=?#LP6_EXP
 
 >S
 
-if cnt=500
+if cnt==500
 then
 for tmp 0 25 1
 ikwd[tmp]=0
 ekwd[tmp]=0
 next
-print array reseted
+print Array 24h Reset !
+idxk=hh
 cnt=99
 svars
 endif
