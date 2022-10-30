@@ -66,7 +66,15 @@ https://forum.cpha.pt/t/pedido-da-porta-han-e-redes-pt-2022/10869
 
 ![Easy HAN tasmota](./tasmota2-20221024.jpg)
 
-![Easy HAN tasmota](./tasmota3-20221025.jpg)
+![Easy HAN](./img/tasmota1-20221030.jpg)
+
+![Easy HAN](./img/tasmota2-20221030.jpg)
+
+![Easy HAN](./img/tasmota3-20221030.jpg)
+
+![Easy HAN](./img/tasmota4-20221030.jpg)
+
+![Easy HAN](./img/tasmota5-20221030.jpg)
 
 # Home Assistant
 
