@@ -1,6 +1,6 @@
 >D 48
 
-ver=10186
+ver=10187
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -90,8 +90,8 @@ lp6e=?#LP6_EXP
 
 >S
 
-ikwd[cnt]=ikwd[cnt]
-ekwd[cnt]=ikwd[cnt]
+ikwd[cnt]=ikwd[cnt]+0.0
+ekwd[cnt]=ekwd[cnt]+0.0
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
