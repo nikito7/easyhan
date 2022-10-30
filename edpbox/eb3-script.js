@@ -1,6 +1,6 @@
 >D 48
 
-ver=10175
+ver=10177
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -211,8 +211,7 @@ endif
 @<br>
 ;
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/chart1.html">Chart1</a>
-<a href="/ufsd">More</a>
+<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
