@@ -136,13 +136,16 @@ endif
 ;
 endif
 
+if cnt>30
+then
+;
 if hh==0
 then
 hour=24
 else
 hour=hh
 endif
-
+;
 if hour==1
 then
 strd="cnt"+s(24)
@@ -150,6 +153,8 @@ idxk=24
 else
 strd="cnt"+s(hour-1)
 idxk=hour-1
+endif
+;
 endif
 
 if chg[hh]>0
