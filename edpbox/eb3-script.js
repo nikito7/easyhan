@@ -1,6 +1,6 @@
 >D 48
 
-ver=10177
+ver=10178
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -168,7 +168,7 @@ ekwd=ekw-ekwo
 ikwo=ikw
 ekwo=ekw
 ;
-idxk=hour
+idxk=hh
 svars
 ;
 endif
