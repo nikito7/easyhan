@@ -1,6 +1,6 @@
 >D 48
 
-ver=10190
+ver=10191
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -91,6 +91,17 @@ lp6e=?#LP6_EXP
 
 >S
 
+if cnt=500
+then
+for tmp 0 25 1
+ikwd[tmp]=0
+ekwd[tmp]=0
+next
+print array reseted
+cnt=99
+svars
+endif
+
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
@@ -152,15 +163,6 @@ if ekwo==0
 then
 ekwo=ekw
 endif
-;
-; try to
-; fix array
-for res 0 25 1
-tmp=ikwd[res]
-ikwd[res]=tmp
-tmp=ekwd[res]
-ekwd[res]=tmp
-next
 ;
 ikwd=ikw-ikwo
 ekwd=ekw-ekwo
