@@ -1,6 +1,6 @@
 >D 48
 
-ver=10187
+ver=10188
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -47,6 +47,7 @@ p:idxk=1
 strd="cnt0"
 p:ikwo=0
 p:ekwo=0
+tmp=0
 
 >B
 
@@ -89,9 +90,6 @@ lp3i=?#LP3_IMP
 lp6e=?#LP6_EXP
 
 >S
-
-ikwd[cnt]=ikwd[cnt]+0.0
-ekwd[cnt]=ekwd[cnt]+0.0
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
@@ -154,6 +152,13 @@ if ekwo==0
 then
 ekwo=ekw
 endif
+;
+; try to
+; fix array
+tmp=ikwd[idxk-1]
+ikwd[idxk-1]=tmp
+tmp=ekwd[idxk-1]
+ekwd[idxk-1]=tmp
 ;
 ikwd=ikw-ikwo
 ekwd=ekw-ekwo
