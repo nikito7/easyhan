@@ -1,6 +1,6 @@
 >D 48
 
-ver=10189
+ver=10190
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -48,7 +48,6 @@ strd="cnt0"
 p:ikwo=0
 p:ekwo=0
 tmp=0
-loop=0
 
 >B
 
@@ -156,11 +155,11 @@ endif
 ;
 ; try to
 ; fix array
-for loop 0 25 1
-tmp=ikwd[loop]
-ikwd[loop]=tmp
-tmp=ekwd[loop]
-ekwd[loop]=tmp
+for res 0 25 1
+tmp=ikwd[res]
+ikwd[res]=tmp
+tmp=ekwd[res]
+ekwd[res]=tmp
 next
 ;
 ikwd=ikw-ikwo
