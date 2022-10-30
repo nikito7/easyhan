@@ -1,6 +1,6 @@
 >D 48
 
-ver=10173
+ver=10174
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -146,14 +146,7 @@ else
 hour=hh
 endif
 ;
-if hour==1
-then
-strd="cnt"+s(0)
-idxk=24
-else
-strd="cnt"+s(hour-1)
-idxk=hour-1
-endif
+strd="cnt"+s(hh)
 ;
 endif
 
@@ -170,11 +163,19 @@ then
 ekwo=ekw
 endif
 ;
-ikwd=ikw-ikwo
-ekwd=ekw-ekwo
+if hour==1
+then
+idxk=24
+else
+idxk=hour-1
+endif
+;
+ikwd[idxk]=ikw-ikwo
+ekwd[idxk]=ekw-ekwo
 ikwo=ikw
 ekwo=ekw
 ;
+svars
 endif
 
 if chg[mm]>0
