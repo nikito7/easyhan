@@ -1,6 +1,6 @@
 >D 48
 
-ver=10181
+ver=10182
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -221,6 +221,7 @@ $gc(lt ikwd ekwd "wr" "Import" "Export" strd)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
+$pointSize: 5, pointShape: 'square',
 $title:'Energia ( kWh ) ( 24h )',
 $};
 $gc(e)
