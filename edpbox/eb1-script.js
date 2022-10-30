@@ -1,6 +1,6 @@
 >D 48
 
-ver=10159
+ver=10179
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -90,6 +90,9 @@ lp6e=?#LP6_EXP
 
 >S
 
+;ikwd[cnt]=0
+;ekwd[cnt]=0
+
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
@@ -136,18 +139,18 @@ endif
 ;
 endif
 
+if cnt>30
+then
+;
 if hh==0
 then
 hour=24
 else
 hour=hh
 endif
-
-if hour==1
-then
-strd="cnt"+s(24)
-else
-strd="cnt"+s(hour-1)
+;
+strd="cnt"+s(hh)
+;
 endif
 
 if chg[hh]>0
@@ -165,9 +168,11 @@ endif
 ;
 ikwd=ikw-ikwo
 ekwd=ekw-ekwo
-idxk=hour-1
 ikwo=ikw
 ekwo=ekw
+;
+idxk=hh
+svars
 ;
 endif
 
@@ -209,11 +214,7 @@ endif
 @<br>
 ;
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/chart1.html">Chart1</a>
-<a href="/ufsd">More</a>
-<br>
-Index M{m}%0idx%
-Index D{m}%0idxk%
+<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
