@@ -90,6 +90,8 @@ lp6e=?#LP6_EXP
 
 >S
 
+print %cnt% [ %ikwd[cnt]% ] [ %ekwd[cnt]% ]
+
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
@@ -104,9 +106,6 @@ then
 =>WifiPower
 smlj=1
 tper=10
-; fix array corruption?
-ikwd[idxk]=ikwd[idxk]
-ekwd[idxk]=ekwd[idxk]
 endif
 
 if cnt==40
