@@ -1,6 +1,6 @@
 >D 48
 
-ver=10172
+ver=10173
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -148,10 +148,10 @@ endif
 ;
 if hour==1
 then
-strd="cnt"+s(00)+"h"
+strd="cnt"+s(0)
 idxk=24
 else
-strd="cnt"+s(2.0hour-1)+"h"
+strd="cnt"+s(hour-1)
 idxk=hour-1
 endif
 ;
