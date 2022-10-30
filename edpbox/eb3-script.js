@@ -1,6 +1,6 @@
 >D 48
 
-ver=10179
+ver=10180
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -22,6 +22,7 @@ ipwr=0
 epwr=0
 strm="cnt0"
 fheap=0
+;
 ws=""
 node=""
 key=""
@@ -46,7 +47,6 @@ p:idxk=1
 strd="cnt0"
 p:ikwo=0
 p:ekwo=0
-hour=0
 
 >B
 
@@ -127,7 +127,7 @@ and cnt>30
 then
 print han %2.0hh%:%2.0mm%:%2.0ss%
 ;
-strm="cnt"+s(idx-1)
+strm="cnt"+s(idx)
 ipwrm=ipwr
 epwrm=epwr
 idx+=1
@@ -141,16 +141,7 @@ endif
 
 if cnt>30
 then
-;
-if hh==0
-then
-hour=24
-else
-hour=hh
-endif
-;
 strd="cnt"+s(hh)
-;
 endif
 
 if chg[hh]>0
@@ -161,6 +152,7 @@ if ikwo==0
 then
 ikwo=ikw
 endif
+;
 if ekwo==0
 then
 ekwo=ekw
@@ -200,6 +192,7 @@ endif
 ;
 res=fw(lps fr)
 fc(fr)
+;
 endif
 
 ; extras
@@ -218,7 +211,7 @@ endif
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt ipwrm epwrm "wr" "Imp" "Exp" strm)
+$gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
@@ -227,11 +220,11 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(ct ikwd ekwd "wr" "Imp" "Exp" strd)
+$gc(ct ikwd ekwd "wr" "Import" "Export" strd)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$bar: {groupWidth: "95%%"},
+$bar: {groupWidth: "98%%"},
 $title:'Energia ( kWh ) ( 24h )',
 $};
 $gc(e)
