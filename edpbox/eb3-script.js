@@ -1,6 +1,6 @@
 >D 48
 
-ver=10178
+ver=10179
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -89,6 +89,9 @@ lp3i=?#LP3_IMP
 lp6e=?#LP6_EXP
 
 >S
+
+;ikwd[cnt]=0
+;ekwd[cnt]=0
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
