@@ -1,6 +1,6 @@
 >D 48
 
-ver=10174
+ver=10175
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -163,19 +163,14 @@ then
 ekwo=ekw
 endif
 ;
-if hour==1
-then
-idxk=24
-else
-idxk=hour-1
-endif
-;
-ikwd[idxk]=ikw-ikwo
-ekwd[idxk]=ekw-ekwo
+ikwd=ikw-ikwo
+ekwd=ekw-ekwo
 ikwo=ikw
 ekwo=ekw
 ;
+idxk=hour
 svars
+;
 endif
 
 if chg[mm]>0
@@ -218,9 +213,6 @@ endif
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/chart1.html">Chart1</a>
 <a href="/ufsd">More</a>
-<br>
-Index M{m}%0idx%
-Index D{m}%0idxk%
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
