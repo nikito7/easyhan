@@ -1,6 +1,6 @@
 >D 48
 
-ver=10183
+ver=10184
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -41,8 +41,8 @@ lp6e=0
 lps=""
 lpf=""
 ;
-m:p:ikwd=0 25
-m:p:ekwd=0 25
+m:p:ikwd=0 24
+m:p:ekwd=0 24
 p:idxk=1
 strd="cnt0"
 p:ikwo=0
@@ -104,8 +104,8 @@ then
 =>WifiPower
 smlj=1
 tper=10
-ikwd[25]=0
-ekwd[25]=0
+ikwd[idxk]=ikwd[idxk]
+ekwd[idxk]=ekwd[idxk]
 endif
 
 if cnt==40
@@ -216,7 +216,7 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt 24 ikwd ekwd "wr" "Import" "Export" strd)
+$gc(lt ikwd ekwd "wr" "Import" "Export" strd)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
