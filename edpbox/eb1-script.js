@@ -1,6 +1,6 @@
 >D 48
 
-ver=10182
+ver=10192
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -47,6 +47,7 @@ p:idxk=1
 strd="cnt0"
 p:ikwo=0
 p:ekwo=0
+tmp=0
 
 >B
 
@@ -90,8 +91,17 @@ lp6e=?#LP6_EXP
 
 >S
 
-;ikwd[cnt]=0
-;ekwd[cnt]=0
+if cnt==500
+then
+for tmp 0 25 1
+ikwd[tmp]=0
+ekwd[tmp]=0
+next
+print Array 24h Reset !
+idxk=hh
+cnt=99
+svars
+endif
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
