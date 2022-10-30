@@ -280,7 +280,7 @@ $gc(e)
 
 ; 0B
 
-1,010406uu@i6:1,Tariff ,,Tariff,0
+1,010406uu@i6:1,Tarifa ,,Tariff,0
 
 ; load profile
 
