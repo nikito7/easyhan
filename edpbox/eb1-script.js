@@ -1,6 +1,6 @@
 >D 48
 
-ver=10180
+ver=10182
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -139,10 +139,7 @@ endif
 ;
 endif
 
-if cnt>30
-then
 strd="cnt"+s(hh)
-endif
 
 if chg[hh]>0
 and cnt>50
@@ -220,11 +217,11 @@ $};
 $gc(e)
 
 $<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(ct ikwd ekwd "wr" "Import" "Export" strd)
+$gc(lt ikwd ekwd "wr" "Import" "Export" strd)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$bar: {groupWidth: "98%%"},
+$pointSize: 5, pointShape: 'square',
 $title:'Energia ( kWh ) ( 24h )',
 $};
 $gc(e)
