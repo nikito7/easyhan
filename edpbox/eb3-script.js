@@ -90,7 +90,8 @@ lp6e=?#LP6_EXP
 
 >S
 
-print %cnt% [ %ikwd[cnt]% ] [ %ekwd[cnt]% ]
+ikwd[cnt]=ikwd[cnt]
+ekwd[cnt]=ikwd[cnt]
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
