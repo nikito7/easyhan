@@ -1,6 +1,6 @@
 >D 48
 
-ver=10194
+ver=10195
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -206,8 +206,7 @@ endif
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
 <br>
 
-$<hr>
-$<center>Google Charts</center>
+$<center><h3>Google Charts</h3></center>
 $<br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
