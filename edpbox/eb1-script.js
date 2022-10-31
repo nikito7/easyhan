@@ -1,7 +1,7 @@
 >D 48
 
-ver=10193
-PF="Factor de Potência"
+ver=10197
+PF="Factor"
 AP="Potência"
 TE="Energia"
 date=""
@@ -19,7 +19,7 @@ m:ipwrm=0 50
 m:epwrm=0 50
 ipwr=0
 epwr=0
-strm="cnt1"
+strm="cnt50"
 fheap=0
 ;
 ws=""
@@ -201,10 +201,11 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
-;
+
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
-<br>
+
+$<center><h3>Google Charts</h3></center>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
