@@ -1,6 +1,6 @@
 >D 48
 
-ver=10192
+ver=10193
 PF="Factor de Potência"
 AP="Potência"
 TE="Energia"
@@ -15,12 +15,11 @@ wtd=0
 hh=0
 mm=0
 ss=0
-m:p:ipwrm=0 50
-m:p:epwrm=0 50
-p:idx=1
+m:ipwrm=0 50
+m:epwrm=0 50
 ipwr=0
 epwr=0
-strm="cnt0"
+strm="cnt1"
 fheap=0
 ;
 ws=""
@@ -65,8 +64,6 @@ smlj=0
 =>Sensor53 r
 
 =>Delay 100
-ipwrm[0]=idx
-epwrm[0]=idx
 ikwd[0]=idxk
 ekwd[0]=idxk
 
@@ -136,17 +133,8 @@ if chg[ss]>0
 and cnt>30
 then
 print han %2.0hh%:%2.0mm%:%2.0ss%
-;
-strm="cnt"+s(idx)
 ipwrm=ipwr
 epwrm=epwr
-idx+=1
-;
-if idx>ipwrm[-1]
-then
-idx=1
-endif
-;
 endif
 
 strd="cnt"+s(hh)
@@ -165,19 +153,20 @@ then
 ekwo=ekw
 endif
 ;
-ikwd=ikw-ikwo
-ekwd=ekw-ekwo
+tmp=0
+tmp=ikw-ikwo
+ikwd=tmp
+;
+tmp=0
+tmp=ekw-ekwo
+ekwd=tmp
+;
 ikwo=ikw
 ekwo=ekw
 ;
 idxk=hh
 svars
 ;
-endif
-
-if chg[mm]>0
-then
-svars
 endif
 
 lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
