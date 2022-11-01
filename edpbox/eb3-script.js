@@ -1,6 +1,6 @@
 >D 48
 
-ver=10203
+ver=10204
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -129,8 +129,7 @@ then
 ;
 if hh==0
 then
-=>UfsDelete2 3d.csv
-=>UfsRename2 2d.csv 3d.csv
+=>UfsDelete2 2d.csv
 =>UfsRename2 1d.csv 2d.csv
 =>UfsRename2 0d.csv 1d.csv
 endif
@@ -147,7 +146,7 @@ endif
 ;
 imp=ikw-ikwo
 exp=ekw-ekwo
-chs=s(2.0hh)+":"+s(2.0mm)+","+s(imp)+","+s(exp)+"\n"
+chs=s(2.0hh-2)+"-"+s(2.0hh-1)+","+s(imp)+","+s(exp)+"\n"
 chf="0d.csv"
 fr=fo(chf 2)
 res=fz(fr)
