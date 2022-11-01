@@ -1,6 +1,6 @@
 >D 48
 
-ver=10198
+ver=10203
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -40,14 +40,13 @@ lp6e=0
 lps=""
 lpf=""
 ;
-m:p:ikwd=0 24
-m:p:ekwd=0 24
-p:idx=1
-strd="cnt0"
 p:ikwo=0
 p:ekwo=0
 tmp=0
-hr=0
+chs=""
+chf=""
+imp=0
+exp=0
 
 >B
 
@@ -63,10 +62,6 @@ smlj=0
 
 =>Delay 100
 =>Sensor53 r
-
-=>Delay 100
-ikwd[0]=idx
-ekwd[0]=idx
 
 >E
 
@@ -92,28 +87,6 @@ lp6e=?#LP6_EXP
 hh=sml[1]
 mm=sml[2]
 ss=sml[3]
-
-if hh==0
-and cnt>30
-then
-hr=24
-else
-hr=hh
-endif
-
-if cnt==500
-then
-for tmp 1 24 1
-ikwd[tmp]=0
-ekwd[tmp]=0
-next
-print Array 24h Reset !
-ikwd[0]=hr
-ekwd[0]=hr
-idx=hr
-cnt=99
-svars
-endif
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
@@ -154,6 +127,14 @@ if chg[hh]>0
 and cnt>50
 then
 ;
+if hh==0
+then
+=>UfsDelete2 3d.csv
+=>UfsRename2 2d.csv 3d.csv
+=>UfsRename2 1d.csv 2d.csv
+=>UfsRename2 0d.csv 1d.csv
+endif
+;
 if ikwo==0
 then
 ikwo=ikw
@@ -164,13 +145,23 @@ then
 ekwo=ekw
 endif
 ;
-ikwd=ikw-ikwo
-ekwd=ekw-ekwo
+imp=ikw-ikwo
+exp=ekw-ekwo
+chs=s(2.0hh)+":"+s(2.0mm)+","+s(imp)+","+s(exp)+"\n"
+chf="0d.csv"
+fr=fo(chf 2)
+res=fz(fr)
+if res==0
+then
+res=fw(date+",Import,Export\n" fr)
+fc(fr)
+fr=fo(chf 2)
+endif
+res=fw(chs fr)
+fc(fr)
 ;
 ikwo=ikw
 ekwo=ekw
-;
-idx=hh
 svars
 ;
 endif
@@ -209,9 +200,8 @@ endif
 @<br>
 
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
-
-$<center><h3>Google Charts</h3></center>
+<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
+<br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
@@ -219,16 +209,6 @@ $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
 $title:'Potência ( Watts ) ( 10min )',
-$};
-$gc(e)
-
-$<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt ikwd ekwd "wr" "Import" "Export" strd)
-$var options = {
-$chartArea:{left:50,width:'80%%'},
-$width:'100%%',legend:'none',
-$pointSize: 5, pointShape: 'square',
-$title:'Energia ( kWh ) ( 24h )',
 $};
 $gc(e)
 
