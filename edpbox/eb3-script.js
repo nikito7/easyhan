@@ -1,6 +1,6 @@
 >D 48
 
-ver=10204
+ver=10205
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -146,7 +146,7 @@ endif
 ;
 imp=ikw-ikwo
 exp=ekw-ekwo
-chs=s(2.0hh-2)+"-"+s(2.0hh-1)+","+s(imp)+","+s(exp)+"\n"
+chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+"\n"
 chf="0d.csv"
 fr=fo(chf 2)
 res=fz(fr)
