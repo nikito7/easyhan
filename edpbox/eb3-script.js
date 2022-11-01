@@ -1,6 +1,6 @@
 >D 48
 
-ver=10199
+ver=10200
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -146,12 +146,21 @@ then
 ekwo=ekw
 endif
 ;
-print csv 0d
+chs=s(2.0hh)+":"+s(2.0mm)+","+s(ikw-ikwo)+","+s(ekw-ekwo)+"\n"
+chf="0d.csv"
+fr=fo(chf 2)
+res=fz(fr)
+if res==0
+then
+res=fw(date+",Import,Export\n" fr)
+fc(fr)
+fr=fo(chf 2)
+endif
+res=fw(chs fr)
+fc(fr)
 ;
 ikwo=ikw
 ekwo=ekw
-;
-idx=hh
 svars
 ;
 endif
