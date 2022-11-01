@@ -46,6 +46,8 @@ tmp=0
 hr=0
 chs=""
 chf=""
+imp=0
+exp=0
 
 >B
 
@@ -130,7 +132,7 @@ endif
 
 strd="cnt"+s(hh)
 
-if chg[hh]>0
+if chg[mm]>0
 and cnt>50
 then
 ;
@@ -146,7 +148,9 @@ then
 ekwo=ekw
 endif
 ;
-chs=s(2.0hh)+":"+s(2.0mm)+","+s(ikw-ikwo)+","+s(ekw-ekwo)+"\n"
+imp=ikw-ikwo
+exp=ekw-ekwo
+chs=s(2.0hh)+":"+s(2.0mm)+","+s(imp)+","+s(exp)+"\n"
 chf="0d.csv"
 fr=fo(chf 2)
 res=fz(fr)
