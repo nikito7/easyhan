@@ -1,6 +1,6 @@
 >D 48
 
-ver=10197
+ver=10198
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -19,7 +19,7 @@ m:ipwrm=0 50
 m:epwrm=0 50
 ipwr=0
 epwr=0
-strm="cnt50"
+strm="cnt0"
 fheap=0
 ;
 ws=""
@@ -42,11 +42,12 @@ lpf=""
 ;
 m:p:ikwd=0 24
 m:p:ekwd=0 24
-p:idxk=1
+p:idx=1
 strd="cnt0"
 p:ikwo=0
 p:ekwo=0
 tmp=0
+hr=0
 
 >B
 
@@ -64,8 +65,8 @@ smlj=0
 =>Sensor53 r
 
 =>Delay 100
-ikwd[0]=idxk
-ekwd[0]=idxk
+ikwd[0]=idx
+ekwd[0]=idx
 
 >E
 
@@ -88,14 +89,28 @@ lp6e=?#LP6_EXP
 
 >S
 
+hh=sml[1]
+mm=sml[2]
+ss=sml[3]
+
+if hh==0
+and cnt>30
+then
+hr=24
+else
+hr=hh
+endif
+
 if cnt==500
 then
-for tmp 0 25 1
+for tmp 1 24 1
 ikwd[tmp]=0
 ekwd[tmp]=0
 next
 print Array 24h Reset !
-idxk=hh
+ikwd[0]=hr
+ekwd[0]=hr
+idx=hr
 cnt=99
 svars
 endif
@@ -103,10 +118,6 @@ endif
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
-
-hh=sml[1]
-mm=sml[2]
-ss=sml[3]
 
 if cnt==30
 then
@@ -153,18 +164,13 @@ then
 ekwo=ekw
 endif
 ;
-tmp=0
-tmp=ikw-ikwo
-ikwd=tmp
-;
-tmp=0
-tmp=ekw-ekwo
-ekwd=tmp
+ikwd=ikw-ikwo
+ekwd=ekw-ekwo
 ;
 ikwo=ikw
 ekwo=ekw
 ;
-idxk=hh
+idx=hh
 svars
 ;
 endif
