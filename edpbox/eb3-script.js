@@ -1,6 +1,6 @@
 >D 48
 
-ver=10201
+ver=10202
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -136,7 +136,13 @@ if chg[mm]>0
 and cnt>50
 then
 ;
-print Manage files
+if hh==0
+then
+=>UfsDelete2 3d.csv
+=>UfsRename2 2d.csv 3d.csv
+=>UfsRename2 1d.csv 2d.csv
+=>UfsRename2 0d.csv 1d.csv
+endif
 ;
 if ikwo==0
 then
