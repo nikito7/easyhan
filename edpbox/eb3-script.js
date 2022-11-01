@@ -1,6 +1,6 @@
 >D 48
 
-ver=10202
+ver=10203
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -43,7 +43,6 @@ lpf=""
 p:ikwo=0
 p:ekwo=0
 tmp=0
-hr=0
 chs=""
 chf=""
 imp=0
@@ -89,14 +88,6 @@ hh=sml[1]
 mm=sml[2]
 ss=sml[3]
 
-if hh==0
-and cnt>30
-then
-hr=24
-else
-hr=hh
-endif
-
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
@@ -132,7 +123,7 @@ endif
 
 strd="cnt"+s(hh)
 
-if chg[mm]>0
+if chg[hh]>0
 and cnt>50
 then
 ;
@@ -209,7 +200,7 @@ endif
 @<br>
 
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
+<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
