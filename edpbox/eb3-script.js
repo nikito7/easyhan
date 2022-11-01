@@ -1,6 +1,6 @@
 >D 48
 
-ver=10198
+ver=10199
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -40,14 +40,12 @@ lp6e=0
 lps=""
 lpf=""
 ;
-m:p:ikwd=0 24
-m:p:ekwd=0 24
-p:idx=1
-strd="cnt0"
 p:ikwo=0
 p:ekwo=0
 tmp=0
 hr=0
+chs=""
+chf=""
 
 >B
 
@@ -63,10 +61,6 @@ smlj=0
 
 =>Delay 100
 =>Sensor53 r
-
-=>Delay 100
-ikwd[0]=idx
-ekwd[0]=idx
 
 >E
 
@@ -99,20 +93,6 @@ then
 hr=24
 else
 hr=hh
-endif
-
-if cnt==500
-then
-for tmp 1 24 1
-ikwd[tmp]=0
-ekwd[tmp]=0
-next
-print Array 24h Reset !
-ikwd[0]=hr
-ekwd[0]=hr
-idx=hr
-cnt=99
-svars
 endif
 
 time=st(tstamp T 2)
@@ -154,6 +134,8 @@ if chg[hh]>0
 and cnt>50
 then
 ;
+print Manage files
+;
 if ikwo==0
 then
 ikwo=ikw
@@ -164,8 +146,7 @@ then
 ekwo=ekw
 endif
 ;
-ikwd=ikw-ikwo
-ekwd=ekw-ekwo
+print csv 0d
 ;
 ikwo=ikw
 ekwo=ekw
@@ -211,24 +192,12 @@ endif
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufsd">More</a>
 
-$<center><h3>Google Charts</h3></center>
-
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
 $title:'Potência ( Watts ) ( 10min )',
-$};
-$gc(e)
-
-$<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt ikwd ekwd "wr" "Import" "Export" strd)
-$var options = {
-$chartArea:{left:50,width:'80%%'},
-$width:'100%%',legend:'none',
-$pointSize: 5, pointShape: 'square',
-$title:'Energia ( kWh ) ( 24h )',
 $};
 $gc(e)
 
