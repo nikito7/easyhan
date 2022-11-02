@@ -74,7 +74,7 @@ https://forum.cpha.pt/t/pedido-da-porta-han-e-redes-pt-2022/10869
 
 ![Easy HAN](./img/tasmota4-20221030.jpg)
 
-![Easy HAN](./img/tasmota5-20221030.jpg)
+![Easy HAN](./img/chartjs-001.jpg)
 
 # Home Assistant
 
