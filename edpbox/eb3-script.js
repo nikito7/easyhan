@@ -1,6 +1,6 @@
 >D 48
 
-ver=10205
+ver=10207
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -130,8 +130,8 @@ then
 if hh==0
 then
 =>UfsDelete2 2d.csv
-=>UfsRename2 1d.csv 2d.csv
-=>UfsRename2 0d.csv 1d.csv
+=>UfsRename2 1d.csv,2d.csv
+=>UfsRename2 0d.csv,1d.csv
 endif
 ;
 if ikwo==0
