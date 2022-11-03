@@ -1,6 +1,6 @@
 >D 48
 
-ver=10211
+ver=10212
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -203,8 +203,8 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-Solar Power{m}%0pv1w% W
-Solar Energy{m}%2pv1k% kWh
+Solar Power{m}%1pv1w% W
+Solar Energy{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
