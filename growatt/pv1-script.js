@@ -1,7 +1,6 @@
 >D 48
 
-ver=103
-IPHAN="10.1.0.182"
+ver=104
 date=""
 time=""
 wfc=""
@@ -17,7 +16,8 @@ epwr=0
 strm="cnt0"
 fheap=0
 ;
-
+ws="WebSend [10.1.0.182:80]"
+p:pv1k=0
 
 >B
 
@@ -41,6 +41,7 @@ wfp=WifiPower
 
 ipwr=?#InputPower
 epwr=?#Power
+pv1k=?#PV_Energy
 
 >S
 
@@ -72,6 +73,9 @@ ipwrm=ipwr
 print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
 print Array: epwrm %0ipwrm[-1]%
+;
+=>%ws%/
+;
 endif
 
 >W
