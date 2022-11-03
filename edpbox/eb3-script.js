@@ -202,7 +202,9 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
-
+<br>
+Solar Power{m}%0pv1w% W
+Solar Energy{m}%2pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
