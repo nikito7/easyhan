@@ -1,6 +1,7 @@
 >D 48
 
-ver=102
+ver=103
+IPHAN="10.1.0.182"
 date=""
 time=""
 wfc=""
@@ -10,14 +11,15 @@ ss=0
 wfp=0
 cnt=0
 m:ipwrm=0 60
-ipwr=0
 m:epwrm=0 60
+ipwr=0
 epwr=0
 strm="cnt0"
 fheap=0
+;
 
 
->BS
+>B
 
 tper=25
 smlj=0
