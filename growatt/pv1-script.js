@@ -74,7 +74,7 @@ print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
 print Array: epwrm %0ipwrm[-1]%
 ;
-=>%ws%/
+=>%ws%/cm?cmnd=Script%%20%%3Epv1k%%3N%pv1k%
 ;
 endif
 
