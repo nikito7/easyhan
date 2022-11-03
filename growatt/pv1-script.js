@@ -1,6 +1,6 @@
 >D 48
 
-ver=105
+ver=107
 date=""
 time=""
 wfc=""
@@ -17,7 +17,7 @@ strm="cnt0"
 fheap=0
 ;
 ws="WebSend [10.1.0.182:80]"
-p:pv1k=0
+pv1k=0
 
 >B
 
