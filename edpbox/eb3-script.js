@@ -1,6 +1,6 @@
 >D 48
 
-ver=10207
+ver=10208
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -47,6 +47,11 @@ chs=""
 chf=""
 imp=0
 exp=0
+;
+p:pv1w=0
+p:pv1wo=0
+p:pv1k=0
+p:pv1ko=0
 
 >B
 
