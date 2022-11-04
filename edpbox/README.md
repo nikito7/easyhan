@@ -20,14 +20,6 @@ Mais info no forum:
 
 https://forum.cpha.pt/t/easy-han-rs485-edpbox-modbus/9977
 
-Tutorial WiFi e MQTT:
-
-https://forum.cpha.pt/t/easy-han-tasmota-configuracao-wifi-mqtt/10486
-
-OLX:
-
-https://m.olx.pt/d/anuncio/leitor-da-porta-han-modbus-rs485-easyhan-pt-IDHnjLr.html
-
 # Contadores
 > Testados com alimentação directa na HAN.
 > Sem modem gprs externo.
@@ -53,12 +45,6 @@ Trifásicos:
 Notas:
 
 Landis+Gyr: Serial mN1/mN2.
-
-# Pedido da HAN
-
-https://www.e-redes.pt/pt-pt/transicao-energetica/redes-do-futuro/acesso-porta-serie-de-comunicacao
-
-https://forum.cpha.pt/t/pedido-da-porta-han-e-redes-pt-2022/10869
 
 # Tasmota
 
