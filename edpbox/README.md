@@ -48,9 +48,7 @@ Landis+Gyr: Serial mN1/mN2.
 
 # Tasmota
 
-![Easy HAN tasmota](./tasmota1-20221024.jpg)
-
-![Easy HAN tasmota](./tasmota2-20221024.jpg)
+![Easy HAN](./img/chartjs-002.jpg)
 
 ![Easy HAN](./img/tasmota1-20221030.jpg)
 
