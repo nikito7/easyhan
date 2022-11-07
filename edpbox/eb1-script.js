@@ -1,6 +1,6 @@
 >D 48
 
-ver=10207
+ver=10212
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -47,6 +47,10 @@ chs=""
 chf=""
 imp=0
 exp=0
+;
+p:pv1w=0
+p:pv1k=0
+p:pv1ko=0
 
 >B
 
@@ -146,13 +150,13 @@ endif
 ;
 imp=ikw-ikwo
 exp=ekw-ekwo
-chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+"\n"
+chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+","+s(pv1k-pv1ko)+"\n"
 chf="0d.csv"
 fr=fo(chf 2)
 res=fz(fr)
 if res==0
 then
-res=fw(date+",Import,Export\n" fr)
+res=fw(date+",Import,Export,Solar\n" fr)
 fc(fr)
 fr=fo(chf 2)
 endif
@@ -161,6 +165,7 @@ fc(fr)
 ;
 ikwo=ikw
 ekwo=ekw
+pv1ko=pv1k
 svars
 ;
 endif
@@ -197,7 +202,9 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
-
+<br>
+Solar Power{m}%1pv1w% W
+Solar Energy{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
