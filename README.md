@@ -6,7 +6,7 @@ Easy HAN - IoT on easy
 
 - [```growatt``` inversor solar](./growatt/)
 
-![Easy HAN RS485](./easy-han-5.jpg)
+![Easy HAN RS485](./easy-han-20221107-1.jpg)
 
 Development:
 
