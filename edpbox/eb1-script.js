@@ -1,6 +1,6 @@
 >D 48
 
-ver=10212
+ver=10214
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -58,13 +58,10 @@ p:pv1ko=0
 =>Delay 100
 =>Delay 100
 
-tper=25
+tper=20
 smlj=0
 
 =>SerialLog 0
-=>WebLog 4
-
-=>Delay 100
 =>Sensor53 r
 
 >E
@@ -96,20 +93,14 @@ time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
 
-if cnt==30
+if cnt==25
 then
+=>UfsRun discovery1.txt
+=>UfsRun discovery2.txt
 =>WifiConfig
 =>WifiPower
 smlj=1
 tper=10
-endif
-
-if cnt==40
-then
-=>Delay 100
-=>UfsRun discovery1.txt
-=>UfsRun discovery2.txt
-=>Delay 100
 endif
 
 if cnt<99
