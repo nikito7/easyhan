@@ -1,3 +1,4 @@
 ; ---
-=>Publish easyhan/freeds3/SENSOR {"Time":"%tstamp%","ENERGY":{"Pv1Current":1,"Pv1Voltage":2,"Pv1Power":3,"Pv2Current":4,"Pv2Voltage":5,"Pv2Power":6,"Today":0,"Power":"-8","Temperature":99}}
+; ICC
+=>Publish easyhan/freeds3/SENSOR {"Time":"%tstamp%","Inverter":{"Pv1Current":1,"Pv1Voltage":2,"Pv1Power":3,"Pv2Current":4,"Pv2Voltage":5,"Pv2Power":6,"Today":0,"Power":"-8","Temperature":99}}
 ; ---
