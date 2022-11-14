@@ -4,6 +4,6 @@
 
 ; ---
 
-=>Publish easyhan/eb1/SENSOR {"Time":"%tstamp%","ENERGY":{"Today":0,"Power":-50}}
+=>Publish easyhan/eb1/SENSOR {"Time":"%tstamp%","ENERGY":{"Today":"0","Power":"-50"}}
 
 ; ---
