@@ -1,9 +1,10 @@
 >D 48
 
 ; Script Editor
-;IP=10.1.0.200
+;IP=10.1.0.99
 ;SB=6144
 ;UFILES=charts.html,charts.js
+;UFILES=charts.html,charts.js,discovery1.txt,discovery2.txt
 ; Script Editor
 
 ver=10215
