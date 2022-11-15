@@ -1,7 +1,9 @@
 >D 48
 
-IP="10.1.0.200"
+; Script Editor
+IP=10.1.0.200
 SB=6144
+UFILES=
 
 ver=10215
 PF="Factor"
