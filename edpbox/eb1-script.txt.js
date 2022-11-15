@@ -1,5 +1,11 @@
 >D 48
 
+; Script Editor
+;IP=10.1.0.200
+;SB=6144
+;UFILES=charts.html,charts.js
+; Script Editor
+
 ver=10215
 PF="Factor"
 AP="Potência"
