@@ -1,5 +1,8 @@
 >D 48
 
+IP="10.1.0.200"
+SB=6144
+
 ver=10215
 PF="Factor"
 AP="Potência"
