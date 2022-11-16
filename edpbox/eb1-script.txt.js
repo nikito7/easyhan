@@ -2,7 +2,7 @@
 
 ; Script Editor
 ;IP=10.1.0.200
-;SB=6144
+;SB=5120
 ;UFILES=charts.html,charts.js
 ; Script Editor
 
