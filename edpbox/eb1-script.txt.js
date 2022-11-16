@@ -1,12 +1,13 @@
 >D 48
 
 ; Script Editor
-;IP=10.1.0.200
+;IP=10.1.0.99
 ;SB=5120
 ;UFILES=charts.html,charts.js
+;,discovery1.txt,discovery2.txt
 ; Script Editor
 
-ver=10215
+ver=10218
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -125,6 +126,8 @@ then
 print han %2.0hh%:%2.0mm%:%2.0ss%
 ipwrm=ipwr
 epwrm=epwr
+; freeds
+; freeds
 endif
 
 strd="cnt"+s(hh)
@@ -152,7 +155,14 @@ endif
 ;
 imp=ikw-ikwo
 exp=ekw-ekwo
-chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+","+s(pv1k-pv1ko)+"\n"
+;
+tmp=pv1k-pv1ko
+if tmp<0
+then
+tmp=0
+endif
+;
+chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+","+s(tmp)+"\n"
 chf="0d.csv"
 fr=fo(chf 2)
 res=fz(fr)
