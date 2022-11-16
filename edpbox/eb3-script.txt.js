@@ -2,12 +2,12 @@
 
 ; Script Editor
 ;IP=10.1.0.99
-;SB=6144
+;SB=5120
 ;UFILES=charts.html,charts.js
 ;UFILES=charts.html,charts.js,discovery1.txt,discovery2.txt
 ; Script Editor
 
-ver=10215
+ver=10217
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -126,6 +126,8 @@ then
 print han %2.0hh%:%2.0mm%:%2.0ss%
 ipwrm=ipwr
 epwrm=epwr
+; freeds
+; freeds
 endif
 
 strd="cnt"+s(hh)
@@ -221,7 +223,7 @@ $title:'Potência ( Watts ) ( 10min )',
 $};
 $gc(e)
 
-; EB3 only !
+; EB3 only !!!
 
 >M 1
 
