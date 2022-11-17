@@ -1,6 +1,6 @@
 >D 48
 
-ver=10219
+ver=10220
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -51,6 +51,7 @@ exp=0
 p:pv1w=0
 p:pv1k=0
 p:pv1ko=0
+sol=0
 
 >B
 
@@ -146,16 +147,16 @@ then
 ekwo=ekw
 endif
 ;
-imp=ikw-ikwo
-exp=ekw-ekwo
-;
-tmp=pv1k-pv1ko
-if tmp<0
+if pv1ko==0
 then
-tmp=0
+pv1ko=pv1k
 endif
 ;
-chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+","+s(tmp)+"\n"
+imp=ikw-ikwo
+exp=ekw-ekwo
+sol=pv1k-pv1ko
+;
+chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+","+s(sol)+"\n"
 chf="0d.csv"
 fr=fo(chf 2)
 res=fz(fr)
