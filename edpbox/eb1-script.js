@@ -1,13 +1,6 @@
 >D 48
 
-; Script Editor
-;IP=10.1.0.99
-;SB=5120
-;UFILES=charts.html,charts.js
-;,discovery1.txt,discovery2.txt
-; Script Editor
-
-ver=10218
+ver=10219
 PF="Factor"
 AP="Potência"
 TE="Energia"
