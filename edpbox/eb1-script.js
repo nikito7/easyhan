@@ -1,6 +1,6 @@
 >D 48
 
-ver=10220
+ver=10221
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -135,6 +135,10 @@ then
 =>UfsDelete2 2d.csv
 =>UfsRename2 1d.csv,2d.csv
 =>UfsRename2 0d.csv,1d.csv
+;
+tmp=lp1y-1
+=>UfsDelete2 LP-%4.0tmp%-%2.0lp1m%.csv
+;
 endif
 ;
 if ikwo==0
@@ -208,9 +212,9 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
-<br>
-Solar Power{m}%1pv1w% W
-Solar Energy{m}%1pv1k% kWh
+;<br>
+;Solar Power{m}%1pv1w% W
+;Solar Energy{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
