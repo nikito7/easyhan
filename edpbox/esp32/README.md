@@ -24,7 +24,6 @@ Password2 edpbox123;
 Hostname Easy-HAN-EBx; 
 OtaUrl http://u.easyhan.pt/han/tasmota32.bin; 
 SetOption65 1; 
-Module 0; 
 WifiConfig 2; 
 Restart 1; 
 ``` 
