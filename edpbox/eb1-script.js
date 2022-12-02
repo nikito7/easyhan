@@ -1,6 +1,6 @@
 >D 48
 
-ver=10223
+ver=10224
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -152,6 +152,7 @@ ekwo=ekw
 endif
 ;
 if pv1ko==0
+or pv1k==0
 then
 pv1ko=pv1k
 endif
