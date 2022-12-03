@@ -214,8 +214,8 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-Solar Power (api){m}%1pv1w% W
-Solar Energy (api){m}%1pv1k% kWh
+Solar{m}%1pv1w% W
+Solar{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
@@ -229,7 +229,7 @@ $title:'Potência ( Watts ) ( 10min )',
 $};
 $gc(e)
 
-; EB3 only !!!
+; EB3 !!!
 
 >M 1
 
