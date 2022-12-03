@@ -278,6 +278,8 @@ $gc(e)
 
 1,01040aUUuu@i5:10,Frequency ,Hz,Frequency,1
 
+1,=h<br>
+
 ; 0B
 
 1,01040euu@i6:1,Tarifa ,,Tariff,0
