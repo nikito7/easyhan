@@ -6,7 +6,7 @@ TimeDST 0,0,3,1,1,60;
 TimeSTD 0,0,10,1,2,0; 
 MqttUser none; 
 MqttPassword none; 
-Topic edpbox7x; 
+Topic edpbox99; 
 MqttClient Easy_HAN_%06X; 
 WebLog 4; 
 SerialLog 0; 
