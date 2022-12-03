@@ -307,9 +307,9 @@ $gc(e)
 ; 83
 
 1,01040eUUuuUUuu@i8:1,LP Entries,,LP_E,0
-1,01040ex4uuxx@i8:1,ICP Status,,ICP_S,0
-1,01040ex4xxxxUUuuUUuu@i8:1,ICP Q,,ICP_Q,0
-1,01040ex4xxxxx4UUuuUUuu@i8:1,ICP K,%%,ICP_K,0
+1,01040ex4uu@i8:1,ICP Status,,ICP_S,0
+1,01040ex4xxUUuuUUuu@i8:1,ICP Q,,ICP_Q,0
+1,01040ex8xxUUuuUUuu@i8:1,ICP K,%%,ICP_K,0
 
 1,=h<br>
 
