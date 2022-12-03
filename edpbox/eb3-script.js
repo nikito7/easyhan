@@ -303,6 +303,7 @@ $gc(e)
 ; 0B
 
 1,01040euu@i6:1,Tarifa,,Tariff,0
+1,01040exxUUuuUUuu@i6:1000,T1,kVA,*,2
 
 ; 83
 
