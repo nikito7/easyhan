@@ -290,12 +290,10 @@ $gc(e)
 1,01040eUUuuUUuu@i8:1,LP Entries,,LP_E,0
 1,01040ex4uu@i8:1,ICP Status,,ICP_S,0
 1,01040ex4xxUUuuUUuu@i8:1,ICP Q,,ICP_Q,0
-1,01040ex8xxUUuuUUuu@i8:100,ICP K,,ICP_K,2
+1,01040ex8xxUUuuUUuu@i8:1,ICP K,%%,ICP_K,0
 
 ; load profile
 
-1,=h<br>
-1,=hDiagrama de Carga (15min)
 1,=h<br>
 
 ; 01441d Imp+Exp
