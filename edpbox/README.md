@@ -48,17 +48,17 @@ Landis+Gyr: Serial mN1/mN2.
 
 # Tasmota
 
-![Easy HAN](./img/chartjs-002.jpg)
+![Easy HAN](./img/tasmota1-0812.jpg)
 
-![Easy HAN](./img/tasmota1-20221030.jpg)
+![Easy HAN](./img/tasmota2-0812.jpg)
 
-![Easy HAN](./img/tasmota2-20221030.jpg)
+![Easy HAN](./img/tasmota3-0812.jpg)
 
-![Easy HAN](./img/tasmota3-20221030.jpg)
+![Easy HAN](./img/tasmota4-0812.jpg)
 
-![Easy HAN](./img/tasmota4-20221030.jpg)
+![Easy HAN](./img/chartjs1-0812.jpg)
 
-![Easy HAN](./img/chartjs-001.jpg)
+![Easy HAN](./img/chartjs2-0812.jpg)
 
 # Home Assistant
 
