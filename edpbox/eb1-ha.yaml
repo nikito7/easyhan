@@ -119,6 +119,8 @@ mqtt:
             {% set mm = states('sensor.eb1_clock_m')|int(0) %}
             {% set ss = value_json.EB1.CS|int(0) %}
             {{ '{0:02d}'.format(hh) + ":" + '{0:02d}'.format(mm) + ":" + '{0:02d}'.format(ss) }}
+          {% else %}
+            {{ states('sensor.eb1_clock') }}
           {% endif %}
       icon: mdi:clock
       device:
