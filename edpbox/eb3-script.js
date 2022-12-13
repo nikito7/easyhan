@@ -1,6 +1,6 @@
 >D 48
 
-ver=10225
+ver=10227
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -100,7 +100,7 @@ then
 =>WifiConfig
 =>WifiPower
 smlj=1
-tper=10
+tper=15
 endif
 
 if cnt==40
@@ -261,21 +261,21 @@ $gc(e)
 
 ; 73
 
-1,01041cx8x8x8UUuuUUuu@i2:1,%AP% Import,W,Power,0
+1,01041cx8x8x8UUuuUUuu@i2:1,%AP% Import,W,Power,16
 
-1,01041cUUuuUUuu@i2:1,%AP% L1,W,API1,0
-1,01041cx8UUuuUUuu@i2:1,%AP% L2,W,API2,0
-1,01041cx8x8UUuuUUuu@i2:1,%AP% L3,W,API3,0
+1,01041cUUuuUUuu@i2:1,%AP% L1,W,API1,16
+1,01041cx8UUuuUUuu@i2:1,%AP% L2,W,API2,16
+1,01041cx8x8UUuuUUuu@i2:1,%AP% L3,W,API3,16
 
-1,01041cx4UUuuUUuu@i2:1,%AP% L1 Export,W,APE1,0
-1,01041cx8x4UUuuUUuu@i2:1,%AP% L2 Export,W,APE2,0
-1,01041cx8x8x4UUuuUUuu@i2:1,%AP% L3 Export,W,APE3,0
+1,01041cx4UUuuUUuu@i2:1,%AP% L1 Export,W,APE1,16
+1,01041cx8x4UUuuUUuu@i2:1,%AP% L2 Export,W,APE2,16
+1,01041cx8x8x4UUuuUUuu@i2:1,%AP% L3 Export,W,APE3,16
 
 1,=h<br>
 
 ; 7A
 
-1,01040eUUuuUUuu@i3:1,%AP% Export,W,APE,0
+1,01040eUUuuUUuu@i3:1,%AP% Export,W,APE,16
 
 1,01040ex4UUuu@i3:1000,%PF%,φ,Factor,3
 1,01040ex4xxxxUUuu@i3:1000,%PF% L1,φ,PF1,3
