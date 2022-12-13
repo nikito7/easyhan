@@ -1,6 +1,6 @@
 >D 48
 
-ver=10225
+ver=10227
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -100,7 +100,7 @@ then
 =>WifiConfig
 =>WifiPower
 smlj=1
-tper=10
+tper=15
 endif
 
 if cnt==40
@@ -270,8 +270,8 @@ $gc(e)
 
 ; 79
 
-1,01040aUUuuUUuu@i4:1,%AP% Import ,W,Power,0
-1,01040axxxxxxxxUUuuUUuu@i4:1,%AP% Export ,W,Active Power Export,0
+1,01040aUUuuUUuu@i4:1,%AP% Import ,W,Power,16
+1,01040axxxxxxxxUUuuUUuu@i4:1,%AP% Export ,W,Active Power Export,16
 1,01040axxxxxxxxxxxxxxxxUUuu@i4:1000,%PF% ,φ,Factor,3
 
 ; 7F
