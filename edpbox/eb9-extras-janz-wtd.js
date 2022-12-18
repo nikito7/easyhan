@@ -18,9 +18,9 @@ wtd=0
 if old==clk
 then
 print modbus error !!!
-; 
+;
 =>Restart -3
-; 
+;
 endif
 endif
 
