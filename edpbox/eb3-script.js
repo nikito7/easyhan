@@ -1,6 +1,6 @@
 >D 48
 
-ver=10227
+ver=10228
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -25,8 +25,8 @@ fheap=0
 ws=""
 node=""
 key=""
-ikw=0
-ekw=0
+p:ikw=0
+p:ekw=0
 fr=0
 res=0
 ;
@@ -49,15 +49,11 @@ imp=0
 exp=0
 ;
 pv1w=0
-pv1k=0
+p:pv1k=0
 p:pv1ko=0
 sol=0
 
->B
-
-=>Delay 100
-=>Delay 100
-=>Delay 100
+>BS
 
 tper=20
 smlj=0
@@ -142,11 +138,13 @@ tmp=lp1y-1
 endif
 ;
 if ikwo==0
+or ikw==0
 then
 ikwo=ikw
 endif
 ;
 if ekwo==0
+or ekw==0
 then
 ekwo=ekw
 endif
@@ -233,13 +231,13 @@ $gc(e)
 
 >M 1
 
-+1,3,mN1,1,9600,EB3,1,20,r010400010001,r0104006C0007,r010400730007,r0104007A0006,r010400260003,r010400160006,r0104000B0004,r01440601,r010400830004
++1,3,mN1,1,9600,EB3,1,15,r010400010001,r0104006C0007,r010400730007,r0104007A0006,r010400260003,r010400160006,r0104000B0004,r01440601,r010400830004
 
 ; 01
 
-1,01040Cxxxxxxxxxxuu@i0:1,Clock,h,CH,0
-1,01040Cxxxxxxxxxxxxuu@i0:1,Clock,m,CM,0
-1,01040Cxxxxxxxxxxxxxxuu@i0:1,Clock,s,CS,0
+1,01040Cx8xxuu@i0:1,Clock,h,CH,0
+1,01040Cx8xxxxuu@i0:1,Clock,m,CM,0
+1,01040Cx8xxxxxxuu@i0:1,Clock,s,CS,0
 
 1,=h<br>
 
@@ -251,37 +249,37 @@ $gc(e)
 
 1,=h<br>
 
-1,01040ExxxxxxxxxxxxxxxxxxxxxxxxUUuu@i1:10,Current Total,A,Current,1
+1,01040Ex8x8x8UUuu@i1:10,Current Total,A,Current,1
 
-1,01040ExxxxUUuu@i1:10,Current L1,A,CL1,1
-1,01040ExxxxxxxxxxxxUUuu@i1:10,Current L2,A,CL2,1
-1,01040ExxxxxxxxxxxxxxxxxxxxUUuu@i1:10,Current L3,A,CL3,1
+1,01040Ex4UUuu@i1:10,Current L1,A,CL1,1
+1,01040Ex4x8UUuu@i1:10,Current L2,A,CL2,1
+1,01040Ex4x8x8UUuu@i1:10,Current L3,A,CL3,1
 
 1,=h<br>
 
 ; 73
 
-1,01041cx8x8x8UUuuUUuu@i2:1,%AP% Import,W,Power,16
+1,01041cx8x8x8UUuuUUuu@i2:1,%AP% Import,W,Power,0
 
-1,01041cUUuuUUuu@i2:1,%AP% L1,W,API1,16
-1,01041cx8UUuuUUuu@i2:1,%AP% L2,W,API2,16
-1,01041cx8x8UUuuUUuu@i2:1,%AP% L3,W,API3,16
+1,01041cUUuuUUuu@i2:1,%AP% L1,W,API1,0
+1,01041cx8UUuuUUuu@i2:1,%AP% L2,W,API2,0
+1,01041cx8x8UUuuUUuu@i2:1,%AP% L3,W,API3,0
 
-1,01041cx4UUuuUUuu@i2:1,%AP% L1 Export,W,APE1,16
-1,01041cx8x4UUuuUUuu@i2:1,%AP% L2 Export,W,APE2,16
-1,01041cx8x8x4UUuuUUuu@i2:1,%AP% L3 Export,W,APE3,16
+1,01041cx4UUuuUUuu@i2:1,%AP% L1 Export,W,APE1,0
+1,01041cx8x4UUuuUUuu@i2:1,%AP% L2 Export,W,APE2,0
+1,01041cx8x8x4UUuuUUuu@i2:1,%AP% L3 Export,W,APE3,0
 
 1,=h<br>
 
 ; 7A
 
-1,01040eUUuuUUuu@i3:1,%AP% Export,W,APE,16
+1,01040eUUuuUUuu@i3:1,%AP% Export,W,APE,0
 
 1,01040ex4UUuu@i3:1000,%PF%,φ,Factor,3
-1,01040ex4xxxxUUuu@i3:1000,%PF% L1,φ,PF1,3
-1,01040ex4xxxxxxxxUUuu@i3:1000,%PF% L2,φ,PF2,3
-1,01040ex4xxxxxxxxxxxxUUuu@i3:1000,%PF% L3,φ,PF3,3
-1,01040ex4xxxxxxxxxxxxxxxxUUuu@i3:10,Frequency,Hz,Frequency,1
+1,01040ex4x4UUuu@i3:1000,%PF% L1,φ,PF1,3
+1,01040ex4x8UUuu@i3:1000,%PF% L2,φ,PF2,3
+1,01040ex4x8x4UUuu@i3:1000,%PF% L3,φ,PF3,3
+1,01040ex4x8x8UUuu@i3:10,Frequency,Hz,Frequency,1
 
 1,=h<br>
 
@@ -289,7 +287,7 @@ $gc(e)
 
 1,01040CUUuuUUuu@i4:1000,%TE% T1 Vazio,kWh,TET1,2
 1,01040Cx4UUuuUUuu@i4:1000,%TE% T2 Ponta,kWh,TET2,2
-1,01040Cx4xxxxxxxxUUuuUUuu@i4:1000,%TE% T3 Cheias,kWh,TET3,2
+1,01040Cx4x8UUuuUUuu@i4:1000,%TE% T3 Cheias,kWh,TET3,2
 
 1,=h<br>
 
@@ -317,18 +315,15 @@ $gc(e)
 ; lp
 
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
-1,01441dxxxxuu@i7:1,Month,,LP1_M,0
-1,01441dxxxxxxuu@i7:1,Day,,LP1_D,0
-1,01441dxxxxxxxxxxuu@i7:1,Hour,h,LP1_HH,0
-1,01441dxxxxxxxxxxxxuu@i7:1,Minute,m,LP1_MM,0
+1,01441dx4uu@i7:1,Month,,LP1_M,0
+1,01441dx4xxuu@i7:1,Day,,LP1_D,0
+1,01441dx8xxuu@i7:1,Hour,h,LP1_HH,0
+1,01441dx8xxxxuu@i7:1,Minute,m,LP1_MM,0
 ; dst
 ; amr
 1,01441dx8x4xxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
 ; lp4
 ; lp5
-1,01441dx8x4x4xxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
+1,01441dx8x8x8x8xxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
 
-; eof lp
-; eof meter
 #
-; eof script
