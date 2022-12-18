@@ -238,9 +238,9 @@ $gc(e)
 
 ; 01
 
-1,01040Cxxxxxxxxxxuu@i0:1,Clock ,h,CH,0
-1,01040Cxxxxxxxxxxxxuu@i0:1,Clock ,m,CM,0
-1,01040Cxxxxxxxxxxxxxxuu@i0:1,Clock ,s,CS,0
+1,01040Cx4xxuu@i0:1,Clock ,h,CH,0
+1,01040Cx4xxxxuu@i0:1,Clock ,m,CM,0
+1,01040Cx4xxxxxxuu@i0:1,Clock ,s,CS,0
 
 1,=h<br>
 
@@ -254,23 +254,23 @@ $gc(e)
 ; 16
 
 1,010408UUuuUUuu@i2:1000,%TE% Total Import ,kWh,TEI,2
-1,010408xxxxxxxxUUuuUUuu@i2:1000,%TE% Total Export ,kWh,TEE,2
+1,010408x4UUuuUUuu@i2:1000,%TE% Total Export ,kWh,TEE,2
 
 1,=h<br>
 
 ; 26
 
 1,01040CUUuuUUuu@i3:1000,%TE% T1 Vazio ,kWh,TET1,2
-1,01040CxxxxxxxxUUuuUUuu@i3:1000,%TE% T2 Ponta ,kWh,TET2,2
-1,01040CxxxxxxxxxxxxxxxxUUuuUUuu@i3:1000,%TE% T3 Cheias ,kWh,TET3,2
+1,01040Cx4UUuuUUuu@i3:1000,%TE% T2 Ponta ,kWh,TET2,2
+1,01040Cx8UUuuUUuu@i3:1000,%TE% T3 Cheias ,kWh,TET3,2
 
 1,=h<br>
 
 ; 79
 
 1,01040aUUuuUUuu@i4:1,%AP% Import ,W,Power,16
-1,01040axxxxxxxxUUuuUUuu@i4:1,%AP% Export ,W,Active Power Export,16
-1,01040axxxxxxxxxxxxxxxxUUuu@i4:1000,%PF% ,φ,Factor,3
+1,01040ax4UUuuUUuu@i4:1,%AP% Export ,W,Active Power Export,16
+1,01040ax8UUuu@i4:1000,%PF% ,φ,Factor,3
 
 ; 7F
 
@@ -290,7 +290,7 @@ $gc(e)
 1,01040ex4xxUUuuUUuu@i8:1,ICP Q,,ICP_Q,0
 1,01040ex8xxUUuuUUuu@i8:1,ICP K,%%,ICP_K,0
 
-; load profile
+; lp
 
 1,=h<br>
 
@@ -300,16 +300,14 @@ $gc(e)
 1,01441dUUuu@i7:1,Year,,LP1_Y,0
 1,01441dxxxxuu@i7:1,Month,,LP1_M,0
 1,01441dxxxxxxuu@i7:1,Day,,LP1_D,0
-1,01441dxxxxxxxxxxuu@i7:1,Hour,h,LP1_HH,0
-1,01441dxxxxxxxxxxxxuu@i7:1,Minute,m,LP1_MM,0
+1,01441dx4xxuu@i7:1,Hour,h,LP1_HH,0
+1,01441dx4xxxxuu@i7:1,Minute,m,LP1_MM,0
 ; summer
 ; amr
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
+1,01441dx8x4xxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
 ; lp4
 ; lp5
-1,01441dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
+1,01441dx8x8x8xxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
 
-; eof lp
-; eof meter
 #
-; eof script
+; eof
