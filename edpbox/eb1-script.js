@@ -1,6 +1,6 @@
 >D 48
 
-ver=10227
+ver=10230
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -25,8 +25,8 @@ fheap=0
 ws=""
 node=""
 key=""
-ikw=0
-ekw=0
+p:ikw=0
+p:ekw=0
 fr=0
 res=0
 ;
@@ -49,15 +49,11 @@ imp=0
 exp=0
 ;
 pv1w=0
-pv1k=0
+p:pv1k=0
 p:pv1ko=0
 sol=0
 
->B
-
-=>Delay 100
-=>Delay 100
-=>Delay 100
+>BS
 
 tper=20
 smlj=0
@@ -142,11 +138,13 @@ tmp=lp1y-1
 endif
 ;
 if ikwo==0
+or ikw==0
 then
 ikwo=ikw
 endif
 ;
 if ekwo==0
+or ekw==0
 then
 ekwo=ekw
 endif
