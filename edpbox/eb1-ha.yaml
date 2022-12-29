@@ -184,7 +184,7 @@ mqtt:
           {% if x > -1 %}
             {{ x }}
           {% endif %}
-      unit_of_measurement: "Cos φ"
+      unit_of_measurement: "%"
       device_class: power_factor
       state_class: measurement
       device:
