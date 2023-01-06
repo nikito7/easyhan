@@ -1,6 +1,6 @@
 >D 48
 
-ver=107
+ver=108
 date=""
 time=""
 wfc=""
@@ -19,17 +19,15 @@ fheap=0
 ws="WebSend [10.1.0.182:80]"
 pv1k=0
 
->B
+>BS
 
 tper=25
 smlj=0
 
-=>Delay 100
 =>SerialLog 0
-=>WifiConfig
-=>WifiPower
++>WifiConfig
++>WifiPower
 
-=>Delay 100
 =>Sensor53 r
 
 >E
