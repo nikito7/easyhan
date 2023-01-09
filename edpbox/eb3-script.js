@@ -93,7 +93,7 @@ fheap=heap/1024
 if cnt==25
 then
 smlj=1
-tper=15
+tper=10
 +>WifiConfig
 +>WifiPower
 =>UfsRun discovery1.txt
