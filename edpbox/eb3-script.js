@@ -1,6 +1,6 @@
 >D 48
 
-ver=10233
+ver=10234
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -259,14 +259,16 @@ $gc(e)
 
 ; 73
 
+1,010420x24UUuuUUuu@i2:1,%AP% Total Import,W,Power,16
+1,010420x28UUuuUUuu@i2:1,%AP% Total Export,W,APE,16
+
 1,010420UUuuUUuu@i2:1,%AP% L1,W,API1,0
-1,010420x4UUuuUUuu@i2:1,%AP% L1 Export,W,APE1,0
 1,010420x8UUuuUUuu@i2:1,%AP% L2,W,API2,0
-1,010420x12UUuuUUuu@i2:1,%AP% L2 Export,W,APE2,0
 1,010420x16UUuuUUuu@i2:1,%AP% L3,W,API3,0
+
+1,010420x4UUuuUUuu@i2:1,%AP% L1 Export,W,APE1,0
+1,010420x12UUuuUUuu@i2:1,%AP% L2 Export,W,APE2,0
 1,010420x20UUuuUUuu@i2:1,%AP% L3 Export,W,APE3,0
-1,010420x24UUuuUUuu@i2:1,%AP% Import,W,Power,16
-1,010420x28UUuuUUuu@i2:1,%AP% Export,W,APE,16
 
 1,=h<br>
 
