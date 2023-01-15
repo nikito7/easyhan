@@ -1,6 +1,6 @@
 >D 48
 
-ver=10234
+ver=10235
 PF="Factor"
 AP="Potência"
 TE="Energia"
