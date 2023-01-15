@@ -30,7 +30,7 @@ Monofásicos:
 
 - ```Landis+Gyr```
 
-- ```Sagemcom CX1000```
+- ```Sagemcom CX1000-6```
 
 - ```Sagemcom S212```
 
@@ -40,7 +40,7 @@ Trifásicos:
 
 - ```Landis+Gyr```
 
-- ```Sagemcom CX2000```
+- ```Sagemcom CX2000-9```
 
 Notas:
 
