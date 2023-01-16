@@ -310,6 +310,8 @@ $gc(e)
 1,01040ex8xxUUuuUUuu@i8:1,ICP K,%%,ICP_K,0
 
 1,=h<br>
+1,=hDiagrama LP
+1,=h<br>
 
 ; lp
 
