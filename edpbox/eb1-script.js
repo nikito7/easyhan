@@ -293,6 +293,8 @@ $gc(e)
 ; lp
 
 1,=h<br>
+1,=hDiagrama LP
+1,=h<br>
 
 ; 01441d Imp+Exp
 ; 014411 Imp
