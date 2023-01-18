@@ -421,6 +421,45 @@ mqtt:
 ###
 ###
 
+    - name: "EB3 Import L1"
+      unique_id: EB3_TotEneImpL1
+      state_topic: "tele/edpbox3/SENSOR"
+      value_template: >-
+          {% set x = value_json.EB3.TEIL1|float(0) %}
+          {% if x > 0 %}
+            {{ x }}
+          {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+    - name: "EB3 Import L2"
+      unique_id: EB3_TotEneImpL2
+      state_topic: "tele/edpbox3/SENSOR"
+      value_template: >-
+          {% set x = value_json.EB3.TEIL2|float(0) %}
+          {% if x > 0 %}
+            {{ x }}
+          {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+    - name: "EB3 Import L3"
+      unique_id: EB3_TotEneImpL3
+      state_topic: "tele/edpbox3/SENSOR"
+      value_template: >-
+          {% set x = value_json.EB3.TEIL3|float(0) %}
+          {% if x > 0 %}
+            {{ x }}
+          {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+###
+###
+
     - name: "EB3 Tariff"
       unique_id: EB3_Tariff
       state_topic: "tele/edpbox3/SENSOR"
