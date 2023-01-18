@@ -1,6 +1,6 @@
 >D 48
 
-ver=10237
+ver=10238
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -231,7 +231,7 @@ $gc(e)
 
 >M 1
 
-+1,3,mN1,1,9600,EB3,1,10,r010400010001,r0104006C0007,r010400730008,r0104007B0005,r010400260003,r010400160006,r0104000B0004,r01440601,r010400830004
++1,3,mN1,1,9600,EB3,1,15,r010400010001,r0104006C0007,r010400730008,r0104007B0005,r010400260003,r010400160006,r0104000B0004,r01440601
 
 ; 01
 
@@ -302,30 +302,21 @@ $gc(e)
 1,01040euu@i6:1,Tarifa,,Tariff,0
 1,01040exxUUuuUUuu@i6:1000,T1,kVA,CT1,2
 
-; 83
-
-1,01040eUUuuUUuu@i8:1,LP Entries,,LP_E,0
-1,01040ex4uu@i8:1,ICP Status,,ICP_S,0
-1,01040ex4xxUUuuUUuu@i8:1,ICP Q,,ICP_Q,0
-1,01040ex8xxUUuuUUuu@i8:1,ICP K,%%,ICP_K,0
-
-1,=h<br>
-1,=hDiagrama LP
 1,=h<br>
 
 ; lp
 
-1,01441dUUuu@i7:1,Year,,LP1_Y,0
-1,01441dxxxxuu@i7:1,Month,,LP1_M,0
-1,01441dxxxxxxuu@i7:1,Day,,LP1_D,0
-1,01441dx4xxuu@i7:1,Hour,h,LP1_HH,0
-1,01441dx4xxxxuu@i7:1,Minute,m,LP1_MM,0
+1,01441dUUuu@i7:1,LP Year,,LP1_Y,0
+1,01441dxxxxuu@i7:1,LP Month,,LP1_M,0
+1,01441dxxxxxxuu@i7:1,LP Day,,LP1_D,0
+1,01441dx4xxuu@i7:1,LP Hour,h,LP1_HH,0
+1,01441dx4xxxxuu@i7:1,LP Minute,m,LP1_MM,0
 ; dst
 ; amr
-1,01441dx8x4xxUUuuUUuu@i7:1,Import Inc,Wh,LP3_IMP,0
+1,01441dx8x4xxUUuuUUuu@i7:1,LP Import Inc,Wh,LP3_IMP,0
 ; lp4
 ; lp5
-1,01441dx8x8x8xxUUuuUUuu@i7:1,Export Inc,Wh,LP6_EXP,0
+1,01441dx8x8x8xxUUuuUUuu@i7:1,LP Export Inc,Wh,LP6_EXP,0
 
 #
 ; eof
