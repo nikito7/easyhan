@@ -1,3 +1,5 @@
+### load profile / netmetering ###
+
 mqtt:
 ##
   sensor:
@@ -5,33 +7,77 @@ mqtt:
     - name: "EB3 LP Minutes"
       unique_id: EB3_LP_Minutes
       state_topic: "tele/edpbox3/SENSOR"
-      value_template: >-
-          {% set x = value_json.EB3.LP1_MM|float(none) %}
-          {% if x != none %}
-            {{ x }}
-          {% endif %}
+      value_template: >
+        {% set x = value_json.EB3.LP1_MM|float(none) %}
+        {% if x != none %}
+          {{ x }}
+        {% endif %}
       unit_of_measurement: "m"
       state_class: measurement
 
     - name: "EB3 LP Import Inc"
       unique_id: EB3_LP_Import
       state_topic: "tele/edpbox3/SENSOR"
-      value_template: >-
-          {% set x = value_json.EB3.LP3_IMP|float(none) %}
-          {% if x != none %}
-            {{ x }}
-          {% endif %}
+      value_template: >
+        {% set x = value_json.EB3.LP3_IMP|float(none) %}
+        {% if x != none %}
+          {{ x }}
+        {% endif %}
       unit_of_measurement: "Wh"
       state_class: measurement
 
     - name: "EB3 LP Export Inc"
       unique_id: EB3_LP_Export
       state_topic: "tele/edpbox3/SENSOR"
-      value_template: >-
-          {% set x = value_json.EB3.LP6_EXP|float(none) %}
-          {% if x != none %}
-            {{ x }}
-          {% endif %}
+      value_template: >
+        {% set x = value_json.EB3.LP6_EXP|float(none) %}
+        {% if x != none %}
+          {{ x }}
+        {% endif %}
       unit_of_measurement: "Wh"
       state_class: measurement
 
+### template trigger ###
+
+template:
+#2
+  - trigger:
+#####6
+      - platform: state
+        entity_id: sensor.eb3_lp_minutes
+###4
+    sensor:
+#####6
+      - name: "EB3 LP Consumo"
+        unique_id: EB3_LP_Consumo
+        state: >
+          {% set last = states('eb3_lp_consumo')|float(0) %}
+          {% set imp = states('eb3_lp_import_inc')|float(0) %}
+          {% set exp = states('eb3_lp_export_inc')|float(0) %}
+          {% set saldo = (exp - imp)|float(0) %}
+          {% if saldo < 0 %}
+            {{ last + (saldo * -1 / 1000) }}
+          {% else %}
+            {{ last }}
+          {% endif %}
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+
+      - name: "EB3 LP Excedente"
+        unique_id: EB3_LP_Excedente
+        state: >
+          {% set last = states('eb3_lp_excedente')|float(0) %}
+          {% set imp = states('eb3_lp_import_inc')|float(0) %}
+          {% set exp = states('eb3_lp_export_inc')|float(0) %}
+          {% set saldo = (exp - imp)|float(0) %}
+          {% if saldo > 0 %}
+            {{ last + (saldo / 1000) }}
+          {% else %}
+            {{ last }}
+          {% endif %}
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+
+#EOF
