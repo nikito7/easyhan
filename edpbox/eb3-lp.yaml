@@ -24,7 +24,7 @@ mqtt:
         {% if x != none %}
           {{ x }}
         {% endif %}
-      unit_of_measurement: "Wh"
+      unit_of_measurement: "Wh/15m"
       state_class: measurement
       icon: mdi:counter
 
@@ -36,7 +36,7 @@ mqtt:
         {% if x != none %}
           {{ x }}
         {% endif %}
-      unit_of_measurement: "Wh"
+      unit_of_measurement: "Wh/15m"
       state_class: measurement
       icon: mdi:counter
 
@@ -55,11 +55,11 @@ template:
         unique_id: EB3_LP_Consumo
         state: >
           {% set last = states('sensor.eb3_lp_consumo')|float(0) %}
-          {% set imp = states('sensor.eb3_lp_import_inc')|float(0) %}
-          {% set exp = states('sensor.eb3_lp_export_inc')|float(0) %}
+          {% set imp = states('sensor.eb3_lp_import_inc')|int(0) %}
+          {% set exp = states('sensor.eb3_lp_export_inc')|int(0) %}
           {% set saldo = (exp - imp)|int(0) %}
           {% if saldo < 0 %}
-            {{ (last + (saldo * -1 / 1000))|round(5) }}
+            {{ last + ((-1 * saldo) * 1000)) }}
           {% else %}
             {{ last }}
           {% endif %}
@@ -71,11 +71,11 @@ template:
         unique_id: EB3_LP_Excedente
         state: >
           {% set last = states('sensor.eb3_lp_excedente')|float(0) %}
-          {% set imp = states('sensor.eb3_lp_import_inc')|float(0) %}
-          {% set exp = states('sensor.eb3_lp_export_inc')|float(0) %}
+          {% set imp = states('sensor.eb3_lp_import_inc')|int(0) %}
+          {% set exp = states('sensor.eb3_lp_export_inc')|int(0) %}
           {% set saldo = (exp - imp)|int(0) %}
           {% if saldo > 0 %}
-            {{ (last + (saldo / 1000))|round(5) }}
+            {{ last + (saldo / 1000) }}
           {% else %}
             {{ last }}
           {% endif %}
