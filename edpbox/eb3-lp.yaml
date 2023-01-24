@@ -59,7 +59,7 @@ template:
           {% set exp = states('sensor.eb3_lp_export_inc')|float(0) %}
           {% set saldo = (exp - imp)|float(0) %}
           {% if saldo < 0 %}
-            {{ last + (saldo * -1 / 1000) }}
+            {{ (last + (saldo * -1 / 1000))|round(5) }}
           {% else %}
             {{ last }}
           {% endif %}
@@ -75,7 +75,7 @@ template:
           {% set exp = states('sensor.eb3_lp_export_inc')|float(0) %}
           {% set saldo = (exp - imp)|float(0) %}
           {% if saldo > 0 %}
-            {{ last + (saldo / 1000) }}
+            {{ (last + (saldo / 1000))|round(5) }}
           {% else %}
             {{ last }}
           {% endif %}
