@@ -1,6 +1,7 @@
 >D 48
 
-ver=10239
+ver=10240
+EB="EB3"
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -52,6 +53,10 @@ pv1w=0
 p:pv1k=0
 p:pv1ko=0
 sol=0
+;
+saldo=0
+p:saldo1=0
+p:saldo2=0
 
 >BS
 
