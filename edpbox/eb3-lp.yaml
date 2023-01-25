@@ -40,58 +40,35 @@ mqtt:
       state_class: measurement
       icon: mdi:counter
 
-### template trigger ###
+    - name: "EB3 LP Calculado"
+      unique_id: EB3_LP_Calculado
+      state_topic: "easyhan/EB3/saldo1"
+      value_template: >-
+        {% set x = value|float(0) %}
+        {% if x > 0 %}
+          {{ x }}
+        {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
 
-template:
-#2
-  - trigger:
-#####6
-      - platform: state
-        entity_id: sensor.eb3_lp_minutes
-###4
-    sensor:
-#####6
-      - name: "EB3 LP Calculado"
-        unique_id: EB3_LP_Calculado
-        state: >
-          {% set last = states('sensor.eb3_lp_calculado')|float(0) %}
-          {% set imp = states('sensor.eb3_lp_import_inc')|int(0) %}
-          {% set exp = states('sensor.eb3_lp_export_inc')|int(0) %}
-          {% set saldo = (imp - exp)|int(0) %}
-          {% if saldo > 0 %}
-            {{ (last + (saldo / 1000))|round(3) }} 
-          {% else %}
-            {{ last|round(3) }}
-          {% endif %}
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: total_increasing
+    - name: "EB3 LP Excedente"
+      unique_id: EB3_LP_Excedente
+      state_topic: "easyhan/EB3/saldo2"
+      value_template: >-
+        {% set x = value|float(0) %}
+        {% if x > 0 %}
+          {{ x }}
+        {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
 
-      - name: "EB3 LP Excedente"
-        unique_id: EB3_LP_Excedente
-        state: >
-          {% set last = states('sensor.eb3_lp_excedente')|float(0) %}
-          {% set imp = states('sensor.eb3_lp_import_inc')|int(0) %}
-          {% set exp = states('sensor.eb3_lp_export_inc')|int(0) %}
-          {% set saldo = (imp - exp)|int(0) %}
-          {% if saldo < 0 %}
-            {{ (last + ((-1 * saldo) / 1000))|round(3) }}
-          {% else %}
-            {{ last|round(3) }}
-          {% endif %}
-        unit_of_measurement: "kWh"
-        device_class: energy
-        state_class: total_increasing
-
-      - name: "EB3 LP Saldo Inc"
-        unique_id: EB3_LP_Saldo_Inc
-        state: >
-          {% set imp = states('sensor.eb3_lp_import_inc')|int(0) %}
-          {% set exp = states('sensor.eb3_lp_export_inc')|int(0) %}
-          {% set saldo = (imp - exp)|int(0) %}
-          {{ saldo }}
-        unit_of_measurement: "Wh/15m"
-        state_class: measurement
-        icon: mdi:counter
+    - name: "EB3 LP Saldo Inc"
+      unique_id: EB3_LP_Saldo_Inc
+      state_topic: "easyhan/EB3/saldo"
+      unit_of_measurement: "Wh/15m"
+      state_class: measurement
+      icon: mdi:counter
 
 #EOF
