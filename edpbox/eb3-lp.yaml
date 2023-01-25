@@ -59,9 +59,9 @@ template:
           {% set exp = states('sensor.eb3_lp_export_inc')|int(0) %}
           {% set saldo = (imp - exp)|int(0) %}
           {% if saldo > 0 %}
-            {{ last + (saldo / 1000) }} 
+            {{ (last + (saldo / 1000))|round(3) }} 
           {% else %}
-            {{ last }}
+            {{ last|round(3) }}
           {% endif %}
         unit_of_measurement: "kWh"
         device_class: energy
@@ -75,9 +75,9 @@ template:
           {% set exp = states('sensor.eb3_lp_export_inc')|int(0) %}
           {% set saldo = (imp - exp)|int(0) %}
           {% if saldo < 0 %}
-            {{ last + ((-1 * saldo) / 1000) }}
+            {{ (last + ((-1 * saldo) / 1000))|round(3) }}
           {% else %}
-            {{ last }}
+            {{ last|round(3) }}
           {% endif %}
         unit_of_measurement: "kWh"
         device_class: energy
