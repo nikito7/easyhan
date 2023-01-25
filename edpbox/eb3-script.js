@@ -213,6 +213,11 @@ if saldo<0
 then
 saldo2+=saldo/1000*-1
 endif
+svars
+;
+=>Publish2 easyhan/%%EB%%/saldo %saldo%
+=>Publish2 easyhan/%%EB%%/saldo1 %saldo1%
+=>Publish2 easyhan/%%EB%%/saldo2 %saldo2%
 ;
 endif
 
