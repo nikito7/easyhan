@@ -1,6 +1,6 @@
 >D 48
 
-ver=10243
+ver=10244
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -215,7 +215,7 @@ saldo2+=saldo/1000*-1
 endif
 svars
 ;
-=>Publish2 easyhan/%EB%/saldo %saldo%
+=>Publish2 easyhan/%EB%/saldo %0saldo%
 =>Publish2 easyhan/%EB%/saldo1 %3saldo1%
 =>Publish2 easyhan/%EB%/saldo2 %3saldo2%
 ;
