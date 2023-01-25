@@ -1,6 +1,6 @@
 >D 48
 
-ver=10240
+ver=10241
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -204,6 +204,16 @@ endif
 res=fw(lps fr)
 fc(fr)
 ;
+saldo=lp3i-lp6e
+if saldo>0
+then
+saldo1+=saldo/1000
+endif
+if saldo<0
+then
+saldo2+=saldo/1000*-1
+endif
+;
 endif
 
 ; extras
@@ -216,6 +226,9 @@ endif
 ;@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
+<br>
+LP Calculado Total{m}%saldo1% kWh
+LP Excedente Total{m}%saldo2% kWh
 ;<br>
 ;Solar{m}%1pv1w% W
 ;Solar{m}%1pv1k% kWh
