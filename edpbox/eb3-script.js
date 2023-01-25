@@ -1,6 +1,6 @@
 >D 48
 
-ver=10241
+ver=10242
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -223,15 +223,15 @@ endif
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
-;@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
+@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-LP Calculado Total{m}%saldo1% kWh
-LP Excedente Total{m}%saldo2% kWh
-;<br>
-;Solar{m}%1pv1w% W
-;Solar{m}%1pv1k% kWh
+%EB% LP Calculado{m}%saldo1% kWh
+%EB% LP Excedente{m}%saldo2% kWh
+<br>
+Solar{m}%1pv1w% W
+Solar{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
