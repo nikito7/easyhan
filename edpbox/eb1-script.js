@@ -1,6 +1,7 @@
 >D 48
 
-ver=10238
+ver=10244
+EB="EB1"
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -52,6 +53,10 @@ pv1w=0
 p:pv1k=0
 p:pv1ko=0
 sol=0
+;
+saldo=0
+p:saldo1=0
+p:saldo2=0
 
 >BS
 
@@ -199,6 +204,21 @@ endif
 res=fw(lps fr)
 fc(fr)
 ;
+saldo=lp3i-lp6e
+if saldo>0
+then
+saldo1+=saldo/1000
+endif
+if saldo<0
+then
+saldo2+=saldo/1000*-1
+endif
+svars
+;
+=>Publish2 easyhan/%EB%/saldo %0saldo%
+=>Publish2 easyhan/%EB%/saldo1 %3saldo1%
+=>Publish2 easyhan/%EB%/saldo2 %3saldo2%
+;
 endif
 
 ; extras
@@ -208,12 +228,15 @@ endif
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
-;@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
+@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
-;<br>
-;Solar{m}%1pv1w% W
-;Solar{m}%1pv1k% kWh
+<br>
+%EB% LP Calculado{m}%3saldo1% kWh
+%EB% LP Excedente{m}%3saldo2% kWh
+<br>
+Solar{m}%1pv1w% W
+Solar{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
