@@ -1,6 +1,6 @@
 >D 48
 
-ver=10242
+ver=10243
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -215,9 +215,9 @@ saldo2+=saldo/1000*-1
 endif
 svars
 ;
-=>Publish2 easyhan/%%EB%%/saldo %saldo%
-=>Publish2 easyhan/%%EB%%/saldo1 %saldo1%
-=>Publish2 easyhan/%%EB%%/saldo2 %saldo2%
+=>Publish2 easyhan/%EB%/saldo %saldo%
+=>Publish2 easyhan/%EB%/saldo1 %3saldo1%
+=>Publish2 easyhan/%EB%/saldo2 %3saldo2%
 ;
 endif
 
@@ -232,8 +232,8 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-%EB% LP Calculado{m}%saldo1% kWh
-%EB% LP Excedente{m}%saldo2% kWh
+%EB% LP Calculado{m}%3saldo1% kWh
+%EB% LP Excedente{m}%3saldo2% kWh
 <br>
 Solar{m}%1pv1w% W
 Solar{m}%1pv1k% kWh
