@@ -1,3 +1,6 @@
+Tasmota > Consoles > Console
+
+1.
 
 ```js
 Backlog 
@@ -12,6 +15,8 @@ WebLog 4;
 SerialLog 0; 
 Restart 1; 
 ```
+
+2.
 
 ```js
 Backlog 
