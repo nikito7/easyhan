@@ -1,6 +1,4 @@
-# Easy HAN
-
-Easy HAN - IoT on easy
+# Easy HAN - easyhan.pt
 
 - [```edpbox``` contadores inteligentes](./edpbox/)
 
