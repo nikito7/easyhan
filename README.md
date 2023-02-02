@@ -1,4 +1,4 @@
-# Easy HAN - easyhan.pt
+# Easy HAN
 
 - [```edpbox``` contadores inteligentes](./edpbox/)
 
