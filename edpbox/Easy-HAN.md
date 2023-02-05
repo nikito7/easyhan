@@ -24,7 +24,7 @@ SSID2 edpbox2-dev;
 Password2 edpbox123; 
 Hostname Easy-HAN-EBx; 
 OtaUrl http://u.easyhan.pt/han/tasmota4M.bin.gz; 
-Template {"NAME":"Easy HAN","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
+Template {"NAME":"easyhan.pt","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
 SetOption65 1; 
 Module 0; 
 WifiConfig 2; 
