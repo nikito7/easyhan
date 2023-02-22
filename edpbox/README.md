@@ -26,6 +26,8 @@ https://forum.cpha.pt/t/easy-han-rs485-edpbox-modbus/9977
 
 Monofásicos:
 
+- ```Kaifa MA109H```
+
 - ```Kaifa MA109P```
 
 - ```Landis+Gyr```
