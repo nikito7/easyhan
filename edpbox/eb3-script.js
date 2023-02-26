@@ -1,6 +1,6 @@
 >D 48
 
-ver=10246
+ver=10247
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -130,6 +130,19 @@ then
 print HAN: %2.0hh%:%2.0mm%:%2.0ss% !
 ipwrm=ipwr
 epwrm=epwr
+;
+vts=s(2.0hh)+"h"+","+s(vt1)+","+s(vt2)+","+s(vt3)+"\n"
+vtf="vt-0d.csv"
+fr=fo(vtf 2)
+res=fz(fr)
+if res==0
+then
+res=fw(date+",Voltage L1,Voltage L2,Voltage L3\n" fr)
+fc(fr)
+fr=fo(vtf 2)
+endif
+res=fw(vts fr)
+fc(fr)
 ; freeds
 ; freeds
 endif
