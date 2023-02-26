@@ -1,6 +1,6 @@
 >D 48
 
-ver=10250
+ver=10251
 EB="EB1"
 PF="Factor"
 AP="Potência"
@@ -138,7 +138,7 @@ if chg[mm]>0
 and cnt>30
 then
 ;
-vts=s(2.0hh)+"h"+","+s(vt1)+","+s(vt2)+","+s(vt3)+"\n"
+vts=s(2.0hh)+":"+s(2.0mm)+","+s(vt1)+","+s(vt2)+","+s(vt3)+"\n"
 vtf="vt-0d.csv"
 fr=fo(vtf 2)
 res=fz(fr)
@@ -271,6 +271,12 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
+<br>
+%EB% LP Calculado{m}%3saldo1% kWh
+%EB% LP Excedente{m}%3saldo2% kWh
+<br>
+Solar{m}%1pv1w% W
+Solar{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
