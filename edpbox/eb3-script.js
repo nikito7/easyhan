@@ -105,18 +105,18 @@ date=st(tstamp T 1)
 fheap=heap/1024
 
 if cnt==25
-then
+{
 smlj=1
 tper=10
 +>WifiConfig
 +>WifiPower
 =>UfsRun discovery1.txt
-endif
+}
 
 if cnt==40
-then
+{
 =>UfsRun discovery2.txt
-endif
+}
 
 if cnt<99
 then
@@ -130,6 +130,13 @@ then
 print HAN: %2.0hh%:%2.0mm%:%2.0ss% !
 ipwrm=ipwr
 epwrm=epwr
+; freeds
+; freeds
+endif
+
+if chg[mm]>0
+and cnt>30
+then
 ;
 vts=s(2.0hh)+"h"+","+s(vt1)+","+s(vt2)+","+s(vt3)+"\n"
 vtf="vt-0d.csv"
@@ -137,14 +144,13 @@ fr=fo(vtf 2)
 res=fz(fr)
 if res==0
 then
-res=fw(date+",Voltage L1,Voltage L2,Voltage L3\n" fr)
+res=fw(date+",Voltage L1,L2,L3\n" fr)
 fc(fr)
 fr=fo(vtf 2)
 endif
 res=fw(vts fr)
 fc(fr)
-; freeds
-; freeds
+;
 endif
 
 strd="cnt"+s(hh)
