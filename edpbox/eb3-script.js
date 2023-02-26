@@ -144,7 +144,15 @@ fr=fo(vtf 2)
 res=fz(fr)
 if res==0
 then
+;
+if EB=="EB1"
+or EB=="EB2"
+then
+res=fw(date+",Voltage L1\n" fr)
+else
 res=fw(date+",Voltage L1,L2,L3\n" fr)
+endif
+;
 fc(fr)
 fr=fo(vtf 2)
 endif
