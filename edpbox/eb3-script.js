@@ -1,6 +1,6 @@
 >D 48
 
-ver=10247
+ver=10248
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -119,10 +119,10 @@ if cnt==40
 }
 
 if cnt<99
-then
+{
 cnt+=1
 print cnt=%0cnt%
-endif
+}
 
 if chg[ss]>0
 and cnt>30
