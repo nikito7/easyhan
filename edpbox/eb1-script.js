@@ -291,8 +291,8 @@ $gc(e)
 
 ; 79
 
-1,01040aUUuuUUuu@i4:1,%AP% Import ,W,Power,16
-1,01040ax4UUuuUUuu@i4:1,%AP% Export ,W,Active Power Export,16
+1,01040aUUuuUUuu@i4:1,%AP% Import ,W,Power,0
+1,01040ax4UUuuUUuu@i4:1,%AP% Export ,W,Active Power Export,0
 1,01040ax8UUuu@i4:1000,%PF% ,φ,Factor,3
 
 ; 7F
