@@ -1,6 +1,6 @@
 >D 48
 
-ver=10248
+ver=10250
 EB="EB3"
 PF="Factor"
 AP="Potência"
