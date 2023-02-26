@@ -1,6 +1,6 @@
 >D 48
 
-ver=10251
+ver=10252
 EB="EB1"
 PF="Factor"
 AP="Potência"
@@ -54,6 +54,7 @@ p:pv1k=0
 p:pv1ko=0
 sol=0
 ;
+PE="Publish2 easyhan"
 saldo=0
 p:saldo1=0
 p:saldo2=0
@@ -138,7 +139,7 @@ if chg[mm]>0
 and cnt>30
 then
 ;
-vts=s(2.0hh)+":"+s(2.0mm)+","+s(vt1)+","+s(vt2)+","+s(vt3)+"\n"
+vts=s(2.0hh)+":"+s(2.0mm)+","+s(0vt1)+","+s(0vt2)+","+s(0vt3)+"\n"
 vtf="vt-0d.csv"
 fr=fo(vtf 2)
 res=fz(fr)
@@ -148,9 +149,9 @@ then
 if EB=="EB1"
 or EB=="EB2"
 then
-res=fw(date+",Voltage L1\n" fr)
+res=fw(date+",L1\n" fr)
 else
-res=fw(date+",Voltage L1,L2,L3\n" fr)
+res=fw(date+",L1,L2,L3\n" fr)
 endif
 ;
 fc(fr)
@@ -255,9 +256,9 @@ saldo2+=saldo/1000*-1
 endif
 svars
 ;
-=>Publish2 easyhan/%EB%/saldo %0saldo%
-=>Publish2 easyhan/%EB%/saldo1 %3saldo1%
-=>Publish2 easyhan/%EB%/saldo2 %3saldo2%
+=>%PE%/%EB%/saldo %0saldo%
+=>%PE%/%EB%/saldo1 %3saldo1%
+=>%PE%/%EB%/saldo2 %3saldo2%
 ;
 endif
 
