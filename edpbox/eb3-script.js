@@ -1,6 +1,6 @@
 >D 48
 
-ver=10245
+ver=10246
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -57,6 +57,12 @@ sol=0
 saldo=0
 p:saldo1=0
 p:saldo2=0
+;
+vts=""
+vtf=""
+vt1=0
+vt2=0
+vt3=0
 
 >BS
 
@@ -84,6 +90,9 @@ lp1hh=?#LP1_HH
 lp1mm=?#LP1_MM
 lp3i=?#LP3_IMP
 lp6e=?#LP6_EXP
+vt1=?#VL1
+vt2=?#VL2
+vt3=?#VL3
 
 >S
 
@@ -118,7 +127,7 @@ endif
 if chg[ss]>0
 and cnt>30
 then
-print han %2.0hh%:%2.0mm%:%2.0ss%
+print HAN: %2.0hh%:%2.0mm%:%2.0ss% !
 ipwrm=ipwr
 epwrm=epwr
 ; freeds
@@ -136,6 +145,10 @@ then
 =>UfsDelete2 2d.csv
 =>UfsRename2 1d.csv,2d.csv
 =>UfsRename2 0d.csv,1d.csv
+;
+=>UfsDelete2 vt-2d.csv
+=>UfsRename2 vt-1d.csv,vt-2d.csv
+=>UfsRename2 vt-0d.csv,vt-1d.csv
 ;
 tmp=lp1y-1
 =>UfsDelete2 LP-%4.0tmp%-%2.0lp1m%.csv
