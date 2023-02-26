@@ -295,7 +295,7 @@ $gc(e)
 
 ; 6C
 
-1,010404UUuu@i1:10,Voltage L1 ,V,Voltage,1
+1,010404UUuu@i1:10,Voltage L1 ,V,VL1,1
 1,010404xxxxUUuu@i1:10,Current L1 ,A,Current,1
 
 1,=h<br>
