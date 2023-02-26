@@ -1,6 +1,6 @@
 >D 48
 
-ver=10245
+ver=10248
 EB="EB1"
 PF="Factor"
 AP="Potência"
@@ -57,6 +57,12 @@ sol=0
 saldo=0
 p:saldo1=0
 p:saldo2=0
+;
+vts=""
+vtf=""
+vt1=0
+vt2=0
+vt3=0
 
 >BS
 
@@ -84,6 +90,9 @@ lp1hh=?#LP1_HH
 lp1mm=?#LP1_MM
 lp3i=?#LP3_IMP
 lp6e=?#LP6_EXP
+vt1=?#VL1
+vt2=?#VL2
+vt3=?#VL3
 
 >S
 
@@ -96,33 +105,52 @@ date=st(tstamp T 1)
 fheap=heap/1024
 
 if cnt==25
-then
+{
 smlj=1
 tper=10
 +>WifiConfig
 +>WifiPower
 =>UfsRun discovery1.txt
-endif
+}
 
 if cnt==40
-then
+{
 =>UfsRun discovery2.txt
-endif
+}
 
 if cnt<99
-then
+{
 cnt+=1
 print cnt=%0cnt%
-endif
+}
 
 if chg[ss]>0
 and cnt>30
 then
-print han %2.0hh%:%2.0mm%:%2.0ss%
+print HAN: %2.0hh%:%2.0mm%:%2.0ss% !
 ipwrm=ipwr
 epwrm=epwr
 ; freeds
 ; freeds
+endif
+
+if chg[mm]>0
+and cnt>30
+then
+;
+vts=s(2.0hh)+"h"+","+s(vt1)+","+s(vt2)+","+s(vt3)+"\n"
+vtf="vt-0d.csv"
+fr=fo(vtf 2)
+res=fz(fr)
+if res==0
+then
+res=fw(date+",Voltage L1,L2,L3\n" fr)
+fc(fr)
+fr=fo(vtf 2)
+endif
+res=fw(vts fr)
+fc(fr)
+;
 endif
 
 strd="cnt"+s(hh)
@@ -136,6 +164,10 @@ then
 =>UfsDelete2 2d.csv
 =>UfsRename2 1d.csv,2d.csv
 =>UfsRename2 0d.csv,1d.csv
+;
+=>UfsDelete2 vt-2d.csv
+=>UfsRename2 vt-1d.csv,vt-2d.csv
+=>UfsRename2 vt-0d.csv,vt-1d.csv
 ;
 tmp=lp1y-1
 =>UfsDelete2 LP-%4.0tmp%-%2.0lp1m%.csv
@@ -231,12 +263,6 @@ endif
 @<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
-<br>
-%EB% LP Calculado{m}%3saldo1% kWh
-%EB% LP Excedente{m}%3saldo2% kWh
-<br>
-Solar{m}%1pv1w% W
-Solar{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
