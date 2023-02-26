@@ -27,6 +27,6 @@ SetOption65 1;
 Template {"NAME":"easyhan.pt","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
 Module 0; 
 WifiConfig 2; 
-OtaUrl http://u.easyhan.pt/han/tasmota4M.bin.gz; 
+OtaUrl http://u.easyhan.pt/han/tasmota-4M.bin.gz; 
 Restart 1; 
 ``` 
