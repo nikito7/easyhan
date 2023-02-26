@@ -258,12 +258,6 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-%EB% LP Calculado{m}%3saldo1% kWh
-%EB% LP Excedente{m}%3saldo2% kWh
-<br>
-Solar{m}%1pv1w% W
-Solar{m}%1pv1k% kWh
-<br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
 
