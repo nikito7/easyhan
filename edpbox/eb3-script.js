@@ -1,6 +1,6 @@
 >D 48
 
-ver=10252
+ver=10253
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -135,7 +135,7 @@ epwrm=epwr
 ; freeds
 endif
 
-if chg[mm]>0
+if upsecs%300==0
 and cnt>30
 then
 ;
@@ -287,7 +287,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Potência ( Watts ) ( 10min )',
+$title:'Potência (W) (10min)',
 $};
 $gc(e)
 
@@ -313,7 +313,7 @@ $gc(e)
 
 1,=h<br>
 
-1,01040Ex8x4UUuu@i1:10,Current Total,A,Current,1
+1,01040Ex8x4UUuu@i1:10,Current,A,Current,1
 
 1,01040ExxxxUUuu@i1:10,Current L1,A,CL1,1
 1,01040Ex4xxxxUUuu@i1:10,Current L2,A,CL2,1
@@ -323,8 +323,8 @@ $gc(e)
 
 ; 73
 
-1,010420x24UUuuUUuu@i2:1,%AP% Total Import,W,Power,0
-1,010420x28UUuuUUuu@i2:1,%AP% Total Export,W,APE,0
+1,010420x24UUuuUUuu@i2:1,%AP% Import,W,Power,0
+1,010420x28UUuuUUuu@i2:1,%AP% Export,W,APE,0
 
 1,010420UUuuUUuu@i2:1,%AP% L1,W,API1,0
 1,010420x8UUuuUUuu@i2:1,%AP% L2,W,API2,0
@@ -372,24 +372,20 @@ $gc(e)
 ; 0B
 
 1,01040euu@i6:1,Tarifa,,Tariff,0
-1,01040exxUUuuUUuu@i6:1000,Potência T1,kVA,PT1,2
-1,01040ex4xxUUuuUUuu@i6:1000,Potência T2,kVA,PT2,2
-1,01040ex8xxUUuuUUuu@i6:1000,Potência T3,kVA,PT3,2
+1,01040exxUUuuUUuu@i6:1000,T1,kVA,PT1,2
+1,01040ex4xxUUuuUUuu@i6:1000,T2,kVA,PT2,2
+1,01040ex8xxUUuuUUuu@i6:1000,T3,kVA,PT3,2
 
 1,=h<br>
-
-; lp
 
 1,01441dUUuu@i7:1,LP Year,,LP1_Y,0
 1,01441dxxxxuu@i7:1,LP Month,,LP1_M,0
 1,01441dxxxxxxuu@i7:1,LP Day,,LP1_D,0
 1,01441dx4xxuu@i7:1,LP Hour,h,LP1_HH,0
 1,01441dx4xxxxuu@i7:1,LP Minute,m,LP1_MM,0
-; dst
-; amr
+;
 1,01441dx8x4xxUUuuUUuu@i7:1,LP Import Inc,Wh,LP3_IMP,0
-; lp4
-; lp5
+;
 1,01441dx8x8x8xxUUuuUUuu@i7:1,LP Export Inc,Wh,LP6_EXP,0
 
 #
