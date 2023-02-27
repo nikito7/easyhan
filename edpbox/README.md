@@ -30,7 +30,7 @@ Monofásicos:
 
 - ```Kaifa MA109P```
 
-- ```Janz C3801```
+- ```Janz C3801 GPRS```
 
 - ```Landis+Gyr```
 
