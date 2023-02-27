@@ -30,11 +30,15 @@ Monofásicos:
 
 - ```Kaifa MA109P```
 
+- ```Janz C3801```
+
 - ```Landis+Gyr```
 
 - ```Sagemcom CX1000-6```
 
 - ```Sagemcom S212```
+
+- ```Ziv```
 
 Trifásicos:
 
@@ -46,7 +50,7 @@ Trifásicos:
 
 Notas:
 
-Landis+Gyr: Serial mN1/mN2.
+Landis+Gyr & Ziv: Serial mN1/mN2.
 
 # Tasmota
 
