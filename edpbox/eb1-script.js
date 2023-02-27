@@ -1,6 +1,6 @@
 >D 48
 
-ver=10252
+ver=10253
 EB="EB1"
 PF="Factor"
 AP="Potência"
@@ -135,7 +135,7 @@ epwrm=epwr
 ; freeds
 endif
 
-if chg[mm]>0
+if upsecs%300==0
 and cnt>30
 then
 ;
@@ -287,7 +287,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Potência ( Watts ) ( 10min )',
+$title:'Potência (W) (10min)',
 $};
 $gc(e)
 
