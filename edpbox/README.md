@@ -48,6 +48,8 @@ Trifásicos:
 
 - ```Sagemcom CX2000-9```
 
+- ```Sagemcom T215```
+
 Notas:
 
 Landis+Gyr & Ziv: Serial mN1/mN2.
