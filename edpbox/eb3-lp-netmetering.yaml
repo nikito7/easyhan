@@ -40,11 +40,20 @@ mqtt:
       state_class: measurement
       icon: mdi:counter
 
+    - name: "EB3 LP Saldo Inc"
+      unique_id: EB3_LP_Saldo_Inc
+      state_topic: "tele/edpbox3/SENSOR"
+      value_template: >
+        {{ value_json.EB3_s0|float(0) }}
+      unit_of_measurement: "Wh/15m"
+      state_class: measurement
+      icon: mdi:counter
+
     - name: "EB3 LP Calculado"
       unique_id: EB3_LP_Calculado
-      state_topic: "easyhan/EB3/saldo1"
+      state_topic: "tele/edpbox3/SENSOR"
       value_template: >-
-        {% set x = value|float(0) %}
+        {% set x = value_json.EB3_s1|float(0) %}
         {% if x > 0 %}
           {{ x }}
         {% endif %}
@@ -54,21 +63,14 @@ mqtt:
 
     - name: "EB3 LP Excedente"
       unique_id: EB3_LP_Excedente
-      state_topic: "easyhan/EB3/saldo2"
+      state_topic: "tele/edpbox3/SENSOR"
       value_template: >-
-        {% set x = value|float(0) %}
+        {% set x = value_json.EB3_s2|float(0) %}
         {% if x > 0 %}
           {{ x }}
         {% endif %}
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
-
-    - name: "EB3 LP Saldo Inc"
-      unique_id: EB3_LP_Saldo_Inc
-      state_topic: "easyhan/EB3/saldo"
-      unit_of_measurement: "Wh/15m"
-      state_class: measurement
-      icon: mdi:counter
 
 #EOF
