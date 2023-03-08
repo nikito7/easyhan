@@ -263,9 +263,9 @@ endif
 
 >J
 ,"HAN":{
-"%EB%_s0":%0saldo%,
-"%EB%_s1":%3saldo1%,
-"%EB%_s2":%3saldo2%
+"s0":%0saldo%,
+"s1":%3saldo1%,
+"s2":%3saldo2%
 }
 
 >W
