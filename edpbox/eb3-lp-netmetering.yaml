@@ -44,7 +44,7 @@ mqtt:
       unique_id: EB3_LP_Saldo_Inc
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
-        {{ value_json.EB3_s0|float(0) }}
+        {{ value_json.HAN.s0|float(0) }}
       unit_of_measurement: "Wh/15m"
       state_class: measurement
       icon: mdi:counter
@@ -53,7 +53,7 @@ mqtt:
       unique_id: EB3_LP_Calculado
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >-
-        {% set x = value_json.EB3_s1|float(0) %}
+        {% set x = value_json.HAN.s1|float(0) %}
         {% if x > 0 %}
           {{ x }}
         {% endif %}
@@ -65,7 +65,7 @@ mqtt:
       unique_id: EB3_LP_Excedente
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >-
-        {% set x = value_json.EB3_s2|float(0) %}
+        {% set x = value_json.HAN.s2|float(0) %}
         {% if x > 0 %}
           {{ x }}
         {% endif %}
