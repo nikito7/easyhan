@@ -30,3 +30,7 @@ WifiConfig 2;
 OtaUrl http://u.easyhan.pt/han/tasmota-4M.bin.gz; 
 Restart 1; 
 ``` 
+
+3. Upload files
+
+!
