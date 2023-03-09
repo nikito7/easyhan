@@ -31,6 +31,20 @@ OtaUrl http://u.easyhan.pt/han/tasmota-4M.bin.gz;
 Restart 1; 
 ``` 
 
+---
+
 3. Upload files
 
-!
+![files](./img/files.jpg)
+
+4. OTA Upgrade
+
+...
+
+5. Enable Script
+
+...
+
+5.1 Restart
+
+...
