@@ -45,6 +45,6 @@ Restart 1;
 
 ...
 
-5.1 Restart
+6. Restart
 
 ...
