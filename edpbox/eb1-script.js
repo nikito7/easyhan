@@ -1,6 +1,6 @@
 >D 48
 
-ver=10253
+ver=10255
 EB="EB1"
 PF="Factor"
 AP="Potência"
@@ -26,6 +26,7 @@ fheap=0
 ws=""
 node=""
 key=""
+;
 p:ikw=0
 p:ekw=0
 fr=0
@@ -54,7 +55,6 @@ p:pv1k=0
 p:pv1ko=0
 sol=0
 ;
-PE="Publish2 easyhan"
 saldo=0
 p:saldo1=0
 p:saldo2=0
@@ -108,7 +108,7 @@ fheap=heap/1024
 if cnt==25
 {
 smlj=1
-tper=10
+tper=11
 +>WifiConfig
 +>WifiPower
 =>UfsRun discovery1.txt
@@ -256,14 +256,17 @@ saldo2+=saldo/1000*-1
 endif
 svars
 ;
-=>%PE%/%EB%/saldo %0saldo%
-=>%PE%/%EB%/saldo1 %3saldo1%
-=>%PE%/%EB%/saldo2 %3saldo2%
-;
 endif
 
 ; extras
 ; extras
+
+>J
+,"HAN":{
+"s0":%0saldo%,
+"s1":%3saldo1%,
+"s2":%3saldo2%
+}
 
 >W
 
