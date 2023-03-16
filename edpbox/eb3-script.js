@@ -1,6 +1,6 @@
 >D 48
 
-ver=10255
+ver=10256
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -265,7 +265,8 @@ endif
 ,"HAN":{
 "s0":%0saldo%,
 "s1":%3saldo1%,
-"s2":%3saldo2%
+"s2":%3saldo2%,
+"ck":"%2.0hh%:%2.0mm%:%2.0ss%"
 }
 
 >W
@@ -276,8 +277,8 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-%EB% LP Calculado{m}%3saldo1% kWh
-%EB% LP Excedente{m}%3saldo2% kWh
+%EB% Calculado{m}%3saldo1% kWh
+%EB% Excedente{m}%3saldo2% kWh
 <br>
 Solar{m}%1pv1w% W
 Solar{m}%1pv1k% kWh
