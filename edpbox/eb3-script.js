@@ -1,6 +1,6 @@
 >D 48
 
-ver=10256
+ver=10257
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -65,7 +65,12 @@ vt1=0
 vt2=0
 vt3=0
 
->BS
+>B
+
+if upsecs<10
+then
+=>WiFi 0
+endif
 
 tper=20
 smlj=0
@@ -96,6 +101,11 @@ vt2=?#VL2
 vt3=?#VL3
 
 >S
+
+if upsecs==10
+then
+=>WiFi 1
+endif
 
 hh=sml[1]
 mm=sml[2]
