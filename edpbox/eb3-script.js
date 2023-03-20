@@ -1,6 +1,6 @@
 >D 48
 
-ver=10257
+ver=10258
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -67,7 +67,7 @@ vt3=0
 
 >B
 
-if upsecs<10
+if upsecs<15
 then
 =>WiFi 0
 endif
@@ -102,7 +102,7 @@ vt3=?#VL3
 
 >S
 
-if upsecs==10
+if upsecs==15
 then
 =>WiFi 1
 endif
