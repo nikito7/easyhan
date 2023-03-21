@@ -1,6 +1,6 @@
 >D 48
 
-ver=10259
+ver=10270
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -316,6 +316,7 @@ $gc(e)
 1,01040Cx4xxuu@i0:1,Clock,h,CH,0
 1,01040Cx4xxxxuu@i0:1,Clock,m,CM,0
 1,01040Cx4xxxxxxuu@i0:1,Clock,s,CS,0
+1,0184uuxx@i0:1,Error,,ER,0
 
 1,=h<br>
 
