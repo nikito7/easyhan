@@ -1,6 +1,6 @@
 >D 48
 
-ver=10259
+ver=10271
 EB="EB1"
 PF="Factor"
 AP="Potência"
@@ -118,7 +118,7 @@ fheap=heap/1024
 if cnt==25
 {
 smlj=1
-tper=11
+tper=12
 +>WifiConfig
 +>WifiPower
 =>UfsRun discovery1.txt
