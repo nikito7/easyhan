@@ -12,16 +12,15 @@ if wtd==1
 old=clk
 }
 
-if wtd==90
+if wtd==300
 {
 wtd=0
 ;
 if old==clk
 {
-;
 =>Restart -3
-;
 }
+;
 }
 
 ; ---
