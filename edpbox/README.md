@@ -12,8 +12,6 @@ Adaptador Modbus para WiFi.
 
 ![edpbox: o seu contador inteligente, é mais que um contador](./edpbox1-20221029.jpg)
 
-<i>Imagem demonstrativa</i>
-
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
 
 Mais info no forum:
