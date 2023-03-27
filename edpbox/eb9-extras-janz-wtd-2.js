@@ -18,7 +18,8 @@ wtd=0
 ;
 if old==clk
 {
-Xxxx
+cnt=1
+=>BackLog Script 0; Delay 500; Script 1; Sensor53 r
 }
 ;
 }
