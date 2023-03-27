@@ -1,6 +1,6 @@
 >D 48
 
-ver=10271
+ver=10272
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -397,6 +397,7 @@ $gc(e)
 1,01441dxxxxxxuu@i7:1,LP Day,,LP1_D,0
 1,01441dx4xxuu@i7:1,LP Hour,h,LP1_HH,0
 1,01441dx4xxxxuu@i7:1,LP Minute,m,LP1_MM,0
+1,01441dx11uu@i7:1,LP DST,,LP1_DST,0
 ;
 1,01441dx8x4xxUUuuUUuu@i7:1,LP Import Inc,Wh,LP3_IMP,0
 ;
