@@ -50,7 +50,8 @@ Trifásicos:
 
 Notas:
 
-Landis+Gyr & Ziv: Serial mN1/mN2.
+- Landis+Gyr & Ziv: Serial mN1/mN2.
+- Sagem's: ```Sleep 75``` e ```WifiPower 12```
 
 # Tasmota
 
