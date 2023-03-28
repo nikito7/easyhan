@@ -24,6 +24,7 @@ mqtt:
       availability_topic: "tele/edpbox3/LWT"
       payload_available: "Online"
       payload_not_available: "Offline"
+      state_class: measurement
 
     - name: "EB3 ESP Free Heap"
       unique_id: EB3_ESP_Heap
