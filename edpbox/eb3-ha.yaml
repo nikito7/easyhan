@@ -10,6 +10,11 @@ mqtt:
       payload_off: "1"
       payload_on: "1"
       icon: mdi:restart
+      device:
+        identifiers: nikito7-EB3
+        name: EB3
+        model: Easy HAN
+        manufacturer: nikito7
 
 ###
 #
@@ -25,6 +30,11 @@ mqtt:
       payload_available: "Online"
       payload_not_available: "Offline"
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
+        name: EB3
+        model: Easy HAN
+        manufacturer: nikito7
 
     - name: "EB3 ESP Free Heap"
       unique_id: EB3_ESP_Heap
@@ -33,6 +43,8 @@ mqtt:
       unit_of_measurement: "kB"
       icon: mdi:chip
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
 ###
 
@@ -43,6 +55,8 @@ mqtt:
       unit_of_measurement: "%"
       icon: mdi:chip
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 ESP Sleep"
       unique_id: EB3_ESP_Sleep
@@ -51,6 +65,8 @@ mqtt:
       unit_of_measurement: "ms"
       icon: mdi:chip
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
 ###
 
@@ -61,6 +77,8 @@ mqtt:
       unit_of_measurement: "dB"
       device_class: signal_strength
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 ESP Vcc"
       unique_id: EB3_ESP_Vcc
@@ -69,6 +87,8 @@ mqtt:
       unit_of_measurement: "V"
       device_class: voltage
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
 ###
 
@@ -82,6 +102,8 @@ mqtt:
             {{ states('sensor.eb3_clock_h') }}
           {% endif %}
       icon: mdi:clock
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Clock M"
       unique_id: EB3_Clock_M
@@ -93,20 +115,21 @@ mqtt:
             {{ states('sensor.eb3_clock_m') }}
           {% endif %}
       icon: mdi:clock
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Clock"
       unique_id: EB3_Clock
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >-
-          {% if value_json.EB3.CS is defined %}
-            {% set hh = states('sensor.eb3_clock_h')|int(0) %}
-            {% set mm = states('sensor.eb3_clock_m')|int(0) %}
-            {% set ss = value_json.EB3.CS|int(0) %}
-            {{ '{0:02d}'.format(hh) + ":" + '{0:02d}'.format(mm) + ":" + '{0:02d}'.format(ss) }}
+          {% if value_json.HAN.ck is defined %}
+            {{ value_json.HAN.ck|istring) }}
           {% else %}
             {{ states('sensor.eb3_clock') }}
           {% endif %}
       icon: mdi:clock
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 ESP Clock"
       unique_id: EB3_ESP_Clock
@@ -118,6 +141,8 @@ mqtt:
             {{ states('sensor.eb3_esp_clock') }}
           {% endif %}
       icon: mdi:clock
+      device:
+        identifiers: nikito7-EB3
 
 ###
 
@@ -132,6 +157,8 @@ mqtt:
       unit_of_measurement: "V"
       device_class: voltage
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Voltage L2"
       unique_id: EB3_VolL2
@@ -144,6 +171,8 @@ mqtt:
       unit_of_measurement: "V"
       device_class: voltage
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Voltage L3"
       unique_id: EB3_VolL3
@@ -156,6 +185,8 @@ mqtt:
       unit_of_measurement: "V"
       device_class: voltage
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Current"
       unique_id: EB3_Current
@@ -165,6 +196,8 @@ mqtt:
       unit_of_measurement: "A"
       device_class: current
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Current L1"
       unique_id: EB3_CurL1
@@ -174,6 +207,8 @@ mqtt:
       unit_of_measurement: "A"
       device_class: current
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Current L2"
       unique_id: EB3_CurL2
@@ -183,6 +218,8 @@ mqtt:
       unit_of_measurement: "A"
       device_class: current
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Current L3"
       unique_id: EB3_CurL3
@@ -192,6 +229,8 @@ mqtt:
       unit_of_measurement: "A"
       device_class: current
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Power Factor"
       unique_id: EB3_PowFac
@@ -204,6 +243,8 @@ mqtt:
       unit_of_measurement: "%"
       device_class: power_factor
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Power Factor L1"
       unique_id: EB3_PowFacL1
@@ -216,6 +257,8 @@ mqtt:
       unit_of_measurement: "%"
       device_class: power_factor
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Power Factor L2"
       unique_id: EB3_LowFacL2
@@ -228,6 +271,8 @@ mqtt:
       unit_of_measurement: "%"
       device_class: power_factor
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Power Factor L3"
       unique_id: EB3_PowFacL3
@@ -240,6 +285,8 @@ mqtt:
       unit_of_measurement: "%"
       device_class: power_factor
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Active Power Import"
       unique_id: EB3_ActPow
@@ -264,6 +311,8 @@ mqtt:
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Active Power L1"
       unique_id: EB3_ActLowL1
@@ -276,6 +325,8 @@ mqtt:
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Active Power L2"
       unique_id: EB3_ActPowL2
@@ -300,6 +351,8 @@ mqtt:
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
 ###
 
@@ -314,6 +367,8 @@ mqtt:
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Active Power L2 Export"
       unique_id: EB3_ActPowL2Exp
@@ -326,6 +381,8 @@ mqtt:
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Active Power L3 Export"
       unique_id: EB3_ActPowL3Exp
@@ -338,6 +395,8 @@ mqtt:
       unit_of_measurement: "W"
       device_class: power
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
 ###
 
@@ -352,6 +411,8 @@ mqtt:
       unit_of_measurement: "Hz"
       device_class: frequency
       state_class: measurement
+      device:
+        identifiers: nikito7-EB3
 
 ###
 ###
@@ -367,6 +428,8 @@ mqtt:
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 T2 Ponta"
       unique_id: EB3_TotEneT2
@@ -379,6 +442,8 @@ mqtt:
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 T3 Cheias"
       unique_id: EB3_TotEneT3
@@ -391,6 +456,8 @@ mqtt:
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
+      device:
+        identifiers: nikito7-EB3
 
 ###
 ###
@@ -406,6 +473,8 @@ mqtt:
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Export"
       unique_id: EB3_TotEneExp
@@ -418,6 +487,8 @@ mqtt:
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
+      device:
+        identifiers: nikito7-EB3
 
 ###
 ###
@@ -433,6 +504,8 @@ mqtt:
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Import L2"
       unique_id: EB3_TotEneImpL2
@@ -445,6 +518,8 @@ mqtt:
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
+      device:
+        identifiers: nikito7-EB3
 
     - name: "EB3 Import L3"
       unique_id: EB3_TotEneImpL3
@@ -457,6 +532,8 @@ mqtt:
       unit_of_measurement: "kWh"
       device_class: energy
       state_class: total_increasing
+      device:
+        identifiers: nikito7-EB3
 
 ###
 ###
@@ -474,6 +551,8 @@ mqtt:
             {{ "Cheias" }}
           {% endif %}
       icon: mdi:counter
+      device:
+        identifiers: nikito7-EB3
 
 ###
 ##
