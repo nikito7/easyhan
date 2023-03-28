@@ -121,12 +121,12 @@ mqtt:
     - name: "EB3 Clock"
       unique_id: EB3_Clock
       state_topic: "tele/edpbox3/SENSOR"
-      value_template: >-
-          {% if value_json.HAN.ck is defined %}
-            {{ value_json.HAN.ck|istring) }}
-          {% else %}
-            {{ states('sensor.eb3_clock') }}
-          {% endif %}
+      value_template: >
+        {% if value_json.HAN.ck is defined %}
+          {{ value_json.HAN.ck|string }}
+        {% else %}
+          {{ states('sensor.eb3_clock') }}
+        {% endif %}
       icon: mdi:clock
       device:
         identifiers: nikito7-EB3
