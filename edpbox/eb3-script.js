@@ -1,6 +1,6 @@
 >D 48
 
-ver=10273
+ver=10274
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -22,10 +22,6 @@ ipwr=0
 epwr=0
 strm="cnt0"
 fheap=0
-;
-ws=""
-node=""
-key=""
 ;
 p:ikw=0
 p:ekw=0
@@ -49,11 +45,6 @@ chs=""
 chf=""
 imp=0
 exp=0
-;
-pv1w=0
-p:pv1k=0
-p:pv1ko=0
-sol=0
 ;
 saldo=0
 p:saldo1=0
@@ -205,23 +196,16 @@ then
 ekwo=ekw
 endif
 ;
-if pv1ko==0
-or pv1k==0
-then
-pv1ko=pv1k
-endif
-;
 imp=ikw-ikwo
 exp=ekw-ekwo
-sol=pv1k-pv1ko
 ;
-chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+","+s(sol)+"\n"
+chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+"\n"
 chf="0d.csv"
 fr=fo(chf 2)
 res=fz(fr)
 if res==0
 then
-res=fw(date+",Import,Export,Solar\n" fr)
+res=fw(date+",Import,Export\n" fr)
 fc(fr)
 fr=fo(chf 2)
 endif
@@ -230,7 +214,6 @@ fc(fr)
 ;
 ikwo=ikw
 ekwo=ekw
-pv1ko=pv1k
 svars
 ;
 endif
@@ -289,9 +272,6 @@ endif
 <br>
 %EB% Calculado{m}%3saldo1% kWh
 %EB% Excedente{m}%3saldo2% kWh
-<br>
-Solar{m}%1pv1w% W
-Solar{m}%1pv1k% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
