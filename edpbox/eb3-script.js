@@ -1,6 +1,6 @@
 >D 48
 
-ver=10274
+ver=10275
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -16,6 +16,7 @@ wtd=0
 hh=0
 mm=0
 ss=0
+;
 m:ipwrm=0 50
 m:epwrm=0 50
 ipwr=0
