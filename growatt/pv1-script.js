@@ -1,6 +1,6 @@
 >D 48
 
-ver=108
+ver=109
 date=""
 time=""
 wfc=""
@@ -16,8 +16,6 @@ epwr=0
 strm="cnt0"
 fheap=0
 ;
-ws="WebSend [10.1.0.182:80]"
-pv1k=0
 
 >BS
 
@@ -39,7 +37,6 @@ wfp=WifiPower
 
 ipwr=?#InputPower
 epwr=?#Power
-pv1k=?#PV_Energy
 
 >S
 
@@ -71,10 +68,6 @@ ipwrm=ipwr
 print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
 print Array: epwrm %0ipwrm[-1]%
-;
-=>%ws%/cm?cmnd=Script%%20%%3Epv1w=%epwr%
-=>%ws%/cm?cmnd=Script%%20%%3Epv1k=%1pv1k%
-;
 endif
 
 >W
