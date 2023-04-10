@@ -17,7 +17,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
         name: EB1
-        model: Easy HAN RS485
+        model: Easy HAN
         manufacturer: nikito7
 
 ###
@@ -36,7 +36,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
         name: EB1
-        model: Easy HAN RS485
+        model: Easy HAN
         manufacturer: nikito7
 
     - name: "EB1 ESP Free Heap"
@@ -134,9 +134,6 @@ mqtt:
       state_class: measurement
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 Current L1"
       unique_id: EB1_CurL1
