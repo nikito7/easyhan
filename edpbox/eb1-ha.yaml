@@ -47,9 +47,6 @@ mqtt:
       icon: mdi:chip
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 ESP Signal"
       unique_id: EB1_ESP_Signal
@@ -59,9 +56,6 @@ mqtt:
       device_class: signal_strength
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 ESP Vcc"
       unique_id: EB1_ESP_Vcc
@@ -72,9 +66,6 @@ mqtt:
       state_class: measurement
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
 ###
 
@@ -90,9 +81,6 @@ mqtt:
       icon: mdi:clock
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 Clock M"
       unique_id: EB1_Clock_M
@@ -106,9 +94,6 @@ mqtt:
       icon: mdi:clock
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 Clock"
       unique_id: EB1_Clock
@@ -133,9 +118,6 @@ mqtt:
       icon: mdi:clock
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
 ###
 
@@ -169,9 +151,6 @@ mqtt:
       state_class: measurement
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 Power Factor"
       unique_id: EB1_PowFac
@@ -186,9 +165,6 @@ mqtt:
       state_class: measurement
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 Active Power Import"
       unique_id: EB1_ActPow
@@ -203,9 +179,6 @@ mqtt:
       state_class: measurement
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 Active Power Export"
       unique_id: EB1_ActPowExp
@@ -220,9 +193,6 @@ mqtt:
       state_class: measurement
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 Frequency"
       unique_id: EB1_Frequency
@@ -236,9 +206,6 @@ mqtt:
       device_class: frequency
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
 ###
 ###
@@ -256,9 +223,6 @@ mqtt:
       state_class: total_increasing
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 T2 Ponta"
       unique_id: EB1_TotEneT2
@@ -273,9 +237,6 @@ mqtt:
       state_class: total_increasing
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 T3 Cheias"
       unique_id: EB1_TotEneT3
@@ -290,9 +251,6 @@ mqtt:
       state_class: total_increasing
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
 ###
 ###
@@ -310,9 +268,6 @@ mqtt:
       state_class: total_increasing
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
     - name: "EB1 Export"
       unique_id: EB1_TotEneExp
@@ -327,9 +282,6 @@ mqtt:
       state_class: total_increasing
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
 ###
 ###
@@ -349,9 +301,6 @@ mqtt:
       icon: mdi:counter
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN RS485
-        manufacturer: nikito7
 
 ###
 ##
