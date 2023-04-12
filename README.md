@@ -1,4 +1,4 @@
-# Easy HAN
+# Easy HAN RS485
 
 - [```edpbox``` contadores inteligentes](./edpbox/)
 
