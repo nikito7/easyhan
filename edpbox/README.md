@@ -1,6 +1,6 @@
 # Easy HAN
 
-Leitor da porta HAN.
+Leitor WiFi da porta HAN.
 
 Medidor de consumo via porta HAN. 
 
@@ -10,7 +10,7 @@ Acesso ao Diagrama de Carga (netmetering)
 
 Adaptador Modbus para WiFi.
 
-![edpbox: o seu contador inteligente, é mais que um contador](./edpbox1-20221029.jpg)
+![edpbox](./edpbox1-20221029.jpg)
 
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
 
@@ -19,39 +19,42 @@ Mais info no forum:
 https://forum.cpha.pt/t/easy-han-rs485-edpbox-modbus/9977
 
 # Contadores
-> Testados com alimentação directa na HAN.
-> Sem modem gprs externo.
+
+>Testados com alimentação directa na porta HAN, sem modem gprs externo.
+
+>Na presença de modem gprs, é preciso 5V/230V no local. Excepto Janz GPRS.
 
 Monofásicos:
 
-- ```Kaifa MA109H```
+- Kaifa MA109H
 
-- ```Kaifa MA109P```
+- Kaifa MA109P
 
-- ```Janz C3801 GPRS```
+- Janz C3801 GPRS
 
-- ```Landis+Gyr```
+- Landis+Gyr
 
-- ```Sagemcom CX1000-6```
+- Sagemcom CX1000-6
 
-- ```Sagemcom S212```
+- Sagemcom S212
 
-- ```Ziv```
+- Ziv
 
 Trifásicos:
 
-- ```Janz B2801 GPRS```
+- Janz B2801 GPRS
 
-- ```Landis+Gyr```
+- Landis+Gyr ZMX e310
 
-- ```Sagemcom CX2000-9```
+- Sagemcom CX2000-9
 
-- ```Sagemcom T215```
+- Sagemcom T215
 
 Notas:
 
 - Landis+Gyr & Ziv: Serial mN1/mN2.
-- Sagem's: ```Sleep 75``` e ```WifiPower 12```
+
+- Sagem's: ```Sleep 75``` e ```WifiPower 12```.
 
 # Tasmota
 
