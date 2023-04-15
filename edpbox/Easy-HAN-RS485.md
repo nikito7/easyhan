@@ -48,3 +48,9 @@ Restart 1;
 6. Restart
 
 ...
+
+Sagem:
+
+```js
+Backlog Sleep 75; WifiPower 15; 
+```
