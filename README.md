@@ -6,7 +6,7 @@
 
 ![Easy HAN RS485](./edpbox/edpbox1-20221029.jpg)
 
-# Old / Dev
+# Dev
 
 https://github.com/nikito7/edpbox-dev
 
