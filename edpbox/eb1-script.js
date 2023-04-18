@@ -332,6 +332,7 @@ $gc(e)
 1,01040ax8UUuu@i4:1000,%PF% ,φ,Factor,3
 
 ; 7F
+; Kaifa MA109H: 1,010410UUuu
 
 1,01040aUUuu@i5:10,Frequency ,Hz,Frequency,1
 
