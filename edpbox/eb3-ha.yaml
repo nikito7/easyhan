@@ -32,9 +32,6 @@ mqtt:
       state_class: measurement
       device:
         identifiers: nikito7-EB3
-        name: EB3
-        model: Easy HAN
-        manufacturer: nikito7
 
     - name: "EB3 ESP Free Heap"
       unique_id: EB3_ESP_Heap
