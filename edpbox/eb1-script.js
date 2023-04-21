@@ -1,6 +1,6 @@
 >D 48
 
-ver=10278
+ver=10279
 EB="EB1"
 PF="Factor"
 AP="Potência"
@@ -59,7 +59,7 @@ vt3=0
 
 >B
 
-if upsecs<5
+if upsecs<7
 then
 =>WiFi 0
 endif
@@ -94,7 +94,7 @@ vt3=?#VL3
 
 >S
 
-if upsecs==5
+if upsecs==7
 then
 =>WiFi 1
 endif
@@ -107,18 +107,27 @@ time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
 
-if cnt==25
+if cnt==31
 {
 smlj=1
 tper=14
 +>WifiConfig
 +>WifiPower
+}
+
+if cnt==41
+{
 =>UfsRun discovery1.txt
 }
 
-if cnt==40
+if cnt==51
 {
 =>UfsRun discovery2.txt
+}
+
+if cnt==61
+{
+=>UfsRun discovery3.txt
 }
 
 if cnt<99
@@ -231,7 +240,7 @@ fr=fo(lpf 2)
 res=fz(fr)
 if res==0
 then
-res=fw("Date,Import Inc,Export Inc\n" fr)
+res=fw("Date,Import,Export\n" fr)
 fc(fr)
 fr=fo(lpf 2)
 endif
