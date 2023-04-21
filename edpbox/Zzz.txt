@@ -1,5 +1,5 @@
 ; switch
-Publish2 homeassistant/switch/nikito7-EB3/restart/config 
+Publish2 homeassistant/switch/nikito7-EB3/restart/config {"name":"EB3 ESP Restart","unique_id":"EB3_ESP_Restart","command_topic":"cmnd/edpbox3/restart","payload_off":"1","payload_on":"1","icon":"mdi:restart","device":{"identifiers":"nikito7-EB3","name":"EB3","model":"Easy HAN","manufacturer":"nikito7"}}
 ; sensor
 Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
 Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
