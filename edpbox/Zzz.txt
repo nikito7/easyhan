@@ -35,15 +35,16 @@ Publish2 homeassistant/sensor/nikito7-EB3/ape1/config {"name":"EB3 Active Power 
 Publish2 homeassistant/sensor/nikito7-EB3/ape2/config {"name":"EB3 Active Power L2 Export","unique_id":"EB3_ActPowL2Exp","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.APE2|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_measurement":"W","device_class":"power","state_class":"measurement","device":{"identifiers":"nikito7-EB3"}}
 Publish2 homeassistant/sensor/nikito7-EB3/ape3/config {"name":"EB3 Active Power L3 Export","unique_id":"EB3_ActPowL3Exp","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.APE3|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_measurement":"W","device_class":"power","state_class":"measurement","device":{"identifiers":"nikito7-EB3"}}
 ; frequency
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
+Publish2 homeassistant/sensor/nikito7-EB3/freq/config {"name":"EB3 Frequency","unique_id":"EB3_Frequency","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.Frequency|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"Hz","device_class":"frequency","state_class":"measurement","device":{"identifiers":"nikito7-EB3"}}
+; kwh
+Publish2 homeassistant/sensor/nikito7-EB3/tet1/config {"name":"EB3 T1 Vazio","unique_id":"EB3_TotEneT1","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.TET1|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/tet2/config {"name":"EB3 T2 Ponta","unique_id":"EB3_TotEneT2","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.TET2|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/tet3/config {"name":"EB3 T3 Cheias","unique_id":"EB3_TotEneT3","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.TET3|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/tei/config {"name":"EB3 Import","unique_id":"EB3_TotEneImp","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.TEI|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/tee/config {"name":"EB3 Export","unique_id":"EB3_TotEneExp","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.TEE|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/tei1/config {"name":"EB3 Import L1","unique_id":"EB3_TotEneImpL1","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.TEIL1|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/tei2/config {"name":"EB3 Import L2","unique_id":"EB3_TotEneImpL2","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.TEIL2|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/tei3/config {"name":"EB3 Import L3","unique_id":"EB3_TotEneImpL3","state_topic":"tele/edpbox3/SENSOR","value_template":"{%% set x = value_json.EB3.TEIL3|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_measurement":"kWh","device_class":"energy","state_class":"total_increasing","device":{"identifiers":"nikito7-EB3"}}
 Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
 Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
 Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
