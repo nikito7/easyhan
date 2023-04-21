@@ -4,9 +4,10 @@ Publish2 homeassistant/switch/nikito7-EB3/restart/config {"name":"EB3 ESP Restar
 ; esp
 Publish2 homeassistant/sensor/nikito7-EB3/uptime/config {"name":"EB3 ESP Uptime","unique_id":"EB3_ESP_Uptime","state_topic":"tele/edpbox3/STATE","value_template":"{{ ( value_json.UptimeSec / 3600 ) | round(1) }}","unit_of_measurement":"h","icon":"mdi:alarm","availability_topic":"tele/edpbox3/LWT","payload_available":"Online","payload_not_available":"Offline","state_class":"measurement","device":{"identifiers":"nikito7-EB3"}}
 Publish2 homeassistant/sensor/nikito7-EB3/heap/config {"name":"EB3 ESP Free Heap","unique_id":"EB3_ESP_Heap","state_topic":"tele/edpbox3/STATE","value_template":"{{ value_json.Heap }}","unit_of_measurement":"kB","icon":"mdi:chip","state_class":"measurement","device":{"identifiers":"nikito7-EB3"}}
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
-Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
+Publish2 homeassistant/sensor/nikito7-EB3/load/config {"name":"EB3 ESP Load","unique_id":"EB3_ESP_Load","state_topic":"tele/edpbox3/STATE","value_template":"{{ value_json.LoadAvg }}","unit_of_measurement":"%%","icon":"mdi:chip","state_class":"measurement","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/sleep/config {"name":"EB3 ESP Sleep","unique_id":"EB3_ESP_Sleep","state_topic":"tele/edpbox3/STATE","value_template":"{{ value_json.Sleep }}","unit_of_measurement":"ms","icon":"mdi:chip","state_class":"measurement","device":{"identifiers":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/signal/config {"name":"EB3 ESP Signal","unique_id":"EB3_ESP_Signal","state_topic":"tele/edpbox3/STATE","value_template":"{{ value_json.Wifi.Signal }}","unit_of_measurement":"dB","device_class":"signal_strength","state_class":"measurement","device":{"identifiers":"nikito7-EB3"}}
+; 
 Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
 Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
 Publish2 homeassistant/sensor/nikito7-EB3/xx/config 
