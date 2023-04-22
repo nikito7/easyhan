@@ -43,9 +43,9 @@ Restart 1;
 
 5. Enable Script
 
-...
-
-6. Restart
+```js
+Backlog Script 1; Restart 1;
+```
 
 ...
 
