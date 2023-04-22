@@ -60,7 +60,7 @@ mqtt:
     - name: "EB3 LP Calculado"
       unique_id: EB3_LP_Calculado
       state_topic: "tele/edpbox3/SENSOR"
-      value_template: >-
+      value_template: >
         {% set x = value_json.HAN.s1|float(0) %}
         {% if x > 0 %}
           {{ x }}
@@ -74,7 +74,7 @@ mqtt:
     - name: "EB3 LP Excedente"
       unique_id: EB3_LP_Excedente
       state_topic: "tele/edpbox3/SENSOR"
-      value_template: >-
+      value_template: >
         {% set x = value_json.HAN.s2|float(0) %}
         {% if x > 0 %}
           {{ x }}
