@@ -35,9 +35,6 @@ mqtt:
       payload_not_available: "Offline"
       device:
         identifiers: nikito7-EB1
-        name: EB1
-        model: Easy HAN
-        manufacturer: nikito7
 
     - name: "EB1 ESP Free Heap"
       unique_id: EB1_ESP_Heap
@@ -72,7 +69,7 @@ mqtt:
     - name: "EB1 Clock H"
       unique_id: EB1_Clock_H
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% if value_json.EB1.CH is defined %}        
             {{ value_json.EB1.CH }}
           {% else %}
@@ -85,7 +82,7 @@ mqtt:
     - name: "EB1 Clock M"
       unique_id: EB1_Clock_M
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% if value_json.EB1.CM is defined %}        
             {{ value_json.EB1.CM }}
           {% else %}
@@ -98,7 +95,7 @@ mqtt:
     - name: "EB1 Clock"
       unique_id: EB1_Clock
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% if value_json.HAN.ck is defined %}
             {{ value_json.HAN.ck|string %}
           {% else %}
@@ -111,7 +108,7 @@ mqtt:
     - name: "EB1 ESP Clock"
       unique_id: EB1_ESP_Clock
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% if value_json.Time is defined %}
             {{ value_json.Time.split('T')[1]|string }}
           {% endif %}
@@ -124,7 +121,7 @@ mqtt:
     - name: "EB1 Voltage L1"
       unique_id: EB1_VolL1
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.VL1|float(0) %}
           {% if x > 0 %}
             {{ x }}
@@ -138,7 +135,7 @@ mqtt:
     - name: "EB1 Current L1"
       unique_id: EB1_CurL1
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.Current|float(0) %}
           {% if x > -1 %}
             {{ x }}
@@ -152,7 +149,7 @@ mqtt:
     - name: "EB1 Power Factor"
       unique_id: EB1_PowFac
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json['EB1']['Factor']|float(0) %}
           {% if x > -1 %}
             {{ x }}
@@ -166,7 +163,7 @@ mqtt:
     - name: "EB1 Active Power Import"
       unique_id: EB1_ActPow
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json['EB1']['Power']|int(0) %}
           {% if x > -1 %}
             {{ x }}
@@ -180,7 +177,7 @@ mqtt:
     - name: "EB1 Active Power Export"
       unique_id: EB1_ActPowExp
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.APE|int(0) %}
           {% if x > -1 %}
             {{ x }}
@@ -194,7 +191,7 @@ mqtt:
     - name: "EB1 Frequency"
       unique_id: EB1_Frequency
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.Frequency|float(0) %}
           {% if x > 0 %}
             {{ x }}
@@ -210,7 +207,7 @@ mqtt:
     - name: "EB1 T1 Vazio"
       unique_id: EB1_TotEneT1
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.TET1|float(0) %}
           {% if x > 0 %}
             {{ x }}
@@ -224,7 +221,7 @@ mqtt:
     - name: "EB1 T2 Ponta"
       unique_id: EB1_TotEneT2
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.TET2|float(0) %}
           {% if x > 0 %}
             {{ x }}
@@ -238,7 +235,7 @@ mqtt:
     - name: "EB1 T3 Cheias"
       unique_id: EB1_TotEneT3
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.TET3|float(0) %}
           {% if x > 0 %}
             {{ x }}
@@ -255,7 +252,7 @@ mqtt:
     - name: "EB1 Import"
       unique_id: EB1_TotEneImp
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.TEI|float(0) %}
           {% if x > 0 %}
             {{ x }}
@@ -269,7 +266,7 @@ mqtt:
     - name: "EB1 Export"
       unique_id: EB1_TotEneExp
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.TEE|float(0) %}
           {% if x > 0 %}
             {{ x }}
@@ -286,7 +283,7 @@ mqtt:
     - name: "EB1 Tariff"
       unique_id: EB1_Tariff
       state_topic: "tele/edpbox1/SENSOR"
-      value_template: >-
+      value_template: >
           {% set x = value_json.EB1.Tariff|int(0) %}
           {% if x == 1 %}
             {{ "Vazio" }}
