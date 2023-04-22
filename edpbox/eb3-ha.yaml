@@ -1,3 +1,6 @@
+# if you use discovery1/2/3.txt,
+# you don't need this file
+#
 # edpbox3 tasmota package
 
 mqtt:
