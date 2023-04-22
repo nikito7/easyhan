@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script>
+
+var page = window.location.href.split('html')[1];
+
+switch (page) {
+  case '?1d':
+    var URL = '/ufs/1d.csv';
+    break;
+  case '?2d':
+    var URL = '/ufs/2d.csv';
+    break;
+  case '?3d':
+    var URL = '/ufs/3d.csv';
+    break;
+  default:
+    var URL = '/ufs/0d.csv';
+}
+</script>
+<title>Charts - easyhan.pt</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+
+<!-- Load jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+<!-- Load Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script src="https://unpkg.com/chartjs-plugin-colorschemes@0.4.0/dist/chartjs-plugin-colorschemes.min.js"></script>
+
+<!-- Load PapaParse to read csv files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
+
+<style>
+a, a:link { color: #ffffff }
+
+.nav a { text-decoration: none; }
+
+.nav {
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+body {
+       background-color: #333333;
+       color: #ffffff;
+       margin: 0px;
+       padding: 0px;
+       text-align: center;
+     }
+
+canvas {background-color: #fefefe}
+
+small { font-size: 10px }
+
+</style>
+</head>
+<body>
+
+<div class="nav">
+| <a href="/">Início</a> 
+| <a href="/ufs/charts.html">Hoje 0d</a> 
+| <a href="/ufs/charts.html?1d">Ontem 1d</a> 
+| <a href="/ufs/charts.html?2d">2d</a> 
+| <a href="/ufs/diag.html?30d">Test</a> 
+|
+</div>
+
+<div>
+<canvas id="chart" style="height: 300px; width: 100%"></canvas>
+</div>
+
+<br>
+<b>easyhan.pt</b><br>
+<small>2022-11-11-5</small>
+</center>
+<br>
+
+<script src="/ufs/charts.js?4"></script>
+
+</body>
+</html>
