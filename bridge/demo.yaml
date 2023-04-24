@@ -1,0 +1,46 @@
+# edpbox2 package
+# standard modbus
+# elfin: tcp
+# tasmota: rtuovertcp
+
+modbus:
+
+  - name: edpbox2
+    type: rtuovertcp #tcp
+    host: 10.1.0.200
+    port: 9502
+    delay: 1
+    timeout: 1
+    retries: 0
+    retry_on_empty: false
+    message_wait_milliseconds: 100
+
+    sensors:
+
+      - name: "EB2 Voltage L1" # 0x006C
+        unique_id: eb2_volt
+        slave: 1
+        address: 108
+        input_type: input
+        count: 1
+        data_type: uint16
+        precision: 1
+        scale: 0.1
+        unit_of_measurement: V
+        device_class: voltage
+        scan_interval: 15
+
+      - name: "EB2 Current L1" # 0x006D
+        unique_id: eb2_curr
+        slave: 1
+        address: 109
+        input_type: input
+        count: 1
+        data_type: uint16
+        precision: 1
+        scale: 0.1
+        unit_of_measurement: A
+        device_class: current
+        scan_interval: 15
+
+# eof
