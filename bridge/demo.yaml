@@ -6,14 +6,14 @@
 modbus:
 
   - name: edpbox2
-    type: rtuovertcp #tcp
+    type: tcp
     host: 10.1.0.200
     port: 9502
     delay: 1
-    timeout: 1
-    retries: 0
-    retry_on_empty: false
-    message_wait_milliseconds: 100
+    timeout: 3
+    retries: 3
+    retry_on_empty: true
+    message_wait_milliseconds: 250
 
     sensors:
 
@@ -41,6 +41,20 @@ modbus:
         scale: 0.1
         unit_of_measurement: A
         device_class: current
+        scan_interval: 15
+
+      - name: "EB2 T1 Vazio" # 0x0026
+        unique_id: eb2_t1_vazio
+        slave: 1
+        address: 38
+        input_type: input
+        count: 1
+        data_type: uint32
+        precision: 2
+        scale: 0.001
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
         scan_interval: 15
 
 # eof
