@@ -16,8 +16,8 @@ wtd=0
 if old==clk {
 cnt=1
 ;
-fr=fo("err.txt" 2)
-res=fw(tstamp "err.txt")
+fr=fo("0000.txt" 2)
+res=fw(tstamp "0000.txt")
 fc(fr)
 ;
 =>BackLog Script 0; Delay 300; Script 1;
