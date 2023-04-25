@@ -15,8 +15,12 @@ wtd=0
 ;
 if old==clk {
 cnt=1
-=>Publish2 HAN/%EB%/WTD %tstamp%
-=>BackLog Script 0; Delay 300; Script 1; Sensor53 r
+;
+fr=fo("err.txt" 2)
+res=fw(tstamp "err.txt")
+fc(fr)
+;
+=>BackLog Script 0; Delay 300; Script 1;
 }
 ;
 }
