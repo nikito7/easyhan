@@ -17,10 +17,10 @@ if old==clk {
 cnt=1
 ;
 fr=fo("0000.txt" 2)
-res=fw(tstamp "0000.txt")
+res=fw(tstamp + "\n" "0000.txt")
 fc(fr)
 ;
-=>BackLog Script 0; Delay 300; Script 1;
+;=>BackLog Script 0; Delay 300; Script 1;
 }
 ;
 }
