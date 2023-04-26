@@ -2,6 +2,8 @@ Tasmota > Consoles > Console
 
 1.
 
+(linha única)
+
 ```js
 Backlog 
 TimeZone 99; 
@@ -16,7 +18,9 @@ Topic edpbox99;
 Restart 1; 
 ```
 
-2.
+2. 
+
+(linha única)
 
 ```js
 Backlog 
