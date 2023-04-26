@@ -20,6 +20,10 @@ fr=fo("0000.txt" 2)
 res=fw(tstamp + "\n" "0000.txt")
 fc(fr)
 ;
+delay(500)
+res=spinm(3 2)
+delay(500)
+res=spinm(3 0)
 ;=>BackLog Script 0; Delay 300; Script 1;
 }
 ;
