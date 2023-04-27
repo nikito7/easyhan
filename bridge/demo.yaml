@@ -9,14 +9,14 @@ modbus:
     host: 10.1.0.200
     port: 9502
     delay: 1
-    timeout: 3
-    retries: 3
-    retry_on_empty: true
-    message_wait_milliseconds: 250
+    timeout: 1
+    retries: 0
+    retry_on_empty: false
+    message_wait_milliseconds: 1000
 
     sensors:
 
-      - name: "EB2 Voltage L1" # 0x006C
+      - name: "EB2 Voltage L1" # 6C
         unique_id: eb2_volt
         slave: 1
         address: 108
@@ -28,7 +28,7 @@ modbus:
         unit_of_measurement: V
         device_class: voltage
 
-      - name: "EB2 Current L1" # 0x006D
+      - name: "EB2 Current L1" # 6D
         unique_id: eb2_curr
         slave: 1
         address: 109
@@ -53,8 +53,7 @@ modbus:
         device_class: energy
         state_class: total_increasing
 
-      - name: "EB2 reg22 c6" #
-        unique_id: eb2_reg_22
+      - name: "EB2 reg22 c6"
         slave: 1
         address: 22
         input_type: input
