@@ -10,8 +10,8 @@ modbus:
     port: 9502
     delay: 1
     timeout: 1
-    retries: 0
-    retry_on_empty: false
+    retries: 1
+    retry_on_empty: true
     message_wait_milliseconds: 1000
 
     sensors:
@@ -76,5 +76,16 @@ modbus:
         structure: ">2I"
         scale: 0.001
         precision: 2
+
+###
+
+      - name: "EB2 clock demo"
+        unique_id: eb2_clock_demo
+        slave: 1
+        address: 1
+        input_type: input
+        count: 1
+        data_type: custom
+        structure: ">1H10B"
 
 # eof
