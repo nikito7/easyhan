@@ -16,15 +16,12 @@ wtd=0
 if old==clk {
 cnt=1
 ;
-fr=fo("0000.txt" 2)
-res=fw(tstamp + "\n" "0000.txt")
+fr=fo("0000.log" 2)
+res=fw(tstamp+"\n" fr)
 fc(fr)
 ;
-delay(500)
-res=spinm(3 2)
-delay(500)
-res=spinm(3 0)
-;=>BackLog Script 0; Delay 300; Script 1;
+; 7s
+=>BackLog Script 0; Delay 70; Script 1;
 }
 ;
 }
