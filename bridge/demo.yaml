@@ -10,9 +10,9 @@ modbus:
     host: 10.1.0.200
     port: 9502
     delay: 1
-    timeout: 1
-    retries: 1
-    retry_on_empty: true
+    timeout: 3
+    retries: 0
+    retry_on_empty: false
     message_wait_milliseconds: 1000
 
     sensors:
