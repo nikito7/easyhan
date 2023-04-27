@@ -1,0 +1,98 @@
+# tasmota: rtuovertcp 
+# demo for testing
+
+modbus:
+
+  - name: edpbox2
+    type: rtuovertcp
+    host: 10.1.0.200
+    port: 9502
+    delay: 1
+    timeout: 3
+    retries: 0
+    retry_on_empty: false
+    message_wait_milliseconds: 1000
+
+    sensors:
+
+      - name: "EB2 108 uint16 c1"
+        unique_id: eb2_demo108_c1
+        slave: 1
+        address: 108
+        input_type: input
+        count: 1
+        data_type: uint16
+        precision: 1
+        scale: 0.1
+        unit_of_measurement: V
+        device_class: voltage
+
+      - name: "EB2 109 uint16 c1"
+        unique_id: eb2_demo109_c1
+        slave: 1
+        address: 109
+        input_type: input
+        count: 1
+        data_type: uint16
+        precision: 1
+        scale: 0.1
+        unit_of_measurement: A
+        device_class: current
+
+      - name: "EB2 38 uint32 c1"
+        unique_id: eb2_demo38_c1
+        slave: 1
+        address: 38
+        input_type: input
+        count: 1
+        data_type: uint32
+        precision: 2
+        scale: 0.001
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+
+###
+
+      - name: "EB2 110-111 uint16 c2"
+        unique_id: eb2_demo110_c2
+        slave: 1
+        address: 110
+        input_type: input
+        count: 2
+        data_type: custom
+        structure: ">2H"
+        scale: 0.1
+        precision: 1
+
+      - name: "EB2 22+23 uint32 c2"
+        unique_id: eb2_demo22_c2
+        slave: 1
+        address: 22
+        input_type: input
+        count: 2
+        data_type: custom
+        structure: ">2I"
+        scale: 0.001
+        precision: 2
+
+###
+
+      - name: "EB2 clock demo"
+        unique_id: eb2_clock_demo
+        slave: 1
+        address: 1
+        input_type: input
+        count: 1
+        data_type: custom
+        structure: ">H7BhB"
+
+      - name: "EB2 reg4"
+        unique_id: eb2_reg4
+        slave: 1
+        address: 4
+        input_type: input
+        count: 1
+        data_type: string
+
+# eof
