@@ -87,6 +87,6 @@ modbus:
         input_type: input
         count: 1
         data_type: custom
-        structure: ">1H10B"
+        structure: ">H7BhB"
 
 # eof
