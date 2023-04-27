@@ -57,4 +57,19 @@ modbus:
         state_class: total_increasing
         scan_interval: 15
 
+      - name: "EB2 reg26 c3" # 0x0026
+        unique_id: eb2_reg_26
+        slave: 1
+        address: 38
+        input_type: input
+        count: 3
+        slave_count: 2 
+        data_type: uint32
+        precision: 2
+        scale: 0.001
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        scan_interval: 15
+
 # eof
