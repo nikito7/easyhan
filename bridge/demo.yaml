@@ -1,4 +1,5 @@
 # elfin: tcp
+# tasmota: rtuovertcp 
 # tasmota: tcp
 
 modbus:
