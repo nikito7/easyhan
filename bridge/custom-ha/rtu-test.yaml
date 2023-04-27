@@ -103,7 +103,7 @@ modbus:
         input_type: input
         count: 1
         data_type: custom
-        structure: ">xccccc"
+        structure: ">cccccc"
 
       - name: "EB2 reg4"
         unique_id: eb2_reg4
