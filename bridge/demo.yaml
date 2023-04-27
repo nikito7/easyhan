@@ -28,7 +28,6 @@ modbus:
         scale: 0.1
         unit_of_measurement: V
         device_class: voltage
-        scan_interval: 15
 
       - name: "EB2 Current L1" # 0x006D
         unique_id: eb2_curr
@@ -41,7 +40,6 @@ modbus:
         scale: 0.1
         unit_of_measurement: A
         device_class: current
-        scan_interval: 15
 
       - name: "EB2 T1 Vazio" # 0x0026
         unique_id: eb2_t1_vazio
@@ -55,21 +53,19 @@ modbus:
         unit_of_measurement: kWh
         device_class: energy
         state_class: total_increasing
-        scan_interval: 15
 
-      - name: "EB2 reg26 c3" # 0x0026
-        unique_id: eb2_reg_26
+      - name: "EB2 reg22 c6" #
+        unique_id: eb2_reg_22
         slave: 1
-        address: 38
+        address: 22
         input_type: input
-        count: 3
-        slave_count: 2 
+        count: 6
+        slave_count: 5
         data_type: uint32
         precision: 2
         scale: 0.001
         unit_of_measurement: kWh
         device_class: energy
         state_class: total_increasing
-        scan_interval: 15
 
 # eof
