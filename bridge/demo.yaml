@@ -53,4 +53,29 @@ modbus:
         device_class: energy
         state_class: total_increasing
 
+###
+
+      - name: "EB2 110-111 uint16 c2"
+        unique_id: eb2_demo110_c2
+        slave: 1
+        address: 110
+        input_type: input
+        count: 2
+        data_type: custom
+        structure: ">2H"
+        scale: 0.1
+        precision: 1
+
+      - name: "EB2 22+23 uint32 c2"
+        unique_id: eb2_demo22_c2
+        slave: 1
+        address: 22
+        input_type: input
+        count: 2
+        data_type: uint32
+        data_type: custom
+        structure: ">2I"
+        scale: 0.001
+        precision: 2
+
 # eof
