@@ -16,8 +16,8 @@ modbus:
 
     sensors:
 
-      - name: "EB2 Voltage L1" # 6C
-        unique_id: eb2_volt
+      - name: "EB2 108 uint16 c1"
+        unique_id: eb2_demo108_c1
         slave: 1
         address: 108
         input_type: input
@@ -28,8 +28,8 @@ modbus:
         unit_of_measurement: V
         device_class: voltage
 
-      - name: "EB2 Current L1" # 6D
-        unique_id: eb2_curr
+      - name: "EB2 109 uint16 c1"
+        unique_id: eb2_demo109_c1
         slave: 1
         address: 109
         input_type: input
@@ -40,8 +40,8 @@ modbus:
         unit_of_measurement: A
         device_class: current
 
-      - name: "EB2 T1 Vazio" # 26
-        unique_id: eb2_t1_vazio
+      - name: "EB2 38 uint32 c1"
+        unique_id: eb2_demo38_c1
         slave: 1
         address: 38
         input_type: input
