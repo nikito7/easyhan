@@ -7,8 +7,8 @@ modbus:
     type: rtuovertcp
     host: 10.1.0.200
     port: 9502
-    delay: 0
-    timeout: 1
+    delay: 1
+    timeout: 2
     retries: 0
     retry_on_empty: false
     message_wait_milliseconds: 100
@@ -103,7 +103,7 @@ modbus:
         input_type: input
         count: 1
         data_type: custom
-        structure: ">xx5s"
+        structure: ">x5s"
 
       - name: "EB2 reg4"
         unique_id: eb2_reg4
