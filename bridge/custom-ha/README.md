@@ -1,3 +1,5 @@
+stop/start/restart
+
 ```yaml
 service: modbus.stop
 data:
