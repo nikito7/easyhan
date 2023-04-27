@@ -1,7 +1,6 @@
-# edpbox2 package
-# standard modbus
 # elfin: tcp
 # tasmota: rtuovertcp
+# tasmota: tcp
 
 modbus:
 
