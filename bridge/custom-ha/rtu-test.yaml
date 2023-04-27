@@ -8,7 +8,7 @@ modbus:
     host: 10.1.0.200
     port: 9502
     delay: 1
-    timeout: 3
+    timeout: 2
     retries: 0
     retry_on_empty: false
     message_wait_milliseconds: 1000
@@ -86,6 +86,23 @@ modbus:
         count: 1
         data_type: custom
         structure: ">H7BhB"
+
+###
+      - name: "EB2 reg2"
+        unique_id: eb2_reg2
+        slave: 1
+        address: 2
+        input_type: input
+        count: 1
+        data_type: string
+
+      - name: "EB2 reg3"
+        unique_id: eb2_reg3
+        slave: 1
+        address: 3
+        input_type: input
+        count: 1
+        data_type: string
 
       - name: "EB2 reg4"
         unique_id: eb2_reg4
