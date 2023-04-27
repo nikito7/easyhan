@@ -72,7 +72,6 @@ modbus:
         address: 22
         input_type: input
         count: 2
-        data_type: uint32
         data_type: custom
         structure: ">2I"
         scale: 0.001
