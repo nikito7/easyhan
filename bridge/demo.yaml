@@ -40,25 +40,12 @@ modbus:
         unit_of_measurement: A
         device_class: current
 
-      - name: "EB2 T1 Vazio" # 0x0026
+      - name: "EB2 T1 Vazio" # 26
         unique_id: eb2_t1_vazio
         slave: 1
         address: 38
         input_type: input
         count: 1
-        data_type: uint32
-        precision: 2
-        scale: 0.001
-        unit_of_measurement: kWh
-        device_class: energy
-        state_class: total_increasing
-
-      - name: "EB2 reg22 c6"
-        slave: 1
-        address: 22
-        input_type: input
-        count: 6
-        slave_count: 5
         data_type: uint32
         precision: 2
         scale: 0.001
