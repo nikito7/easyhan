@@ -103,12 +103,28 @@ modbus:
         input_type: input
         count: 1
         data_type: custom
-        structure: ">xx9s"
+        structure: ">xx5s"
 
       - name: "EB2 reg4"
         unique_id: eb2_reg4
         slave: 1
         address: 4
+        input_type: input
+        count: 1
+        data_type: string
+
+      - name: "EB2 reg5"
+        unique_id: eb2_reg5
+        slave: 1
+        address: 5
+        input_type: input
+        count: 1
+        data_type: string
+
+      - name: "EB2 reg6"
+        unique_id: eb2_reg6
+        slave: 1
+        address: 6
         input_type: input
         count: 1
         data_type: string
