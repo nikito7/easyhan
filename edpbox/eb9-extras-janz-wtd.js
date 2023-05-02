@@ -10,7 +10,7 @@ if wtd==1 {
 old=clk
 }
 
-if wtd==30 {
+if wtd==31 {
 wtd=0
 ;
 if old==clk {
@@ -20,8 +20,9 @@ fr=fo("0000.log" 2)
 res=fw(tstamp+"\n" fr)
 fc(fr)
 ;
-; 7s
-=>BackLog Script 0; Delay 70; Script 1;
+; 30s
+=>BackLog Script 0; Delay 300; Script 1;
+;
 }
 ;
 }
