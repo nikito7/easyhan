@@ -8,6 +8,6 @@
 
 # Dev
 
-https://github.com/nikito7/edpbox-dev
+https://github.com/nikito7/modbus
 
 [![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
