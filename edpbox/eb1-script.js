@@ -1,6 +1,6 @@
 >D 48
 
-ver=10279
+ver=10280
 EB="EB1"
 PF="Factor"
 AP="Potência"
@@ -110,7 +110,7 @@ fheap=heap/1024
 if cnt==31
 {
 smlj=1
-tper=14
+tper=10
 +>WifiConfig
 +>WifiPower
 }
@@ -251,11 +251,11 @@ fc(fr)
 saldo=lp3i-lp6e
 if saldo>0
 then
-saldo1+=saldo/1000
+saldo1+=saldo
 endif
 if saldo<0
 then
-saldo2+=saldo/1000*-1
+saldo2+=saldo*-1
 endif
 svars
 ;
