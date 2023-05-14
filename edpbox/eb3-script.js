@@ -387,9 +387,9 @@ $gc(e)
 1,01441dx4xxuu@i7:1,LP Hour,h,LP1_HH,0
 1,01441dx4xxxxuu@i7:1,LP Minute,m,LP1_MM,0
 ;
-1,01441dx8x4xxUUuuUUuu@i7:1000,LP Import Inc,kWh,LP3_IMP,0
+1,01441dx8x4xxUUuuUUuu@i7:1000,LP Import Inc,kWh,LP3_IMP,3
 ;
-1,01441dx8x8x8xxUUuuUUuu@i7:1000,LP Export Inc,kWh,LP6_EXP,0
+1,01441dx8x8x8xxUUuuUUuu@i7:1000,LP Export Inc,kWh,LP6_EXP,3
 
 #
 ; eof
