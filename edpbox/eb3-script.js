@@ -1,6 +1,6 @@
 >D 48
 
-ver=10279
+ver=10280
 EB="EB3"
 PF="Factor"
 AP="Potência"
@@ -110,7 +110,7 @@ fheap=heap/1024
 if cnt==31
 {
 smlj=1
-tper=14
+tper=10
 +>WifiConfig
 +>WifiPower
 }
@@ -251,11 +251,11 @@ fc(fr)
 saldo=lp3i-lp6e
 if saldo>0
 then
-saldo1+=saldo/1000
+saldo1+=saldo
 endif
 if saldo<0
 then
-saldo2+=saldo/1000*-1
+saldo2+=saldo*-1
 endif
 svars
 ;
@@ -299,7 +299,7 @@ $gc(e)
 
 >M 1
 
-+1,3,mN1,1,9600,EB3,1,14,r010400010001,r0104006C0007,r010400730008,r0104007B0005,r010400260003,r010400160006,r0104000B0004,r01440601,r0104001C0003
++1,3,mN1,1,9600,EB3,1,10,r010400010001,r0104006C0007,r010400730008,r0104007B0005,r010400260003,r010400160006,r0104000B0004,r01440601,r0104001C0003
 
 ; 01
 
@@ -387,9 +387,9 @@ $gc(e)
 1,01441dx4xxuu@i7:1,LP Hour,h,LP1_HH,0
 1,01441dx4xxxxuu@i7:1,LP Minute,m,LP1_MM,0
 ;
-1,01441dx8x4xxUUuuUUuu@i7:1,LP Import Inc,Wh,LP3_IMP,0
+1,01441dx8x4xxUUuuUUuu@i7:1000,LP Import Inc,kWh,LP3_IMP,0
 ;
-1,01441dx8x8x8xxUUuuUUuu@i7:1,LP Export Inc,Wh,LP6_EXP,0
+1,01441dx8x8x8xxUUuuUUuu@i7:1000,LP Export Inc,kWh,LP6_EXP,0
 
 #
 ; eof
