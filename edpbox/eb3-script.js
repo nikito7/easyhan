@@ -1,7 +1,8 @@
 >D 48
 
-ver=10280
+ver=10281
 EB="EB3"
+C="Calculado"
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -280,8 +281,8 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-%EB% Calculado{m}%3saldo1% kWh
-%EB% Excedente{m}%3saldo2% kWh
+%EB% Consumo %C%{m}%3saldo1% kWh
+%EB% Excedente %C%{m}%3saldo2% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
