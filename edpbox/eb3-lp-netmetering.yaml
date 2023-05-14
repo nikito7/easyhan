@@ -22,11 +22,11 @@ mqtt:
       unique_id: EB3_LP_Import
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
-        {% set x = value_json.EB3.LP3_IMP|int(none) %}
+        {% set x = value_json.EB3.LP3_IMP|float(none) %}
         {% if x != none %}
           {{ x }}
         {% endif %}
-      unit_of_measurement: "Wh/15m"
+      unit_of_measurement: "kWh/15m"
       state_class: measurement
       icon: mdi:counter
       device:
@@ -36,11 +36,11 @@ mqtt:
       unique_id: EB3_LP_Export
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
-        {% set x = value_json.EB3.LP6_EXP|int(none) %}
+        {% set x = value_json.EB3.LP6_EXP|float(none) %}
         {% if x != none %}
           {{ x }}
         {% endif %}
-      unit_of_measurement: "Wh/15m"
+      unit_of_measurement: "kWh/15m"
       state_class: measurement
       icon: mdi:counter
       device:
@@ -51,7 +51,7 @@ mqtt:
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
         {{ value_json.HAN.s0|float(0) }}
-      unit_of_measurement: "Wh/15m"
+      unit_of_measurement: "kWh/15m"
       state_class: measurement
       icon: mdi:counter
       device:
