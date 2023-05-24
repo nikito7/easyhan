@@ -59,11 +59,13 @@ Sagem:
 Backlog Sleep 75; WifiPower 15; 
 ```
 
-...
+---
 
 mN2:
 
 (linha única)
+
+Implica a existência dos dois scripts
 
 ```js
 Backlog 
@@ -71,3 +73,4 @@ UfsRename script.txt,script-mN1.txt;
 UfsRename script-mN2.txt,script.txt; 
 Restart 1;
 ```
+
