@@ -74,4 +74,9 @@ UfsRename script-mN2.txt,script.txt;
 Restart 1;
 ```
 
-eof
+---
+
+[![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
+
+https://easyhan.pt
+
