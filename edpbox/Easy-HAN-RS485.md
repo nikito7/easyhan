@@ -58,3 +58,16 @@ Sagem:
 ```js
 Backlog Sleep 75; WifiPower 15; 
 ```
+
+...
+
+mN2:
+
+(linha única)
+
+```js
+Backlog 
+UfsRename script.txt,script-mN1.txt; 
+UfsRename script-mN2.txt,script.txt; 
+Restart 1;
+```
