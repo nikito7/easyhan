@@ -1,5 +1,7 @@
 Tasmota > Consoles > Console
 
+(tudo numa linha, caso o copy-paste não funcione adequadamente)
+
 ```js
 BackLog 
 IfxHost 10.1.0.91; 
