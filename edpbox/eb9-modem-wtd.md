@@ -13,6 +13,7 @@ ss=st(time : 3)
 if hh==15
 and mm==25
 then
-=>BackLog Script 0; Delay 30; Script 1
+; 600 = 60s
+=>BackLog Script 0; Delay 600; Delay 600; Delay 600; Delay 600; Delay 600; Script 1
 endif
 ```
