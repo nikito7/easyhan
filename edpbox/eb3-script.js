@@ -1,6 +1,6 @@
 >D 48
 
-ver=10282
+ver=10283
 EB="EB3"
 C="Calculado"
 PF="Factor"
@@ -17,6 +17,8 @@ wtd=0
 hh=0
 mm=0
 ss=0
+thh=0
+tmm=0
 ;
 m:ipwrm=0 50
 m:epwrm=0 50
@@ -100,13 +102,13 @@ then
 =>WiFi 1
 endif
 
-hh=sml[1]
-mm=sml[2]
-ss=sml[3]
-
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
+
+hh=sml[1]
+mm=sml[2]
+ss=sml[3]
 
 if cnt==31
 {
