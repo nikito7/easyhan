@@ -8,8 +8,13 @@ Requer script >= 10283.
 ...
 time=st(tstamp T 2)
 date=st(tstamp T 1)
+fheap=heap/1024
 
 colar aqui
+
+hh=sml[1]
+mm=sml[2]
+ss=sml[3]
 ...
 ```
 
