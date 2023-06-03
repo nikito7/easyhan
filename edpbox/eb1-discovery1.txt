@@ -1,5 +1,5 @@
 ; switch 2023-05-16
-Publish2 homeassistant/switch/nikito7-EB1/restart/config {"name":"EB1 ESP Restart","uniq_id":"EB1_ESP_Switch","command_topic":"cmnd/edpbox1/restart","payload_on":"1","payload_off":"1","icon":"mdi:restart","dev":{"ids":"nikito7-EB1","name":"EB1","model":"Easy HAN","mf":"nikito7"}}
+Publish2 homeassistant/button/nikito7-EB1/restart/config {"name":"EB1 ESP Restart","uniq_id":"EB1_ESP_Restart","command_topic":"cmnd/edpbox1/restart","payload_press":"1","icon":"mdi:restart","dev":{"ids":"nikito7-EB1","name":"EB1","model":"Easy HAN","mf":"nikito7"}}
 ; sensor
 ; esp
 Publish2 homeassistant/sensor/nikito7-EB1/uptime/config {"name":"EB1 ESP Uptime","uniq_id":"EB1_ESP_Uptime","stat_t":"tele/edpbox1/STATE","val_tpl":"{{ ( value_json.UptimeSec / 3600 ) | round(1) }}","unit_of_meas":"h","icon":"mdi:alarm","availability_topic":"tele/edpbox1/LWT","payload_available":"Online","payload_not_available":"Offline","dev":{"ids":"nikito7-EB1"}}
