@@ -1,4 +1,4 @@
-; switch 2023-05-16
+; switch 2023-06-04
 Publish2 homeassistant/button/nikito7-EB1/restart/config {"name":"EB1 ESP Restart","uniq_id":"EB1_ESP_Restart","command_topic":"cmnd/edpbox1/restart","payload_press":"1","icon":"mdi:restart","dev":{"ids":"nikito7-EB1","name":"EB1","model":"Easy HAN","mf":"nikito7"}}
 ; sensor
 ; esp
