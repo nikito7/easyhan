@@ -6,13 +6,12 @@
 
 mqtt:
 #
-  switch:
+  button:
 #
     - name: "EB1 ESP Restart"
-      unique_id: EB1_ESP_Switch
+      unique_id: EB1_ESP_Restart
       command_topic: "cmnd/edpbox1/restart"
-      payload_on: "1"
-      payload_off: "1"
+      payload_press: "1"
       icon: mdi:restart
       device:
         identifiers: nikito7-EB1
