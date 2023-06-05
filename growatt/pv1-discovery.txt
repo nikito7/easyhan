@@ -1,5 +1,5 @@
-; switch
-Publish2 homeassistant/switch/nikito7-PV1/restart/config {"name":"PV1 ESP Restart","unique_id":"PV1_ESP_Switch","command_topic":"cmnd/pv1/restart","payload_on":"1","payload_off":"1","icon":"mdi:restart","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
+; button
+Publish2 homeassistant/button/nikito7-PV1/restart/config {"name":"PV1 ESP Restart","unique_id":"PV1_ESP_Btn","command_topic":"cmnd/pv1/restart","payload_press":"1","icon":"mdi:restart","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
 ; sensor
 ; esp
 Publish2 homeassistant/sensor/nikito7-PV1/uptime/config {"name":"PV1 ESP Uptime","unique_id":"PV1_ESP_Uptime","state_topic":"tele/pv1/STATE","value_template":"{{ ( value_json.UptimeSec / 3600 ) | round(1) }}","unit_of_measurement":"h","icon":"mdi:alarm","availability_topic":"tele/pv1/LWT","payload_available":"Online","payload_not_available":"Offline","device":{"identifiers":"nikito7-PV1","name":"PV1","model":"Easy HAN RS485","manufacturer":"nikito7"}}
