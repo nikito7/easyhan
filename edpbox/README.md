@@ -44,7 +44,9 @@ Trifásicos:
 
 - Janz B2801 GPRS
 
-- Landis+Gyr ZMX e310
+- Landis+Gyr ZMX e310 S3
+
+- Landis+Gyr ZMX e310 S5
 
 - Sagemcom CX2000-9
 
