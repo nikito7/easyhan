@@ -37,8 +37,6 @@ OtaUrl http://u.easyhan.pt/han/tasmota-4M.bin.gz;
 Restart 1; 
 ``` 
 
----
-
 3. Upload files
 
 ![files](./img/files.jpg)
