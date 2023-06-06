@@ -1,6 +1,6 @@
 >D 48
 
-ver=10283
+ver=10284
 EB="EB3"
 C="Calculado"
 PF="Factor"
@@ -269,7 +269,7 @@ endif
 
 >J
 ,"HAN":{
-"s0":%0saldo%,
+"s0":%3saldo%,
 "s1":%3saldo1%,
 "s2":%3saldo2%,
 "ck":"%2.0hh%:%2.0mm%:%2.0ss%"
@@ -283,8 +283,8 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-%EB% Consumo %C%{m}%3saldo1% kWh
-%EB% Excedente %C%{m}%3saldo2% kWh
+%EB% LP Consumo %C%{m}%3saldo1% kWh
+%EB% LP Excedente %C%{m}%3saldo2% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
@@ -298,7 +298,7 @@ $title:'Potência (W) (10min)',
 $};
 $gc(e)
 
-; EB3 !!!
+; EB3 !
 
 >M 1
 
