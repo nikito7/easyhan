@@ -1,4 +1,4 @@
-# Easy HAN
+# Easy HAN RS485 ®
 
 - [```bridge``` rtuovertcp modbus tcp](./bridge/)
 
