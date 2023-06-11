@@ -1,3 +1,5 @@
+# Easy HAN RS485 ®
+
 Tasmota > Consoles > Console
 
 1.
@@ -81,3 +83,4 @@ Restart 1;
 
 https://easyhan.pt
 
+Easy HAN RS485 ®
