@@ -13,7 +13,6 @@ MqttUser none;
 MqttPassword none; 
 MqttClient Easy_HAN_%06X; 
 WebLog 4; 
-SerialLog 0; 
 Sleep 75; 
 WifiPower 15; 
 Topic edpbox99; 
