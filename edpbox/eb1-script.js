@@ -1,6 +1,6 @@
 >D 48
 
-ver=10283
+ver=10285
 EB="EB1"
 C="Calculado"
 PF="Factor"
@@ -269,7 +269,7 @@ endif
 
 >J
 ,"HAN":{
-"s0":%0saldo%,
+"s0":%3saldo%,
 "s1":%3saldo1%,
 "s2":%3saldo2%,
 "ck":"%2.0hh%:%2.0mm%:%2.0ss%"
