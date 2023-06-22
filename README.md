@@ -19,4 +19,5 @@ https://github.com/nikito7/edpbox-dev
 https://paypal.me/easyhanpt
 
 Easy HAN RS485 ®
+
 Easy HAN ™
