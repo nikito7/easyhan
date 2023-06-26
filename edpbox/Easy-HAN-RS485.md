@@ -4,6 +4,8 @@ Tasmota > Consoles > Console
 
 1.
 
+![Easy HAN](./img/howto-1.jpg)
+
 (linha única)
 
 ```js
@@ -22,6 +24,8 @@ Restart 1;
 ```
 
 2. 
+
+![Easy HAN](./img/howto-2.jpg)
 
 (linha única)
 
@@ -42,7 +46,12 @@ Restart 1;
 
 ![files](./img/files.jpg)
 
+![Easy HAN](./img/howto-3.jpg)
+
 4. OTA Upgrade
+
+![Easy HAN](./img/howto-4.jpg)
+
 
 ...
 
@@ -52,7 +61,7 @@ Restart 1;
 Backlog Script 1; Restart 1;
 ```
 
-...
+<hr>
 
 # Sagem
 
