@@ -83,7 +83,7 @@ Implica a existência dos dois scripts
 Backlog 
 UfsRename script.txt,script-mN1.txt; 
 UfsRename script-mN2.txt,script.txt; 
-Restart 1;
+Script 1; Restart 1;
 ```
 
 ---
