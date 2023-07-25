@@ -16,7 +16,7 @@ wtd=0
 if old==clk {
 cnt=1
 ;
-fr=fo("0000.log" 2)
+fr=fo("0001.log" 2)
 res=fw(tstamp+"\n" fr)
 fc(fr)
 ;
