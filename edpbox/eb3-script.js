@@ -1,6 +1,6 @@
 >D 48
 
-ver=10285
+ver=10287
 EB="EB3"
 C="Calculado"
 PF="Factor"
@@ -380,9 +380,11 @@ $gc(e)
 
 1,01040euu@i6:1,Tarifa,,Tariff,0
 1,01040exxUUuuUUuu@i6:1000,T1,kVA,PT1,2
-1,01040ex4xxUUuuUUuu@i6:1000,T2,kVA,PT2,2
+1,01040ex12xxUUuuUUuu@i6:1000,T4,kVA,PT4,2
 
 1,=h<br>
+
+; 0144 LP
 
 1,01441dUUuu@i7:1,LP Year,,LP1_Y,0
 1,01441dxxxxuu@i7:1,LP Month,,LP1_M,0
@@ -395,4 +397,4 @@ $gc(e)
 1,01441dx8x8x8xxUUuuUUuu@i7:1000,LP Export Inc,kWh,LP6_EXP,3
 
 #
-; eof
+; EOF
