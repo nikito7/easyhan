@@ -1,4 +1,6 @@
-; switch 2023-06-04
+; 2023-08-04
+; button
+
 Publish2 homeassistant/button/nikito7-EB1/restart/config {"name":"EB1 ESP Restart","uniq_id":"EB1_ESP_Restart","command_topic":"cmnd/edpbox1/restart","payload_press":"1","icon":"mdi:restart","dev":{"ids":"nikito7-EB1","name":"EB1","model":"Easy HAN","mf":"nikito7"}}
 ; sensor
 ; esp
@@ -14,3 +16,22 @@ Publish2 homeassistant/sensor/nikito7-EB1/volt/config {"name":"EB1 Voltage L1","
 ; Current
 Publish2 homeassistant/sensor/nikito7-EB1/current/config {"name":"EB1 Current L1","uniq_id":"EB1_CurL1","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.Current|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"A","dev_cla":"current","state_class":"measurement","dev":{"ids":"nikito7-EB1"}}
 ;eof
+
+; Factor 2023-05-16
+Publish2 homeassistant/sensor/nikito7-EB1/pfactor/config {"name":"EB1 Power Factor","uniq_id":"EB1_PowFac","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json['EB1']['Factor']|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","dev_cla":"power_factor","unit_of_meas":"%%","state_class":"measurement","dev":{"ids":"nikito7-EB1"}}
+; Power
+Publish2 homeassistant/sensor/nikito7-EB1/powimp/config {"name":"EB1 Active Power Import","uniq_id":"EB1_ActPow","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json['EB1']['Power']|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"W","dev_cla":"power","state_class":"measurement","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/powexp/config {"name":"EB1 Active Power Export","uniq_id":"EB1_ActPowExp","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.APE|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"W","dev_cla":"power","state_class":"measurement","dev":{"ids":"nikito7-EB1"}}
+; Frequency
+Publish2 homeassistant/sensor/nikito7-EB1/freq/config {"name":"EB1 Frequency","uniq_id":"EB1_Frequency","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.Frequency|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"Hz","dev_cla":"frequency","dev":{"ids":"nikito7-EB1"}}
+; Tarifas kWh
+Publish2 homeassistant/sensor/nikito7-EB1/tt1/config {"name":"EB1 T1 Vazio","uniq_id":"EB1_TotEneT1","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.TET1|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","state_class":"total_increasing","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/tt2/config {"name":"EB1 T2 Ponta","uniq_id":"EB1_TotEneT2","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.TET2|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","state_class":"total_increasing","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/tt3/config {"name":"EB1 T3 Cheias","uniq_id":"EB1_TotEneT3","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.TET3|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","state_class":"total_increasing","dev":{"ids":"nikito7-EB1"}}
+; Total kWh
+Publish2 homeassistant/sensor/nikito7-EB1/totalimp/config {"name":"EB1 Import","uniq_id":"EB1_TotEneImp","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.TEI|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","state_class":"total_increasing","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/totalexp/config {"name":"EB1 Export","uniq_id":"EB1_TotEneExp","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.TEE|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","state_class":"total_increasing","dev":{"ids":"nikito7-EB1"}}
+; Tarifa
+Publish2 homeassistant/sensor/nikito7-EB1/tarifa/config {"name":"EB1 Tariff","uniq_id":"EB1_Tariff","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.Tariff|int(0) %%} {%% if x == 1 %%} {{ 'Vazio' }} {%% elif x == 2 %%} {{ 'Ponta' }} {%% elif x == 3 %%} {{ 'Cheias' }} {%% endif %%}","icon":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
+
+; EOF
