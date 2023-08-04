@@ -1,6 +1,6 @@
 >D 48
 
-ver=10289
+ver=10290
 EB="EB1"
 C="Calculado"
 PF="Factor"
@@ -120,17 +120,7 @@ tper=10
 
 if cnt==41
 {
-=>UfsRun discovery1.txt
-}
-
-if cnt==51
-{
-=>UfsRun discovery2.txt
-}
-
-if cnt==61
-{
-=>UfsRun discovery3.txt
+=>UfsRun discovery-%EB%.txt
 }
 
 if cnt<99
