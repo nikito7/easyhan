@@ -5,7 +5,7 @@ mqtt:
 ##
   sensor:
 ####
-    - name: "EB3 LP Minutes"
+    - name: "LP Minutes"
       unique_id: EB3_LP_Minutes
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
@@ -19,7 +19,7 @@ mqtt:
       device:
         identifiers: nikito7-EB3
 
-    - name: "EB3 LP Import Inc"
+    - name: "LP Import Inc"
       unique_id: EB3_LP_Import
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
@@ -33,7 +33,7 @@ mqtt:
       device:
         identifiers: nikito7-EB3
 
-    - name: "EB3 LP Export Inc"
+    - name: "LP Export Inc"
       unique_id: EB3_LP_Export
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
@@ -47,7 +47,7 @@ mqtt:
       device:
         identifiers: nikito7-EB3
 
-    - name: "EB3 LP Saldo Inc"
+    - name: "LP Saldo Inc"
       unique_id: EB3_LP_Saldo_Inc
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
@@ -58,7 +58,7 @@ mqtt:
       device:
         identifiers: nikito7-EB3
 
-    - name: "EB3 LP Calculado"
+    - name: "LP Calculado"
       unique_id: EB3_LP_Calculado
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
@@ -72,7 +72,7 @@ mqtt:
       device:
         identifiers: nikito7-EB3
 
-    - name: "EB3 LP Excedente"
+    - name: "LP Excedente"
       unique_id: EB3_LP_Excedente
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
@@ -88,7 +88,7 @@ mqtt:
 
 ### ADC Addon ###
 
-    - name: "EB3 ADC Addon"
+    - name: "ADC Addon"
       unique_id: EB3_ADC_Addon
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
