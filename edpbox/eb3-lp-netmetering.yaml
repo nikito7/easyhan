@@ -18,6 +18,9 @@ mqtt:
       icon: mdi:alarm
       device:
         identifiers: nikito7-EB3
+        name: EB3
+        model: Easy HAN
+        manufacturer: nikito7
 
     - name: "LP Import Inc"
       unique_id: EB3_LP_Import
