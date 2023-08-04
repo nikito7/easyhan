@@ -1,6 +1,6 @@
 >D 48
 
-ver=10289
+ver=10290
 EB="EB3"
 C="Calculado"
 PF="Factor"
@@ -120,17 +120,7 @@ tper=10
 
 if cnt==41
 {
-=>UfsRun discovery1.txt
-}
-
-if cnt==51
-{
-=>UfsRun discovery2.txt
-}
-
-if cnt==61
-{
-=>UfsRun discovery3.txt
+=>UfsRun discovery-%EB%.txt
 }
 
 if cnt<99
@@ -303,6 +293,8 @@ $gc(e)
 >M 1
 
 +1,3,mN1,1,9600,EB3,1,10,r010400010001,r0104006C0007,r010400730008,r0104007B0005,r010400260003,r010400160006,r0104000B0007,r01440601,r0104001C0003
+
+1,=h<br>
 
 ; 01
 
