@@ -1,8 +1,8 @@
 >D 48
 
-ver=10290
+ver=10291
 EB="EB3"
-C="Calculado"
+C="Net."
 PF="Factor"
 AP="Potência"
 TE="Energia"
@@ -110,15 +110,15 @@ hh=sml[1]
 mm=sml[2]
 ss=sml[3]
 
-if cnt==31
+if cnt==21
 {
 smlj=1
-tper=10
+tper=11
 +>WifiConfig
 +>WifiPower
 }
 
-if cnt==41
+if cnt==31
 {
 =>UfsRun discovery-%EB%.txt
 }
@@ -126,7 +126,7 @@ if cnt==41
 if cnt<99
 {
 cnt+=1
-print cnt=%0cnt%
+print cnt=%0cnt% !
 }
 
 if chg[ss]>0
@@ -135,7 +135,6 @@ then
 print HAN: %2.0hh%:%2.0mm%:%2.0ss% !
 ipwrm=ipwr
 epwrm=epwr
-; freeds
 ; freeds
 endif
 
@@ -150,13 +149,7 @@ res=fz(fr)
 if res==0
 then
 ;
-if EB=="EB1"
-or EB=="EB2"
-then
-res=fw(date+",L1\n" fr)
-else
 res=fw(date+",L1,L2,L3\n" fr)
-endif
 ;
 fc(fr)
 fr=fo(vtf 2)
@@ -292,7 +285,7 @@ $gc(e)
 
 >M 1
 
-+1,3,mN1,1,9600,EB3,1,10,r010400010001,r0104006C0007,r010400730008,r0104007B0005,r010400260003,r010400160006,r0104000B0007,r01440601,r0104001C0003
++1,3,mN1,1,9600,EB3,1,11,r010400010001,r0104006C0007,r010400730008,r0104007B0005,r010400260003,r010400160006,r0104000B0007,r01440601,r0104001C0003
 
 1,=h<br>
 
