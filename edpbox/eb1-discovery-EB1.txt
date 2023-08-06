@@ -66,7 +66,7 @@ Publish2 homeassistant/sensor/nikito7-EB1/lpimport/config {"name":"LP Import Inc
 
 Publish2 homeassistant/sensor/nikito7-EB1/lpexport/config {"name":"LP Export Inc","unique_id":"EB1_LP_Export","state_topic":"tele/edpbox1/SENSOR","value_template":"{%% if value_json.EB1 is defined %%} {%% set x = value_json.EB1.LP6_EXP|float(none) %%}   {%% if x != none %%} {{ x }} {%% endif %%} {%% endif %%}","unit_of_measurement":"kWh/15m","state_class":"measurement","icon":"mdi:counter","device":{"identifiers":"nikito7-EB1"}}
 
-Publish2 homeassistant/sensor/nikito7-EB1/tarifa/config 
+Publish2 homeassistant/sensor/nikito7-EB1/lpsaldo/config {"name":"LP Saldo Inc","unique_id":"EB1_LP_Saldo_Inc","state_topic":"tele/edpbox1/SENSOR","value_template":"{%% if value_json.HAN is defined %%} {{ value_json.HAN.s0|float(0) }} {%% endif %%}","unit_of_measurement":"kWh/15m","state_class":"measurement","icon":"mdi:counter","device":{"identifiers":"nikito7-EB1"}}
 
 Publish2 homeassistant/sensor/nikito7-EB1/tarifa/config 
 
