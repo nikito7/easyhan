@@ -1,6 +1,6 @@
 >D 48
 
-ver=10291
+ver=10292
 EB="EB1"
 C="Net."
 PF="Factor"
@@ -337,8 +337,8 @@ $gc(e)
 ; 0B
 
 1,01041Auu@i6:1,Tarifa,,Tariff,0
-1,01041AxxUUuuUUuu@i6:1000,T1,kVA,PT1,2
-1,01041Ax12xxUUuuUUuu@i6:1000,T4,kVA,PT4,2
+1,01041AxxUUuuUUuu@i6:1000,CT1,kVA,CT1,2
+1,01041Ax12xxUUuuUUuu@i6:1000,CT4,kVA,CT4,2
 
 1,=h<br>
 
