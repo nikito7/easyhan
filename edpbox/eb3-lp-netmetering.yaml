@@ -59,7 +59,9 @@ mqtt:
       unique_id: EB3_LP_Saldo_Inc
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
-        {{ value_json.HAN.s0|float(0) }}
+        {% if value_json.HAN is defined %}
+          {{ value_json.HAN.s0|float(0) }}
+        {% endif %}
       unit_of_measurement: "kWh/15m"
       state_class: measurement
       icon: mdi:counter
@@ -70,9 +72,11 @@ mqtt:
       unique_id: EB3_LP_Calculado
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
-        {% set x = value_json.HAN.s1|float(0) %}
-        {% if x > 0 %}
-          {{ x }}
+        {% if value_json.HAN is defined %}
+          {% set x = value_json.HAN.s1|float(0) %}
+          {% if x > 0 %}
+            {{ x }}
+          {% endif %}
         {% endif %}
       unit_of_measurement: "kWh"
       device_class: energy
@@ -84,9 +88,11 @@ mqtt:
       unique_id: EB3_LP_Excedente
       state_topic: "tele/edpbox3/SENSOR"
       value_template: >
-        {% set x = value_json.HAN.s2|float(0) %}
-        {% if x > 0 %}
-          {{ x }}
+        {% if value_json.HAN is defined %}
+          {% set x = value_json.HAN.s2|float(0) %}
+          {% if x > 0 %}
+            {{ x }}
+          {% endif %}
         {% endif %}
       unit_of_measurement: "kWh"
       device_class: energy
