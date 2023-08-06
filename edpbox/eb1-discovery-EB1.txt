@@ -74,6 +74,6 @@ Publish2 homeassistant/sensor/nikito7-EB1/lpexced/config {"name":"LP Excedente",
 
 ; Adc
 
-Publish2 homeassistant/sensor/nikito7-EB1/tarifa/config 
+Publish2 homeassistant/sensor/nikito7-EB1/adc/config {"name":"ADC Addon","unique_id":"EB1_ADC_Addon","state_topic":"tele/edpbox1/SENSOR","value_template":"{%% if value_json.ANALOG is defined %%} {%% set x = value_json.ANALOG.A0|int(0) %%} {%% if x > 0 %%} {{ (x/1024*6)|float(None)|round(2) }} {%% endif %%} {%% endif %%}","unit_of_measurement":"V","device_class":"voltage","state_class":"measurement","device":{"identifiers":"nikito7-EB1"}}
 
 ; EOF
