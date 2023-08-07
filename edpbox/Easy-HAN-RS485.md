@@ -33,8 +33,7 @@ Restart 1;
 Backlog 
 SSID2 edpbox2-dev; 
 Password2 edpbox123; 
-Hostname Easy-HAN-EBx; 
-SetOption65 1; 
+Hostname Easy-HAN-EB999; 
 Template {"NAME":"easyhan.pt","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
 Module 0; 
 WifiConfig 2; 
@@ -47,6 +46,8 @@ Restart 1;
 ![files](./img/files.jpg)
 
 ![Easy HAN](./img/howto-3.jpg)
+
+Desde Agosto 2023 apenas existe um ficheiro discovery por tipo: mono ou trifásico.
 
 4. OTA Upgrade
 
