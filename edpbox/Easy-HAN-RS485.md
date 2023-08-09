@@ -33,7 +33,7 @@ Restart 1;
 Backlog 
 SSID2 edpbox2-dev; 
 Password2 edpbox123; 
-Hostname Easy-HAN-EB999; 
+Hostname Easy-HAN-EB99; 
 Template {"NAME":"easyhan.pt","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
 Module 0; 
 WifiConfig 2; 
