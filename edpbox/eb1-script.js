@@ -1,6 +1,6 @@
 >D 48
 
-ver=10292
+ver=10293
 EB="EB1"
 C="Net."
 PF="Factor"
@@ -126,7 +126,7 @@ if cnt==31
 if cnt<99
 {
 cnt+=1
-print cnt=%0cnt% !
+print cnt=%0cnt%
 }
 
 if chg[ss]>0
@@ -309,16 +309,16 @@ $gc(e)
 
 ; 16
 
-1,010408UUuuUUuu@i2:1000,%TE% Total Import ,kWh,TEI,2
-1,010408x4UUuuUUuu@i2:1000,%TE% Total Export ,kWh,TEE,2
+1,010408UUuuUUuu@i2:1000,%TE% Total Import ,kWh,TEI,3
+1,010408x4UUuuUUuu@i2:1000,%TE% Total Export ,kWh,TEE,3
 
 1,=h<br>
 
 ; 26
 
-1,01040CUUuuUUuu@i3:1000,%TE% T1 Vazio ,kWh,TET1,2
-1,01040Cx4UUuuUUuu@i3:1000,%TE% T2 Ponta ,kWh,TET2,2
-1,01040Cx8UUuuUUuu@i3:1000,%TE% T3 Cheias ,kWh,TET3,2
+1,01040CUUuuUUuu@i3:1000,%TE% T1 Vazio ,kWh,TET1,3
+1,01040Cx4UUuuUUuu@i3:1000,%TE% T2 Ponta ,kWh,TET2,3
+1,01040Cx8UUuuUUuu@i3:1000,%TE% T3 Cheias ,kWh,TET3,3
 
 1,=h<br>
 
