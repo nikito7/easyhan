@@ -1,6 +1,6 @@
 >D 48
 
-ver=10292
+ver=10293
 EB="EB3"
 C="Net."
 PF="Factor"
@@ -126,7 +126,7 @@ if cnt==31
 if cnt<99
 {
 cnt+=1
-print cnt=%0cnt% !
+print cnt=%0cnt%
 }
 
 if chg[ss]>0
@@ -340,24 +340,24 @@ $gc(e)
 
 ; 26
 
-1,01040CUUuuUUuu@i4:1000,%TE% T1 Vazio,kWh,TET1,2
-1,01040Cx4UUuuUUuu@i4:1000,%TE% T2 Ponta,kWh,TET2,2
-1,01040Cx8UUuuUUuu@i4:1000,%TE% T3 Cheias,kWh,TET3,2
+1,01040CUUuuUUuu@i4:1000,%TE% T1 Vazio,kWh,TET1,3
+1,01040Cx4UUuuUUuu@i4:1000,%TE% T2 Ponta,kWh,TET2,3
+1,01040Cx8UUuuUUuu@i4:1000,%TE% T3 Cheias,kWh,TET3,3
 
 1,=h<br>
 
 ; 16
 
-1,010418UUuuUUuu@i5:1000,%TE% Total Import,kWh,TEI,2
-1,010418x4UUuuUUuu@i5:1000,%TE% Total Export,kWh,TEE,2
+1,010418UUuuUUuu@i5:1000,%TE% Total Import,kWh,TEI,3
+1,010418x4UUuuUUuu@i5:1000,%TE% Total Export,kWh,TEE,3
 
 1,=h<br>
 
 ; 1C
 
-1,01040cUUuuUUuu@i8:1000,%TE% Import L1,kWh,TEIL1,2
-1,01040cx4UUuuUUuu@i8:1000,%TE% Import L2,kWh,TEIL2,2
-1,01040cx8UUuuUUuu@i8:1000,%TE% Import L3,kWh,TEIL3,2
+1,01040cUUuuUUuu@i8:1000,%TE% Import L1,kWh,TEIL1,3
+1,01040cx4UUuuUUuu@i8:1000,%TE% Import L2,kWh,TEIL2,3
+1,01040cx8UUuuUUuu@i8:1000,%TE% Import L3,kWh,TEIL3,3
 
 1,=h<br>
 
