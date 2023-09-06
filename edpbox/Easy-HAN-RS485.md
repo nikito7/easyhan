@@ -43,9 +43,11 @@ Restart 1;
 
 3. Upload files
 
-![files](./img/files.jpg)
+http://u.easyhan.pt/setup/EB1/
 
-![Easy HAN](./img/howto-3.jpg)
+![files](./img/files0823a.jpg)
+
+![Easy HAN](./img/files0823b.jpg)
 
 Desde Agosto 2023 apenas existe um ficheiro discovery por tipo: mono ou trifásico.
 
