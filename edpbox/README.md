@@ -12,17 +12,12 @@ Adaptador Modbus para WiFi.
 
 ![edpbox](./edpbox1-20221029.jpg)
 
-[![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
 
 Mais info no forum:
 
 https://forum.cpha.pt/t/easy-han-rs485-edpbox-modbus/9977
 
 # Contadores
-
->Testados com alimentação directa na porta HAN, sem modem gprs externo.
-
->Na presença de modem gprs, é preciso 5V/230V no local. Excepto Janz GPRS.
 
 Monofásicos:
 
