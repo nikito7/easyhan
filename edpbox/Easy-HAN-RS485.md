@@ -16,7 +16,7 @@ TimeSTD 0,0,10,1,2,0;
 MqttUser none; 
 MqttPassword none; 
 MqttClient Easy_HAN_%06X; 
-WebLog 4; 
+WebLog 3; 
 Sleep 75; 
 WifiPower 15; 
 Topic edpbox99; 
@@ -100,11 +100,14 @@ UfsRename script-mN1.txt,script.txt;
 Script 1; Restart 1;
 ```
 
-
 ---
-
-[![Discord](https://img.shields.io/discord/494714310518505472?style=plastic&logo=discord)](https://discord.gg/Mh9mTEA) 
 
 https://easyhan.pt
 
 Easy HAN RS485 ®
+
+Easy HAN ® RS485
+
+Easy HAN ®
+
+
