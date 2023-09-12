@@ -74,7 +74,7 @@ Backlog Sleep 75; WifiPower 15;
 
 ---
 
-# mN2
+# mN2 (Stop Bits 2)
 
 Ziv e alguns Landis
 
@@ -88,6 +88,18 @@ UfsRename script.txt,script-mN1.txt;
 UfsRename script-mN2.txt,script.txt; 
 Script 1; Restart 1;
 ```
+
+Voltar ao mN1:
+
+(linha única)
+
+```js
+Backlog 
+UfsRename script.txt,script-mN2.txt; 
+UfsRename script-mN1.txt,script.txt; 
+Script 1; Restart 1;
+```
+
 
 ---
 
