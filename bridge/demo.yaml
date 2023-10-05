@@ -43,6 +43,7 @@ modbus:
         slave: 1
         address: 38
         count: 2
+        input_type: input
         data_type: custom
         structure: ">Ixxxx"
         precision: 2
