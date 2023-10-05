@@ -13,7 +13,7 @@ modbus:
     timeout: 3
     retries: 0
     retry_on_empty: false
-    message_wait_milliseconds: 1000
+    message_wait_milliseconds: 500
 
     sensors:
 
@@ -22,7 +22,6 @@ modbus:
         slave: 1
         address: 108
         input_type: input
-        count: 1
         data_type: uint16
         precision: 1
         scale: 0.1
@@ -34,7 +33,6 @@ modbus:
         slave: 1
         address: 109
         input_type: input
-        count: 1
         data_type: uint16
         precision: 1
         scale: 0.1
@@ -46,7 +44,6 @@ modbus:
         slave: 1
         address: 38
         input_type: input
-        count: 1
         data_type: uint32
         precision: 2
         scale: 0.001
