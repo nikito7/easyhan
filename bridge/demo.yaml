@@ -42,9 +42,9 @@ modbus:
         unique_id: eb2_demo38_c1
         slave: 1
         address: 38
-        count: 1
+        count: 2
         data_type: custom
-        structure: ">I"
+        structure: ">Ixxxx"
         precision: 2
         scale: 0.001
         unit_of_measurement: kWh
