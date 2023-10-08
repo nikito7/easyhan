@@ -143,30 +143,34 @@ endif
 
 clk=s(2.0mm)+s(2.0ss)
 
-if cnt==99 {
+if cnt==99
+then
 wtd+=1
-}
+endif
 
-if wtd==1 {
+if wtd==1
+then
 old=clk
-}
+endif
 
-if wtd==31 {
+if wtd==31
+then
 wtd=0
 ;
-if old==clk {
+if old==clk 
+then
 cnt=1
 ;
-fr=fo("0001.log" 2)
+fr=fo("/0001.log" 2)
 res=fw(tstamp+"\n" fr)
 fc(fr)
 ;
 ; 30s
 =>BackLog Script 0; Delay 300; Script 1;
 ;
-}
+endif
 ;
-}
+endif
 ; --
 ; extras
 
