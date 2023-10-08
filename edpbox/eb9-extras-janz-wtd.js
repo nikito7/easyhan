@@ -13,7 +13,7 @@ old=clk
 if wtd==31 {
 wtd=0
 ;
-if old==clk {
+if old=clk {
 cnt=1
 ;
 fr=fo("0001.log" 2)
