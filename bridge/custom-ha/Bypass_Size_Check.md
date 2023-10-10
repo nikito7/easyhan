@@ -34,6 +34,6 @@ ha core restart
 
 
 ```
-bash -c "$(wget -qLO - https://u.easyhan.pt/dev/bypass.txt)"
+bash -c "$(wget -qO - https://u.easyhan.pt/dev/bypass.txt)"
 
 ```
