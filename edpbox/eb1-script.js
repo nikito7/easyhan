@@ -1,6 +1,6 @@
 >D 48
 
-ver=10293
+ver=10295
 EB="EB1"
 C="Net."
 PF="Factor"
@@ -353,6 +353,7 @@ $gc(e)
 1,01441dx4xxuu@i7:1,LP Hour,h,LP1_HH,0
 1,01441dx4xxxxuu@i7:1,LP Minute,m,LP1_MM,0
 ;
+1,01441dx8x4uu@i7:1000,LP 2 AMR,,LP2_AMR,0
 1,01441dx8x4xxUUuuUUuu@i7:1000,LP Import Inc,kWh,LP3_IMP,3
 1,01441dx16xxUUuuUUuu@i7:1000,LP 4,kWh,LP4,3
 1,01441dx16x4xxUUuuUUuu@i7:1000,LP 5,kWh,LP5,3
