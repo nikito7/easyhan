@@ -72,7 +72,7 @@ modbus:
         input_type: input
         count: 2
         data_type: custom
-        structure: ">2I"
+        structure: ">2L"
         scale: 0.001
         precision: 2
 
