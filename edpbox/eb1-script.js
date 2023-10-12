@@ -1,6 +1,6 @@
 >D 48
 
-ver=10298
+ver=10300
 EB="EB1"
 C="Net."
 PF="Factor"
@@ -62,7 +62,7 @@ vt3=0
 
 >B
 
-if upsecs<7
+if upsecs<5
 then
 =>WiFi 0
 endif
@@ -97,7 +97,7 @@ vt3=?#VL3
 
 >S
 
-if upsecs==7
+if upsecs==5
 then
 =>WiFi 1
 endif
@@ -110,7 +110,7 @@ hh=sml[1]
 mm=sml[2]
 ss=sml[3]
 
-if cnt==25
+if cnt==21
 {
 smlj=1
 tper=11
@@ -231,7 +231,9 @@ fc(fr)
 fr=fo(lpf 2)
 endif
 ;
-res=fw(lps fr)
+; diagrama LP csv
+;res=fw(lps fr)
+;
 fc(fr)
 ;
 saldo=lp3i-lp6e
