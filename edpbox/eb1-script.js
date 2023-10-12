@@ -1,6 +1,6 @@
 >D 48
 
-ver=10296
+ver=10297
 EB="EB1"
 C="Net."
 PF="Factor"
@@ -71,7 +71,6 @@ tper=20
 smlj=0
 
 =>SerialLog 0
-=>Sensor53 r
 
 >E
 
@@ -100,6 +99,8 @@ vt3=?#VL3
 if upsecs==7
 then
 =>WiFi 1
+delay(1000)
+=>Sensor53 r
 endif
 
 time=st(tstamp T 2)
@@ -110,7 +111,7 @@ hh=sml[1]
 mm=sml[2]
 ss=sml[3]
 
-if cnt==21
+if cnt==25
 {
 smlj=1
 tper=11
