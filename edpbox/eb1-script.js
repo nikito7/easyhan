@@ -1,6 +1,6 @@
 >D 48
 
-ver=10297
+ver=10298
 EB="EB1"
 C="Net."
 PF="Factor"
@@ -71,6 +71,7 @@ tper=20
 smlj=0
 
 =>SerialLog 0
+=>BackLog Delay 100; Sensor53 r;
 
 >E
 
@@ -99,8 +100,6 @@ vt3=?#VL3
 if upsecs==7
 then
 =>WiFi 1
-delay(1000)
-=>Sensor53 r
 endif
 
 time=st(tstamp T 2)
