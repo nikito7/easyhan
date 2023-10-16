@@ -17,7 +17,9 @@ mqtt:
       state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
-          {{ value_json.uplink_message.f_cnt }}
+          {% if value_json.uplink_message.f_cnt is defined %}
+            {{ value_json.uplink_message.f_cnt }}
+          {% endif %}
         {% endif %}
       state_class: measurement
       device:
@@ -26,13 +28,15 @@ mqtt:
         model: Easy HAN
         manufacturer: nikito7
 ###4
-    - name: "LoRa rssi"
-      unique_id: EB5_LoRa_rssi
+    - name: "LoRa Signal"
+      unique_id: EB5_LoRa_Signal
       state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
-        {% set x = value_json.uplink_message.rx_metadata.0.rssi %}
-          {{ x }}
+          {% if value_json.uplink_message.rx_metadata is defined %}
+          {% set x = value_json.uplink_message.rx_metadata.0.rssi %}
+            {{ x }}
+          {% endif %}
         {% endif %}
       state_class: measurement
       device_class: signal_strength
@@ -40,8 +44,8 @@ mqtt:
       device:
         identifiers: nikito7-EB5
 ###4
-    - name: "LoRa modbus err"
-      unique_id: EB5_LoRa_MB_Err
+    - name: "LoRa Modbus Err"
+      unique_id: EB5_LoRa_Modbus_Err
       state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed0061977/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
@@ -571,5 +575,4 @@ mqtt:
         identifiers: nikito7-EB5
 ###4
 # EOF
-
 
