@@ -46,7 +46,7 @@ mqtt:
 ###4
     - name: "LoRa Modbus Err"
       unique_id: EB5_LoRa_Modbus_Err
-      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed0061977/up"
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
           {% if value_json.uplink_message.decoded_payload is defined %}
