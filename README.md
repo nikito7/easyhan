@@ -6,6 +6,8 @@
 
 - [```growatt``` inversor solar](./growatt/)
 
+- [```lorawan``` ttn edpbox han](./lorawan/)
+
 ![Easy HAN RS485](./edpbox/edpbox1-20221029.jpg)
 
 # Dev
