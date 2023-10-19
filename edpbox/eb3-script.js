@@ -112,6 +112,7 @@ ss=sml[3]
 
 if cnt==21
 then
+=>Script 8
 smlj=1
 tper=11
 +>WifiConfig
