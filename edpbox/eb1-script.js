@@ -1,6 +1,6 @@
 >D 48
 
-ver=10300
+ver=10303
 EB="EB1"
 C="Net."
 PF="Factor"
@@ -71,7 +71,7 @@ tper=20
 smlj=0
 
 =>SerialLog 0
-=>BackLog Delay 100; Sensor53 r;
+=>BackLog Delay 150; Sensor53 r;
 
 >E
 
@@ -111,23 +111,24 @@ mm=sml[2]
 ss=sml[3]
 
 if cnt==21
-{
+then
 smlj=1
 tper=11
 +>WifiConfig
 +>WifiPower
-}
++>BackLog Script 8
+endif
 
 if cnt==31
-{
+then
 =>UfsRun discovery-%EB%.txt
-}
+endif
 
 if cnt<99
-{
+then
 cnt+=1
 print cnt=%0cnt%
-}
+endif
 
 if chg[ss]>0
 and cnt>30
@@ -138,7 +139,7 @@ epwrm=epwr
 ; freeds
 endif
 
-if upsecs%300==0
+if upsecs%600==0
 and cnt>30
 then
 ;
