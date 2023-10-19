@@ -19,6 +19,7 @@ wtd=0
 if old=clk
 then
 cnt=1
+smlj=0
 ;
 fr=fo("/0001.log" 2)
 res=fw(tstamp+"\n" fr)
