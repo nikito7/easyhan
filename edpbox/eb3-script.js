@@ -1,6 +1,6 @@
 >D 48
 
-ver=10302
+ver=10303
 EB="EB3"
 C="Net."
 PF="Factor"
@@ -112,11 +112,11 @@ ss=sml[3]
 
 if cnt==21
 then
-=>Script 8
 smlj=1
 tper=11
 +>WifiConfig
 +>WifiPower
++>BackLog Script 8
 endif
 
 if cnt==31
