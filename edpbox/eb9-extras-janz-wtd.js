@@ -16,7 +16,7 @@ if wtd==31
 then
 wtd=0
 ;
-if old=clk
+if old==clk
 then
 cnt=1
 smlj=0
