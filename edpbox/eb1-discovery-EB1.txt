@@ -1,4 +1,4 @@
-; 2023-10-12
+; 2023-10-23
 ; button
 
 Publish2 homeassistant/button/nikito7-EB1/restart/config {"name":"ESP Restart","uniq_id":"EB1_ESP_Restart","cmd_t":"cmnd/edpbox1/restart","pl_prs":"1","ic":"mdi:restart","dev":{"ids":"nikito7-EB1","name":"EB1","mdl":"Easy HAN","mf":"nikito7"}}
