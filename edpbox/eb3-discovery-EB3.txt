@@ -1,4 +1,4 @@
-; 2023-10-12
+; 2023-10-23
 
 ; button
 
@@ -43,13 +43,13 @@ Publish2 homeassistant/sensor/nikito7-EB3/cl3/config {"name":"Current L3","uniq_
 
 ; factor
 
-Publish2 homeassistant/sensor/nikito7-EB3/pf/config {"name":"Power Factor","uniq_id":"EB3_PowFac","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.Factor|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/pf/config {"name":"Power Factor","uniq_id":"EB3_PowFac","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.Factor|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"None","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
 
-Publish2 homeassistant/sensor/nikito7-EB3/pf1/config {"name":"Power Factor L1","uniq_id":"EB3_PowFacL1","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.PF1|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/pf1/config {"name":"Power Factor L1","uniq_id":"EB3_PowFacL1","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.PF1|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"None","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
 
-Publish2 homeassistant/sensor/nikito7-EB3/pf2/config {"name":"Power Factor L2","uniq_id":"EB3_LowFacL2","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.PF2|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/pf2/config {"name":"Power Factor L2","uniq_id":"EB3_LowFacL2","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.PF2|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"None","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
 
-Publish2 homeassistant/sensor/nikito7-EB3/pf3/config {"name":"Power Factor L3","uniq_id":"EB3_PowFacL3","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.PF3|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/pf3/config {"name":"Power Factor L3","uniq_id":"EB3_PowFacL3","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.PF3|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"None","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
 
 ; power
 
