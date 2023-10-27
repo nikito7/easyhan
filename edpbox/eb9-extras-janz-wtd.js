@@ -18,6 +18,7 @@ wtd=0
 ;
 if old==clk
 then
+print HAN: Wtd Fail
 cnt=1
 smlj=0
 ;
@@ -28,6 +29,8 @@ fc(fr)
 ; 40s
 =>BackLog Script 0; Delay 400; Script 1;
 ;
+else
+print HAN: Wtd OK!
 endif
 ;
 endif
