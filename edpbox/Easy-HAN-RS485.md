@@ -1,4 +1,4 @@
-# Easy HAN RS485 ®
+# Easy HAN ® RS485
 
 Tasmota > Consoles > Console
 
@@ -19,7 +19,6 @@ MqttClient Easy_HAN_%06X;
 WebLog 3; 
 Sleep 75; 
 WifiPower 15;
-SaveData 2; 
 Topic edpbox99; 
 Restart 1; 
 ```
@@ -105,10 +104,6 @@ Script 1; Restart 1;
 
 https://easyhan.pt
 
-Easy HAN RS485 ®
-
 Easy HAN ® RS485
-
-Easy HAN ®
 
 
