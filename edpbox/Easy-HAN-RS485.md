@@ -19,6 +19,7 @@ MqttClient Easy_HAN_%06X;
 WebLog 3; 
 Sleep 75; 
 WifiPower 15;
+SaveData 2; 
 Topic edpbox99; 
 Restart 1; 
 ```
@@ -61,7 +62,7 @@ Desde Agosto 2023 apenas existe um ficheiro discovery por tipo: mono ou trifási
 5. Enable Script
 
 ```js
-Backlog Script 1; Restart 1;
+Backlog Script 1; SaveData 2; Restart 1;
 ```
 
 <hr>
