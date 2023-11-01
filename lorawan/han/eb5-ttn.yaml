@@ -81,6 +81,25 @@ mqtt:
         identifiers: nikito7-EB5
 ###4
 ###4
+    - name: "LoRa EB Serial"
+      unique_id: EB5_LoRa_EB_Serial
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.Serial is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.Serial|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
 ########### HAN ##########
 ###4
     - name: "Clock"
