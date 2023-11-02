@@ -28,17 +28,17 @@ Publish2 homeassistant/sensor/nikito7-EB1/current/config {"name":"Current L1","u
 
 ; Factor
 
-Publish2 homeassistant/sensor/nikito7-EB1/pfactor/config {"name":"Power Factor","uniq_id":"EB1_PowFac","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json['EB1']['Factor']|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/pfactor/config {"name":"Power Factor","uniq_id":"EB1_PowFac","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.PF|float(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","dev_cla":"power_factor","stat_cla":"measurement","dev":{"ids":"nikito7-EB1"}}
 
 ; Power
 
-Publish2 homeassistant/sensor/nikito7-EB1/powimp/config {"name":"Active Power Import","uniq_id":"EB1_ActPow","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json['EB1']['Power']|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"W","dev_cla":"power","stat_cla":"measurement","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/powimp/config {"name":"Active Power Import","uniq_id":"EB1_ActPow","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.API|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"W","dev_cla":"power","stat_cla":"measurement","dev":{"ids":"nikito7-EB1"}}
 
 Publish2 homeassistant/sensor/nikito7-EB1/powexp/config {"name":"Active Power Export","uniq_id":"EB1_ActPowExp","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.APE|int(0) %%} {%% if x > -1 %%} {{ x }} {%% endif %%}","unit_of_meas":"W","dev_cla":"power","stat_cla":"measurement","dev":{"ids":"nikito7-EB1"}}
 
 ; Frequency
 
-Publish2 homeassistant/sensor/nikito7-EB1/freq/config {"name":"Frequency","uniq_id":"EB1_Frequency","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.Frequency|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"Hz","dev_cla":"frequency","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/freq/config {"name":"Frequency","uniq_id":"EB1_Frequency","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.FR|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"Hz","dev_cla":"frequency","dev":{"ids":"nikito7-EB1"}}
 
 ; Tarifas kWh
 
