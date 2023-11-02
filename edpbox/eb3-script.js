@@ -1,6 +1,6 @@
 >D 48
 
-ver=10303
+ver=10304
 EB="EB3"
 C="Net."
 PF="Factor"
@@ -233,7 +233,7 @@ fr=fo(lpf 2)
 endif
 ;
 ; diagrama LP csv
-;res=fw(lps fr)
+res=fw(lps fr)
 ;
 fc(fr)
 ;
@@ -308,7 +308,7 @@ $gc(e)
 
 1,=h<br>
 
-1,01040Ex8x4UUuu@i1:10,Current,A,Current,1
+1,01040Ex8x4UUuu@i1:10,Current,A,CL,1
 
 1,01040ExxxxUUuu@i1:10,Current L1,A,CL1,1
 1,01040Ex4xxxxUUuu@i1:10,Current L2,A,CL2,1
@@ -318,7 +318,7 @@ $gc(e)
 
 ; 73
 
-1,010420x24UUuuUUuu@i2:1,%AP% Import,W,Power,0
+1,010420x24UUuuUUuu@i2:1,%AP% Import,W,API,0
 1,010420x28UUuuUUuu@i2:1,%AP% Export,W,APE,0
 
 1,010420UUuuUUuu@i2:1,%AP% L1,W,API1,0
@@ -333,11 +333,11 @@ $gc(e)
 
 ; 7B
 
-1,01040aUUuu@i3:1000,%PF%,φ,Factor,3
+1,01040aUUuu@i3:1000,%PF%,φ,PF,3
 1,01040ax2UUuu@i3:1000,%PF% L1,φ,PF1,3
 1,01040ax4UUuu@i3:1000,%PF% L2,φ,PF2,3
 1,01040ax6UUuu@i3:1000,%PF% L3,φ,PF3,3
-1,01040ax8UUuu@i3:10,Frequency,Hz,Frequency,1
+1,01040ax8UUuu@i3:10,Frequency,Hz,FR,1
 
 1,=h<br>
 
