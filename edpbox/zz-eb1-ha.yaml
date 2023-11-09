@@ -8,7 +8,7 @@ mqtt:
 #
   button:
 #
-    - name: "EB1 ESP Restart"
+    - name: "ESP Restart"
       unique_id: EB1_ESP_Restart
       command_topic: "cmnd/edpbox1/restart"
       payload_press: "1"
@@ -23,7 +23,7 @@ mqtt:
 #
   sensor:
 #
-    - name: "EB1 ESP Uptime"
+    - name: "ESP Uptime"
       unique_id: EB1_ESP_Uptime
       state_topic: "tele/edpbox1/STATE"
       value_template: '{{ ( value_json.UptimeSec / 3600 ) | round(1) }}'
@@ -35,7 +35,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 ESP Free Heap"
+    - name: "ESP Free Heap"
       unique_id: EB1_ESP_Heap
       state_topic: "tele/edpbox1/STATE"
       value_template: '{{ value_json.Heap }}'
@@ -44,7 +44,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 ESP Signal"
+    - name: "ESP Signal"
       unique_id: EB1_ESP_Signal
       state_topic: "tele/edpbox1/STATE"
       value_template: '{{ value_json.Wifi.Signal }}'
@@ -53,7 +53,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 ESP Vcc"
+    - name: "ESP Vcc"
       unique_id: EB1_ESP_Vcc
       state_topic: "tele/edpbox1/STATE"
       value_template: '{{ value_json.Vcc|float(0.000) }}'
@@ -65,7 +65,7 @@ mqtt:
 
 ###
 
-    - name: "EB1 Clock H"
+    - name: "Clock H"
       unique_id: EB1_Clock_H
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -78,7 +78,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 Clock M"
+    - name: "Clock M"
       unique_id: EB1_Clock_M
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -91,7 +91,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 Clock"
+    - name: "Clock"
       unique_id: EB1_Clock
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -104,7 +104,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 ESP Clock"
+    - name: "ESP Clock"
       unique_id: EB1_ESP_Clock
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -117,7 +117,7 @@ mqtt:
 
 ###
 
-    - name: "EB1 Voltage L1"
+    - name: "Voltage L1"
       unique_id: EB1_VolL1
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -131,7 +131,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 Current L1"
+    - name: "Current L1"
       unique_id: EB1_CurL1
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -145,7 +145,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 Power Factor"
+    - name: "Power Factor"
       unique_id: EB1_PowFac
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -153,13 +153,13 @@ mqtt:
           {% if x > -1 %}
             {{ x }}
           {% endif %}
-      unit_of_measurement: "%"
+      #unit_of_measurement: "" #nenhum
       device_class: power_factor
       state_class: measurement
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 Active Power Import"
+    - name: "Active Power Import"
       unique_id: EB1_ActPow
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -173,7 +173,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 Active Power Export"
+    - name: "Active Power Export"
       unique_id: EB1_ActPowExp
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -187,7 +187,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 Frequency"
+    - name: "Frequency"
       unique_id: EB1_Frequency
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -203,7 +203,7 @@ mqtt:
 ###
 ###
 
-    - name: "EB1 T1 Vazio"
+    - name: "T1 Vazio"
       unique_id: EB1_TotEneT1
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -217,7 +217,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 T2 Ponta"
+    - name: "T2 Ponta"
       unique_id: EB1_TotEneT2
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -231,7 +231,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 T3 Cheias"
+    - name: "T3 Cheias"
       unique_id: EB1_TotEneT3
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -248,7 +248,7 @@ mqtt:
 ###
 ###
 
-    - name: "EB1 Import"
+    - name: "Import"
       unique_id: EB1_TotEneImp
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -262,7 +262,7 @@ mqtt:
       device:
         identifiers: nikito7-EB1
 
-    - name: "EB1 Export"
+    - name: "Export"
       unique_id: EB1_TotEneExp
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
@@ -279,7 +279,7 @@ mqtt:
 ###
 ###
 
-    - name: "EB1 Tariff"
+    - name: "Tariff"
       unique_id: EB1_Tariff
       state_topic: "tele/edpbox1/SENSOR"
       value_template: >
