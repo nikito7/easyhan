@@ -1,6 +1,6 @@
 >D 48
 
-ver=10304
+ver=10305
 EB="EB3"
 C="Net."
 PF="Factor"
@@ -71,7 +71,7 @@ tper=20
 smlj=0
 
 =>SerialLog 0
-=>BackLog Delay 150; Sensor53 r;
+=>BackLog Delay 150; Sensor53 r; Sensor53 l2;
 
 >E
 
