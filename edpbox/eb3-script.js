@@ -1,6 +1,6 @@
 >D 48
 
-ver=10307
+ver=10309
 EB="EB3"
 C="Net."
 PF="Factor"
@@ -62,6 +62,8 @@ vt3=0
 
 >B
 
+spinm(2 1)
+
 if upsecs<5
 then
 =>WiFi 0
@@ -98,7 +100,7 @@ vt3=?#VL3
 >S
 
 spin(2 0)
-delay(250)
+delay(100)
 spin(2 1)
 
 if upsecs==5
@@ -137,7 +139,7 @@ endif
 if chg[ss]>0
 and cnt>30
 then
-print HAN: %2.0hh%:%2.0mm%:%2.0ss% !
+print HAN: %2.0hh%:%2.0mm%:%2.0ss%
 ipwrm=ipwr
 epwrm=epwr
 ; freeds
@@ -154,7 +156,12 @@ res=fz(fr)
 if res==0
 then
 ;
+if EB=="EB1"
+then
+res=fw(date+",L1\n" fr)
+else
 res=fw(date+",L1,L2,L3\n" fr)
+endif
 ;
 fc(fr)
 fr=fo(vtf 2)
@@ -236,7 +243,7 @@ fc(fr)
 fr=fo(lpf 2)
 endif
 ;
-; diagrama LP csv
+; LP csv
 res=fw(lps fr)
 ;
 fc(fr)
