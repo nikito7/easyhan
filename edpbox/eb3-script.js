@@ -1,6 +1,6 @@
 >D 48
 
-ver=10306
+ver=10307
 EB="EB3"
 C="Net."
 PF="Factor"
@@ -72,7 +72,6 @@ smlj=0
 
 =>SerialLog 0
 =>Sensor53 r
-=>Sensor53 l2
 
 >E
 
@@ -97,6 +96,10 @@ vt2=?#VL2
 vt3=?#VL3
 
 >S
+
+spin(2 0)
+delay(250)
+spin(2 1)
 
 if upsecs==5
 then
