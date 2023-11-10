@@ -30,7 +30,7 @@ fc(fr)
 =>BackLog Script 0; Delay 400; Script 1;
 ;
 else
-print HAN: Wtd OK!
+print HAN: Wtd OK
 endif
 ;
 endif
