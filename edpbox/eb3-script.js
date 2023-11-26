@@ -1,6 +1,6 @@
 >D 48
 
-ver=10309
+ver=10310
 EB="EB3"
 C="Net."
 PF="Factor"
@@ -82,7 +82,7 @@ wfp=WifiPower
 
 >T
 
-ipwr=?#Power
+ipwr=?#API
 epwr=?#APE
 ikw=?#TEI
 ekw=?#TEE
