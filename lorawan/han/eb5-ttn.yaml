@@ -62,6 +62,24 @@ mqtt:
       device:
         identifiers: nikito7-EB5
 ###4
+    - name: "LoRa txFail CAD"
+      unique_id: EB5_LoRa_tx_fail_cad
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.txFail is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.txFail|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
     - name: "LoRa EB Type"
       unique_id: EB5_LoRa_EB_Type
       state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
