@@ -1,5 +1,5 @@
 # Home Assistant Package
-# LoRaWAN TTN
+# LoRaWAN TTN - ADC
 # Bridge:
 # - mqtt to mqtt
 # - v3 to home/v3
@@ -10,7 +10,7 @@ mqtt:
 #2
   sensor:
 ###4
-########### EB5 ##########
+########### ADC ##########
 ###4
     - name: "LoRa Counter"
       unique_id: ADC1_LoRa_Counter
@@ -25,7 +25,7 @@ mqtt:
       device:
         identifiers: nikito7-ADC1
         name: ADC1
-        model: Easy HAN
+        model: easyhan.pt
         manufacturer: nikito7
 ###4
     - name: "LoRa Signal"
@@ -81,7 +81,7 @@ mqtt:
         identifiers: nikito7-ADC1
 ###4
 ###4
-    - name: "Battery Voltage"
+    - name: "LoRa Battery Voltage"
       unique_id: ADC1_Battery_Voltage
       state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
       value_template: >
