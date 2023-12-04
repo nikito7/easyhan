@@ -1,1 +1,105 @@
+# Home Assistant Package
+# LoRaWAN TTN
+# Bridge:
+# - mqtt to mqtt
+# - v3 to home/v3
 
+### ### ###
+
+mqtt:
+#2
+  sensor:
+###4
+########### EB5 ##########
+###4
+    - name: "LoRa Counter"
+      unique_id: ADC1_LoRa_Counter
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.f_cnt is defined %}
+            {{ value_json.uplink_message.f_cnt }}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-ADC1
+        name: ADC1
+        model: Easy HAN
+        manufacturer: nikito7
+###4
+    - name: "LoRa Signal"
+      unique_id: ADC1_LoRa_Signal
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.rx_metadata is defined %}
+          {% set x = value_json.uplink_message.rx_metadata.0.rssi %}
+            {{ x }}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device_class: signal_strength
+      unit_of_measurement: dBm
+      device:
+        identifiers: nikito7-ADC1
+###4
+    - name: "LoRa ADC raw"
+      unique_id: ADC1_LoRa_ADC_raw
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.ADC is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.ADC|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-ADC1
+###4
+    - name: "LoRa txFail CAD"
+      unique_id: ADC1_LoRa_tx_fail_cad
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.txFail is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.txFail|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-ADC1
+###4
+###4
+    - name: "Battery Voltage"
+      unique_id: ADC1_Battery_Voltage
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.Volt is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.Volt|float(0) %}
+              {% if x > 0 %}
+                {{ x|round(3) }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      device:
+        identifiers: nikito7-ADC1
+###4
+
+# EOF
