@@ -27,7 +27,9 @@ Monofásicos:
 
 - Janz C3801 GPRS
 
-- Landis+Gyr
+- Landis+Gyr ZCXe110 S3
+
+- Landis+Gyr ZCXe110 S5
 
 - Sagemcom CX1000-6
 
@@ -39,13 +41,16 @@ Trifásicos:
 
 - Janz B2801 GPRS
 
-- Landis+Gyr ZMX e310 S3
+- Landis+Gyr ZMXe310 S3
 
-- Landis+Gyr ZMX e310 S5
+- Landis+Gyr ZMXe310 S5
 
 - Sagemcom CX2000-9
 
 - Sagemcom T215
+
+- Ziv
+
 
 Notas:
 
