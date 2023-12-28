@@ -59,7 +59,7 @@ Publish2 homeassistant/sensor/nikito7-EB1/totalexp/config {"name":"Export","uniq
 Publish2 homeassistant/sensor/nikito7-EB1/tarifa/config {"name":"Tariff","uniq_id":"EB1_Tariff","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.Tariff|int(0) %%} {%% if x == 1 %%} {{ 'Vazio' }} {%% elif x == 2 %%} {{ 'Ponta' }} {%% elif x == 3 %%} {{ 'Cheias' }} {%% endif %%}","ic":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
 
 ; Potência Contratada
-Publish2 homeassistant/sensor/nikito7-EB1/contractpow/config {"name":"Contracted Power","uniq_id":"EB1_ContractPow","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.CT1|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","ic":"mdi:transmission-tower","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/contractpow/config {"name":"Contracted Power","uniq_id":"EB1_ContractPow","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% set x = value_json.EB1.CT1|float(None)|round(2) %%} {%% if x > 0 %%} {{ x }} {%% endif %%}","unit_of_meas":"kVA", "ic":"mdi:transmission-tower","dev":{"ids":"nikito7-EB1"}}
 
 ; Extras
 
