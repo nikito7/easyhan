@@ -26,6 +26,6 @@ if thh==21
 and tmm==10
 then
 ; 600 = 60s
-=>BackLog Script 0; Delay 3600; Script 1
+=>BackLog Script 0; Delay 3600; Script 1;
 endif
 ```
