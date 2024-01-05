@@ -61,7 +61,7 @@ Desde Agosto 2023 apenas existe um ficheiro discovery por tipo: mono ou trifási
 5. Enable Script
 
 ```js
-Backlog Script 1; SaveData 2; Restart 1;
+Backlog Script 1; SaveData 9; Restart 1;
 ```
 
 <hr>
