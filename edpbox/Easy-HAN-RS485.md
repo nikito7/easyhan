@@ -18,7 +18,7 @@ MqttPassword none;
 MqttClient Easy_HAN_%06X; 
 WebLog 3; 
 Sleep 75; 
-WifiPower 15;
+WifiPower 0;
 Topic edpbox99; 
 Restart 1; 
 ```
@@ -31,8 +31,6 @@ Restart 1;
 
 ```js
 Backlog 
-SSID2 edpbox2-dev; 
-Password2 edpbox123; 
 Hostname Easy-HAN-EB99; 
 Template {"NAME":"easyhan.pt","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
 Module 0; 
@@ -49,12 +47,9 @@ http://u.easyhan.pt/setup/EB1/
 
 ![Easy HAN](./img/files0823b.jpg)
 
-Desde Agosto 2023 apenas existe um ficheiro discovery por tipo: mono ou trifásico.
-
 4. OTA Upgrade
 
 ![Easy HAN](./img/howto-4.jpg)
-
 
 ...
 
