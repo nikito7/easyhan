@@ -1,4 +1,4 @@
-# Easy HAN ®
+# Easy HAN ® RS485
 
 - [```bridge``` rtuovertcp modbus tcp](./bridge/)
 
@@ -14,4 +14,4 @@
 
 https://github.com/nikito7/edpbox-dev
 
-Easy HAN ®
+Easy HAN ® RS485
