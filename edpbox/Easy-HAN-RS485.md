@@ -41,7 +41,14 @@ Restart 1;
 
 3. Upload files
 
+Monofásico:
 http://u.easyhan.pt/setup/EB1/
+
+Trifásico:
+http://u.easyhan.pt/setup/EB1/
+
+Zip com tudo:
+https://u.easyhan.pt/setup/HAN.zip
 
 ![files](./img/files0823a.jpg)
 
