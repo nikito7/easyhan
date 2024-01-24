@@ -2,6 +2,7 @@
 
 Static:
 
+(linha única)
 ```js
 BackLog IPAddress1 10.1.0.182; 
 IPAddress2 10.1.0.1; 
