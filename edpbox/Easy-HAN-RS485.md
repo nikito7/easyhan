@@ -45,7 +45,7 @@ Monofásico:
 http://u.easyhan.pt/setup/EB1/
 
 Trifásico:
-http://u.easyhan.pt/setup/EB1/
+http://u.easyhan.pt/setup/EB3/
 
 Zip com tudo:
 https://u.easyhan.pt/setup/HAN.zip
