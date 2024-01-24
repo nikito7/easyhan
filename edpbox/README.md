@@ -21,7 +21,7 @@ https://forum.cpha.pt/t/easy-han-rs485-edpbox-modbus/9977
 
 Monofásicos:
 
-- Kaifa MA109H
+- Kaifa MA109H 2023 (temporariamente não suportado)
 
 - Kaifa MA109P
 
@@ -40,6 +40,8 @@ Monofásicos:
 Trifásicos:
 
 - Janz B2801 GPRS
+
+- Janz B2801 PLC
 
 - Landis+Gyr ZMXe310 S3
 
