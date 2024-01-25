@@ -1,6 +1,6 @@
 >D 48
 
-ver=10310
+ver=10311
 EB="EB1"
 C="Net."
 PF="Factor"
@@ -59,6 +59,7 @@ vtf=""
 vt1=0
 vt2=0
 vt3=0
+dbg=0
 
 >B
 
@@ -139,6 +140,7 @@ endif
 if chg[ss]>0
 and cnt>30
 then
+dbg+=1
 print HAN: %2.0hh%:%2.0mm%:%2.0ss%
 ipwrm=ipwr
 epwrm=epwr
@@ -269,7 +271,8 @@ endif
 "s0":%3saldo%,
 "s1":%3saldo1%,
 "s2":%3saldo2%,
-"ck":"%2.0hh%:%2.0mm%:%2.0ss%"
+"ck":"%2.0hh%:%2.0mm%:%2.0ss%",
+"dbg":%0dbg%
 }
 
 >W
