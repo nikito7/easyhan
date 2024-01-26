@@ -13,10 +13,9 @@ import socket
 
 HOST       = '10.1.0.56'   # The remote host
 PORT       = 9502          # The port to connect to
-FILE_DIR      ="./"        # directory to save data
+FILE_DIR   = "./"        # directory to save data
 
 ######################################################################
-
 
 FILE_NAME     = (FILE_DIR +
                 "{:0>2d}".format(datetime.datetime.today().year)  +
@@ -52,7 +51,7 @@ def get_data(data):
     got = 1                                 # main loop, get data
     while got:                              # loop until get valid response to command
         ser.sendall(cmd)     # write request to serial
-        time.sleep(0.8)                     # wait a while before reading a modbus response...
+        time.sleep(0.5)                     # wait a while before reading a modbus response...
         resp = ser.recv(1).hex()          # read 1 byte from the serial
         c = 0                               # counter to prevent looping forever
         while resp != data[0:2]:            # check up to 32 bytes if response comes from the right slave
@@ -70,7 +69,6 @@ def get_data(data):
                 got = 0                            # got good data, break the main get data loop and return data
     ser.close()                              # close serial port
     return(resp)                             # return colected data
-
 
 ### ### ### 
 
@@ -113,4 +111,7 @@ load_map.close()                 # close file
 
 
 sys.exit(0)
+
+# EOF
+
 
