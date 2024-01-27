@@ -1,5 +1,18 @@
 @echo off
 
-for /L %%a in (1,1,100) do python rtu.py %%a 
+set /a start=1
+set /a end=999
 
+:loop
+
+echo python rtu.py %start%
+
+set /a start+=1
+
+if %start% lss %end% (
+goto loop
+)
+
+echo end
 rem eof
+pause
