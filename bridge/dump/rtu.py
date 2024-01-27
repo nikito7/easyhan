@@ -13,14 +13,14 @@ import socket
 
 HOST       = '10.1.0.56'   # The remote host
 PORT       = 9502          # The port to connect to
-FILE_DIR   = "./"        # directory to save data
+FILE_DIR   = "./zz-"        # directory to save data
 
 ######################################################################
 
 FILE_NAME     = (FILE_DIR +
                 "{:0>2d}".format(datetime.datetime.today().year)  +
                 "{:0>2d}".format(datetime.datetime.today().month) +
-                ".txt")               # create a file name to save data locally
+                "-loadprofile.txt")               # create a file name to save data locally
 
 ser = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ser.connect((HOST, PORT))
@@ -54,10 +54,10 @@ def get_data(data):
         time.sleep(0.5)                     # wait a while before reading a modbus response...
         resp = ser.recv(1).hex()          # read 1 byte from the serial
         c = 0                               # counter to prevent looping forever
-        while resp != data[0:2]:            # check up to 32 bytes if response comes from the right slave
+        while resp != data[0:2]:            # check up to 3 times if response comes from the right slave
             resp = ser.recv(1).hex()        # if not, keep reading serial buffer
             c += 1                          # prevent looping forever
-            if c == 32:                     # there was a loop, start from beginning
+            if c == 3:                     # there was a loop, start from beginning
                 break
         resp = resp + ser.recv(1).hex()     # possibly found slave number response corret so add the command and check it
         if resp == data[0:4]:               # break the loop if the response includes the requested sent command
@@ -80,7 +80,7 @@ if lpline < 1 or lpline > 7000:
 
 cmd = "0145060000" + "{:04x}".format(lpline) + "01";
 #cmd = "01440001";
-print("Decimal: " + str(lpline) + " Hex: " + cmd);
+print("Decimal: " + str(lpline) + " Hex: " + "{:04x}".format(lpline) + " CmdHex: " + cmd);
 
 # get data
 reg  = []                        # set array to receive all requested data
@@ -100,8 +100,8 @@ msg = ("{:0>4d}".format( reg[0])  + "-" +
        "{:0>2d}".format( reg[2])  + "T" +
        "{:0>2d}".format( reg[3])  + ":" +
        "{:0>2d}".format( reg[4])  + "," +
-       "{:0>12d}".format(reg[5])  + "," +
-       "{:0>12d}".format(reg[6])
+       "{:0>8d}".format( reg[5])  + "," +
+       "{:0>8d}".format( reg[6])
        )
 
 print(msg);
@@ -113,5 +113,3 @@ load_map.close()                 # close file
 sys.exit(0)
 
 # EOF
-
-
