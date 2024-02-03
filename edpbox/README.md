@@ -66,8 +66,6 @@ Notas:
 
 ![Easy HAN](./img/tasmota2-0812.jpg)
 
-![Easy HAN](./img/tasmota3-0812.jpg)
-
 ![Easy HAN](./img/tasmota4-0812.jpg)
 
 ![Easy HAN](./img/chartjs1-0812.jpg)
