@@ -10,7 +10,7 @@ find / -name register_read_message*
 ![rtu tweak](./rtu-tweak.jpg)
 
 ---
-
+only run if you understand it 
 ```
 #! /bin/bash
 
