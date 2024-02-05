@@ -26,8 +26,8 @@ fr=fo("/0001.log" 2)
 res=fw(tstamp+"\n" fr)
 fc(fr)
 ;
-; 40s
-=>BackLog Script 0; Delay 400; Script 1;
+; 30s
+=>BackLog Script 0; Delay 300; Script 1;
 ;
 else
 print HAN: Wtd OK
