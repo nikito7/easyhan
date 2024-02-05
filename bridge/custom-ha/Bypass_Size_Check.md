@@ -1,7 +1,7 @@
 Custom Maker:
 
 ```sh
-vv=2023.10.00001
+vv=2024.02.00001
 file=master.zip
 url=https://github.com/home-assistant/core/archive/refs/heads/${file}
 #
