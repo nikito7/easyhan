@@ -7,7 +7,7 @@ modbus:
 
   - name: edpbox2
     type: tcp
-    host: 10.1.0.35
+    host: 10.1.0.56
     port: 9502
     delay: 1
     timeout: 3
