@@ -72,20 +72,23 @@ wfp=WifiPower
 
 >T
 
-ipwr=?#API
-epwr=?#APE
-ikw=?#TEI
-ekw=?#TEE
-lp1y=?#LP1_Y
-lp1m=?#LP1_M
-lp1d=?#LP1_D
-lp1hh=?#LP1_HH
-lp1mm=?#LP1_MM
-lp3i=?#LP3_IMP
-lp6e=?#LP6_EXP
-vt1=?#VL1
-vt2=?#VL2
-vt3=?#VL3
+ipwr=EB3#API
+epwr=EB3#APE
+ikw=EB3#TEI
+ekw=EB3#TEE
+lp1y=EB3#LP1_Y
+lp1m=EB3#LP1_M
+lp1d=EB3#LP1_D
+lp1hh=EB3#LP1_HH
+lp1mm=EB3#LP1_MM
+lp3i=EB3#LP3_IMP
+lp6e=EB3#LP6_EXP
+vt1=EB3#VL1
+vt2=EB3#VL2
+vt3=EB3#VL3
+hh=EB3#HH
+mm=EB3#MM
+ss=EB3#SS
 
 >S
 
@@ -96,10 +99,6 @@ spin(2 1)
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
-
-hh=sml[1]
-mm=sml[2]
-ss=sml[3]
 
 if cnt==21
 then
