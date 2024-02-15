@@ -4,7 +4,7 @@ Tasmota > Consoles > Console
 
 1.
 
-![Easy HAN](./img/howto-1.jpg)
+![Easy HAN](../edpbox/img/howto-1.jpg)
 
 (linha única)
 
@@ -26,7 +26,7 @@ Restart 1;
 
 2. 
 
-![Easy HAN](./img/howto-2.jpg)
+![Easy HAN](../edpbox/img/howto-2.jpg)
 
 (linha única)
 
@@ -43,21 +43,27 @@ Restart 1;
 3. Upload files
 
 Monofásico:
+
+
 http://u.easyhan.pt/v2/setup-v2/EB1/
 
 Trifásico:
+
+
 http://u.easyhan.pt/v2/setup-v2/EB3/
 
 Zip com tudo:
+
+
 https://u.easyhan.pt/v2/setup-v2/HAN-V2.zip
 
-![files](./img/files0823a.jpg)
+![files](../edpbox/img/files0823a.jpg)
 
-![Easy HAN](./img/files0823b.jpg)
+![Easy HAN](../edpbox/img/files0823b.jpg)
 
 4. OTA Upgrade
 
-![Easy HAN](./img/howto-4.jpg)
+![Easy HAN](../../img/howto-4.jpg)
 
 ...
 
