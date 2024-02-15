@@ -63,7 +63,7 @@ https://u.easyhan.pt/v2/setup-v2/HAN-V2.zip
 
 4. OTA Upgrade
 
-```http://u.easyhan.pt/v2/tasmota-4M.bin.gz``
+```http://u.easyhan.pt/v2/tasmota-4M.bin.gz```
 
 ![Easy HAN](../edpbox/img/howto-4.jpg)
 
@@ -79,7 +79,7 @@ Backlog Script 1; SaveData 9; Restart 1;
 
 ---
 
-https://easyhan.pt
+https://easyhan.pt/?v2
 
 Easy HAN ® V2
 
