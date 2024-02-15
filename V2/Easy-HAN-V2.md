@@ -63,6 +63,8 @@ https://u.easyhan.pt/v2/setup-v2/HAN-V2.zip
 
 4. OTA Upgrade
 
+```http://u.easyhan.pt/v2/tasmota-4M.bin.gz``
+
 ![Easy HAN](../edpbox/img/howto-4.jpg)
 
 ...
