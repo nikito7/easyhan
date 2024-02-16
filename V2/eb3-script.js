@@ -1,6 +1,6 @@
 >D 48
 
-ver=20002
+ver=20003
 C="Net."
 date=""
 time=""
@@ -58,11 +58,7 @@ vt3=0
 
 >B
 
-spinm(2 1)
-
-tper=20
-smlj=0
-
+tper=21
 =>SerialLog 0
 
 >E
@@ -92,10 +88,6 @@ ss=EB3#SS
 
 >S
 
-spin(2 0)
-delay(100)
-spin(2 1)
-
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
@@ -108,7 +100,7 @@ tper=11
 +>BackLog Script 8
 endif
 
-if cnt==31
+if cnt==41
 then
 =>UfsRun discovery-EB3.txt
 endif
@@ -116,7 +108,6 @@ endif
 if cnt<99
 then
 cnt+=1
-print cnt=%0cnt%
 endif
 
 if chg[ss]>0
@@ -124,7 +115,6 @@ and cnt>30
 then
 ipwrm=ipwr
 epwrm=epwr
-; freeds
 endif
 
 if upsecs%600==0
@@ -139,6 +129,7 @@ if res==0
 then
 ;
 if EB=="EB1"
+or EB=="EB2"
 then
 res=fw(date+",L1\n" fr)
 else
@@ -256,10 +247,9 @@ endif
 
 >W
 
-@<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% ver=%0ver%
-@<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
-@<br>
+<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
+<b>Vars </b> cnt=%0cnt% tper=%0tper% ver=%0ver%
+<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 <br>
 Consumo %C%{m}%3saldo1% kWh
 Excedente %C%{m}%3saldo2% kWh
