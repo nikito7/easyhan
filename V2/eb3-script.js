@@ -1,6 +1,6 @@
 >D 48
 
-ver=20003
+ver=20004
 C="Net."
 date=""
 time=""
@@ -247,9 +247,10 @@ endif
 
 >W
 
-<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
-<b>Vars </b> cnt=%0cnt% tper=%0tper% ver=%0ver%
-<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
+@<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
+@<b>Vars </b> cnt=%0cnt% tper=%0tper% ver=%0ver%
+@<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
+@<br>
 <br>
 Consumo %C%{m}%3saldo1% kWh
 Excedente %C%{m}%3saldo2% kWh
