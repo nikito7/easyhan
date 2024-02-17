@@ -1,4 +1,4 @@
-; 2024.02.17.1413
+; 2024.02.17.2228
 
 ; button
 
@@ -115,6 +115,10 @@ Publish2 homeassistant/sensor/nikito7-EB3/adc/config {"name":"ADC Addon","uniq_i
 
 ; Firmware V2
 
-Publish2 homeassistant/sensor/nikito7-EB3/hanERR/config {"name":"MB Error Count","uniq_id":"EB3_MB_Error_Count","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.ERR|int(0) }} {%% endif %%}","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/hanERR/config {"name":"MB Error Count","uniq_id":"EB3_MB_Error_Count","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.ErrCnt|int(0) }} {%% endif %%}","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
+
+Publish2 homeassistant/sensor/nikito7-EB3/ErrCode/config {"name":"MB Error Code","uniq_id":"EB3_MB_Error_Code","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.ErrCode|string }} {%% endif %%}","ic":"mdi:chip","dev":{"ids":"nikito7-EB3"}}
+
+Publish2 homeassistant/sensor/nikito7-EB3/ErrTime/config {"name":"MB Error Time","uniq_id":"EB3_MB_Error_Time","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.ErrTime|string }} {%% endif %%}","ic":"mdi:chip","dev":{"ids":"nikito7-EB3"}}
 
 ; EOF
