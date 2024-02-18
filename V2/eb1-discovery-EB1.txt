@@ -1,4 +1,4 @@
-; 2024-01-25
+; 2024.02.18.1323
 ; button
 
 Publish2 homeassistant/button/nikito7-EB1/restart/config {"name":"ESP Restart","uniq_id":"EB1_ESP_Restart","cmd_t":"cmnd/edpbox1/restart","pl_prs":"1","ic":"mdi:restart","dev":{"ids":"nikito7-EB1","name":"EB1","mdl":"Easy HAN","mf":"nikito7"}}
@@ -79,8 +79,12 @@ Publish2 homeassistant/sensor/nikito7-EB1/lpexced/config {"name":"LP Excedente",
 
 Publish2 homeassistant/sensor/nikito7-EB1/adc/config {"name":"ADC Addon","uniq_id":"EB1_ADC_Addon","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.ANALOG is defined %%} {%% set x = value_json.ANALOG.A0|int(0) %%} {%% if x > 0 %%} {{ (x/1024*6)|float(None)|round(2) }} {%% endif %%} {%% endif %%}","unit_of_meas":"V","dev_cla":"voltage","stat_cla":"measurement","dev":{"ids":"nikito7-EB1"}}
 
-; Debug
+; Firmware V2
 
-Publish2 homeassistant/sensor/nikito7-EB1/debug/config {"name":"Debug","uniq_id":"EB1_Debug","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.HAN is defined %%} {{ value_json.HAN.dbg|int(0) }} {%% endif %%}","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/hanERR/config {"name":"MB Error Count","uniq_id":"EB1_MB_Error_Count","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.EB1 is defined %%} {{ value_json.EB1.ErrCnt|int(0) }} {%% endif %%}","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
+
+Publish2 homeassistant/sensor/nikito7-EB1/ErrCode/config {"name":"MB Error Code","uniq_id":"EB1_MB_Error_Code","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.EB1 is defined %%} {{ value_json.EB1.ErrCode|string }} {%% endif %%}","ic":"mdi:chip","dev":{"ids":"nikito7-EB1"}}
+
+Publish2 homeassistant/sensor/nikito7-EB1/ErrTime/config {"name":"MB Error Time","uniq_id":"EB1_MB_Error_Time","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.EB1 is defined %%} {{ value_json.EB1.ErrTime|string }} {%% endif %%}","ic":"mdi:chip","dev":{"ids":"nikito7-EB1"}}
 
 ; EOF
