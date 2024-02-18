@@ -1,6 +1,6 @@
 >D 48
 
-ver=20004
+ver=20005
 C="Net."
 date=""
 time=""
@@ -58,7 +58,7 @@ vt3=0
 
 >B
 
-tper=21
+tper=61
 =>SerialLog 0
 
 >E
@@ -94,15 +94,15 @@ fheap=heap/1024
 
 if cnt==21
 then
-tper=11
 +>WifiConfig
 +>WifiPower
 +>BackLog Script 8
 endif
 
-if cnt==41
+if cnt==51
 then
 =>UfsRun discovery-EB3.txt
+tper=11
 endif
 
 if cnt<99
