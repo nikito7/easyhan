@@ -1,6 +1,6 @@
 >D 48
 
-ver=20008
+ver=20009
 C="Net."
 date=""
 time=""
@@ -58,7 +58,7 @@ vt3=0
 
 >B
 
-tper=61
+tper=51
 =>SerialLog 0
 
 >E
@@ -235,46 +235,6 @@ svars
 endif
 
 ; extras
-
-; --
-
-clk=s(2.0mm)+s(2.0ss)
-
-if cnt==99
-then
-wtd+=1
-endif
-
-if wtd==1
-then
-old=clk
-endif
-
-if wtd==31
-then
-wtd=0
-;
-if old==clk
-then
-print HAN: Wtd Fail
-cnt=70
-;
-fr=fo("/0001.log" 2)
-res=fw(tstamp+"\n" fr)
-fc(fr)
-;
-; Apenas para guardar 
-; a data no .log
-; 
-else
-print HAN: Wtd OK
-endif
-;
-endif
-
-; --
-  
-
 ; extras
 
 
