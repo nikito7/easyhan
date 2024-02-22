@@ -1,6 +1,6 @@
 >D 48
 
-ver=20007
+ver=20008
 C="Net."
 date=""
 time=""
@@ -257,14 +257,14 @@ wtd=0
 if old==clk
 then
 print HAN: Wtd Fail
-cnt=1
-smlj=0
+cnt=70
 ;
 fr=fo("/0001.log" 2)
 res=fw(tstamp+"\n" fr)
 fc(fr)
 ;
-; Apenas para guardar a data no .log
+; Apenas para guardar 
+; a data no .log
 ; 
 else
 print HAN: Wtd OK
