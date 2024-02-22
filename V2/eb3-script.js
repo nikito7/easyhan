@@ -1,6 +1,6 @@
 >D 48
 
-ver=20005
+ver=20007
 C="Net."
 date=""
 time=""
@@ -235,7 +235,48 @@ svars
 endif
 
 ; extras
+
+; --
+
+clk=s(2.0mm)+s(2.0ss)
+
+if cnt==99
+then
+wtd+=1
+endif
+
+if wtd==1
+then
+old=clk
+endif
+
+if wtd==31
+then
+wtd=0
+;
+if old==clk
+then
+print HAN: Wtd Fail
+cnt=1
+smlj=0
+;
+fr=fo("/0001.log" 2)
+res=fw(tstamp+"\n" fr)
+fc(fr)
+;
+; Apenas para guardar a data no .log
+; 
+else
+print HAN: Wtd OK
+endif
+;
+endif
+
+; --
+  
+
 ; extras
+
 
 >J
 ,"HAN":{
@@ -249,6 +290,7 @@ endif
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% ver=%0ver%
+@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
