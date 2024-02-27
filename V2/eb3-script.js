@@ -1,6 +1,7 @@
 >D 48
 
-ver=20009
+ver=20010
+EB="EB3"
 C="Net."
 date=""
 time=""
