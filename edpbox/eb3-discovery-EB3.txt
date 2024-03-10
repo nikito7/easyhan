@@ -1,4 +1,4 @@
-; 2024-01-23
+; 2024-03-10
 
 ; button
 
@@ -112,7 +112,5 @@ Publish2 homeassistant/sensor/nikito7-EB3/lpexced/config {"name":"LP Excedente",
 ; Adc
 
 Publish2 homeassistant/sensor/nikito7-EB3/adc/config {"name":"ADC Addon","uniq_id":"EB3_ADC_Addon","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.ANALOG is defined %%} {%% set x = value_json.ANALOG.A0|int(0) %%} {%% if x > 0 %%} {{ (x/1024*6)|float(None)|round(2) }} {%% endif %%} {%% endif %%}","unit_of_meas":"V","dev_cla":"voltage","stat_cla":"measurement","dev":{"ids":"nikito7-EB3"}}
-
-Publish2 homeassistant/sensor/nikito7-EB3/debug/config {"name":"Debug","uniq_id":"EB3_Debug","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.HAN is defined %%} {{ value_json.HAN.dbg|int(0) }} {%% endif %%}","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
 
 ; EOF
