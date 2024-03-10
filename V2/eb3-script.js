@@ -1,7 +1,7 @@
 >D 48
 
-ver=20010
-EB="EB3"
+ver=20012
+EBx="EB3"
 C="Net."
 date=""
 time=""
@@ -59,7 +59,7 @@ vt3=0
 
 >B
 
-tper=51
+tper=31
 =>SerialLog 0
 
 >E
@@ -129,8 +129,8 @@ res=fz(fr)
 if res==0
 then
 ;
-if EB=="EB1"
-or EB=="EB2"
+if EBx=="EB1"
+or EBx=="EB2"
 then
 res=fw(date+",L1\n" fr)
 else
@@ -203,7 +203,7 @@ endif
 lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 
 if chg[lp1mm]>0
-and cnt>50
+and cnt>5
 then
 lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(3lp3i)+","+s(3lp6e)+"\n"
 ;
@@ -255,8 +255,8 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-Consumo %C%{m}%3saldo1% kWh
-Excedente %C%{m}%3saldo2% kWh
+%EBx% Consumo %C%{m}%3saldo1% kWh
+%EBx% Excedente %C%{m}%3saldo2% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
