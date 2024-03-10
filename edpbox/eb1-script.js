@@ -1,7 +1,7 @@
 >D 48
 
-ver=10311
-EB="EB1"
+ver=10312
+EBx="EB1"
 C="Net."
 PF="Factor"
 AP="Potência"
@@ -59,7 +59,6 @@ vtf=""
 vt1=0
 vt2=0
 vt3=0
-dbg=0
 
 >B
 
@@ -128,7 +127,7 @@ endif
 
 if cnt==31
 then
-=>UfsRun discovery-%EB%.txt
+=>UfsRun discovery-%EBx%.txt
 endif
 
 if cnt<99
@@ -140,7 +139,6 @@ endif
 if chg[ss]>0
 and cnt>30
 then
-dbg+=1
 print HAN: %2.0hh%:%2.0mm%:%2.0ss%
 ipwrm=ipwr
 epwrm=epwr
@@ -158,7 +156,8 @@ res=fz(fr)
 if res==0
 then
 ;
-if EB=="EB1"
+if EBx=="EB1"
+or EBx=="EB2"
 then
 res=fw(date+",L1\n" fr)
 else
@@ -231,7 +230,7 @@ endif
 lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 
 if chg[lp1mm]>0
-and cnt>50
+and upsecs>5
 then
 lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(3lp3i)+","+s(3lp6e)+"\n"
 ;
@@ -272,7 +271,6 @@ endif
 "s1":%3saldo1%,
 "s2":%3saldo2%,
 "ck":"%2.0hh%:%2.0mm%:%2.0ss%",
-"dbg":%0dbg%
 }
 
 >W
@@ -283,8 +281,8 @@ endif
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
-%EB% Consumo %C%{m}%3saldo1% kWh
-%EB% Excedente %C%{m}%3saldo2% kWh
+%EBx% Consumo %C%{m}%3saldo1% kWh
+%EBx% Excedente %C%{m}%3saldo2% kWh
 <br>
 <a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
 <br>
