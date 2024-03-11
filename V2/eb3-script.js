@@ -1,6 +1,6 @@
 >D 48
 
-ver=20012
+ver=20013
 EBx="EB3"
 C="Net."
 date=""
@@ -37,6 +37,7 @@ lp1mm=0
 lp3i=0
 lp6e=0
 lps=""
+lpsx=""
 lpf=""
 ;
 p:ikwo=0
@@ -187,7 +188,7 @@ fr=fo(chf 2)
 res=fz(fr)
 if res==0
 then
-res=fw(date+",Import,Export\n" fr)
+res=fw(date+",Import,Export,TEI,TEE\n" fr)
 fc(fr)
 fr=fo(chf 2)
 endif
@@ -205,7 +206,8 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 and cnt>5
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(3lp3i)+","+s(3lp6e)+"\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(3lp3i)+","+s(3lp6e)+","
+lpsx=s(3ikw)+","+s(3ekw)+"\n"
 ;
 fr=fo(lpf 2)
 ;
@@ -219,6 +221,7 @@ endif
 ;
 ; LP csv
 res=fw(lps fr)
+res=fw(lpsx fr)
 ;
 fc(fr)
 ;
