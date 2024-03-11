@@ -1,6 +1,6 @@
 >D 48
 
-ver=20013
+ver=20014
 EBx="EB3"
 C="Net."
 date=""
@@ -227,7 +227,7 @@ res=fw(lpsx fr)
 ;
 fc(fr)
 ;
-saldo=lp3i-lp6e
+saldo=(lp3i-lp6e)/1000
 if saldo>0
 then
 saldo1+=saldo
