@@ -80,7 +80,9 @@ lp1d=EB3#LP1_D
 lp1hh=EB3#LP1_HH
 lp1mm=EB3#LP1_MM
 lp3i=EB3#LP3_IMP
+lp3i=lp3i*1000
 lp6e=EB3#LP6_EXP
+lp6e=lp6e*1000
 vt1=EB3#VL1
 vt2=EB3#VL2
 vt3=EB3#VL3
@@ -206,7 +208,7 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 and cnt>5
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(3lp3i)+","+s(3lp6e)+","
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+","
 lpsx=s(3ikw)+","+s(3ekw)+"\n"
 ;
 fr=fo(lpf 2)
