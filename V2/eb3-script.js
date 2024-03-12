@@ -1,6 +1,6 @@
 >D 48
 
-ver=20017
+ver=20018
 EBx="EB3"
 C="Net."
 date=""
@@ -206,7 +206,7 @@ endif
 lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 
 if chg[lp1mm]>0
-and cnt>5
+or upsecs==20
 then
 lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+","
 lpsx=s(3ikw)+","+s(3ekw)+"\n"
