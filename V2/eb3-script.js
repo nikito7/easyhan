@@ -1,6 +1,6 @@
 >D 48
 
-ver=20018
+ver=20019
 EBx="EB3"
 C="Net."
 date=""
@@ -144,6 +144,7 @@ fc(fr)
 fr=fo(vtf 2)
 endif
 res=fw(vts fr)
+print CSV: Updating %vtf%
 fc(fr)
 ;
 endif
@@ -195,6 +196,7 @@ fc(fr)
 fr=fo(chf 2)
 endif
 res=fw(chs fr)
+print CSV: Updating %chf%
 fc(fr)
 ;
 ikwo=ikw
@@ -206,7 +208,7 @@ endif
 lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 
 if chg[lp1mm]>0
-or upsecs==20
+or (upsecs==20 and lp1y>0)
 then
 lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+","
 lpsx=s(3ikw)+","+s(3ekw)+"\n"
@@ -224,6 +226,7 @@ endif
 ; LP csv
 res=fw(lps fr)
 res=fw(lpsx fr)
+print CSV: Updating %lpf%
 ;
 fc(fr)
 ;
