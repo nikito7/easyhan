@@ -1,6 +1,6 @@
 >D 48
 
-ver=20021
+ver=20022
 EBx="EB3"
 C="Net."
 date=""
@@ -34,6 +34,7 @@ lp1m=0
 lp1d=0
 lp1hh=0
 lp1mm=0
+lp1gmt=""
 lp3i=0
 lp6e=0
 lps=""
@@ -78,6 +79,7 @@ lp1m=EB3#LP1_M
 lp1d=EB3#LP1_D
 lp1hh=EB3#LP1_HH
 lp1mm=EB3#LP1_MM
+lp1gmt=EB3#LP1_GMT
 lp3i=EB3#LP3_IMP
 lp3i=lp3i*1000
 lp6e=EB3#LP6_EXP
@@ -209,7 +211,7 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 or (upsecs==25 and lp1y>0)
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+"\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+"Z"+lp1gmt+","+s(4.0lp3i)+","+s(4.0lp6e)+"\n"
 ;
 fr=fo(lpf 2)
 ;
