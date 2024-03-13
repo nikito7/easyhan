@@ -1,6 +1,6 @@
 >D 48
 
-ver=20019
+ver=20020
 EBx="EB3"
 C="Net."
 date=""
@@ -37,7 +37,6 @@ lp1mm=0
 lp3i=0
 lp6e=0
 lps=""
-lpsx=""
 lpf=""
 ;
 p:ikwo=0
@@ -210,8 +209,7 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 or (upsecs==20 and lp1y>0)
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+","
-lpsx=s(3ikw)+","+s(3ekw)+"\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+","+s(4.0lp3i)+","+s(4.0lp6e)+"\n"
 ;
 fr=fo(lpf 2)
 ;
