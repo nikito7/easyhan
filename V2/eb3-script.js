@@ -1,6 +1,6 @@
 >D 48
 
-ver=20027
+ver=20028
 EBx="EB3"
 C="Net."
 date=""
@@ -104,7 +104,7 @@ then
 +>BackLog Script 8
 endif
 
-if cnt==41
+if cnt==32
 then
 =>UfsRun discovery-EB3.txt
 tper=10
