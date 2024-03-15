@@ -1,6 +1,6 @@
 >D 48
 
-ver=20028
+ver=20029
 EBx="EB3"
 C="Net."
 date=""
@@ -33,7 +33,7 @@ lp1y=0
 lp1m=0
 lp1d=0
 lp1hh=0
-lp1mm=0
+lp1mm=99
 lp1gmt=""
 lp3i=0
 lp6e=0
