@@ -1,6 +1,6 @@
 >D 48
 
-ver=20029
+ver=20030
 EBx="EB3"
 C="Net."
 date=""
@@ -60,7 +60,7 @@ vt3=0
 
 >B
 
-tper=31
+tper=35
 =>SerialLog 0
 
 >E
@@ -104,9 +104,9 @@ then
 +>BackLog Script 8
 endif
 
-if cnt==32
+if cnt==30
 then
-=>UfsRun discovery-EB3.txt
++>UfsRun discovery-EB3.txt
 tper=10
 endif
 
