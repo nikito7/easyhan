@@ -270,7 +270,7 @@ endif
 "s0":%3saldo%,
 "s1":%3saldo1%,
 "s2":%3saldo2%,
-"ck":"%2.0hh%:%2.0mm%:%2.0ss%",
+"ck":"%2.0hh%:%2.0mm%:%2.0ss%"
 }
 
 >W
