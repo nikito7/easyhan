@@ -1,0 +1,2 @@
+HanDelayWait 1200
+HanDelayError 300000
