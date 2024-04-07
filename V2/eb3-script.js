@@ -1,6 +1,6 @@
 >D 48
 
-ver=20030
+ver=20031
 EBx="EB3"
 C="Net."
 date=""
@@ -96,6 +96,11 @@ ss=EB3#SS
 time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
+
+if cnt==15
+then
+=>UfsRun config.txt
+endif
 
 if cnt==21
 then
@@ -258,7 +263,6 @@ endif
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
 @<b>Vars </b> cnt=%0cnt% tper=%0tper% ver=%0ver%
-@<b>Vars </b> wtd=%0wtd% clk=%0clk% old=%0old%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
 @<br>
 <br>
