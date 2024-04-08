@@ -1,6 +1,6 @@
 >D 48
 
-ver=20031
+ver=20032
 EBx="EB3"
 C="Net."
 date=""
@@ -97,11 +97,6 @@ time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
 
-if cnt==15
-then
-=>UfsRun config.txt
-endif
-
 if cnt==21
 then
 +>WifiConfig
@@ -113,6 +108,11 @@ if cnt==30
 then
 +>UfsRun discovery-EB3.txt
 tper=10
+endif
+
+if cnt==60
+then
+=>UfsRun config.txt
 endif
 
 if cnt<99
