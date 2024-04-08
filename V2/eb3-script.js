@@ -250,7 +250,6 @@ endif
 ; extras
 ; extras
 
-
 >J
 ,"HAN":{
 "s0":%3saldo%,
