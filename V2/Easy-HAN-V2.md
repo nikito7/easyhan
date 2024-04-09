@@ -9,7 +9,7 @@ Tasmota > Consoles > Console
 (linha única)
 
 ```js
-Backlog 
+Backlog0 
 TimeZone 99; 
 TimeDST 0,0,3,1,1,60; 
 TimeSTD 0,0,10,1,2,0; 
@@ -31,7 +31,7 @@ Restart 1;
 (linha única)
 
 ```js
-Backlog 
+Backlog0 
 Hostname Easy-HAN-EB99; 
 Template {"NAME":"easyhan.pt","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
 Module 0; 
