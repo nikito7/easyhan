@@ -265,7 +265,7 @@ endif
 >W
 
 @<b>NTP </b> %date% %time% <b> Heap </b> %1fheap% kB
-@<b>Init </b> %0cnt% %% <b>TelePeriod </b> %0tper% <b>Version <b/> %0ver%
+@<b>Init </b> %0cnt% %% <b> TelePeriod </b> %0tper% <b> Version </b> %0ver%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% dBm <b> Topic </b> %topic%
 @<br>
 %EBx% Consumo %C%{m}%3saldo1% kWh
