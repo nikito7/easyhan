@@ -1,4 +1,4 @@
-; 2024.02.17.2228
+; 2024.04.10.2221
 
 ; button
 
@@ -19,7 +19,7 @@ Publish2 homeassistant/sensor/nikito7-EB3/signal/config {"name":"ESP Signal","un
 
 ; clock
 
-Publish2 homeassistant/sensor/nikito7-EB3/clockhan/config {"name":"Clock","uniq_id":"EB3_Clock","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.HAN.ck is defined %%} {{ value_json.HAN.ck|string }} {%% else %%} {{ states('sensor.eb3_clock') }}{%% endif %%}","ic":"mdi:clock","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/clockhan/config {"name":"Clock","uniq_id":"EB3_Clock","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3.CLK is defined %%} {{ value_json.EB3.CLK|string }} {%% else %%} {{ states('sensor.eb3_clock') }}{%% endif %%}","ic":"mdi:clock","dev":{"ids":"nikito7-EB3"}}
 
 Publish2 homeassistant/sensor/nikito7-EB3/clockesp/config {"name":"ESP Clock","uniq_id":"EB3_ESP_Clock","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.Time is defined %%} {{ value_json.Time.split('T')[1]|string }} {%% else %%} {{ states('sensor.eb3_esp_clock') }} {%% endif %%}","ic":"mdi:clock","dev":{"ids":"nikito7-EB3"}}
 
