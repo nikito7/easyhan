@@ -1,6 +1,6 @@
 >D 48
 
-ver=20032
+ver=20033
 EBx="EB3"
 C="Net."
 date=""
@@ -106,16 +106,21 @@ endif
 
 if cnt==30
 then
-+>UfsRun discovery-EB3.txt
+;
+if mqtts>0
+then
+=>UfsRun discovery-EB3.txt
+endif
+;
 tper=10
 endif
 
-if cnt==60
+if cnt==40
 then
 =>UfsRun config.txt
 endif
 
-if cnt<99
+if cnt<100
 then
 cnt+=1
 endif
@@ -254,21 +259,19 @@ endif
 ,"HAN":{
 "s0":%3saldo%,
 "s1":%3saldo1%,
-"s2":%3saldo2%,
-"ck":"%2.0hh%:%2.0mm%:%2.0ss%"
+"s2":%3saldo2%
 }
 
 >W
 
-@<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% ver=%0ver%
-@<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
+@<b>NTP </b> %date% %time% <b> Heap </b> %1fheap% kB
+@<b>Init </b> %0cnt% %% <b>TelePeriod </b> %0tper% <b>Version <b/> %0ver%
+@<b>Wifi </b> %wfc% <b> Power </b> %0wfp% dBm <b> Topic </b> %topic%
 @<br>
-<br>
 %EBx% Consumo %C%{m}%3saldo1% kWh
 %EBx% Excedente %C%{m}%3saldo2% kWh
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts</a>
+<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts JS</a>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
@@ -276,7 +279,7 @@ $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Potência (W) (10min)',
+$title:'Potência (W) (~10min)',
 $};
 $gc(e)
 
