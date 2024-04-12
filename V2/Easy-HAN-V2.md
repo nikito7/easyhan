@@ -16,11 +16,11 @@ TimeSTD 0,0,10,1,2,0;
 MqttUser none; 
 MqttPassword none; 
 MqttClient Easy_HAN_%06X; 
-WebLog 3;
+WebLog 2;
 SerialLog 0;
 Sleep 75; 
 WifiPower 15;
-Topic edpbox99v2; 
+Topic edpbox99; 
 Restart 1; 
 ```
 
