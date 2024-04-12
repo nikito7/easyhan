@@ -19,7 +19,7 @@ MqttClient Easy_HAN_%06X;
 WebLog 3;
 SerialLog 0;
 Sleep 75; 
-WifiPower 0;
+WifiPower 15;
 Topic edpbox99v2; 
 Restart 1; 
 ```
