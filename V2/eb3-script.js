@@ -1,6 +1,6 @@
 >D 48
 
-ver=20034
+ver=20035
 EBx="EB3"
 C="Net."
 date=""
@@ -104,7 +104,7 @@ then
 +>BackLog Script 8
 endif
 
-if cnt==30
+if cnt==31
 then
 tper=10
 =>UfsRun config.txt
@@ -113,7 +113,7 @@ endif
 if cnt==60
 then
 ;
-if mqttc>0
+if mqtts>0
 then
 =>UfsRun discovery-EB3.txt
 endif
