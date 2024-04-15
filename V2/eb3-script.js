@@ -1,6 +1,6 @@
 >D 48
 
-ver=20033
+ver=20034
 EBx="EB3"
 C="Net."
 date=""
@@ -60,7 +60,7 @@ vt3=0
 
 >B
 
-tper=35
+tper=30
 =>SerialLog 0
 
 >E
@@ -97,7 +97,7 @@ time=st(tstamp T 2)
 date=st(tstamp T 1)
 fheap=heap/1024
 
-if cnt==21
+if cnt==20
 then
 +>WifiConfig
 +>WifiPower
@@ -106,18 +106,18 @@ endif
 
 if cnt==30
 then
+tper=10
+=>UfsRun config.txt
+endif
+
+if cnt==60
+then
 ;
-if mqtts>0
+if mqttc>0
 then
 =>UfsRun discovery-EB3.txt
 endif
 ;
-tper=10
-endif
-
-if cnt==40
-then
-=>UfsRun config.txt
 endif
 
 if cnt<100
