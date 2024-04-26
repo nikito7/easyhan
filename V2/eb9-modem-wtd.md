@@ -17,6 +17,6 @@ endif
 
 ou externamente:
 
-curl http://10.1.0.200/cm?cmnd=HanDelay+600
+curl http://10.1.0.200/cm?cmnd=HanDelay+900
 
 Entre 300 a 900.
