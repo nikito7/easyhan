@@ -10,7 +10,7 @@ tmm=st(time : 2)
 if thh==21
 and tmm==10
 then
-=>BackLog HanDelay 600;
+=>BackLog HanDelay 900;
 endif
 ```
 ---
