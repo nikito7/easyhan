@@ -4,6 +4,7 @@
 
 
 ```js
+; extras
 thh=st(time : 1)
 tmm=st(time : 2)
 
@@ -12,6 +13,7 @@ and tmm==10
 then
 =>BackLog HanDelay 900;
 endif
+; extras
 ```
 ---
 
