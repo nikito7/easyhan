@@ -2,6 +2,7 @@
 - libertar han.
 - horário fixo.
 
+https://github.com/nikito7/easyhan/blob/ff44b8071265f3575cb88990db2480f2251bce0c/V2/eb3-script.js#L255
 
 ```js
 ; extras
