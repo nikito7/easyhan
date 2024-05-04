@@ -1,0 +1,43 @@
+# elfin: tcp
+# tasmota: rtuovertcp 
+# tasmota: tcp
+# demo for testing
+
+modbus:
+
+  - name: edpbox2
+    type: rtuovertcp
+    #type: tcp
+    host: 10.1.0.200
+    port: 9502
+    delay: 1
+    timeout: 3
+    message_wait_milliseconds: 500
+
+    sensors:
+
+      - name: "EB2 108 uint16 c1"
+        unique_id: eb2_demo108_c1
+        slave: 1
+        address: 108
+        input_type: input
+        data_type: uint16
+        precision: 1
+        scale: 0.1
+        unit_of_measurement: V
+        device_class: voltage
+
+      - name: "EB2 109 uint16 c1"
+        unique_id: eb2_demo109_c1
+        slave: 1
+        address: 109
+        input_type: input
+        data_type: uint16
+        precision: 1
+        scale: 0.1
+        unit_of_measurement: A
+        device_class: current
+
+###
+
+# eof
