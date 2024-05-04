@@ -11,3 +11,5 @@ https://github.com/nikito7/easyhan/blob/dev/bridge/Bridge-RTUoverTCP.js
 Modbus TCP:
 
 ![easyhan.pt](./bridge-02-tcp.jpg)
+
+https://github.com/nikito7/easyhan/blob/dev/bridge/Bridge-ModbusTCP.js
