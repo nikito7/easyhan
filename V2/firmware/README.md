@@ -1,5 +1,9 @@
 http://u.easyhan.pt/v2/
 
+# 7.21.3
+
+https://github.com/nikito7/edpbox-dev/commit/fb6bb7691fda6898ee82b672282bc4eec6398bcd
+
 # 7.20.7
 
 - Add tcp bridge
