@@ -1,3 +1,7 @@
+V2: firmware *-tcp
+
+V1: default
+
 ![easyhan.pt](./bridge-00.jpg)
 
 
