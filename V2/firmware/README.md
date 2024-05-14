@@ -1,5 +1,13 @@
 http://u.easyhan.pt/v2/
 
+# 7.21.6
+
+- HanTimeout
+- Remove tcp bridge
+- New firmware variant with tcp bridge
+
+https://github.com/nikito7/edpbox-dev/commit/00a219851a1ad08372168a3864f18d7a5d4372d1
+
 # 7.21.3
 
 https://github.com/nikito7/edpbox-dev/commit/fb6bb7691fda6898ee82b672282bc4eec6398bcd
