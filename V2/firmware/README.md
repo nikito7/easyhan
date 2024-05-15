@@ -1,5 +1,9 @@
 http://u.easyhan.pt/v2/
 
+# 7.21.7
+
+- Realtime Netmetering (qs)
+
 # 7.21.6
 
 - HanTimeout
