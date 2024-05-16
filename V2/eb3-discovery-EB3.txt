@@ -1,4 +1,4 @@
-; 2024.05.16.0109
+; 2024.05.16.0127
 
 ; button
 
@@ -121,6 +121,6 @@ Publish2 homeassistant/sensor/nikito7-EB3/ErrCode/config {"name":"MB Error Code"
 
 Publish2 homeassistant/sensor/nikito7-EB3/ErrTime/config {"name":"MB Error Time","uniq_id":"EB3_MB_Error_Time","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.ErrTime|string }} {%% endif %%}","ic":"mdi:chip","dev":{"ids":"nikito7-EB3"}}
 
-Publish2 homeassistant/sensor/nikito7-EB3/lpnet/config {"name":"LP Net","uniq_id":"EB3_LP_Net","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.qs|float(0) }} {%% endif %%}","unit_of_meas":"kWh","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/lpnet/config {"name":"LP Net","uniq_id":"EB3_LP_Net","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.qs|float(0) }} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
 
 ; EOF
