@@ -73,7 +73,7 @@ https://u.easyhan.pt/v2/setup-v2/HAN-V2.zip
 5. Enable Script
 
 ```js
-Backlog Script 1; SaveData 9; Restart 1;
+Backlog0 Script 1; SaveData 9; Restart 1;
 ```
 
 <hr>
