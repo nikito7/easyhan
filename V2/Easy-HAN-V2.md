@@ -1,4 +1,5 @@
-# Easy HAN ® V2
+# Easy HAN ® 
+# Firmware V2
 
 Tasmota > Consoles > Console
 
@@ -40,7 +41,7 @@ OtaUrl http://u.easyhan.pt/v2/tasmota-4M.bin.gz;
 Restart 1; 
 ``` 
 
-3. Upload files
+3. Upload files (se necessário)
 
 Monofásico:
 
