@@ -1,3 +1,4 @@
-HanDelayWait 1100
-HanDelayError 120000
+HanDelayWait 1000
+HanDelayError 35000
+HanTimeout 2000
 TelePeriod 10
