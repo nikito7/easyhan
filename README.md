@@ -4,6 +4,8 @@
 
 - [```edpbox``` contadores inteligentes](./edpbox/)
 
+- [```edpbox V2``` contadores inteligentes](./V2/)
+
 - [```growatt``` inversor solar](./growatt/)
 
 - [```lorawan``` ttn edpbox han](./lorawan/)
