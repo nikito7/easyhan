@@ -1,13 +1,15 @@
 # Easy HAN ® 
 # Firmware V2
 
+As imagens são apenas uma referência e podem não estar actualizadas.
+
 Tasmota > Consoles > Console
 
 1.
 
 ![Easy HAN](../edpbox/img/howto-1.jpg)
 
-(linha única)
+(linha única, caso o copy-paste não funcione correctamente)
 
 ```js
 Backlog0 
