@@ -9,7 +9,7 @@ Tasmota > Consoles > Console
 
 ![Easy HAN](../edpbox/img/howto-1.jpg)
 
-(linha única, caso o copy-paste não funcione correctamente)
+(linha única. caso o copy-paste não funcione correctamente, corrigir primeiro)
 
 ```js
 Backlog0 
