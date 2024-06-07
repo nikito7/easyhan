@@ -1,8 +1,6 @@
-h# Home Assistant Package
-# LoRaWAN TTN - ADC
-# Bridge:
-# - mqtt to mqtt
-# - v3 to home/v3
+# Home Assistant Package
+# LoRaWAN - ADC2
+# Helium
 
 ### ### ###
 
@@ -13,28 +11,26 @@ mqtt:
 ########### ADC ##########
 ###4
     - name: "LoRa Counter"
-      unique_id: ADC1_LoRa_Counter
-      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      unique_id: ADC2_LoRa_Counter
+      state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
       value_template: >
-        {% if value_json.uplink_message is defined %}
-          {% if value_json.uplink_message.f_cnt is defined %}
-            {{ value_json.uplink_message.f_cnt }}
+          {% if value_json.fcnt is defined %}
+            {{ value_json.fcnt }}
           {% endif %}
-        {% endif %}
       state_class: measurement
       device:
-        identifiers: nikito7-ADC1
-        name: ADC1
+        identifiers: nikito7-ADC2
+        name: ADC2
         model: easyhan.pt
         manufacturer: nikito7
 ###4
     - name: "LoRa Signal"
-      unique_id: ADC1_LoRa_Signal
-      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      unique_id: ADC2_LoRa_Signal
+      state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
       value_template: >
-        {% if value_json.uplink_message is defined %}
-          {% if value_json.uplink_message.rx_metadata is defined %}
-          {% set x = value_json.uplink_message.rx_metadata.0.rssi %}
+        {% if value_json.hotspots is defined %}
+          {% if value_json.hotspots.0 is defined %}
+          {% set x = value_json.hotspots.0.rssi %}
             {{ x }}
           {% endif %}
         {% endif %}
@@ -42,16 +38,16 @@ mqtt:
       device_class: signal_strength
       unit_of_measurement: dBm
       device:
-        identifiers: nikito7-ADC1
+        identifiers: nikito7-ADC2
 ###4
     - name: "LoRa ADC raw"
-      unique_id: ADC1_LoRa_ADC_raw
-      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      unique_id: ADC2_LoRa_ADC_raw
+      state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
       value_template: >
-        {% if value_json.uplink_message is defined %}
-          {% if value_json.uplink_message.decoded_payload is defined %}
-            {% if value_json.uplink_message.decoded_payload.ADC is defined %}
-              {% set x = value_json.uplink_message.decoded_payload.ADC|int(0) %}
+        {% if value_json.decoded is defined %}
+          {% if value_json.decoded.payload is defined %}
+            {% if value_json.decoded.payload.ADC is defined %}
+              {% set x = value_json.decoded.payload.ADC|int(0) %}
               {% if x > -1 %}
                 {{ x }}
               {% endif %}
@@ -60,16 +56,16 @@ mqtt:
         {% endif %}
       state_class: measurement
       device:
-        identifiers: nikito7-ADC1
+        identifiers: nikito7-ADC2
 ###4
     - name: "LoRa txFail CAD"
-      unique_id: ADC1_LoRa_tx_fail_cad
-      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      unique_id: ADC2_LoRa_tx_fail_cad
+      state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
       value_template: >
-        {% if value_json.uplink_message is defined %}
-          {% if value_json.uplink_message.decoded_payload is defined %}
-            {% if value_json.uplink_message.decoded_payload.txFail is defined %}
-              {% set x = value_json.uplink_message.decoded_payload.txFail|int(0) %}
+        {% if value_json.decoded is defined %}
+          {% if value_json.decoded.payload is defined %}
+            {% if value_json.decoded.payload.txFail is defined %}
+              {% set x = value_json.decoded.payload.txFail|int(0) %}
               {% if x > -1 %}
                 {{ x }}
               {% endif %}
@@ -78,17 +74,17 @@ mqtt:
         {% endif %}
       state_class: measurement
       device:
-        identifiers: nikito7-ADC1
+        identifiers: nikito7-ADC2
 ###4
 ###4
     - name: "LoRa Battery Voltage"
-      unique_id: ADC1_Battery_Voltage
-      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00633b4/up"
+      unique_id: ADC2_Battery_Voltage
+      state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
       value_template: >
-        {% if value_json.uplink_message is defined %}
-          {% if value_json.uplink_message.decoded_payload is defined %}
-            {% if value_json.uplink_message.decoded_payload.Volt is defined %}
-              {% set x = value_json.uplink_message.decoded_payload.Volt|float(0) %}
+        {% if value_json.decoded is defined %}
+          {% if value_json.decoded.payload is defined %}
+            {% if value_json.decoded.payload.Volt is defined %}
+              {% set x = value_json.decoded.payload.Volt|float(0) %}
               {% if x > 0 %}
                 {{ x|round(3) }}
               {% endif %}
@@ -99,7 +95,7 @@ mqtt:
       device_class: voltage
       state_class: measurement
       device:
-        identifiers: nikito7-ADC1
+        identifiers: nikito7-ADC2
 ###4
 
 # EOF
