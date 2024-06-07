@@ -10,7 +10,7 @@ mqtt:
 #2
   sensor:
 ###4
-########### ADC ##########
+########### ADC2 ##########
 ###4
     - name: "LoRa Counter"
       unique_id: ADC2_LoRa_Counter
