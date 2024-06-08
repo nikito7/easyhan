@@ -1,0 +1,629 @@
+# Home Assistant Package
+# LoRaWAN TTN
+# Bridge:
+# - mqtt to mqtt
+# - v3 to home/v3
+
+### ### ###
+
+mqtt:
+#2
+  sensor:
+###4
+########### EB5 ##########
+###4
+    - name: "LoRa Counter"
+      unique_id: EB5_LoRa_Counter
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.f_cnt is defined %}
+            {{ value_json.uplink_message.f_cnt }}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+        name: EB5
+        model: Easy HAN
+        manufacturer: nikito7
+###4
+    - name: "LoRa Signal"
+      unique_id: EB5_LoRa_Signal
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.rx_metadata is defined %}
+          {% set x = value_json.uplink_message.rx_metadata.0.rssi %}
+            {{ x }}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device_class: signal_strength
+      unit_of_measurement: dBm
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "LoRa Modbus Err"
+      unique_id: EB5_LoRa_Modbus_Err
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.ERR is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.ERR|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "LoRa txFail CAD"
+      unique_id: EB5_LoRa_tx_fail_cad
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.txFail is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.txFail|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "LoRa EB Type"
+      unique_id: EB5_LoRa_EB_Type
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.Type is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.Type|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+    - name: "LoRa EB Serial"
+      unique_id: EB5_LoRa_EB_Serial
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.Serial is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.Serial|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+########### HAN ##########
+###4
+    - name: "Clock"
+      unique_id: EB5_Clock
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.AAc is defined %}
+              {{ value_json.uplink_message.decoded_payload.AAc|string }}
+            {% endif %}          
+          {% endif %}
+        {% endif %}
+      icon: mdi:clock
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Voltage L1"
+      unique_id: EB5_VolL1
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.VL1 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.VL1|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Voltage L2"
+      unique_id: EB5_VolL2
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.VL2 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.VL2|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+    - name: "Voltage L3"
+      unique_id: EB5_VolL3
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.VL3 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.VL3|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+    - name: "Current L1"
+      unique_id: EB5_CurL1
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.CL1 is defined %}
+              {{ value_json.uplink_message.decoded_payload.CL1|float(0.0) }}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Current L2"
+      unique_id: EB5_CurL2
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.CL2 is defined %}
+              {{ value_json.uplink_message.decoded_payload.CL2|float(0.0) }}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Current L3"
+      unique_id: EB5_CurL3
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.CL3 is defined %}
+              {{ value_json.uplink_message.decoded_payload.CL3|float(0.0) }}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+    - name: "Current"
+      unique_id: EB5_Current
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.CLT is defined %}
+              {{ value_json.uplink_message.decoded_payload.CLT|float(0.0) }}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+    - name: "T1 Vazio"
+      unique_id: EB5_TotEneT1
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.TET1 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.TET1|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "T2 Ponta"
+      unique_id: EB5_TotEneT2
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.TET2 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.TET2|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "T3 Cheias"
+      unique_id: EB5_TotEneT3
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.TET3 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.TET3|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      device:
+        identifiers: nikito7-EB5
+###4 #####
+    - name: "Active Power Import"
+      unique_id: EB5_ActPow
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.API is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.API|int(0) %}
+              {% if x > -1%}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Active Power Export"
+      unique_id: EB5_ActPowExp
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.APE is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.APE|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+    - name: "Frequency"
+      unique_id: EB5_Frequency
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.Freq is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.Freq|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "Hz"
+      device_class: frequency
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Power Factor"
+      unique_id: EB5_PowFac
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.PF is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.PF|float(0) %}
+              {% if x > -1 %}
+                 {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      device_class: power_factor
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Power Factor L1"
+      unique_id: EB5_PowFacL1
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.PF1 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.PF1|float(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      device_class: power_factor
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Power Factor L2"
+      unique_id: EB5_LowFacL2
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.PF2 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.PF2|float(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      device_class: power_factor
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Power Factor L3"
+      unique_id: EB5_PowFacL3
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.PF3 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.PF3|float(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      device_class: power_factor
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+    - name: "Import"
+      unique_id: EB5_TotEneImp
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.TEI is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.TEI|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Export"
+      unique_id: EB5_TotEneExp
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.TEE is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.TEE|float(0) %}
+              {% if x > 0 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      device:
+        identifiers: nikito7-EB5
+###4
+###4
+    - name: "Active Power L1"
+      unique_id: EB5_ActLowL1
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.API1 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.API1|int(0) %}
+              {% if x > -1%}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Active Power L2"
+      unique_id: EB5_ActPowL2
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.API2 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.API2|int(0) %}
+              {% if x > -1%}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+
+    - name: "Active Power L3"
+      unique_id: EB5_ActLowL3
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.API3 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.API3|int(0) %}
+              {% if x > -1%}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Active Power L1 Export"
+      unique_id: EB5_ActPowL1Exp
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.APE1 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.APE1|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Active Power L2 Export"
+      unique_id: EB5_ActPowL2Exp
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.APE2 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.APE2|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+    - name: "Active Power L3 Export"
+      unique_id: EB5_ActPowL3Exp
+      state_topic: "home/v3/nikito-app@ttn/devices/eui-70b3d57ed00617fe/up"
+      value_template: >
+        {% if value_json.uplink_message is defined %}
+          {% if value_json.uplink_message.decoded_payload is defined %}
+            {% if value_json.uplink_message.decoded_payload.APE3 is defined %}
+              {% set x = value_json.uplink_message.decoded_payload.APE3|int(0) %}
+              {% if x > -1 %}
+                {{ x }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      device:
+        identifiers: nikito7-EB5
+###4
+# EOF
