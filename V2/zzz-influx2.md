@@ -1,4 +1,3 @@
-# iot.easyhan.pt
 # InfluxDB 2
 
 Tasmota > Consoles > Console
@@ -7,13 +6,13 @@ Tasmota > Consoles > Console
 
 ```js
 BackLog0 
-IfxHost iot.easyhan.pt;
+IfxHost influx2.ssn.pt;
 IfxPort 80;
-IfxBucket EB1;
+IfxBucket EB3;
 IfxOrg eb1org;
-IfxSensor 0;
+IfxSensor 1;
 IfxToken apitoken;
-IfxPeriod 0;
+IfxPeriod 15;
 Ifx 1;
 ```
 
