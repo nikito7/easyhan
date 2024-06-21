@@ -5,7 +5,8 @@ Tasmota > Consoles > Console
 (tudo numa linha, caso o copy-paste não funcione adequadamente)
 
 ```js
-BackLog0 
+BackLog0
+Ifx 0;
 IfxHost influx2.ssn.pt;
 IfxPort 80;
 IfxBucket EB3;
