@@ -41,6 +41,22 @@ mqtt:
       unit_of_measurement: dBm
       device:
         identifiers: nikito7-ADC2
+
+###4
+
+    - name: "LoRa Gateway"
+      unique_id: ADC2_LoRa_Gateway
+      state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
+      value_template: >
+        {% if value_json.hotspots is defined %}
+          {% if value_json.hotspots.0 is defined %}
+          {% set x = value_json.hotspots.0.name|string %}
+            {{ x }}
+          {% endif %}
+        {% endif %}
+      device:
+        identifiers: nikito7-ADC2
+
 ###4
     - name: "LoRa ADC raw"
       unique_id: ADC2_LoRa_ADC_raw
