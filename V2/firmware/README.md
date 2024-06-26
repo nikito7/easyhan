@@ -1,4 +1,8 @@
-http://u.easyhan.pt/v2/
+Last: http://u.easyhan.pt/v2/
+
+# 7.22.9
+
+- Fix InfluxDB issue with null json.
 
 # 7.21.7
 
@@ -24,3 +28,5 @@ https://github.com/nikito7/edpbox-dev/commit/fb6bb7691fda6898ee82b672282bc4eec63
 https://github.com/nikito7/edpbox-dev/commit/7c5928acb415b35797e7b9f24fe22a4fa0109399
 
 https://github.com/nikito7/edpbox-dev/commit/0694751f36e8a78c559e7e07b3cd4aec211080e1
+
+# EOF
