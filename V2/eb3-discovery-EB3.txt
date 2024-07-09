@@ -1,4 +1,4 @@
-; 2024.06.05.00.14
+; 2024.07.09.2210
 
 ; button
 
@@ -106,11 +106,11 @@ Publish2 homeassistant/sensor/nikito7-EB3/lpimport/config {"name":"LP Import Inc
 
 Publish2 homeassistant/sensor/nikito7-EB3/lpexport/config {"name":"LP Export Inc","uniq_id":"EB3_LP_Export","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {%% set x = value_json.EB3.LP6_EXP|float(none) %%} {%% if x != none %%} {{ x }} {%% endif %%} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
 
-Publish2 homeassistant/sensor/nikito7-EB3/lpsaldo/config {"name":"LP Saldo Inc","uniq_id":"EB3_LP_Saldo_Inc","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.HAN is defined %%} {{ value_json.HAN.s0|float(0) }} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/lpsaldo/config {"name":"LP Saldo Inc","uniq_id":"EB3_LP_Saldo_Inc","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.HEB3 is defined %%} {{ value_json.HEB3.s0|float(0) }} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
 
-Publish2 homeassistant/sensor/nikito7-EB3/lpcalc/config {"name":"LP Calculado","uniq_id":"EB3_LP_Calculado","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.HAN is defined %%} {%% set x = value_json.HAN.s1|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","stat_cla":"total_increasing","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/lpcalc/config {"name":"LP Calculado","uniq_id":"EB3_LP_Calculado","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.HEB3 is defined %%} {%% set x = value_json.HEB3.s1|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","stat_cla":"total_increasing","dev":{"ids":"nikito7-EB3"}}
 
-Publish2 homeassistant/sensor/nikito7-EB3/lpexced/config {"name":"LP Excedente","uniq_id":"EB3_LP_Excedente","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.HAN is defined %%} {%% set x = value_json.HAN.s2|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","stat_cla":"total_increasing","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/lpexced/config {"name":"LP Excedente","uniq_id":"EB3_LP_Excedente","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.HEB3 is defined %%} {%% set x = value_json.HEB3.s2|float(0) %%} {%% if x > 0 %%} {{ x }} {%% endif %%} {%% endif %%}","unit_of_meas":"kWh","dev_cla":"energy","stat_cla":"total_increasing","dev":{"ids":"nikito7-EB3"}}
 
 ; Adc
 
