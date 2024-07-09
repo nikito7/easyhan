@@ -1,6 +1,6 @@
 >D 48
 
-ver=20035
+ver=20037
 EBx="EB3"
 C="Net."
 date=""
@@ -80,10 +80,8 @@ lp1d=EB3#LP1_D
 lp1hh=EB3#LP1_HH
 lp1mm=EB3#LP1_MM
 lp1gmt=EB3#LP1_GMT
-lp3i=EB3#LP3_IMP
-lp3i=lp3i*1000
-lp6e=EB3#LP6_EXP
-lp6e=lp6e*1000
+lp3i=EB3#LPid9
+lp6e=EB3#LPid10
 vt1=EB3#VL1
 vt2=EB3#VL2
 vt3=EB3#VL3
@@ -98,32 +96,27 @@ date=st(tstamp T 1)
 fheap=heap/1024
 
 if cnt==20
-then
+{
 +>WifiConfig
 +>WifiPower
 +>BackLog Script 8
-endif
+}
 
 if cnt==31
-then
+{
 tper=10
 =>UfsRun config.txt
-endif
+}
 
 if cnt==60
-then
-;
-if mqtts>0
-then
+{
 =>UfsRun discovery-EB3.txt
-endif
-;
-endif
+}
 
 if cnt<100
-then
+{
 cnt+=1
-endif
+}
 
 if chg[ss]>0
 and cnt>30
@@ -221,7 +214,7 @@ lpf="LP-"+s(4.0lp1y)+"-"+s(2.0lp1m)+".csv"
 if chg[lp1mm]>0
 and lp1y>0
 then
-lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+"Z"+lp1gmt+","+s(4.0lp3i)+","+s(4.0lp6e)+"\n"
+lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+"Z"+lp1gmt+","+s(5.0lp3i)+","+s(5.0lp6e)+"\n"
 ;
 fr=fo(lpf 2)
 ;
@@ -256,7 +249,7 @@ endif
 ; extras
 
 >J
-,"HAN":{
+,"HEB3":{
 "s0":%3saldo%,
 "s1":%3saldo1%,
 "s2":%3saldo2%
