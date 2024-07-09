@@ -1,6 +1,6 @@
 >D 48
 
-ver=20037
+ver=20038
 EBx="EB3"
 C="Net."
 date=""
@@ -249,7 +249,7 @@ endif
 ; extras
 
 >J
-,"HEB3":{
+,"H%EBx%":{
 "s0":%3saldo%,
 "s1":%3saldo1%,
 "s2":%3saldo2%
