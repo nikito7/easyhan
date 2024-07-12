@@ -1,4 +1,4 @@
-; 2024.07.09.2205
+; 2024.07.13.0022
 ; button
 
 Publish2 homeassistant/button/nikito7-EB1/restart/config {"name":"ESP Restart","uniq_id":"EB1_ESP_Restart","cmd_t":"cmnd/edpbox1/restart","pl_prs":"1","ic":"mdi:restart","dev":{"ids":"nikito7-EB1","name":"EB1","mdl":"Easy HAN","mf":"nikito7"}}
@@ -65,9 +65,9 @@ Publish2 homeassistant/sensor/nikito7-EB1/contractpow/config {"name":"Contracted
 
 Publish2 homeassistant/sensor/nikito7-EB1/lpmin/config {"name":"LP Minutes","uniq_id":"EB1_LP_Minutes","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.EB1 is defined %%} {%% set x = value_json.EB1.LP1_MM|int(none) %%} {%% if x != none %%} {{ x }} {%% endif %%} {%% endif %%}","unit_of_meas":"m","stat_cla":"measurement","ic":"mdi:alarm","dev":{"ids":"nikito7-EB1"}}
 
-Publish2 homeassistant/sensor/nikito7-EB1/lpimport/config {"name":"LP Import Inc","uniq_id":"EB1_LP_Import","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.EB1 is defined %%} {%% set x = value_json.EB1.LP3_IMP|float(none) %%} {%% if x != none %%}  {{ x }}\n  {%% endif %%} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/lpimport/config {"name":"LP Import Inc","uniq_id":"EB1_LP_Import","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.EB1 is defined %%} {%% set x = value_json.EB1.LPid9|float(none) %%} {%% if x != none %%}  {{ x/1000 }} {%% endif %%} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
 
-Publish2 homeassistant/sensor/nikito7-EB1/lpexport/config {"name":"LP Export Inc","uniq_id":"EB1_LP_Export","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.EB1 is defined %%} {%% set x = value_json.EB1.LP6_EXP|float(none) %%}   {%% if x != none %%} {{ x }} {%% endif %%} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
+Publish2 homeassistant/sensor/nikito7-EB1/lpexport/config {"name":"LP Export Inc","uniq_id":"EB1_LP_Export","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.EB1 is defined %%} {%% set x = value_json.EB1.LPid10|float(none) %%}   {%% if x != none %%} {{ x/1000 }} {%% endif %%} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
 
 Publish2 homeassistant/sensor/nikito7-EB1/lpsaldo/config {"name":"LP Saldo Inc","uniq_id":"EB1_LP_Saldo_Inc","stat_t":"tele/edpbox1/SENSOR","val_tpl":"{%% if value_json.HEB1 is defined %%} {{ value_json.HEB1.s0|float(0) }} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB1"}}
 
