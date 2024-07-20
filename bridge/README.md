@@ -1,3 +1,6 @@
+⚠️ Easy HAN E5.1 Enable pin GPIO16
+
+
 V2: firmware *-tcp
 
 https://u.easyhan.pt/v2/
