@@ -1,5 +1,6 @@
 # Easy HAN ® 
-# Firmware V2
+# Firmware V2 
+# ESP8266
 
 As imagens são apenas uma referência e podem não estar actualizadas.
 
