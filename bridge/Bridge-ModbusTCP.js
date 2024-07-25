@@ -10,7 +10,8 @@ then
 endif
 
 >W
-<hr><br>
+
+<br>
 Bridge Mode: Modbus TCP
 
 
