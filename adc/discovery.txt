@@ -1,0 +1,15 @@
+Publish2 homeassistant/button/nikito7-EB3a/restart/config {"name":"ESP Restart","uniq_id":"EB3a_ESP_RestartBtn","cmd_t":"cmnd/edpbox3a/restart","pl_prs":"1","ic":"mdi:restart","dev":{"ids":"nikito7-EB3a","name":"EB3a","mdl":"Easy HAN","mf":"nikito7"}}
+
+
+; Adc
+
+; 6V
+Publish2 homeassistant/sensor/nikito7-EB3a/adc/config {"name":"ADC Addon","uniq_id":"EB3a_ADC_Addon","stat_t":"tele/edpbox3a/SENSOR","val_tpl":"{%% if value_json.ANALOG is defined %%} {%% set x = value_json.ANALOG.A0|int(0) %%} {%% if x > 0 %%} {{ (x/1024*6)|float(None)|round(2) }} {%% endif %%} {%% endif %%}","unit_of_meas":"V","dev_cla":"voltage","stat_cla":"measurement","dev":{"ids":"nikito7-EB3a"}}
+
+; 1V
+Publish2 homeassistant/sensor/nikito7-EB3a/adc1v/config {"name":"ADC Addon 1V","uniq_id":"EB3a_ADC_Addon1V","stat_t":"tele/edpbox3a/SENSOR","val_tpl":"{%% if value_json.ANALOG is defined %%} {%% set x = value_json.ANALOG.A0|int(0) %%} {%% if x > 0 %%} {{ (x/1024)|float(None)|round(2) }} {%% endif %%} {%% endif %%}","unit_of_meas":"V","dev_cla":"voltage","stat_cla":"measurement","dev":{"ids":"nikito7-EB3a"}}
+
+; raw
+Publish2 homeassistant/sensor/nikito7-EB3a/adcr/config {"name":"ADC Addon R","uniq_id":"EB3a_ADC_AddonR","stat_t":"tele/edpbox3a/SENSOR","val_tpl":"{%% if value_json.ANALOG is defined %%} {%% set x = value_json.ANALOG.A0|int(0) %%} {%% if x > 0 %%} {{ (x)|float(None)|round(2) }} {%% endif %%} {%% endif %%}","unit_of_meas":"raw","dev_cla":"voltage","stat_cla":"measurement","dev":{"ids":"nikito7-EB3a"}}
+
+; EOF
