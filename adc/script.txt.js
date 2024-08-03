@@ -11,12 +11,9 @@ cnt=0
 m:adc=0 50
 raw=0
 max=700
-min=200
+min=204
 strm="cnt0"
 fheap=0
-;
-
-
 
 >B
 
@@ -31,7 +28,6 @@ wfp=WifiPower
 >T
 
 raw=ANALOG#A0
-
 
 >S
 
@@ -53,7 +49,7 @@ tper=10
 
 if cnt==60
 {
-=>UfsRun discovery-EB3.txt
+=>UfsRun discovery.txt
 }
 
 if cnt<100
