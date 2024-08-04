@@ -1,6 +1,6 @@
 >D 48
 
-ver=1001
+ver=1002
 ;ver=20038
 date=""
 time=""
@@ -8,12 +8,15 @@ wfc=""
 wfp=0
 cnt=0
 ;
-m:adc=0 50
-raw=0
 max=700
 min=204
-strm="cnt0"
 fheap=0
+;
+tmp=0
+raw=0
+hour=0
+m:adc=0 60
+cstr2="cnt0"
 
 >B
 
@@ -57,11 +60,11 @@ if cnt<100
 cnt+=1
 }
 
-if upsecs%600==0
-and cnt>30
-{
+
+if (secs%60==0)
+then
 adc=raw
-}
+endif
 
 >W
 
@@ -70,21 +73,19 @@ adc=raw
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% dBm <b> Topic </b> %topic%
 @<br>
 <br> {m}
+Max (fixed) {m} %0max% raw
 Current {m} %0raw% raw
-Max {m} %0max% raw
-Min {m} %0min% raw
+Min (fixed) {m} %0min% raw
 <br> {m}
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt adc "wr" "ADC" strm)
+$gc(lt adc "wr" "ADC" cstr2)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'ADC (raw) (~10min*50)',
+$title:'ADC (raw) (~1min * 60)',
 $};
 $gc(e)
 
 
 ; EOF ADC
-
-
