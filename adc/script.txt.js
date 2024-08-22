@@ -1,6 +1,6 @@
 >D 48
 
-ver=1002
+ver=1003
 ;ver=20038
 date=""
 time=""
@@ -22,6 +22,8 @@ cstr2="cnt0"
 
 tper=30
 =>SerialLog 0
+spinm(2 1)
+spin(2 0)
 
 >E
 
@@ -33,6 +35,10 @@ wfp=WifiPower
 raw=ANALOG#A0
 
 >S
+
+spin(2 0)
+delay(30)
+spin(2 1)
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
@@ -89,3 +95,4 @@ $gc(e)
 
 
 ; EOF ADC
+
