@@ -1,5 +1,11 @@
 Last: http://u.easyhan.pt/v2/
 
+# 7.22.4
+
+- watchdog fix on han error
+
+https://github.com/nikito7/edpbox-dev/commit/1b69162435a331fadfea437624d8c8b70685d56d
+
 # 7.22.9
 
 - Fix InfluxDB issue with null json.
