@@ -1,6 +1,6 @@
 >D 48
 
-ver=20038
+ver=20039
 EBx="EB3"
 C="Net."
 date=""
@@ -161,13 +161,13 @@ then
 ;
 if hh==0
 then
-=>UfsDelete2 2d.csv
-=>UfsRename2 1d.csv,2d.csv
-=>UfsRename2 0d.csv,1d.csv
+=>UfsDelete 2d.csv
+=>UfsRename 1d.csv,2d.csv
+=>UfsRename 0d.csv,1d.csv
 ;
-=>UfsDelete2 vt-2d.csv
-=>UfsRename2 vt-1d.csv,vt-2d.csv
-=>UfsRename2 vt-0d.csv,vt-1d.csv
+=>UfsDelete vt-2d.csv
+=>UfsRename vt-1d.csv,vt-2d.csv
+=>UfsRename vt-0d.csv,vt-1d.csv
 ;
 tmp=lp1y-1
 =>UfsDelete2 LP-%4.0tmp%-%2.0lp1m%.csv
