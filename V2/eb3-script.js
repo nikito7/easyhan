@@ -1,6 +1,6 @@
 >D 48
 
-ver=20039
+ver=20040
 EBx="EB3"
 C="Net."
 date=""
@@ -264,7 +264,7 @@ endif
 %EBx% Consumo %C%{m}%3saldo1% kWh
 %EBx% Excedente %C%{m}%3saldo2% kWh
 <br>
-<a href="/ufs/%lpf%">%lpf%</a>{m}<a href="/ufs/charts.html">Charts JS</a>
+<a href="ufs/%lpf%">%lpf%</a>{m}<a href="ufs/charts.html">Charts JS</a>
 <br>
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
