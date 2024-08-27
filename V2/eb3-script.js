@@ -254,6 +254,7 @@ endif
 @<b>Init </b> %0cnt% %% <b> TelePeriod </b> %0tper% <b> Version </b> %0ver%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% dBm <b> Topic </b> %topic%
 @<br>
+<br>
 %EBx% Consumo %C%{m}%3saldo1% kWh
 %EBx% Excedente %C%{m}%3saldo2% kWh
 <br>
