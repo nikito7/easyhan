@@ -1,6 +1,6 @@
 Last: http://u.easyhan.pt/v2/
 
-# 7.23.4
+# 7.24.3
 
 - watchdog fix on han error
 
