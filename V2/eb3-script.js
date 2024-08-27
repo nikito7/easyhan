@@ -1,6 +1,6 @@
 >D 48
 
-ver=20040
+ver=20041
 EBx="EB3"
 C="Net."
 date=""
@@ -145,6 +145,7 @@ res=fw(date+",L1,L2,L3\n" fr)
 endif
 ;
 fc(fr)
+delay(100)
 fr=fo(vtf 2)
 endif
 res=fw(vts fr)
@@ -197,6 +198,7 @@ if res==0
 then
 res=fw(date+",Import,Export\n" fr)
 fc(fr)
+delay(100)
 fr=fo(chf 2)
 endif
 res=fw(chs fr)
@@ -223,6 +225,7 @@ if res==0
 then
 res=fw("Date,Import Inc,Export Inc\n" fr)
 fc(fr)
+delay(100)
 fr=fo(lpf 2)
 endif
 ;
