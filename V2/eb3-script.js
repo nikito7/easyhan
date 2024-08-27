@@ -1,6 +1,6 @@
 >D 48
 
-ver=20041
+ver=20042
 EBx="EB3"
 C="Net."
 date=""
@@ -102,7 +102,7 @@ if cnt==20
 +>BackLog Script 8
 }
 
-if cnt==31
+if cnt==35
 {
 tper=10
 =>UfsRun config.txt
@@ -144,9 +144,6 @@ else
 res=fw(date+",L1,L2,L3\n" fr)
 endif
 ;
-fc(fr)
-delay(100)
-fr=fo(vtf 2)
 endif
 res=fw(vts fr)
 print CSV: Updating %vtf%
@@ -197,9 +194,6 @@ res=fz(fr)
 if res==0
 then
 res=fw(date+",Import,Export\n" fr)
-fc(fr)
-delay(100)
-fr=fo(chf 2)
 endif
 res=fw(chs fr)
 print CSV: Updating %chf%
@@ -224,9 +218,6 @@ res=fz(fr)
 if res==0
 then
 res=fw("Date,Import Inc,Export Inc\n" fr)
-fc(fr)
-delay(100)
-fr=fo(lpf 2)
 endif
 ;
 ; LP csv
