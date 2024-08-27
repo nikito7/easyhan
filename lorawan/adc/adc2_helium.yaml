@@ -58,6 +58,36 @@ mqtt:
         identifiers: nikito7-ADC2
 
 ###4
+
+    - name: "LoRa Gateway 1"
+      unique_id: ADC2_LoRa_Gateway1
+      state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
+      value_template: >
+        {% if value_json.hotspots is defined %}
+          {% if value_json.hotspots.1 is defined %}
+          {% set x = value_json.hotspots.1.name|string %}
+            {{ x }}
+          {% endif %}
+        {% endif %}
+      device:
+        identifiers: nikito7-ADC2
+
+###4
+
+    - name: "LoRa Gateway 2"
+      unique_id: ADC2_LoRa_Gateway2
+      state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
+      value_template: >
+        {% if value_json.hotspots is defined %}
+          {% if value_json.hotspots.2 is defined %}
+          {% set x = value_json.hotspots.2.name|string %}
+            {{ x }}
+          {% endif %}
+        {% endif %}
+      device:
+        identifiers: nikito7-ADC2
+
+###4
     - name: "LoRa ADC raw"
       unique_id: ADC2_LoRa_ADC_raw
       state_topic: "application/1/device/70b3d57ed0067bb5/event/up"
