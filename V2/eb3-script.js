@@ -1,6 +1,6 @@
 >D 48
 
-ver=20042
+ver=20043
 EBx="EB3"
 C="Net."
 date=""
@@ -131,8 +131,8 @@ then
 ;
 vts=s(2.0hh)+":"+s(2.0mm)+","+s(0vt1)+","+s(0vt2)+","+s(0vt3)+"\n"
 vtf="vt-0d.csv"
+res=fx(vtf)
 fr=fo(vtf 2)
-res=fz(fr)
 if res==0
 then
 ;
@@ -189,8 +189,8 @@ exp=ekw-ekwo
 ;
 chs=s(2.0hh)+"h"+","+s(imp)+","+s(exp)+"\n"
 chf="0d.csv"
+res=fx(chf)
 fr=fo(chf 2)
-res=fz(fr)
 if res==0
 then
 res=fw(date+",Import,Export\n" fr)
@@ -212,9 +212,8 @@ and lp1y>0
 then
 lps=s(4.0lp1y)+"-"+s(2.0lp1m)+"-"+s(2.0lp1d)+"T"+s(2.0lp1hh)+":"+s(2.0lp1mm)+"Z"+lp1gmt+","+s(5.0lp3i)+","+s(5.0lp6e)+"\n"
 ;
+res=fx(lpf)
 fr=fo(lpf 2)
-;
-res=fz(fr)
 if res==0
 then
 res=fw("Date,Import Inc,Export Inc\n" fr)
