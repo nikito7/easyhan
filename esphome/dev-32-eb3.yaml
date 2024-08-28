@@ -20,10 +20,12 @@ esphome:
       - switch.turn_on: edpbox_polling
 
 esp32:
-  board: adafruit_feather_esp32s3
+  #board: adafruit_feather_esp32s3 # N4 R2
+  board: esp32-s3-devkitc-1 # N8
   framework:
     type: arduino
-  flash_size: 8MB
+  #flash_size: 8MB
+  partitions: taamota32_app2880k.csv # just for test!
   variant: esp32s3
 
 
