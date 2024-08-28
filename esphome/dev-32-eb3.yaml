@@ -656,6 +656,17 @@ text_sensor:
 ###
 
   - platform: modbus_controller
+    name: "${dev} LP IDs"
+    register_type: read
+    address: 0x0080
+    register_count: 1
+    response_size: 14
+    raw_encode: COMMA
+    icon: mdi:chip
+
+###
+
+  - platform: modbus_controller
     name: "${dev} Tariff"
     register_type: read
     address: 0x000B
@@ -674,3 +685,4 @@ text_sensor:
 #######
 # eof #
 #######
+
