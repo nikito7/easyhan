@@ -22,10 +22,12 @@ esphome:
 esp32:
   #board: adafruit_feather_esp32s3 # N4 R2
   board: esp32-s3-devkitc-1 # N8
+  #board: esp32-c6-devkitc-1
   framework:
     type: arduino
   #flash_size: 8MB
-  partitions: taamota32_app2880k.csv # just for test!
+  partitions: D:\3.dev\esphome\tasmota32_app2880k.csv
+  #      #    # just for testing. one way upgrade. no ota after!
   variant: esp32s3
 
 
