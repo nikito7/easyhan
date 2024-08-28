@@ -1,3 +1,8 @@
+# Override Settings
+
+Tools > Manage filesystem <br>
+Criar o ficheiro config.txt
+
 # HAN V2
 
 
