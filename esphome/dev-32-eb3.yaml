@@ -25,8 +25,8 @@ esp32:
   #board: esp32-c6-devkitc-1
   framework:
     type: arduino
-  #flash_size: 8MB
-  partitions: D:\3.dev\esphome\tasmota32_app2880k.csv
+  flash_size: 8MB
+  #partitions: D:\3.dev\esphome\tasmota32_app2880k.csv
   #      #    # just for testing. one way upgrade. no ota after!
   variant: esp32s3
 
@@ -561,7 +561,7 @@ sensor:
 ### Load Profile ###
 
   - platform: template
-    name: "${dev} LP ID 3"
+    name: "${dev} LP3"
     id: lp3x
     accuracy_decimals: 3
     filters:
@@ -571,7 +571,7 @@ sensor:
     icon: mdi:counter
 
   - platform: template
-    name: "${dev} LP ID 4"
+    name: "${dev} LP4"
     id: lp4x
     accuracy_decimals: 3
     filters:
@@ -581,7 +581,7 @@ sensor:
     icon: mdi:counter
 
   - platform: template
-    name: "${dev} LP ID 6"
+    name: "${dev} LP6"
     id: lp6x
     accuracy_decimals: 3
     filters:
