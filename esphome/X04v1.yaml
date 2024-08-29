@@ -1,3 +1,6 @@
+# X04v1
+# ESP32-S3 N8
+
 substitutions:
   dev: WL
   name: x04v1
