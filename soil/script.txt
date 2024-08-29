@@ -95,9 +95,9 @@ $gc(e)
 
 ; 0x0000
 
-1,010406UUuu@i0:1,Soil A1,,Soil_A1,2
-1,010406xxxxUUuu@i0:10,Soil A2,°C,Soil_A2,1
-1,010406xxxxxxxxUUuu@i0:1,Soil A3,,Soil_A3,2
+1,010406UUuu@i0:10,A0 Humidity,%%,Soil_A0,1
+1,010406xxxxUUuu@i0:10,A1 Temperature,°C,Soil_A1,1
+1,010406xxxxxxxxUUuu@i0:10,Soil A2,,Soil_A2,2
 
  
 ; eof meter
