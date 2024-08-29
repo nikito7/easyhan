@@ -35,8 +35,8 @@ wfp=WifiPower
 
 >T
 
-ipwr=?#Soil_A2
-epwr=?#Power
+ipwr=?#Soil_A1
+epwr=?#Soil_A0
 
 >S
 
@@ -52,7 +52,8 @@ if cnt==30
 then
 smlj=1
 tper=10
-=>UfsRun discovery.txt
+;=>UfsRun discovery.txt
+=>SetOption19 0
 endif
 
 if cnt<99
@@ -78,11 +79,11 @@ endif
 @<br>
 
 $<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
-$gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
+$gc(lt ipwrm epwrm "wr" "Temp" "Hum" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
-$title:'Input Power & Output Power 1h [W]',
+$title:'Temp & Hum 1h [W]',
 $};
 $gc(e)
 
@@ -102,6 +103,5 @@ $gc(e)
 1,010404UUuu@i1:1,Device ID,,,0
 1,010404xxxxUUuu@i1:1,Baud Rate,,,0
 
-; eof meter
 #
-; eof script
+; EOF
