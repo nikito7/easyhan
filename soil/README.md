@@ -1,0 +1,4 @@
+# Soil Sensor RS485
+
+ZTS-3000-TR-WS-N01
+
