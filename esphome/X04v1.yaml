@@ -15,21 +15,18 @@ esp32:
   framework:
     type: arduino
   flash_size: 8MB
-  #partitions: D:\3.dev\esphome\tasmota32_app2880k.csv
-  #      #    # just for testing. one way upgrade. no ota after!
   variant: esp32s3
-
 
 wifi:
   output_power: 15db
   
   ssid: !secret wifi_ssid
-  #password: !secret wifi_key
+  password: !secret wifi_key
   
   ap:
     ssid: "Easy-HAN-${dev}"
     password: edpbox123
-    ap_timeout: 10s # change me
+    ap_timeout: 15s # change me
 
 captive_portal:
 
@@ -61,7 +58,7 @@ button:
     name: "${dev} ESP Restart"
 
 interval:
-  - interval: 1s
+  - interval: 5s
     then:
       - switch.turn_on: led_pin
       - delay: 30ms
@@ -194,3 +191,4 @@ text_sensor:
 #######
 # eof #
 #######
+
