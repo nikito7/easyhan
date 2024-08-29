@@ -14,7 +14,7 @@ mqtt:
 ###4
     - name: "LoRa Counter"
       unique_id: ADC2_LoRa_Counter
-      state_topic: "home/v3/han2@easyhan/devices/eui-70b3d57ed0067bb5/up"
+      state_topic: "home/v3/nikito-app@ttn/devices/adc2-easyhan-pt/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
           {% if value_json.uplink_message.f_cnt is defined %}
@@ -30,7 +30,7 @@ mqtt:
 ###4
     - name: "LoRa Signal"
       unique_id: ADC2_LoRa_Signal
-      state_topic: "home/v3/han2@easyhan/devices/eui-70b3d57ed0067bb5/up"
+      state_topic: "home/v3/nikito-app@ttn/devices/adc2-easyhan-pt/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
           {% if value_json.uplink_message.rx_metadata is defined %}
@@ -46,7 +46,7 @@ mqtt:
 ###4
     - name: "LoRa ADC raw"
       unique_id: ADC2_LoRa_ADC_raw
-      state_topic: "home/v3/han2@easyhan/devices/eui-70b3d57ed0067bb5/up"
+      state_topic: "home/v3/nikito-app@ttn/devices/adc2-easyhan-pt/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
           {% if value_json.uplink_message.decoded_payload is defined %}
@@ -64,7 +64,7 @@ mqtt:
 ###4
     - name: "LoRa txFail CAD"
       unique_id: ADC2_LoRa_tx_fail_cad
-      state_topic: "home/v3/han2@easyhan/devices/eui-70b3d57ed0067bb5/up"
+      state_topic: "home/v3/nikito-app@ttn/devices/adc2-easyhan-pt/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
           {% if value_json.uplink_message.decoded_payload is defined %}
@@ -83,7 +83,7 @@ mqtt:
 ###4
     - name: "LoRa Battery Voltage"
       unique_id: ADC2_Battery_Voltage
-      state_topic: "home/v3/han2@easyhan/devices/eui-70b3d57ed0067bb5/up"
+      state_topic: "home/v3/nikito-app@ttn/devices/adc2-easyhan-pt/up"
       value_template: >
         {% if value_json.uplink_message is defined %}
           {% if value_json.uplink_message.decoded_payload is defined %}
