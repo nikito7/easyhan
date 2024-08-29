@@ -1,1 +1,179 @@
+substitutions:
+  dev: WL
+  name: x04v1
 
+esphome:
+  name: ${name}
+
+esp32:
+  #board: adafruit_feather_esp32s3 # N4 R2
+  board: esp32-s3-devkitc-1 # N8
+  #board: esp32-c6-devkitc-1
+  framework:
+    type: arduino
+  flash_size: 8MB
+  #partitions: D:\3.dev\esphome\tasmota32_app2880k.csv
+  #      #    # just for testing. one way upgrade. no ota after!
+  variant: esp32s3
+
+
+wifi:
+  output_power: 15db
+  
+  ssid: !secret wifi_ssid
+  password: !secret wifi_key
+  
+  ap:
+    ssid: "Easy-HAN-${dev}"
+    password: edpbox123
+    ap_timeout: 10s # change me
+
+captive_portal:
+
+###
+
+esp32_ble_tracker:
+bluetooth_proxy:
+
+###
+
+web_server:
+  local: true
+  
+logger:
+  level: debug
+
+api:
+  reboot_timeout: 30min
+
+ota:
+  - platform: esphome
+
+time:
+  - platform: homeassistant
+    id: esptime
+
+button:
+  - platform: restart
+    name: "${dev} ESP Restart"
+
+one_wire:
+  - platform: gpio
+    pin: 38
+
+sensor:
+
+####
+
+  - platform: dallas_temp
+    name: "${dev} DS18B20 Temperature"
+
+####
+
+  - platform: adc
+    name: "${dev} Adc In raw"
+    id: adc_in
+    raw: true
+    pin: 1
+    attenuation: 0dB
+    samples: 20
+    accuracy_decimals: 0
+    device_class: ""
+    unit_of_measurement: "raw"
+    state_class: measurement
+    update_interval: 5s
+
+  - platform: template
+    name: "${dev} Adc In"
+    lambda: |-
+      return  id(adc_in).state / 257.2580645161;
+    accuracy_decimals: 2
+    device_class: voltage
+    unit_of_measurement: "V"
+    state_class: measurement
+
+###
+
+  - platform: adc
+    name: "${dev} Adc A2 raw"
+    id: adc_a2
+    raw: true
+    pin: 2
+    attenuation: 0dB
+    samples: 20
+    accuracy_decimals: 0
+    device_class: ""
+    unit_of_measurement: "raw"
+    state_class: measurement
+    update_interval: 5s
+
+
+# 4-20ma Water Level // Resistor 47 Ohm = <1V
+# Tasmota: ESP8266 raw: 323   // 6*1V: 1.89V  // meters: 0.38m
+# ESPHome S3       raw: 1265 
+
+# Tasmota # ESPHome # Div y/x
+# 323     # 1265    # 3.916408
+# 360     # 1360    # 3.777777
+# 387     # 1621    # 4.188630
+# 498     # 1920    # 3.855421
+# 536     # 2182    # 4.070895
+# 646     # 2570    # 3.978328
+
+  - platform: template
+    name: "${dev} Adc A2"
+    lambda: |-
+      return  id(adc_a2).state * 3.9; // to fix
+    accuracy_decimals: 2
+    device_class: voltage
+    unit_of_measurement: "V"
+    state_class: measurement
+
+###
+
+  - platform: template
+    name: "${dev} ESP Free Heap"
+    lambda: |-
+      float heap = ESP.getFreeHeap();
+      // float heap = esp_get_free_heap_size();
+      return heap / 1024.0;
+    unit_of_measurement: "kB"
+    icon: mdi:chip
+    state_class: measurement
+
+  - platform: wifi_signal
+    name: "${dev} ESP Signal"
+    unit_of_measurement: "dB"
+    state_class: measurement
+
+  - platform: uptime
+    name: "${dev} ESP Uptime"
+    filters:
+      - lambda: return x/3600;
+    unit_of_measurement: "h"
+    accuracy_decimals: 1
+    device_class: ""
+
+### ### ###
+
+### ### ###
+
+text_sensor:
+
+  - platform: template
+    name: "${dev} ESP Clock"
+    icon: mdi:clock
+    lambda: |-
+      char str[25];
+      time_t currTime = id(esptime).now().timestamp;
+      strftime(str, sizeof(str), "%H:%M:%S", localtime(&currTime));
+      return {str};
+    update_interval: 5s
+    id: esp_clock
+
+###
+
+
+#######
+# eof #
+#######
