@@ -72,9 +72,9 @@ endif
 
 >W
 
-@<b>NTP </b> %date% %time% <b> Heap </b> %1fheap%
-@<b>Vars </b> cnt=%0cnt% tper=%0tper% smlj=%0smlj% ver=%0ver%
-@<b>Wifi </b> %wfc% <b> Power </b> %0wfp% <b> Topic </b> %topic%
+@<b>NTP </b> %date% %time% <b> Heap </b> %1fheap% kB
+@<b>Init </b> %0cnt% %% <b> TelePeriod </b> %0tper% <b> Version </b> %0ver%
+@<b>Wifi </b> %wfc% <b> Power </b> %0wfp% dBm <b> Topic </b> %topic%
 @<br>
 
 $<div id="chart1" style="width:100%%;height:250px;padding:0px;"></div><br><br>
@@ -91,15 +91,17 @@ $gc(e)
 
 >M 1
 
-+1,17,mN1,1,4800,Soil,15(16),10,r010400000003
++1,17,mN1,1,4800,Soil,15(16),10,r010400000003,r010407D00002
 
 ; 0x0000
 
 1,010406UUuu@i0:10,A0 Humidity,%%,Soil_A0,1
-1,010406xxxxUUuu@i0:10,A1 Temperature,°C,Soil_A1,1
-1,010406xxxxxxxxUUuu@i0:10,Soil A2,,Soil_A2,2
+1,010406xxxxSSss@i0:10,A1 Temperature,°C,Soil_A1,1
+1,010406xxxxxxxxUUuu@i0:10,A2 Test,,Soil_A2,2
 
- 
+1,010404UUuu@i1:1,Device ID,,,0
+1,010404xxxxUUuu@i1:1,Baud Rate,,,0
+
 ; eof meter
 #
 ; eof script
