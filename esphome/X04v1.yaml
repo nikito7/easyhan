@@ -1,8 +1,8 @@
-# X04v1
+# X04v1.3
 # ESP32-S3 N8
 
 substitutions:
-  dev: WL
+  dev: X04v1
   name: x04v1
 
 esphome:
@@ -24,7 +24,7 @@ wifi:
   output_power: 15db
   
   ssid: !secret wifi_ssid
-  password: !secret wifi_key
+  #password: !secret wifi_key
   
   ap:
     ssid: "Easy-HAN-${dev}"
@@ -59,6 +59,20 @@ time:
 button:
   - platform: restart
     name: "${dev} ESP Restart"
+
+interval:
+  - interval: 1s
+    then:
+      - switch.turn_on: led_pin
+      - delay: 30ms
+      - switch.turn_off: led_pin
+
+switch:
+  - platform: gpio
+    id: led_pin
+    pin:
+      number: 39
+      inverted: yes
 
 one_wire:
   - platform: gpio
