@@ -1,9 +1,16 @@
 # X04v1.3
 # ESP32-S3 N8
-#
+# Deep Sleep
+# Soil Sensor RS485
+
 substitutions:
   dev: T44
   name: t44x04soil
+
+deep_sleep:
+  id: sleep1
+  run_duration: 50s
+  sleep_duration: 10min
 
 esphome:
   name: ${name}
@@ -57,6 +64,12 @@ button:
   - platform: restart
     name: "${dev} ESP Restart"
 
+  - platform: template
+    name: "${dev} ESP Prevent Sleep"
+    on_press:
+      then:
+        - deep_sleep.prevent: sleep1
+
 switch:
   - platform: gpio
     id: led_pin
@@ -68,12 +81,76 @@ one_wire:
   - platform: gpio
     pin: 38
 
+####
+
+uart:
+
+#ifdef ESP32S3
+#define HAN_DIR 16
+#define HAN_TX 15
+#define HAN_RX 17
+
+#elif ESP32C6
+#define HAN_DIR 3
+#define HAN_TX 5
+#define HAN_RX 4
+
+  id: modbus_serial
+  rx_pin: 17
+  tx_pin: 15
+  baud_rate: 4800
+  stop_bits: 1
+
+modbus:
+  flow_control_pin: 16
+  id: modbus1
+  uart_id: modbus_serial
+  send_wait_time: 500ms
+
+modbus_controller:
+  - id: edpbox
+    update_interval: 5s
+    address: 0x1
+    command_throttle: 500ms
+    setup_priority: -10
+
+####
+
 sensor:
 
 ####
 
   - platform: dallas_temp
     name: "${dev} DS18B20 Temperature"
+    device_class: temperature
+    state_class: measurement
+    update_interval: 5s
+
+####
+
+  - platform: modbus_controller
+    name: "${dev} Soil Humidity"
+    address: 0
+    unit_of_measurement: "%"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: humidity
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Soil Temperature"
+    address: 1
+    unit_of_measurement: "°C"
+    register_type: read
+    value_type: S_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: temperature
+    state_class: measurement
 
 ####
 
@@ -98,6 +175,7 @@ sensor:
     device_class: voltage
     unit_of_measurement: "V"
     state_class: measurement
+    update_interval: 5s
 
 ###
 
@@ -135,6 +213,7 @@ sensor:
     device_class: voltage
     unit_of_measurement: "V"
     state_class: measurement
+    update_interval: 5s
 
 ###
 
@@ -147,36 +226,27 @@ sensor:
     unit_of_measurement: "kB"
     icon: mdi:chip
     state_class: measurement
+    update_interval: 5s
 
   - platform: wifi_signal
     name: "${dev} ESP Signal"
     unit_of_measurement: "dB"
     state_class: measurement
+    update_interval: 5s
 
   - platform: uptime
     name: "${dev} ESP Uptime"
     filters:
-      - lambda: return x/3600;
-    unit_of_measurement: "h"
-    accuracy_decimals: 1
+      - lambda: return x;
+    unit_of_measurement: "s"
+    accuracy_decimals: 0
     device_class: ""
-
-### ### ###
-
-### ### ###
-
-text_sensor:
-
-  - platform: template
-    name: "${dev} ESP Clock"
-    icon: mdi:clock
-    lambda: |-
-      char str[25];
-      time_t currTime = id(esptime).now().timestamp;
-      strftime(str, sizeof(str), "%H:%M:%S", localtime(&currTime));
-      return {str};
     update_interval: 5s
-    id: esp_clock
+
+### ### ###
+
+### ### ###
+
 
 ###
 
