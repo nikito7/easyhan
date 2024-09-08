@@ -1,24 +1,23 @@
 # X04v1.3
 # ESP32-S3 N8
-# Deep Sleep
 # Soil Sensor RS485
 
 substitutions:
   dev: T44
   name: t44x04soil
 
-deep_sleep:
-  id: sleep1
-  run_duration: 60s
-  sleep_duration: 20min
+#deep_sleep:
+#  id: sleep1
+#  run_duration: 40s
+#  sleep_duration: 30min
 
 esphome:
   name: ${name}
-  friendly_name: ${dev}
-  name_add_mac_suffix: true
+  #friendly_name: ${dev}
+  #name_add_mac_suffix: true
   project:
     name: easyhan.soil-rs485
-    version: "1.0"
+    version: "1.1"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/t44-x04-soil.yaml@dev
@@ -35,21 +34,22 @@ esp32:
 
 wifi:
   output_power: 15db
-  
+  use_address: 10.1.0.33
+
   ssid: !secret wifi_ssid
   password: !secret wifi_key
   
   ap:
     ssid: "Easy-HAN-${dev}"
     password: edpbox123
-    ap_timeout: 15s # change me
+    #ap_timeout: 15s # change me
 
 captive_portal:
 
 ###
 
-#esp32_ble_tracker:
-#bluetooth_proxy:
+esp32_ble_tracker:
+bluetooth_proxy:
 
 ###
 
@@ -73,11 +73,11 @@ button:
   - platform: restart
     name: "${dev} ESP Restart"
 
-  - platform: template
-    name: "${dev} ESP Prevent Sleep"
-    on_press:
-      then:
-        - deep_sleep.prevent: sleep1
+#  - platform: template
+#    name: "${dev} ESP Prevent Sleep"
+#    on_press:
+#      then:
+#        - deep_sleep.prevent: sleep1
 
 switch:
   - platform: gpio
@@ -118,7 +118,7 @@ modbus:
 
 modbus_controller:
   - id: edpbox
-    update_interval: 5s
+    update_interval: 30s
     address: 0x1
     command_throttle: 500ms
     setup_priority: -10
@@ -130,10 +130,12 @@ sensor:
 ####
 
   - platform: dallas_temp
-    name: "${dev} DS18B20 Temperature"
+    name: "${dev} Aquarium Water Temp"
     device_class: temperature
     state_class: measurement
-    update_interval: 5s
+    filters:
+      - filter_out: nan
+    update_interval: 30s
 
 ####
 
@@ -177,9 +179,12 @@ sensor:
     filters:
       - calibrate_linear:
          datapoints:
-          - 5.0 -> 0.0
-          - 6.0 -> 10.0
-          - 7.2 -> 100.0
+          - 7.0 -> 0.0
+          - 7.4 -> 10.0
+          - 8.4 -> 100.0
+      - clamp:
+          min_value: 0
+          max_value: 100
     accuracy_decimals: 0
     device_class: battery
     unit_of_measurement: "%"
@@ -226,13 +231,20 @@ sensor:
   - platform: uptime
     name: "${dev} ESP Uptime"
     filters:
-      - lambda: return x;
-    unit_of_measurement: "s"
-    accuracy_decimals: 0
+      - lambda: return x/3600.0;
+    unit_of_measurement: "h"
+    accuracy_decimals: 1
     device_class: ""
-    update_interval: 5s
+    update_interval: 30s
 
 ### ### ###
+
+text_sensor:
+
+  - platform: version
+    name: "${dev} ESPHome Version"
+    hide_timestamp: true
+
 
 ### ### ###
 
@@ -243,3 +255,4 @@ sensor:
 #######
 # eof #
 #######
+
