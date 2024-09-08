@@ -17,7 +17,7 @@ esphome:
   #name_add_mac_suffix: true
   project:
     name: easyhan.soil-rs485
-    version: "1.1"
+    version: "1.20"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/t44-x04-soil.yaml@dev
@@ -37,7 +37,7 @@ wifi:
   use_address: 10.1.0.33
 
   ssid: !secret wifi_ssid
-  password: !secret wifi_key
+  password: !secret wifi_password
   
   ap:
     ssid: "Easy-HAN-${dev}"
@@ -255,4 +255,3 @@ text_sensor:
 #######
 # eof #
 #######
-
