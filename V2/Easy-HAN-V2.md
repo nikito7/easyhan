@@ -12,6 +12,8 @@ Tasmota > Consoles > Console
 
 (linha única. caso o copy-paste não funcione correctamente, corrigir primeiro)
 
+1.1 Defaults
+
 ```js
 Backlog0 
 TimeZone 99; 
@@ -25,6 +27,20 @@ SerialLog 0;
 Sleep 75; 
 WifiPower 15;
 Topic edpbox99; 
+Restart 1; 
+```
+
+1.2 Manter mqtt
+
+```js
+Backlog0 
+TimeZone 99; 
+TimeDST 0,0,3,1,1,60; 
+TimeSTD 0,0,10,1,2,0; 
+WebLog 2;
+SerialLog 0;
+Sleep 75; 
+WifiPower 15;
 Restart 1; 
 ```
 
