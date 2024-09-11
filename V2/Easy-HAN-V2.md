@@ -12,7 +12,7 @@ Tasmota > Consoles > Console
 
 (linha única. caso o copy-paste não funcione correctamente, corrigir primeiro)
 
-1.1 Defaults
+1.1. Defaults
 
 ```js
 Backlog0 
@@ -30,7 +30,7 @@ Topic edpbox99;
 Restart 1; 
 ```
 
-1.2 Manter mqtt
+1.2. Manter mqtt
 
 ```js
 Backlog0 
