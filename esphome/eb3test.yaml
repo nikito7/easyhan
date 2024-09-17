@@ -1,6 +1,6 @@
 substitutions:
-  dev: EB3
-  name: t99dev
+  dev: EB3test
+  name: eb3test
 
 interval:
   - interval: 12s
@@ -18,16 +18,21 @@ esphome:
     then:
       - delay: 7s
       - switch.turn_on: edpbox_polling
+  project:
+    name: easyhan.edpbox3
+    version: "1.01"
+
+dashboard_import:
+  package_import_url: github://nikito7/easyhan/esphome/eb3test.yaml@dev
+  import_full_config: true
 
 esp32:
-  #board: adafruit_feather_esp32s3 # N4 R2
-  board: esp32-s3-devkitc-1 # N8
+  board: adafruit_feather_esp32s3 # N4 R2
+  #board: esp32-s3-devkitc-1 # N8
   #board: esp32-c6-devkitc-1
   framework:
     type: arduino
-  flash_size: 8MB
-  #partitions: D:\3.dev\esphome\tasmota32_app2880k.csv
-  #      #    # just for testing. one way upgrade. no ota after!
+  #flash_size: 8MB
   variant: esp32s3
 
 
@@ -40,19 +45,19 @@ wifi:
   ap:
     ssid: "Easy-HAN-${dev}"
     password: edpbox123
+   #ap_timeout: 15s # change me
 
 captive_portal:
 
 ###
 
-esp32_ble_tracker:
-bluetooth_proxy:
+#esp32_ble_tracker:
+#bluetooth_proxy:
 
 ###
 
 web_server:
   local: true
-  version: 3
   
 logger:
   level: debug
@@ -685,3 +690,4 @@ text_sensor:
 #######
 # eof #
 #######
+
