@@ -116,9 +116,9 @@ modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
-    command_throttle: 1500ms
+    command_throttle: 1000ms
     setup_priority: -10
-    offline_skip_updates: 4
+    offline_skip_updates: 8
 
 sensor:
 
@@ -696,4 +696,3 @@ text_sensor:
 #######
 # eof #
 #######
-
