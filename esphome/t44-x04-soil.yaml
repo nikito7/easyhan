@@ -17,7 +17,7 @@ esphome:
   #name_add_mac_suffix: true
   project:
     name: easyhan.soil-rs485
-    version: "1.20"
+    version: "1.21"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/t44-x04-soil.yaml@dev
@@ -125,12 +125,41 @@ modbus_controller:
 
 ####
 
+number:
+
+  - platform: modbus_controller
+    name: "${dev} Soil Set Temp Calibration"
+    address: 0x0050
+    value_type: U_WORD
+    multiply: 10.0
+    min_value: 0.0
+    max_value: 10.0
+    step: 0.1
+    mode: box
+    unit_of_measurement: "°C"
+    device_class: temperature
+
+  - platform: modbus_controller
+    name: "${dev} Soil Set Humidity Calibration"
+    address: 0x0051
+    value_type: U_WORD
+    multiply: 10.0
+    min_value: 0.0
+    max_value: 80.0
+    step: 0.1
+    mode: box
+    unit_of_measurement: "%"
+    device_class: humidity
+
+####
+
 sensor:
 
 ####
 
   - platform: dallas_temp
-    name: "${dev} Aquarium Water Temp"
+    name: "${dev} DS18B20 Aquarium Temp"
+    unit_of_measurement: "°C"
     device_class: temperature
     state_class: measurement
     filters:
@@ -141,27 +170,71 @@ sensor:
 
   - platform: modbus_controller
     name: "${dev} Soil Humidity"
-    address: 0
-    unit_of_measurement: "%"
+    address: 0x0000
     register_type: read
     value_type: U_WORD
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
     device_class: humidity
+    unit_of_measurement: "%"
     state_class: measurement
 
   - platform: modbus_controller
     name: "${dev} Soil Temperature"
-    address: 1
-    unit_of_measurement: "°C"
+    address: 0x0001
     register_type: read
     value_type: S_WORD
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+    unit_of_measurement: "°C"
     device_class: temperature
     state_class: measurement
+
+##
+
+  - platform: modbus_controller
+    name: "${dev} Soil Temp Calibration"
+    address: 0x0050
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    state_class: measurement
+    unit_of_measurement: "°C"
+    device_class: temperature
+
+  - platform: modbus_controller
+    name: "${dev} Soil Humidity Calibration"
+    address: 0x0051
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    state_class: measurement
+    unit_of_measurement: "%"
+    device_class: humidity
+
+  - platform: modbus_controller
+    name: "${dev} Soil Device ID"
+    address: 0x07D0
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 0
+    state_class: measurement
+    icon: mdi:chip
+
+  - platform: modbus_controller
+    name: "${dev} Soil Baud Rate"
+    address: 0x07D1
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 0
+    state_class: measurement
+    icon: mdi:chip
 
 ####
 
@@ -255,3 +328,4 @@ text_sensor:
 #######
 # eof #
 #######
+
