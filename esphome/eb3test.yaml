@@ -1,9 +1,12 @@
+# EB3
+# ESP32
+
 substitutions:
-  dev: EB3test
+  dev: EB3
   name: eb3test
 
 interval:
-  - interval: 12s
+  - interval: 15s
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
@@ -20,7 +23,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3
-    version: "1.01"
+    version: "1.02"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/eb3test.yaml@dev
@@ -38,14 +41,15 @@ esp32:
 
 wifi:
   output_power: 15db
-  
+  use_address: 10.1.0.44
+
   ssid: !secret wifi_ssid
   password: !secret wifi_key
   
   ap:
     ssid: "Easy-HAN-${dev}"
     password: edpbox123
-   #ap_timeout: 15s # change me
+    ap_timeout: 15s # change me
 
 captive_portal:
 
@@ -58,9 +62,10 @@ captive_portal:
 
 web_server:
   local: true
+  version: 3
   
 logger:
-  level: debug
+  level: verbose
 
 api:
   reboot_timeout: 30min
@@ -105,21 +110,28 @@ modbus:
   flow_control_pin: 16
   id: modbus1
   uart_id: modbus_serial
-  send_wait_time: 1000ms
+  send_wait_time: 1500ms
 
 modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
-    command_throttle: 1000ms
+    command_throttle: 1500ms
     setup_priority: -10
     offline_skip_updates: 4
 
 sensor:
 
+  - platform: template
+    name: "${dev} Adc In"
+    id: adc_in_v
+    accuracy_decimals: 2
+    device_class: voltage
+    unit_of_measurement: "V"
+    state_class: measurement
+
   - platform: adc
-    name: "${dev} Adc In raw"
-    id: adc_in
+    name: "${dev} Adc In raw" # ESP32-S3 PCB
     raw: true
     pin: 1
     attenuation: 0dB
@@ -128,16 +140,10 @@ sensor:
     device_class: ""
     unit_of_measurement: "raw"
     state_class: measurement
-    update_interval: 5s
-
-  - platform: template
-    name: "${dev} Adc In"
-    lambda: |-
-      return  id(adc_in).state / 257.2580645161;
-    accuracy_decimals: 2
-    device_class: voltage
-    unit_of_measurement: "V"
-    state_class: measurement
+    update_interval: 10s
+    on_value:
+      then:
+        - lambda: id(adc_in_v).state / 257.2580645161;
 
 ###
 
@@ -647,12 +653,12 @@ text_sensor:
       uint8_t lpDD = data[5];
       uint8_t lpHH = data[7];
       uint8_t lpMM = data[8];
-      uint32_t lpID3 = (data[15] << 24 | data[16] << 16 | data[17] << 8 | data[18]);
-      uint32_t lpID4 = (data[19] << 24 | data[20] << 16 | data[21] << 8 | data[22]);
-      uint32_t lpID6 = (data[27] << 24 | data[28] << 16 | data[29] << 8 | data[30]); 
-      id(lp3x).publish_state(lpID3);
-      id(lp4x).publish_state(lpID4);
-      id(lp6x).publish_state(lpID6);
+      uint32_t lp3g = (data[15] << 24 | data[16] << 16 | data[17] << 8 | data[18]);
+      uint32_t lp4g = (data[19] << 24 | data[20] << 16 | data[21] << 8 | data[22]);
+      uint32_t lp6g = (data[27] << 24 | data[28] << 16 | data[29] << 8 | data[30]); 
+      id(lp3x).publish_state(lp3g);
+      id(lp4x).publish_state(lp4g);
+      id(lp6x).publish_state(lp6g);
       char lpclk[25];
       sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
       return {lpclk};
