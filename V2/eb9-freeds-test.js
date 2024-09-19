@@ -8,7 +8,7 @@ tmp=300
 ; edpbox
 ; ipwr import
 ; epwr export
-tmp=epwr-ipwr-tmp
+tmp=epwr-ipwr
 =>Publish freeds/%EBx%/SENSOR {"Time":"%tstamp%","ENERGY":{"Voltage":%1vt1%,"Power":%0tmp%}}
 tmp=0
 }
