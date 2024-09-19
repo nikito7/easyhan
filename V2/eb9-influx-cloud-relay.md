@@ -9,8 +9,8 @@ IfxPort 80;
 IfxBucket EB3; 
 IfxOrg hantest; 
 IfxSensor 1; 
-IfxToken 5Bdqe9Snrxxxx1KH06T3un9FNfElkXS4mAjHSnhO6muF0XlGYw==; 
-IfxPeriod 0; 
+IfxToken apitoken; 
+IfxPeriod 60; 
 Ifx 1; 
 ```
 
