@@ -1,6 +1,6 @@
 >D 48
 
-ver=109
+ver=110
 date=""
 time=""
 wfc=""
@@ -17,7 +17,7 @@ strm="cnt0"
 fheap=0
 ;
 
->BS
+>B
 
 tper=25
 smlj=0
@@ -69,6 +69,11 @@ print Array: ipwrm %0ipwrm[-1]%
 epwrm=epwr
 print Array: epwrm %0ipwrm[-1]%
 endif
+
+if (upsecs%5==0)
+{
+=>Publish freeds/growatt/SENSOR {"Time":"%tstamp%","ENERGY":{"Pv1Current":0,"Pv2Current":0,"Pv1Voltage":0,"Pv2Voltage":0,"Pv1Power":0,"Pv2Power":0,"Today":0,"Power":%1epwr%,"Temperature":0}}
+}
 
 >W
 
