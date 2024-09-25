@@ -164,8 +164,10 @@ sensor:
   - platform: template
     name: "${dev} ESP Free Heap"
     lambda: |-
-      float heap = ESP.getFreeHeap();
-      // float heap = esp_get_free_heap_size();
+      // arduino
+      //float heap = ESP.getFreeHeap();
+      // idf
+      float heap = esp_get_free_heap_size();
       return heap / 1024.0;
     unit_of_measurement: "kB"
     icon: mdi:chip
