@@ -1,5 +1,6 @@
 # EB3
-# ESP32
+# ESP32-C6 / Easy HAN B5
+# Tested on: 2024.9.1
 
 substitutions:
   dev: EB3
@@ -22,11 +23,11 @@ esphome:
       - delay: 7s
       - switch.turn_on: edpbox_polling
   project:
-    name: easyhan.edpbox3
+    name: easyhan.edpbox3-c6-b5
     version: "1.04"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/eb3test.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
   import_full_config: true
 
 #esp8266:
@@ -69,8 +70,8 @@ captive_portal:
 
 ###
 
-#esp32_ble_tracker:
-#bluetooth_proxy:
+esp32_ble_tracker:
+bluetooth_proxy:
 
 ###
 
@@ -79,7 +80,7 @@ web_server:
   version: 3
   
 logger:
-  level: verbose
+  level: debug
 
 api:
   reboot_timeout: 30min
@@ -712,4 +713,3 @@ text_sensor:
 #######
 # eof #
 #######
-
