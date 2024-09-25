@@ -23,20 +23,34 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3
-    version: "1.03"
+    version: "1.04"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/eb3test.yaml@dev
   import_full_config: true
 
+#esp8266:
+#  board: esp07s
+
 esp32:
-  board: adafruit_feather_esp32s3 # N4 R2
-  #board: esp32-s3-devkitc-1 # N8
-  #board: esp32-c6-devkitc-1
+  board: esp32-c6-devkitc-1
+  flash_size: 8MB
+  variant: esp32c6
   framework:
-    type: arduino
-  #flash_size: 8MB
-  variant: esp32s3
+    type: esp-idf
+    version: 5.3.1
+    platform_version: 6.8.1
+    sdkconfig_options:
+      CONFIG_ESPTOOLPY_FLASHSIZE_8MB: y
+
+#esp32:
+#  board: adafruit_feather_esp32s3 # N4 R2
+#  #board: esp32-s3-devkitc-1 # N8
+#  #board: esp32-c6-devkitc-1
+#  framework:
+#    type: arduino
+#  #flash_size: 8MB
+#  variant: esp32s3
 
 
 wifi:
@@ -100,14 +114,14 @@ uart:
 #define HAN_RX 4
 
   id: modbus_serial
-  rx_pin: 17
-  tx_pin: 15
+  rx_pin: 4
+  tx_pin: 5
   baud_rate: 9600
   stop_bits: 1
   #stop_bits: 2 # ziv
 
 modbus:
-  flow_control_pin: 16
+  flow_control_pin: 3
   id: modbus1
   uart_id: modbus_serial
   send_wait_time: 1500ms
@@ -122,28 +136,28 @@ modbus_controller:
 
 sensor:
 
-  - platform: template
-    name: "${dev} Adc In"
-    id: adc_in_v
-    accuracy_decimals: 2
-    device_class: voltage
-    unit_of_measurement: "V"
-    state_class: measurement
+#  - platform: template
+#    name: "${dev} Adc In"
+#    id: adc_in_v
+#    accuracy_decimals: 2
+#    device_class: voltage
+#    unit_of_measurement: "V"
+#    state_class: measurement
 
-  - platform: adc
-    name: "${dev} Adc In raw" # ESP32-S3 PCB
-    raw: true
-    pin: 1
-    attenuation: 0dB
-    samples: 20
-    accuracy_decimals: 0
-    device_class: ""
-    unit_of_measurement: "raw"
-    state_class: measurement
-    update_interval: 10s
-    on_value:
-      then:
-        - lambda: id(adc_in_v).state / 257.2580645161;
+#  - platform: adc
+#    name: "${dev} Adc In raw" # ESP32-S3 PCB
+#    raw: true
+#    pin: 1
+#    attenuation: 0dB
+#    samples: 20
+#    accuracy_decimals: 0
+#    device_class: ""
+#    unit_of_measurement: "raw"
+#    state_class: measurement
+#    update_interval: 10s
+#    on_value:
+#      then:
+#        - lambda: id(adc_in_v).state / 257.2580645161;
 
 ###
 
