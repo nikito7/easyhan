@@ -26,32 +26,21 @@ esphome:
     version: "1.04"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/eb3test.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-S3.yaml@dev
   import_full_config: true
 
 #esp8266:
 #  board: esp07s
 
+
 esp32:
-  board: esp32-c6-devkitc-1
-  flash_size: 8MB
-  variant: esp32c6
+  #board: adafruit_feather_esp32s3 # N4 R2
+  board: esp32-s3-devkitc-1 # N8
+  #board: esp32-c6-devkitc-1
   framework:
-    type: esp-idf
-    version: 5.3.1
-    platform_version: 6.8.1
-    sdkconfig_options:
-      CONFIG_ESPTOOLPY_FLASHSIZE_8MB: y
-
-#esp32:
-#  board: adafruit_feather_esp32s3 # N4 R2
-#  #board: esp32-s3-devkitc-1 # N8
-#  #board: esp32-c6-devkitc-1
-#  framework:
-#    type: arduino
-#  #flash_size: 8MB
-#  variant: esp32s3
-
+    type: arduino
+  flash_size: 8MB
+  variant: esp32s3
 
 wifi:
   output_power: 15db
@@ -79,7 +68,7 @@ web_server:
   version: 3
   
 logger:
-  level: verbose
+  level: debug
 
 api:
   reboot_timeout: 30min
@@ -165,9 +154,9 @@ sensor:
     name: "${dev} ESP Free Heap"
     lambda: |-
       // arduino
-      //float heap = ESP.getFreeHeap();
+      float heap = ESP.getFreeHeap();
       // idf
-      float heap = esp_get_free_heap_size();
+      //float heap = esp_get_free_heap_size();
       return heap / 1024.0;
     unit_of_measurement: "kB"
     icon: mdi:chip
