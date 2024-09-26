@@ -1,1 +1,704 @@
+# EB3
+# ESP8266
+
+substitutions:
+  dev: EB3
+  name: eb3test
+
+interval:
+  - interval: 15s
+    then:
+      - lambda: |-
+          if (id(edpbox_polling).state) {
+              id(esp_clock).update();
+              id(edpbox).update();
+          }
+
+esphome:
+  name: ${name}
+  on_boot:
+    priority: -500
+    then:
+      - delay: 7s
+      - switch.turn_on: edpbox_polling
+  project:
+    name: easyhan.edpbox3
+    version: "1.04"
+
+dashboard_import:
+  package_import_url: github://nikito7/easyhan/esphome/HAN-ESP8266.yaml@dev
+  import_full_config: true
+
+esp8266:
+  board: esp07s
+
+#esp32:
+#  board: adafruit_feather_esp32s3 # N4 R2
+#  #board: esp32-s3-devkitc-1 # N8
+#  #board: esp32-c6-devkitc-1
+#  framework:
+#    type: arduino
+#  #flash_size: 8MB
+#  variant: esp32s3
+
+
+wifi:
+  output_power: 15db
+  use_address: 10.1.0.44
+
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  
+  ap:
+    ssid: "Easy-HAN-${dev}"
+    password: edpbox123
+    ap_timeout: 15s # change me
+
+captive_portal:
+
+###
+
+#esp32_ble_tracker:
+#bluetooth_proxy:
+
+###
+
+web_server:
+  local: true
+  version: 3
+  
+logger:
+  level: verbose
+
+api:
+  reboot_timeout: 30min
+
+ota:
+  - platform: esphome
+
+time:
+  - platform: homeassistant
+    id: esptime
+
+button:
+  - platform: restart
+    name: "${dev} ESP Restart"
+
+switch:
+  - platform: template
+    name: "${dev} ESP Polling"
+    id: "edpbox_polling"
+    optimistic: yes
+
+uart:
+
+#ifdef ESP32S3
+#define HAN_DIR 16
+#define HAN_TX 15
+#define HAN_RX 17
+
+#elif ESP32C6
+#define HAN_DIR 3
+#define HAN_TX 5
+#define HAN_RX 4
+
+  id: modbus_serial
+  rx_pin: 3
+  tx_pin: 1
+  baud_rate: 9600
+  stop_bits: 1
+  #stop_bits: 2 # ziv
+
+modbus:
+  flow_control_pin: 16
+  id: modbus1
+  uart_id: modbus_serial
+  send_wait_time: 1500ms
+
+modbus_controller:
+  - id: edpbox
+    update_interval: never
+    address: 0x1
+    command_throttle: 1000ms
+    setup_priority: -10
+    offline_skip_updates: 8
+
+sensor:
+
+#  - platform: template
+#    name: "${dev} Adc In"
+#    id: adc_in_v
+#    accuracy_decimals: 2
+#    device_class: voltage
+#    unit_of_measurement: "V"
+#    state_class: measurement
+
+#  - platform: adc
+#    name: "${dev} Adc In raw" # ESP32-S3 PCB
+#    raw: true
+#    pin: 1
+#    attenuation: 0dB
+#    samples: 20
+#    accuracy_decimals: 0
+#    device_class: ""
+#    unit_of_measurement: "raw"
+#    state_class: measurement
+#    update_interval: 10s
+#    on_value:
+#      then:
+#        - lambda: id(adc_in_v).state / 257.2580645161;
+
+###
+
+  - platform: template
+    name: "${dev} ESP Free Heap"
+    lambda: |-
+      // arduino
+      float heap = ESP.getFreeHeap();
+      // idf
+      //float heap = esp_get_free_heap_size();
+      return heap / 1024.0;
+    unit_of_measurement: "kB"
+    icon: mdi:chip
+    state_class: measurement
+
+  - platform: wifi_signal
+    name: "${dev} ESP Signal"
+    unit_of_measurement: "dB"
+    state_class: measurement
+
+  - platform: uptime
+    name: "${dev} ESP Uptime"
+    filters:
+      - lambda: return x/3600;
+    unit_of_measurement: "h"
+    accuracy_decimals: 1
+    device_class: ""
+
+### ### ###
+
+### Voltage & Current ###
+
+  - platform: modbus_controller
+    name: "${dev} Voltage L1"
+    address: 0x006C
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Current L1"
+    address: 0x006D
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Voltage L2"
+    address: 0x006E
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Current L2"
+    address: 0x006F
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    device_class: current
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Voltage L3"
+    address: 0x0070
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+     - multiply: 0.1
+    device_class: voltage
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Current L3"
+    address: 0x0071
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+     - multiply: 0.1
+    device_class: current
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Current"
+    address: 0x0072
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: U_WORD
+    filters:
+      - multiply: 0.1
+    accuracy_decimals: 1
+    device_class: current
+    state_class: measurement
+
+### Active Power & Export ###
+
+  - platform: modbus_controller
+    name: "${dev} Active Power L1"
+    address: 0x0073
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Active Power L1 Export"
+    address: 0x0074
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Active Power L2"
+    address: 0x0075
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Active Power L2 Export"
+    address: 0x0076
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Active Power L3"
+    address: 0x0077
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Active Power L3 Export"
+    address: 0x0078
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Active Power Import"
+    address: 0x0079
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Active Power Export"
+    address: 0x007A
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+### Power Factor & Frequency ###
+
+  - platform: modbus_controller
+    name: "${dev} Power Factor"
+    address: 0x007B
+    unit_of_measurement: ""
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    device_class: power_factor
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Power Factor L1"
+    address: 0x007C
+    unit_of_measurement: ""
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    device_class: power_factor
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Power Factor L2"
+    address: 0x007D
+    unit_of_measurement: ""
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    device_class: power_factor
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Power Factor L3"
+    address: 0x007E
+    unit_of_measurement: ""
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    device_class: power_factor
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "${dev} Frequency"
+    address: 0x007F
+    unit_of_measurement: "Hz"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    icon: "mdi:pulse"
+    state_class: measurement
+
+### Total Energy Tariffs ###
+
+  - platform: modbus_controller
+    name: "${dev} T1 Vazio"
+    address: 0x0026
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller 
+    name: "${dev} T2 Ponta"
+    address: 0x0027
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller
+    name: "${dev} T3 Cheias"
+    address: 0x0028
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+### Total Energy ###
+
+  - platform: modbus_controller
+    name: "${dev} Import"
+    skip_updates: 4
+    address: 0x0016
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller
+    name: "${dev} Export"
+    address: 0x0017
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+### Total Energy L ###
+
+  - platform: modbus_controller
+    name: "${dev} Import L1"
+    address: 0x001C
+    skip_updates: 4
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller
+    name: "${dev} Import L2"
+    address: 0x001D
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller
+    name: "${dev} Import L3"
+    address: 0x001E
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+### Contract ###
+
+  - platform: modbus_controller
+    name: "${dev} Contract T1"
+    address: 0x000C
+    skip_updates: 4
+    register_type: read
+    value_type: U_DWORD
+    register_count: 3 # ranges optimization
+    response_size: 12 # 
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kVA"
+    state_class: measurement
+    icon: mdi:flash
+
+  - platform: modbus_controller
+    name: "${dev} Contract T4"
+    address: 0x000F
+    register_type: read
+    value_type: U_DWORD
+    register_count: 1
+    response_size: 4
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kVA"
+    state_class: measurement
+    icon: mdi:flash
+
+### Load Profile ###
+
+  - platform: template
+    name: "${dev} LP3"
+    id: lp3x
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh/15m"
+    state_class: measurement
+    icon: mdi:counter
+
+  - platform: template
+    name: "${dev} LP4"
+    id: lp4x
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh/15m"
+    state_class: measurement
+    icon: mdi:counter
+
+  - platform: template
+    name: "${dev} LP6"
+    id: lp6x
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    unit_of_measurement: "kWh/15m"
+    state_class: measurement
+    icon: mdi:counter
+
+### ### ###
+
+text_sensor:
+
+  - platform: template
+    name: "${dev} ESP Clock"
+    icon: mdi:clock
+    lambda: |-
+      char str[25];
+      time_t currTime = id(esptime).now().timestamp;
+      strftime(str, sizeof(str), "%H:%M:%S", localtime(&currTime));
+      return {str};
+    update_interval: never
+    id: esp_clock
+
+###
+
+  - platform: modbus_controller
+    name: "${dev} Clock"
+    register_type: read
+    address: 0x0001
+    register_count: 1
+    response_size: 12
+    raw_encode: HEXBYTES
+    icon: mdi:clock
+    lambda: |-
+        uint8_t hh, mm, ss;
+        hh = data[5];
+        mm = data[6];
+        ss = data[7];
+        char ebclk[20];
+        sprintf(ebclk,"%02d:%02d:%02d",hh,mm,ss);
+        return {ebclk};
+#    on_value:
+#      - then:
+#        - switch.turn_on: led_pin
+#        - delay: 30ms
+#        - switch.turn_off: led_pin
+
+###
+
+  - platform: modbus_controller
+    name: "${dev} LP Date Time"
+    custom_command: [0x1, 0x44, 0x0, 0x1]
+    register_count: 1
+    response_size: 42
+    lambda: |-
+      uint16_t lpYY = (data[2] << 8 | data[3]);
+      uint8_t lpMT = data[4];
+      uint8_t lpDD = data[5];
+      uint8_t lpHH = data[7];
+      uint8_t lpMM = data[8];
+      uint32_t lp3g = (data[15] << 24 | data[16] << 16 | data[17] << 8 | data[18]);
+      uint32_t lp4g = (data[19] << 24 | data[20] << 16 | data[21] << 8 | data[22]);
+      uint32_t lp6g = (data[27] << 24 | data[28] << 16 | data[29] << 8 | data[30]); 
+      id(lp3x).publish_state(lp3g);
+      id(lp4x).publish_state(lp4g);
+      id(lp6x).publish_state(lp6g);
+      char lpclk[25];
+      sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
+      return {lpclk};
+    icon: mdi:calendar
+
+###
+
+  - platform: modbus_controller
+    name: "${dev} LP IDs"
+    register_type: read
+    address: 0x0080
+    register_count: 1
+    response_size: 14
+    raw_encode: COMMA
+    icon: mdi:chip
+
+###
+
+  - platform: modbus_controller
+    name: "${dev} Tariff"
+    register_type: read
+    address: 0x000B
+    force_new_range: true    #####
+    register_count: 1
+    response_size: 2
+    raw_encode: COMMA
+    icon: mdi:counter
+    lambda: |-
+        auto z = "Null";
+        if (x == "1,0") z = "Vazio";
+        else if (x == "2,0") z = "Ponta";
+        else if (x == "3,0") z = "Cheias";
+        return {z};
+
+#######
+# eof #
+#######
 
