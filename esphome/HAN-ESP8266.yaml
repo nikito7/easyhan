@@ -65,10 +65,11 @@ captive_portal:
 
 web_server:
   local: true
-  version: 3
   
-logger:
-  level: verbose
+# não usar com web_server
+#logger:
+#  level: debug
+#  baud_rate: 0
 
 api:
   reboot_timeout: 30min
