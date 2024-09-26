@@ -56,7 +56,7 @@ esp32:
 
 wifi:
   output_power: 15db
-  use_address: 10.1.0.44
+  use_address: 10.1.0.46
 
   ssid: !secret wifi_ssid
   password: !secret wifi_password
@@ -70,8 +70,9 @@ captive_portal:
 
 ###
 
-esp32_ble_tracker:
-bluetooth_proxy:
+# ainda não funciona no C6
+#esp32_ble_tracker:
+#bluetooth_proxy:
 
 ###
 
@@ -127,6 +128,10 @@ modbus:
   uart_id: modbus_serial
   send_wait_time: 1500ms
 
+#i2c:
+#  sda: 6
+#  scl: 7
+
 modbus_controller:
   - id: edpbox
     update_interval: never
@@ -136,6 +141,13 @@ modbus_controller:
     offline_skip_updates: 8
 
 sensor:
+
+#  - platform: aht10
+#    variant: AHT20
+#    temperature:
+#      name: "${dev} AHT Temperature"
+#    humidity:
+#      name: "${dev} AHT Humidity"
 
 #  - platform: template
 #    name: "${dev} Adc In"
