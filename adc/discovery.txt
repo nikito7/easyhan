@@ -1,5 +1,6 @@
 Publish2 homeassistant/button/nikito7-EB3a/restart/config {"name":"ESP Restart","uniq_id":"EB3a_ESP_RestartBtn","cmd_t":"cmnd/edpbox3a/restart","pl_prs":"1","ic":"mdi:restart","dev":{"ids":"nikito7-EB3a","name":"EB3a","mdl":"Easy HAN","mf":"nikito7"}}
 
+Publish2 homeassistant/sensor/nikito7-EB3a/uptime/config {"name":"ESP Uptime","uniq_id":"EB3a_ESP_Uptime","stat_t":"tele/edpbox3a/STATE","val_tpl":"{{ ( value_json.UptimeSec / 3600 ) | round(1) }}","unit_of_meas":"h","ic":"mdi:alarm","avty_t":"tele/edpbox3a/LWT","pl_avail":"Online","pl_not_avail":"Offline","stat_cla":"measurement","dev":{"ids":"nikito7-EB3a"}}
 
 ; Adc
 
