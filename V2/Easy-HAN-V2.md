@@ -75,7 +75,9 @@ http://u.easyhan.pt/v2/setup-v2/EB3/
 Zip com tudo:
 
 
-https://u.easyhan.pt/v2/setup-v2/HAN-V2.zip
+https://u.easyhan.pt/v2/setup-v2/
+
+HAN-V2-*****.zip
 
 ![files](../edpbox/img/files0823a.jpg)
 
