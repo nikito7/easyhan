@@ -22,10 +22,11 @@ esphome:
     priority: -500
     then:
       - delay: 7s
+      - switch.turn_on: led_pin
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.05"
+    version: "1.07"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -99,11 +100,22 @@ button:
   - platform: restart
     name: "${dev} ESP Restart"
 
+###
+
 switch:
+
+  - platform: gpio
+    id: led_pin
+    pin:
+      number: 2
+      inverted: no # C6 no
+
   - platform: template
     name: "${dev} ESP Polling"
     id: "edpbox_polling"
     optimistic: yes
+
+###
 
 uart:
 
@@ -142,6 +154,8 @@ modbus_controller:
     command_throttle: 1000ms
     setup_priority: -10
     offline_skip_updates: 8
+
+###
 
 sensor:
 
@@ -666,11 +680,11 @@ text_sensor:
         char ebclk[20];
         sprintf(ebclk,"%02d:%02d:%02d",hh,mm,ss);
         return {ebclk};
-#    on_value:
-#      - then:
-#        - switch.turn_on: led_pin
-#        - delay: 30ms
-#        - switch.turn_off: led_pin
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ###
 
@@ -706,6 +720,7 @@ text_sensor:
     response_size: 14
     raw_encode: COMMA
     icon: mdi:chip
+    skip_updates: 10
 
 ###
 
