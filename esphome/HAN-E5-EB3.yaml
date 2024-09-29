@@ -648,12 +648,11 @@ text_sensor:
         char ebclk[20];
         sprintf(ebclk,"%02d:%02d:%02d",hh,mm,ss);
         return {ebclk};
-#    on_value:
-#      - then:
-#        - switch.turn_on: led_pin
-#        - delay: 30ms
-#        - switch.turn_off: led_pin
-
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 ###
 
   - platform: modbus_controller
