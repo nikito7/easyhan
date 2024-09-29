@@ -1,3 +1,7 @@
+# V2
+
+https://github.com/nikito7/easyhan/tree/dev/V2
+
 # Easy HAN ® RS485
 
 Leitor WiFi da porta HAN.
