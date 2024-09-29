@@ -20,10 +20,11 @@ esphome:
     priority: -500
     then:
       - delay: 7s
+      - switch.turn_on: led_pin
       - switch.turn_on: edpbox_polling
   project:
-    name: easyhan.edpbox3
-    version: "1.04"
+    name: easyhan.e5-edpbox3
+    version: "1.05"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB3.yaml@dev
