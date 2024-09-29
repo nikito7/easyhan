@@ -86,6 +86,13 @@ button:
     name: "${dev} ESP Restart"
 
 switch:
+
+  - platform: gpio
+    id: led_pin
+    pin:
+      number: 2
+      inverted: yes
+
   - platform: template
     name: "${dev} ESP Polling"
     id: "edpbox_polling"
