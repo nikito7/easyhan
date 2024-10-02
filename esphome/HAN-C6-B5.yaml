@@ -1,6 +1,6 @@
 # EB3
 # ESP32-C6 / Easy HAN B5
-# Tested on: 2024.9.1
+# Tested on: 2024.9.2
 # Active development yaml
 
 substitutions:
@@ -8,7 +8,7 @@ substitutions:
   name: eb3test
 
 interval:
-  - interval: 15s
+  - interval: 12s
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
@@ -26,7 +26,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.08"
+    version: "1.12"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -152,9 +152,10 @@ modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
-    command_throttle: 1000ms
+    command_throttle: 900ms
     setup_priority: -10
     offline_skip_updates: 8
+    max_cmd_retries: 0
 
 ###
 
@@ -237,6 +238,11 @@ sensor:
       - multiply: 0.1
     device_class: voltage
     state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
   - platform: modbus_controller
     name: "${dev} Current L1"
@@ -407,6 +413,11 @@ sensor:
     device_class: power
     unit_of_measurement: "W"
     state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Power Factor & Frequency ###
 
@@ -595,7 +606,6 @@ sensor:
   - platform: modbus_controller
     name: "${dev} Contract T1"
     address: 0x000C
-    skip_updates: 4
     register_type: read
     value_type: U_DWORD
     register_count: 3 # ranges optimization
@@ -620,12 +630,17 @@ sensor:
     unit_of_measurement: "kVA"
     state_class: measurement
     icon: mdi:flash
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Load Profile ###
 
   - platform: template
-    name: "${dev} LP3"
-    id: lp3x
+    name: "${dev} LP Import Inc"
+    id: lpid9
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -634,8 +649,8 @@ sensor:
     icon: mdi:counter
 
   - platform: template
-    name: "${dev} LP4"
-    id: lp4x
+    name: "${dev} LP Export Inc"
+    id: lpid10
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -643,15 +658,6 @@ sensor:
     state_class: measurement
     icon: mdi:counter
 
-  - platform: template
-    name: "${dev} LP6"
-    id: lp6x
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-    unit_of_measurement: "kWh/15m"
-    state_class: measurement
-    icon: mdi:counter
 
 #######
 
@@ -749,8 +755,26 @@ sensor:
     accuracy_decimals: 0
     icon: mdi:calendar
     entity_category: diagnostic
-    skip_updates: 10
 
+
+### ### ###
+
+globals:
+
+   - id: idx3
+     type: int
+     restore_value: no
+     initial_value: '0' 
+
+   - id: idx4
+     type: int
+     restore_value: no
+     initial_value: '0'
+
+   - id: idx6
+     type: int
+     restore_value: no
+     initial_value: '0'
 
 ### ### ###
 
@@ -814,9 +838,17 @@ text_sensor:
       uint32_t lp3g = (data[15] << 24 | data[16] << 16 | data[17] << 8 | data[18]);
       uint32_t lp4g = (data[19] << 24 | data[20] << 16 | data[21] << 8 | data[22]);
       uint32_t lp6g = (data[27] << 24 | data[28] << 16 | data[29] << 8 | data[30]); 
-      id(lp3x).publish_state(lp3g);
-      id(lp4x).publish_state(lp4g);
-      id(lp6x).publish_state(lp6g);
+      //
+      if (id(idx3) == 9) {
+      id(lpid9).publish_state(lp3g);
+      }
+      //
+      if (id(idx4) == 10) {
+      id(lpid10).publish_state(lp4g);
+      }
+      if (id(idx6) == 10) {
+      id(lpid10).publish_state(lp6g);
+      }
       // 
       char _emi_err[12];
       sprintf(_emi_err,"0x%0X",_emi_err1);
@@ -833,13 +865,26 @@ text_sensor:
 
   - platform: modbus_controller
     name: "${dev} LP IDs"
-    register_type: read
-    address: 0x0080
+    custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
     register_count: 1
     response_size: 14
-    raw_encode: COMMA
+    lambda: |-
+      char lpindex[25];
+      sprintf(lpindex,"%d,%d,%d,%d,%d,%d,%d,%d",
+          data[2],
+          data[3],
+          data[4],
+          data[5],
+          data[6],
+          data[7],
+          data[8],
+          data[9]);
+      id(idx3) = data[2];
+      id(idx4) = data[3];
+      id(idx6) = data[5];
+      return {lpindex};
+      // eof
     icon: mdi:chip
-    skip_updates: 10
     entity_category: diagnostic
 
 ###
