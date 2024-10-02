@@ -26,7 +26,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.07"
+    version: "1.08"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -84,7 +84,8 @@ web_server:
   version: 3
   
 logger:
-  level: debug
+  #level: debug
+  level: verbose # modbus
 
 api:
   reboot_timeout: 30min
@@ -163,8 +164,10 @@ sensor:
     variant: AHT20
     temperature:
       name: "${dev} AHT Temperature"
+      accuracy_decimals: 1
     humidity:
       name: "${dev} AHT Humidity"
+      accuracy_decimals: 1
 
 #  - platform: template
 #    name: "${dev} Adc In"
@@ -202,11 +205,13 @@ sensor:
     unit_of_measurement: "kB"
     icon: mdi:chip
     state_class: measurement
+    entity_category: diagnostic
 
   - platform: wifi_signal
     name: "${dev} ESP Signal"
     unit_of_measurement: "dB"
     state_class: measurement
+    entity_category: diagnostic
 
   - platform: uptime
     name: "${dev} ESP Uptime"
@@ -215,6 +220,7 @@ sensor:
     unit_of_measurement: "h"
     accuracy_decimals: 1
     device_class: ""
+    entity_category: diagnostic
 
 ### ### ###
 
@@ -647,9 +653,113 @@ sensor:
     state_class: measurement
     icon: mdi:counter
 
+#######
+
+  - platform: template
+    name: "${dev} EMI Code"
+    icon: mdi:chip
+    accuracy_decimals: 0
+    id: emi_code
+    entity_category: diagnostic
+
+  - platform: modbus_controller
+    name: "${dev} EMI Year"
+    custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
+    register_count: 1
+    response_size: 25
+    lambda: |-
+      char hFw1[12];
+      char hFw2[12];
+      char hFw3[12];
+      char _emi[20];
+
+      uint32_t hMnfC = (data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3]);
+      uint16_t hMnfY = (data[4] << 8 | data[5]);
+
+      sprintf(hFw1, "%c%c%c%c%c",
+              data[6],
+              data[7],
+              data[8],
+              data[9],
+              data[10]);
+
+      sprintf(hFw2, "%c%c%c%c%c",
+              data[11],
+              data[12],
+              data[13],
+              data[14],
+              data[15]);
+
+      sprintf(hFw3, "%c%c%c%c%c",
+              data[16],
+              data[17],
+              data[18],
+              data[19],
+              data[20]);
+
+      id(emi_fw1).publish_state(hFw1);
+      id(emi_fw2).publish_state(hFw2);
+      id(emi_fw3).publish_state(hFw3);
+      id(emi_code).publish_state(hMnfC);
+
+      switch (hMnfC) {
+        case 6623491:
+          sprintf(_emi, "%s", "T Janz GPRS");
+          break;
+        case 6750210:
+          sprintf(_emi, "%s", "M Landis+Gyr S3");
+          break;
+        case 6754306:
+          sprintf(_emi, "%s", "T Landis+Gyr S3");
+          break;
+        case 6754307:
+          sprintf(_emi, "%s", "T Landis+Gyr S5");
+          break;
+        case 11010050:
+          sprintf(_emi, "%s", "M Sagem CX1000-6");
+          break;
+        case 11010051:
+          sprintf(_emi, "%s", "M Sagem S212");
+          break;
+        case 11014146:
+          sprintf(_emi, "%s", "T Sagem CX2000-9");
+          break;
+        case 16973825:
+          sprintf(_emi, "%s", "? Ziv ???");
+          break;
+        case 16977920:
+          sprintf(_emi, "%s", "T Ziv 5CTD-E2F");
+          break;
+        case 18481154:
+          sprintf(_emi, "%s", "M Kaifa MA109P");
+          break;
+        case 18481156:
+          sprintf(_emi, "%s", "M Kaifa MA109H");
+          break;
+        default:
+          sprintf(_emi, "%s", "? ??? ???");
+      }
+
+      id(emi_name).publish_state(_emi);
+
+      return hMnfY;
+
+      // eof
+    ## lambda eof
+    accuracy_decimals: 0
+    icon: mdi:calendar
+    entity_category: diagnostic
+    skip_updates: 10
+
+
 ### ### ###
 
 text_sensor:
+
+  - platform: version
+    name: "${dev} ESPHome Version"
+    hide_timestamp: true
+    entity_category: diagnostic
 
   - platform: template
     name: "${dev} ESP Clock"
@@ -694,6 +804,8 @@ text_sensor:
     register_count: 1
     response_size: 42
     lambda: |-
+      uint8_t _emi_err1 = data[0];
+      uint8_t _emi_err2 = data[1];
       uint16_t lpYY = (data[2] << 8 | data[3]);
       uint8_t lpMT = data[4];
       uint8_t lpDD = data[5];
@@ -705,6 +817,13 @@ text_sensor:
       id(lp3x).publish_state(lp3g);
       id(lp4x).publish_state(lp4g);
       id(lp6x).publish_state(lp6g);
+      // 
+      char _emi_err[12];
+      sprintf(_emi_err,"0x%0X",_emi_err1);
+      id(emi_errF).publish_state(_emi_err);
+      sprintf(_emi_err,"0x%0X",_emi_err2);
+      id(emi_errS).publish_state(_emi_err);
+      //
       char lpclk[25];
       sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
       return {lpclk};
@@ -721,6 +840,7 @@ text_sensor:
     raw_encode: COMMA
     icon: mdi:chip
     skip_updates: 10
+    entity_category: diagnostic
 
 ###
 
@@ -739,6 +859,44 @@ text_sensor:
         else if (x == "2,0") z = "Ponta";
         else if (x == "3,0") z = "Cheias";
         return {z};
+
+#######
+
+  - platform: template
+    name: "${dev} EMI Name"
+    icon: mdi:chip
+    id: emi_name
+    entity_category: diagnostic
+
+  - platform: template
+    name: "${dev} EMI Fw1"
+    icon: mdi:chip
+    id: emi_fw1
+    entity_category: diagnostic
+
+  - platform: template
+    name: "${dev} EMI Fw2"
+    icon: mdi:chip
+    id: emi_fw2
+    entity_category: diagnostic
+
+  - platform: template
+    name: "${dev} EMI Fw3"
+    icon: mdi:chip
+    id: emi_fw3
+    entity_category: diagnostic
+
+  - platform: template
+    name: "${dev} EMI Err F"
+    icon: mdi:chip
+    id: emi_errF
+    entity_category: diagnostic
+
+  - platform: template
+    name: "${dev} EMI Err S"
+    icon: mdi:chip
+    id: emi_errS
+    entity_category: diagnostic
 
 #######
 # eof #
