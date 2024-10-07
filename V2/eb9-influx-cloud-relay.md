@@ -3,15 +3,16 @@ Tasmota > Consoles > Console
 (tudo numa linha, caso o copy-paste não funcione adequadamente)
 
 ```js
-BackLog0 
+BackLog 
+Ifx 0; 
 IfxHost influx-relay.easyhan.pt; 
 IfxPort 80; 
-IfxBucket EB3; 
-IfxOrg hantest; 
-IfxSensor 1; 
+IfxBucket 0000-EB1; 
+IfxOrg HanUsers; 
+IfxSensor 0; 
 IfxToken apitoken; 
-IfxPeriod 60; 
-Ifx 1; 
+IfxPeriod 0; 
+Ifx 1;
 ```
 
 Cloud Endpoint:
