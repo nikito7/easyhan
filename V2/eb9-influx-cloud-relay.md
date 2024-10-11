@@ -19,3 +19,6 @@ Cloud Endpoint:
 
 https://eu-central-1-1.aws.cloud2.influxdata.com
 
+```
+eu-central-1-1.aws.cloud2.influxdata.com
+```
