@@ -1,6 +1,6 @@
 >D 48
 
-ver=110
+ver=111
 date=""
 time=""
 wfc=""
@@ -115,23 +115,23 @@ $gc(e)
 
 ; 0x005D 93-95
 
-1,010406UUuu@i3:10,Temp 1,°C,*,1
-1,010406xxxxUUuu@i3:10,Temp 2,°C,*,1
-1,010406xxxxxxxxUUuu@i3:10,Temp 3,°C,*,1
+1,010406UUuu@i3:10,Temp 1,°C,Temp1,1
+1,010406xxxxUUuu@i3:10,Temp 2,°C,Temp2,1
+1,010406xxxxxxxxUUuu@i3:10,Temp 3,°C,Temp3,1
 
 1,=h<br>
 
 ; 0x0003 3-10
 
-1,010410UUuu@i4:10,S1 Voltage,V,*,1
-1,010410xxxxUUuu@i4:10,S1 Current,A,*,1
-1,010410xxxxxxxxUUuuUUuu@i4:10,S1 Power,W,*,1
+1,010410UUuu@i4:10,S1 Voltage,V,S1V,1
+1,010410xxxxUUuu@i4:10,S1 Current,A,S1A,1
+1,010410xxxxxxxxUUuuUUuu@i4:10,S1 Power,W,S1P,1
 
 1,=h<br>
 
-1,010410x8UUuu@i4:10,S2 Voltage,V,*,1
-1,010410x8xxxxUUuu@i4:10,S2 Current,A,*,1
-1,010410x8xxxxxxxxUUuuUUuu@i4:10,S2 Power,W,*,1
+1,010410x8UUuu@i4:10,S2 Voltage,V,S2V,1
+1,010410x8xxxxUUuu@i4:10,S2 Current,A,S2C,1
+1,010410x8xxxxxxxxUUuuUUuu@i4:10,S2 Power,W,S2P,1
 
 
 1,=h<br>
