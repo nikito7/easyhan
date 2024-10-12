@@ -124,7 +124,7 @@ $gc(e)
 ; 0x0003 3-10
 
 1,010410UUuu@i4:10,S1 Voltage,V,S1V,1
-1,010410xxxxUUuu@i4:10,S1 Current,A,S1A,1
+1,010410xxxxUUuu@i4:10,S1 Current,A,S1C,1
 1,010410xxxxxxxxUUuuUUuu@i4:10,S1 Power,W,S1P,1
 
 1,=h<br>
