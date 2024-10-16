@@ -1,4 +1,4 @@
-gsubstitutions:
+substitutions:
   dev: H5
   name: h5cc
 
@@ -6,7 +6,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.h5-cc
-    version: "1.15"
+    version: "1.16"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/H5-CC868.yaml@dev
@@ -118,7 +118,7 @@ sensor:
     update_interval: 10s
     on_value:
       then:
-        - lambda: id(adc_in_v).state / 257.2580645161;
+        - lambda: id(adc_in_v).publish_state(x/257.2580645161);
 
 ###
 
