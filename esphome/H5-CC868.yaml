@@ -1,0 +1,170 @@
+gsubstitutions:
+  dev: H5
+  name: h5cc
+
+esphome:
+  name: ${name}
+  project:
+    name: easyhan.h5-cc
+    version: "1.15"
+
+dashboard_import:
+  package_import_url: github://nikito7/easyhan/esphome/H5-CC868.yaml@dev
+  import_full_config: true
+
+#esp8266:
+#  board: esp07s
+
+esp32:
+  #board: adafruit_feather_esp32s3 # N4 R2
+  board: esp32-s3-devkitc-1 # N8
+  #board: esp32-c6-devkitc-1
+  framework:
+    type: arduino
+  flash_size: 8MB
+  variant: esp32s3
+
+
+wifi:
+  output_power: 15db
+  #use_address: 10.1.0.39
+
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  #password: edpbox123
+
+  ap:
+    ssid: "Easy-HAN-${dev}"
+    password: edpbox123
+    ap_timeout: 15s # change me
+
+captive_portal:
+
+###
+
+external_components:
+  - source: github://nikito7/__wmbus@main
+    refresh: 0d
+    components: [ wmbus ]
+
+wmbus:
+  mosi_pin: 38
+  miso_pin: 36
+  clk_pin:  37
+  cs_pin:   33
+  gdo0_pin: 34
+  gdo2_pin: 35
+
+  led_pin:
+    number: 39
+    inverted: true
+
+  all_drivers: True
+  log_all: True
+
+###
+
+#esp32_ble_tracker:
+#bluetooth_proxy:
+
+###
+
+web_server:
+  local: true
+  version: 3
+  
+logger:
+  #level: debug
+  level: verbose # modbus
+
+api:
+  reboot_timeout: 30min
+
+ota:
+  - platform: esphome
+
+time:
+  - platform: homeassistant
+    id: esptime
+
+button:
+  - platform: restart
+    name: "${dev} ESP Restart"
+
+###
+
+###
+
+sensor:
+
+  - platform: template
+    name: "${dev} Adc In"
+    id: adc_in_v
+    accuracy_decimals: 2
+    device_class: voltage
+    unit_of_measurement: "V"
+    state_class: measurement
+
+  - platform: adc
+    name: "${dev} Adc In raw" # ESP32-S3 PCB
+    raw: true
+    pin: 1
+    attenuation: 0dB
+    samples: 20
+    accuracy_decimals: 0
+    device_class: ""
+    unit_of_measurement: "raw"
+    state_class: measurement
+    update_interval: 10s
+    on_value:
+      then:
+        - lambda: id(adc_in_v).state / 257.2580645161;
+
+###
+
+  - platform: template
+    name: "${dev} ESP Free Heap"
+    lambda: |-
+      // arduino
+      float heap = ESP.getFreeHeap();
+      // idf
+      //float heap = esp_get_free_heap_size();
+      return heap / 1024.0;
+    unit_of_measurement: "kB"
+    icon: mdi:chip
+    state_class: measurement
+    entity_category: diagnostic
+
+  - platform: wifi_signal
+    name: "${dev} ESP Signal"
+    unit_of_measurement: "dB"
+    state_class: measurement
+    entity_category: diagnostic
+
+  - platform: uptime
+    name: "${dev} ESP Uptime"
+    filters:
+      - lambda: return x/3600;
+    unit_of_measurement: "h"
+    accuracy_decimals: 1
+    device_class: ""
+    entity_category: diagnostic
+
+### ### ###
+
+
+### ### ###
+
+text_sensor:
+
+  - platform: version
+    name: "${dev} ESPHome Version"
+    hide_timestamp: true
+    entity_category: diagnostic
+
+
+###
+
+#######
+# eof #
+#######
