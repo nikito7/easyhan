@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.h5-cc
-    version: "1.16"
+    version: "1.17"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/H5-CC868.yaml@dev
@@ -66,8 +66,8 @@ wmbus:
 
 ###
 
-#esp32_ble_tracker:
-#bluetooth_proxy:
+esp32_ble_tracker:
+bluetooth_proxy:
 
 ###
 
@@ -98,6 +98,28 @@ button:
 ###
 
 sensor:
+
+##
+#  - platform: wmbus
+#    meter_id: 0x#######
+#    type: izar
+#    sensors:
+#      - name: "Izar Signal"
+#        field: "rssi"
+#        accuracy_decimals: 0
+#        unit_of_measurement: "dBm"
+#        device_class: "signal_strength"
+#        state_class: "measurement"
+#
+#      - name: "Izar Total"
+#        field: "total"
+#        accuracy_decimals: 3
+#        unit_of_measurement: "m³"
+#        device_class: "water"
+#        state_class: "total_increasing"
+#        icon: "mdi:counter"
+#
+##
 
   - platform: template
     name: "${dev} Adc In"
