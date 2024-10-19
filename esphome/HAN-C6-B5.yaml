@@ -1,6 +1,6 @@
 # EB3
 # ESP32-C6 / Easy HAN B5
-# Tested on: 2024.9.2
+# Tested on: 2024.10.0
 # Active development yaml
 
 substitutions:
@@ -59,7 +59,7 @@ esp32:
 
 wifi:
   output_power: 15db
-  #use_address: 10.1.0.56
+  #use_address: 10.1.0.46
 
   ssid: !secret wifi_ssid
   password: !secret wifi_password
