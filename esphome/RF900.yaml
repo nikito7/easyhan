@@ -48,12 +48,12 @@ external_components:
     components: [ wmbus ]
 
 wmbus:
-  mosi_pin: 38
-  miso_pin: 36
-  clk_pin:  37
-  cs_pin:   33
-  gdo0_pin: 34
-  gdo2_pin: 35
+  mosi_pin: 37
+  miso_pin: 38
+  clk_pin:  35
+  cs_pin:   36
+  gdo0_pin: 33
+  gdo2_pin: 34
 
   led_pin:
     number: 39
