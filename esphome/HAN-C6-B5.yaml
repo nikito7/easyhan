@@ -4,8 +4,8 @@
 # Active development yaml
 
 substitutions:
-  dev: EB3
-  name: eb3test
+  dev: EB99
+  name: eb99
 
 interval:
   - interval: 12s
@@ -52,7 +52,6 @@ i2c:
   scl: 7
   scan: false # prevent bootloop
 
-
 #esp32:
 #  board: adafruit_feather_esp32s3 # N4 R2
 #  #board: esp32-s3-devkitc-1 # N8
@@ -61,7 +60,6 @@ i2c:
 #    type: arduino
 #  #flash_size: 8MB
 #  variant: esp32s3
-
 
 wifi:
   output_power: 15db
