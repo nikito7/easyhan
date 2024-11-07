@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.h5-cc
-    version: "1.17"
+    version: "1.18"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/H5-CC868.yaml@dev
@@ -60,6 +60,9 @@ wmbus:
   led_pin:
     number: 39
     inverted: true
+
+  #frequency: 868.95
+  #frequency: 868.30
 
   all_drivers: True
   log_all: True
