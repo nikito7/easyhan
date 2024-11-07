@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.18"
+    version: "1.19"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
@@ -59,6 +59,9 @@ wmbus:
     number: 39
     inverted: true
 
+  #frequency: 868.95
+  #frequency: 868.30
+
   all_drivers: True
   log_all: True
 
@@ -99,7 +102,7 @@ sensor:
 
 ##
 #  - platform: wmbus
-#    meter_id: 0x#######
+#    meter_id: 0xABCD1234
 #    type: izar
 #    sensors:
 #      - name: "Izar Signal"
