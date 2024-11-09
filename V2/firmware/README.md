@@ -2,6 +2,11 @@ Last: http://u.easyhan.pt/v2/
 
 # 7.271
 
+- fix auto detect on error
+- add FreeDS mqtt topics
+- add firmware version
+- add ESP32 support
+
 https://github.com/nikito7/edpbox-dev/commits/dev/tasmota/xdrv100/xdrv_100_han_v2.ino
 
 # 7.24.3
