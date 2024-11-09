@@ -2,7 +2,7 @@ Last: http://u.easyhan.pt/v2/
 
 # 7.271
 
-...
+https://github.com/nikito7/edpbox-dev/commits/dev/tasmota/xdrv100/xdrv_100_han_v2.ino
 
 # 7.24.3
 
