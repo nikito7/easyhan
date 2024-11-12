@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.19"
+    version: "1.21"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
@@ -101,18 +101,19 @@ button:
 sensor:
 
 ##
-#  - platform: wmbus
-#    meter_id: 0xABCD1234
-#    type: izar
-#    sensors:
-#      - name: "Izar Signal"
-#        field: "rssi"
-#        accuracy_decimals: 0
-#        unit_of_measurement: "dBm"
-#        device_class: "signal_strength"
-#        state_class: "measurement"
-#
-#      - name: "Izar Total"
+  - platform: wmbus
+    meter_id: 0x12345678
+    type: izar
+    key: ""
+    sensors:
+      - name: "Test Izar Signal"
+        field: "rssi"
+        accuracy_decimals: 0
+        unit_of_measurement: "dBm"
+        device_class: "signal_strength"
+        state_class: "measurement"
+##
+#      - name: "Test Izar Total"
 #        field: "total"
 #        accuracy_decimals: 3
 #        unit_of_measurement: "m³"
