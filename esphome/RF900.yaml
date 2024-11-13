@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.22"
+    version: "1.23"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
@@ -43,6 +43,7 @@ captive_portal:
 ###
 
 external_components:
+#  - source: github://nikito7/__wmbus@arrow1
   - source: github://nikito7/__wmbus@main
     refresh: 0d
     components: [ wmbus ]
