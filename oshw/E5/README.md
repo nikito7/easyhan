@@ -1,6 +1,6 @@
 No support !
 
-https://www.jlcpcb.com
+https://jlcpcb.com
 
 Notes:
 
