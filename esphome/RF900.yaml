@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.24"
+    version: "1.27"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
@@ -101,6 +101,11 @@ sensor:
 ## ## ##
 
   - platform: wmbus
+    type: izar # enable driver
+
+##
+
+  - platform: wmbus
     meter_id: 0x12345678
     type: izar
     key: ""
@@ -109,7 +114,7 @@ sensor:
 
 ##
 
-      - name: "Test Izar Signal"
+      - name: "${dev} Test Izar Signal"
         field: "rssi"
         accuracy_decimals: 0
         unit_of_measurement: "dBm"
@@ -118,7 +123,7 @@ sensor:
 
 ##
 
-      - name: "Test Izar Total"
+      - name: "${dev} Test Izar Total"
         field: "total"
         accuracy_decimals: 3
         unit_of_measurement: "m³"
@@ -141,12 +146,12 @@ sensor:
     raw: true
     pin: 1
     attenuation: 0dB
-    samples: 20
+    samples: 8
     accuracy_decimals: 0
     device_class: ""
     unit_of_measurement: "raw"
+    icon: mdi:information
     state_class: measurement
-    update_interval: 10s
     on_value:
       then:
         - lambda: id(adc_in_v).publish_state(x/257.2580645161);
