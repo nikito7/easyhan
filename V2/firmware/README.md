@@ -1,5 +1,12 @@
 Last: http://u.easyhan.pt/v2/
 
+# 7.274
+
+- refresh onetime requests every 15min
+- index 1 error count
+
+https://github.com/nikito7/edpbox-dev/commit/c6fe5e92bedb0780149dd81273cdfcfa23be5ccf
+
 # 7.271
 
 - fix auto detect on error
