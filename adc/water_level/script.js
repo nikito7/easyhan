@@ -1,6 +1,6 @@
 >D 48
 
-ver=1004
+ver=1005
 ;ver=20038
 date=""
 time=""
@@ -79,7 +79,7 @@ volt6v=raw/1024*6
 volt1v=raw/1024
 
 >J
-,"WL%":{
+,"WL":{
 "wlm":%2wlm%
 }
 
