@@ -1,6 +1,6 @@
 >D 48
 
-ver=1003
+ver=1004
 ;ver=20038
 date=""
 time=""
@@ -9,7 +9,7 @@ wfp=0
 cnt=0
 ;
 max=700
-min=204
+min=274
 fheap=0
 ;
 tmp=0
@@ -17,6 +17,9 @@ raw=0
 hour=0
 m:adc=0 60
 cstr2="cnt0"
+wlm=0
+volt6v=0
+volt1v=0
 
 >B
 
@@ -66,11 +69,19 @@ if cnt<100
 cnt+=1
 }
 
-
 if (secs%60==0)
 then
 adc=raw
 endif
+
+wlm=(raw-min)*0.55/100
+volt6v=raw/1024*6
+volt1v=raw/1024
+
+>J
+,"WL%":{
+"wlm":%2wlm%
+}
 
 >W
 
@@ -82,6 +93,10 @@ endif
 Max (fixed) {m} %0max% raw
 Current {m} %0raw% raw
 Min (fixed) {m} %0min% raw
+<br> {m}
+Meters {m} %2wlm% m
+Volt 6V {m} %2volt6v% V
+Volt 1V {m} %2volt1v% V
 <br> {m}
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
