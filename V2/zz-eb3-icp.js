@@ -57,6 +57,8 @@ vtf=""
 vt1=0
 vt2=0
 vt3=0
+get=""
+icp=""
 
 >B
 
@@ -67,6 +69,7 @@ tper=30
 
 wfc=WifiConfig#?
 wfp=WifiPower
+get=HanGet
 
 >T
 
@@ -90,6 +93,31 @@ mm=EB3#MM
 ss=EB3#SS
 
 >S
+
+if upsecs%20==0
+then
++>HanGet 132
+endif
+
+tmp=st(get - 1)
+if (tmp==132)
+then
+;
+tmp=st(get , 2)
+if (tmp==0)
+then
+icp="Desligado "+s(0tmp)
+endif
+if (tmp==1)
+then
+icp="Ligado "+s(0tmp)
+endif
+if (tmp==2)
+then
+icp="Pronto Rearme "+s(0tmp)
+endif
+;
+endif
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
@@ -257,6 +285,8 @@ endif
 <br>
 %EBx% Consumo %C%{m}%3saldo1% kWh
 %EBx% Excedente %C%{m}%3saldo2% kWh
+<br>
+ICP: %icp%<br>
 <br>
 <a href="ufs/%lpf%">%lpf%</a>{m}<a href="ufs/charts.html">Charts JS</a>
 <br>
