@@ -1,4 +1,4 @@
-# Easy HAN ® RS485
+# Easy HAN ® V1
 
 Tasmota > Consoles > Console
 
@@ -7,6 +7,23 @@ Tasmota > Consoles > Console
 ![Easy HAN](./img/howto-1.jpg)
 
 (linha única)
+
+manter mqtt:
+
+```js
+Backlog 
+TimeZone 99; 
+TimeDST 0,0,3,1,1,60; 
+TimeSTD 0,0,10,1,2,0; 
+MqttClient Easy_HAN_%06X; 
+WebLog 3; 
+Sleep 75; 
+WifiPower 0;
+Topic edpbox99; 
+Restart 1; 
+```
+
+default:
 
 ```js
 Backlog 
@@ -35,7 +52,7 @@ Hostname Easy-HAN-EB99;
 Template {"NAME":"easyhan.pt","GPIO":[1,1,1,1,1,1,1,1,1,1,1,1,1,1],"FLAG":0,"BASE":18}; 
 Module 0; 
 WifiConfig 2; 
-OtaUrl http://u.easyhan.pt/han/tasmota-4M.bin.gz; 
+OtaUrl http://u.easyhan.pt/v2/tasmota-4M-v1.bin.gz; 
 Restart 1; 
 ``` 
 
