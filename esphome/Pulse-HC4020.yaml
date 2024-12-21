@@ -1,15 +1,21 @@
 # Pulse Counter
-# Binary Counter
+# Binary Counter HC4020 TI
 
 substitutions:
   dev: Pulse
   name: pulse
 
+globals:
+   - id: cubic
+     type: float
+     restore_value: yes
+     initial_value: '0.000' 
+
 esphome:
   name: ${name}
   project:
     name: easyhan.pulse
-    version: "1.02"
+    version: "1.09"
   on_boot:
     priority: 1000
     then:
@@ -26,13 +32,16 @@ esphome:
           pinMode(14, INPUT_PULLDOWN);
           pinMode(15, INPUT_PULLDOWN);
           pinMode(16, INPUT_PULLDOWN);
-          delay(100);
+          //
           pinMode(17, OUTPUT);
           digitalWrite(17, LOW);
-          delay(100);
+          //
+          pinMode(39, OUTPUT);
+          digitalWrite(39, LOW);
+
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/Pulse.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/Pulse-HC4020.yaml@dev
   import_full_config: true
 
 esp32:
@@ -47,8 +56,8 @@ wifi:
   #use_address: 10.1.0.39
 
   ssid: !secret wifi_ssid
-  #password: !secret wifi_password
-  password: edpbox123
+  password: !secret wifi_password
+  #password: edpbox123
 
   ap:
     ssid: "Easy-HAN-${dev}"
@@ -61,8 +70,8 @@ captive_portal:
 
 ###
 
-esp32_ble_tracker:
-bluetooth_proxy:
+#esp32_ble_tracker:
+#bluetooth_proxy:
 
 ###
 
@@ -86,9 +95,8 @@ time:
 
 ## ## ##
 
-## ## ##
-
 button:
+
   - platform: restart
     name: "${dev} ESP Restart"
 
@@ -114,22 +122,74 @@ sensor:
   - platform: template
     name: "${dev} Counter Debug"
     lambda: |-
+        // bits
+        bool qq_a = digitalRead(12);
+        bool qq_d = digitalRead(5);
+        bool qq_e = digitalRead(7);
+        bool qq_f = digitalRead(8);
+        bool qq_g = digitalRead(6);
+        bool qq_h = digitalRead(14);
+        bool qq_i = digitalRead(13);
+        bool qq_j = digitalRead(15);
+        bool qq_k = digitalRead(16);
+        bool qq_l = digitalRead(11);
+        bool qq_m = digitalRead(10);
+        bool qq_n = digitalRead(9);
+        //
+        char qq_dbg[24];
+        sprintf(qq_dbg, "xx%d%d%d%d%d%d%d%d%d%d%dcb%d",
+            qq_n, qq_m, qq_l, qq_k,
+            qq_j, qq_i, qq_h, qq_g,
+            qq_f, qq_e, qq_d, qq_a );
+        id(counter_t).publish_state(qq_dbg);
         // n to a order
-        uint16_t hc_pulse = (
-          (digitalRead(9) << 13)
-        | (digitalRead(10) << 12)
-        | (digitalRead(11) << 11)
-        | (digitalRead(16) << 10)
-        | (digitalRead(15) << 9)
-        | (digitalRead(13) << 8)
-        | (digitalRead(14) << 7)
-        | (digitalRead(6) << 6)
-        | (digitalRead(8) << 5)
-        | (digitalRead(7) << 4)
-        | (digitalRead(5) << 3)
-        |  digitalRead(12)
+        uint16_t hc_pulse = 0;
+        hc_pulse = (
+          (qq_n << 13)
+        | (qq_m << 12)
+        | (qq_l << 11)
+        | (qq_k << 10)
+        | (qq_j << 9)
+        | (qq_i << 8)
+        | (qq_h << 7)
+        | (qq_g << 6)
+        | (qq_f << 5)
+        | (qq_e << 4)
+        | (qq_d << 3)
+        |  qq_a
         );
-        return hc_pulse;
+        uint16_t inc = hc_pulse;
+        // sum HC4020
+        if ((hc_pulse >= 24) && (hc_pulse % 8 == 0)) {
+          float total = id(cubic);
+          id(cubic) = total + (hc_pulse / 1000.0);
+          // reset
+          digitalWrite(17, HIGH);
+          delay(1);
+          digitalWrite(17, LOW);
+        }
+        // led blink
+        digitalWrite(39, LOW);
+        delay(30);
+        digitalWrite(39, HIGH);
+        // value
+        return inc;
+    accuracy_decimals: 0
+    device_class: water
+    state_class: measurement
+    update_interval: 10s
+    icon: "mdi:information"
+
+  - platform: template
+    name: "${dev} Water Total Test"
+    lambda: |-
+        float a = id(cubic);
+        return a;
+    accuracy_decimals: 3
+    device_class: water
+    state_class: total_increasing
+    unit_of_measurement: "m³"
+    update_interval: 10s
 
 ###
 
@@ -198,6 +258,10 @@ text_sensor:
     hide_timestamp: true
     entity_category: diagnostic
 
+  - platform: template
+    name: "${dev} Counter Debug T"
+    id: counter_t
+    icon: "mdi:information"
 
 ###
 
