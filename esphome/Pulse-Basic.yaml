@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.pulse
-    version: "1.08"
+    version: "1.09"
   on_boot:
     priority: 1000
     then:
@@ -93,7 +93,7 @@ sensor:
       rising_edge: DISABLE
       falling_edge: INCREMENT
     use_pcnt: false
-    internal_filter: 100ms
+    internal_filter: 50ms
     update_interval: 10s
     total:
       name: "${dev} Counter Basic Total"
