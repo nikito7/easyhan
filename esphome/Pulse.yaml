@@ -1,0 +1,310 @@
+# Pulse Counter
+# Binary Counter HC4020 TI
+
+substitutions:
+  dev: Pulse
+  name: pulse
+
+globals:
+   - id: cubic
+     type: float
+     restore_value: yes
+     initial_value: '0.001' 
+
+deep_sleep:
+  id: sleep1
+  run_duration: 40s
+  sleep_duration: 5min
+  wakeup_pin: 7
+  wakeup_pin_mode: KEEP_AWAKE
+
+esphome:
+  name: ${name}
+  project:
+    name: easyhan.pulse-hc
+    version: "1.15"
+  on_boot:
+    priority: 1000
+    then:
+      - lambda: |-
+          pinMode(5, INPUT_PULLDOWN);
+          pinMode(6, INPUT_PULLDOWN);
+          pinMode(7, INPUT_PULLDOWN);
+          pinMode(8, INPUT_PULLDOWN);
+          pinMode(9, INPUT_PULLDOWN);
+          pinMode(10, INPUT_PULLDOWN);
+          pinMode(11, INPUT_PULLDOWN);
+          pinMode(12, INPUT_PULLDOWN);
+          pinMode(13, INPUT_PULLDOWN);
+          pinMode(14, INPUT_PULLDOWN);
+          pinMode(15, INPUT_PULLDOWN);
+          pinMode(16, INPUT_PULLDOWN);
+          //
+          pinMode(17, OUTPUT);
+          digitalWrite(17, LOW);
+          //
+          pinMode(39, OUTPUT);
+          digitalWrite(39, LOW);
+
+
+dashboard_import:
+  package_import_url: github://nikito7/easyhan/esphome/Pulse-HC4020.yaml@dev
+  import_full_config: true
+
+esp32:
+  board: esp32-s3-devkitc-1 # N8
+  framework:
+    type: arduino
+  flash_size: 8MB
+  variant: esp32s3
+
+wifi:
+  output_power: 15db
+  #use_address: 10.1.0.39
+
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  #password: edpbox123
+
+  ap:
+    ssid: "Easy-HAN-${dev}"
+    password: edpbox123
+    ap_timeout: 20s # change me
+
+captive_portal:
+
+###
+
+###
+
+#esp32_ble_tracker:
+#bluetooth_proxy:
+
+###
+
+web_server:
+  local: true
+  version: 3
+  
+logger:
+  #level: debug
+  level: verbose
+
+api:
+  reboot_timeout: 30min
+
+ota:
+  - platform: esphome
+
+time:
+  - platform: homeassistant
+    id: esptime
+
+## ## ##
+
+button:
+
+  - platform: restart
+    name: "${dev} ESP Restart"
+
+## ## ##
+
+# number: 12 id: qq_a
+# number: 5  id: qq_d
+# number: 7  id: qq_e
+# number: 8  id: qq_f
+# number: 6  id: qq_g
+# number: 14 id: qq_h
+# number: 13 id: qq_i
+# number: 15 id: qq_j
+# number: 16 id: qq_k
+# number: 11 id: qq_l
+# number: 10 id: qq_m
+# number: 9  id: qq_n
+
+## ## ##
+
+sensor:
+
+  - platform: template
+    name: "${dev} HC Debug"
+    lambda: |-
+        // bits
+        bool qq_a = digitalRead(12);
+        bool qq_d = digitalRead(5);
+        bool qq_e = digitalRead(7);
+        bool qq_f = digitalRead(8);
+        bool qq_g = digitalRead(6);
+        bool qq_h = digitalRead(14);
+        bool qq_i = digitalRead(13);
+        bool qq_j = digitalRead(15);
+        bool qq_k = digitalRead(16);
+        bool qq_l = digitalRead(11);
+        bool qq_m = digitalRead(10);
+        bool qq_n = digitalRead(9);
+        //
+        char qq_dbg[24];
+        sprintf(qq_dbg, "%d%d%d%d%d%d%d%d%d%d%dcb%d",
+            qq_n, qq_m, qq_l, qq_k,
+            qq_j, qq_i, qq_h, qq_g,
+            qq_f, qq_e, qq_d, qq_a );
+        id(counter_t).publish_state(qq_dbg);
+        // n to a order
+        uint16_t hc_pulse = 0;
+        hc_pulse = (
+          (qq_n << 13)
+        | (qq_m << 12)
+        | (qq_l << 11)
+        | (qq_k << 10)
+        | (qq_j << 9)
+        | (qq_i << 8)
+        | (qq_h << 7)
+        | (qq_g << 6)
+        | (qq_f << 5)
+        | (qq_e << 4)
+        | (qq_d << 3)
+        |  qq_a
+        );
+        uint16_t inc = hc_pulse;
+        // sum HC4020
+        // if ((hc_pulse >= 24) && (hc_pulse % 8 == 0)) {
+        //
+        if (hc_pulse >= 16) {
+          float total = id(cubic);
+          id(cubic) = total + (hc_pulse / 1000.0);
+          id(water_total).update();
+          // reset
+          digitalWrite(17, HIGH);
+          delay(1);
+          digitalWrite(17, LOW);
+        }
+        // led blink
+        digitalWrite(39, LOW);
+        delay(100);
+        digitalWrite(39, HIGH);
+        // value
+        return inc;
+    accuracy_decimals: 0
+    state_class: measurement
+    update_interval: 5s
+    icon: "mdi:information"
+
+###
+
+  - platform: template
+    name: "${dev} Water Total"
+    id: water_total
+    lambda: |-
+        float a = id(cubic);
+        return a;
+    accuracy_decimals: 3
+    device_class: water
+    state_class: total_increasing
+    unit_of_measurement: "m³"
+    update_interval: 10s
+
+###
+
+  - platform: template
+    name: "${dev} Wakeup Cause"
+    accuracy_decimals: 0
+    lambda: return esp_sleep_get_wakeup_cause();
+    icon: "mdi:information"
+
+###
+
+  - platform: template
+    name: "${dev} Adc In"
+    id: adc_in_v
+    accuracy_decimals: 2
+    device_class: voltage
+    unit_of_measurement: "V"
+    state_class: measurement
+
+  - platform: adc
+    name: "${dev} Adc In raw" # ESP32-S3 PCB
+    raw: true
+    pin: 1
+    attenuation: 0dB
+    samples: 8
+    accuracy_decimals: 0
+    device_class: ""
+    unit_of_measurement: "raw"
+    icon: mdi:information
+    state_class: measurement
+    on_value:
+      then:
+        - lambda: id(adc_in_v).publish_state(x/257.2580645161);
+
+###
+
+  - platform: template
+    name: "${dev} ESP Free Heap"
+    lambda: |-
+      // arduino
+      float heap = ESP.getFreeHeap();
+      // idf
+      //float heap = esp_get_free_heap_size();
+      return heap / 1024.0;
+    unit_of_measurement: "kB"
+    icon: mdi:chip
+    state_class: measurement
+    entity_category: diagnostic
+
+  - platform: wifi_signal
+    name: "${dev} ESP Signal"
+    unit_of_measurement: "dB"
+    state_class: measurement
+    entity_category: diagnostic
+
+  - platform: uptime
+    name: "${dev} ESP Uptime"
+    filters:
+      - lambda: return x/3600;
+    unit_of_measurement: "h"
+    accuracy_decimals: 1
+    device_class: ""
+    entity_category: diagnostic
+
+### ### ###
+
+number:
+
+  - platform: template
+    name: "${dev} Total Set"
+    optimistic: true
+    id: water_set
+    set_action:
+      - lambda: |-
+          if ( x > 0 ) {
+            id(cubic) = x;
+            id(water_total).update();
+          }
+    min_value: 0.001
+    max_value: 9999.999
+    step: 0.001
+    mode: box
+    device_class: water
+    unit_of_measurement: "m³"
+
+### ### ###
+
+text_sensor:
+
+  - platform: version
+    name: "${dev} ESPHome Version"
+    hide_timestamp: true
+    entity_category: diagnostic
+
+  - platform: template
+    name: "${dev} HC Debug T"
+    id: counter_t
+    icon: "mdi:information"
+    entity_category: ""
+
+###
+
+#######
+# eof #
+#######
+
