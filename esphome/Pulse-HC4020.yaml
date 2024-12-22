@@ -9,13 +9,13 @@ globals:
    - id: cubic
      type: float
      restore_value: yes
-     initial_value: '0.000' 
+     initial_value: '0.001' 
 
 esphome:
   name: ${name}
   project:
-    name: easyhan.pulse
-    version: "1.09"
+    name: easyhan.pulse-hc
+    version: "1.15"
   on_boot:
     priority: 1000
     then:
@@ -120,7 +120,7 @@ button:
 sensor:
 
   - platform: template
-    name: "${dev} Counter Debug"
+    name: "${dev} HC Debug"
     lambda: |-
         // bits
         bool qq_a = digitalRead(12);
@@ -137,7 +137,7 @@ sensor:
         bool qq_n = digitalRead(9);
         //
         char qq_dbg[24];
-        sprintf(qq_dbg, "xx%d%d%d%d%d%d%d%d%d%d%dcb%d",
+        sprintf(qq_dbg, "%d%d%d%d%d%d%d%d%d%d%dcb%d",
             qq_n, qq_m, qq_l, qq_k,
             qq_j, qq_i, qq_h, qq_g,
             qq_f, qq_e, qq_d, qq_a );
@@ -160,9 +160,11 @@ sensor:
         );
         uint16_t inc = hc_pulse;
         // sum HC4020
-        if ((hc_pulse >= 24) && (hc_pulse % 8 == 0)) {
+        // if ((hc_pulse >= 24) && (hc_pulse % 8 == 0)) {
+        if (hc_pulse >= 16) {
           float total = id(cubic);
           id(cubic) = total + (hc_pulse / 1000.0);
+          id(water_total).update();
           // reset
           digitalWrite(17, HIGH);
           delay(1);
@@ -175,13 +177,13 @@ sensor:
         // value
         return inc;
     accuracy_decimals: 0
-    device_class: water
     state_class: measurement
     update_interval: 10s
     icon: "mdi:information"
 
   - platform: template
-    name: "${dev} Water Total Test"
+    name: "${dev} Water Total"
+    id: water_total
     lambda: |-
         float a = id(cubic);
         return a;
@@ -248,6 +250,24 @@ sensor:
 
 ### ### ###
 
+number:
+
+  - platform: template
+    name: "${dev} Total Set"
+    optimistic: true
+    id: water_set
+    set_action:
+      - lambda: |-
+          if ( x > 0 ) {
+            id(cubic) = x;
+            id(water_total).update();
+          }
+    min_value: 0.001
+    max_value: 9999.999
+    step: 0.001
+    mode: box
+    device_class: water
+    unit_of_measurement: "m³"
 
 ### ### ###
 
@@ -259,9 +279,10 @@ text_sensor:
     entity_category: diagnostic
 
   - platform: template
-    name: "${dev} Counter Debug T"
+    name: "${dev} HC Debug T"
     id: counter_t
     icon: "mdi:information"
+    entity_category: ""
 
 ###
 
