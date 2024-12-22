@@ -1,5 +1,5 @@
 # Pulse Counter
-# Binary Counter HC4020 TI
+# Binary Counter (TI HC4040)
 
 substitutions:
   dev: Pulse
@@ -11,18 +11,18 @@ globals:
      restore_value: yes
      initial_value: '0.001' 
 
-deep_sleep:
-  id: sleep1
-  run_duration: 40s
-  sleep_duration: 5min
-  wakeup_pin: 7
-  wakeup_pin_mode: KEEP_AWAKE
+#deep_sleep:
+#  id: sleep1
+#  run_duration: 40s
+#  sleep_duration: 5min
+#  wakeup_pin: 7
+#  wakeup_pin_mode: KEEP_AWAKE
 
 esphome:
   name: ${name}
   project:
     name: easyhan.pulse-hc
-    version: "1.15"
+    version: "1.17"
   on_boot:
     priority: 1000
     then:
@@ -48,7 +48,7 @@ esphome:
 
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/Pulse-HC4020.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/Pulse.yaml@dev
   import_full_config: true
 
 esp32:
@@ -87,8 +87,8 @@ web_server:
   version: 3
   
 logger:
-  #level: debug
-  level: verbose
+  level: debug
+  #level: verbose
 
 api:
   reboot_timeout: 30min
@@ -166,9 +166,7 @@ sensor:
         |  qq_a
         );
         uint16_t inc = hc_pulse;
-        // sum HC4020
-        // if ((hc_pulse >= 24) && (hc_pulse % 8 == 0)) {
-        //
+        // sum HC4040
         if (hc_pulse >= 16) {
           float total = id(cubic);
           id(cubic) = total + (hc_pulse / 1000.0);
@@ -180,13 +178,13 @@ sensor:
         }
         // led blink
         digitalWrite(39, LOW);
-        delay(100);
+        delay(30);
         digitalWrite(39, HIGH);
         // value
         return inc;
     accuracy_decimals: 0
     state_class: measurement
-    update_interval: 5s
+    update_interval: 10s
     icon: "mdi:information"
 
 ###
@@ -307,4 +305,3 @@ text_sensor:
 #######
 # eof #
 #######
-
