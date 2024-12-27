@@ -22,7 +22,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.pulse-hc
-    version: "1.17"
+    version: "1.18"
   on_boot:
     priority: 1000
     then:
@@ -110,17 +110,17 @@ button:
 ## ## ##
 
 # number: 12 id: qq_a
-# number: 5  id: qq_d
-# number: 7  id: qq_e
-# number: 8  id: qq_f
-# number: 6  id: qq_g
+# number: 5  id: qq_b
+# number: 6  id: qq_c
+# number: 7  id: qq_d
+# number: 9  id: qq_e
+# number: 10 id: qq_f
+# number: 8  id: qq_g
 # number: 14 id: qq_h
 # number: 13 id: qq_i
 # number: 15 id: qq_j
 # number: 16 id: qq_k
 # number: 11 id: qq_l
-# number: 10 id: qq_m
-# number: 9  id: qq_n
 
 ## ## ##
 
@@ -131,43 +131,43 @@ sensor:
     lambda: |-
         // bits
         bool qq_a = digitalRead(12);
-        bool qq_d = digitalRead(5);
-        bool qq_e = digitalRead(7);
-        bool qq_f = digitalRead(8);
-        bool qq_g = digitalRead(6);
+        bool qq_b = digitalRead(5);
+        bool qq_c = digitalRead(6);
+        bool qq_d = digitalRead(7);
+        bool qq_e = digitalRead(9);
+        bool qq_f = digitalRead(10);
+        bool qq_g = digitalRead(8);
         bool qq_h = digitalRead(14);
         bool qq_i = digitalRead(13);
         bool qq_j = digitalRead(15);
         bool qq_k = digitalRead(16);
         bool qq_l = digitalRead(11);
-        bool qq_m = digitalRead(10);
-        bool qq_n = digitalRead(9);
         //
         char qq_dbg[24];
-        sprintf(qq_dbg, "%d%d%d%d%d%d%d%d%d%d%dcb%d",
-            qq_n, qq_m, qq_l, qq_k,
-            qq_j, qq_i, qq_h, qq_g,
-            qq_f, qq_e, qq_d, qq_a );
+        sprintf(qq_dbg, "%d%d%d%d%d%d%d%d%d%d%d%d",
+            qq_l, qq_k, qq_j, qq_i,
+            qq_h, qq_g, qq_f, qq_e,
+            qq_d, qq_c, qq_b, qq_a );
         id(counter_t).publish_state(qq_dbg);
         // n to a order
         uint16_t hc_pulse = 0;
         hc_pulse = (
-          (qq_n << 13)
-        | (qq_m << 12)
-        | (qq_l << 11)
+          (qq_l << 11)
         | (qq_k << 10)
-        | (qq_j << 9)
+        | (qq_i << 9)
         | (qq_i << 8)
         | (qq_h << 7)
         | (qq_g << 6)
         | (qq_f << 5)
         | (qq_e << 4)
         | (qq_d << 3)
+        | (qq_c << 2)
+        | (qq_b << 1)
         |  qq_a
         );
         uint16_t inc = hc_pulse;
         // sum HC4040
-        if (hc_pulse >= 16) {
+        if (hc_pulse >= 3) {
           float total = id(cubic);
           id(cubic) = total + (hc_pulse / 1000.0);
           id(water_total).update();
