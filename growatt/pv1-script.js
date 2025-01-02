@@ -1,6 +1,6 @@
 >D 48
 
-ver=112
+ver=115
 date=""
 time=""
 wfc=""
@@ -26,7 +26,10 @@ smlj=0
 +>WifiConfig
 +>WifiPower
 
+if upsecs<300
+then
 =>Sensor53 r
+endif
 
 >E
 
