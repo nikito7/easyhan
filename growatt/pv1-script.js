@@ -1,6 +1,6 @@
 >D 48
 
-ver=111
+ver=112
 date=""
 time=""
 wfc=""
@@ -72,7 +72,8 @@ endif
 
 if (upsecs%5==0)
 {
-=>Publish freeds/growatt/SENSOR {"Time":"%tstamp%","ENERGY":{"Pv1Current":0,"Pv2Current":0,"Pv1Voltage":0,"Pv2Voltage":0,"Pv1Power":0,"Pv2Power":0,"Today":0,"Power":%1epwr%,"Temperature":0}}
+print FreedDS disabled
+;=>Publish freeds/growatt/SENSOR {"Time":"%tstamp%","ENERGY":{"Pv1Current":0,"Pv2Current":0,"Pv1Voltage":0,"Pv2Voltage":0,"Pv1Power":0,"Pv2Power":0,"Today":0,"Power":%1epwr%,"Temperature":0}}
 }
 
 >W
