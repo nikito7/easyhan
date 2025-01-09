@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.scd4x
-    version: "1.01"
+    version: "1.03"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/SCD4x.yaml@dev
@@ -36,8 +36,6 @@ wifi:
 
 captive_portal:
 
-
-
 ###
 
 #esp32_ble_tracker:
@@ -53,9 +51,6 @@ logger:
   #level: debug
   level: verbose
 
-api:
-  reboot_timeout: 30min
-
 ota:
   - platform: esphome
 
@@ -63,9 +58,22 @@ time:
   - platform: homeassistant
     id: esptime
 
+###
+
+api:
+  reboot_timeout: 30min
+
 button:
   - platform: restart
     name: "${dev} ESP Restart"
+    entity_category: diagnostic
+
+  - platform: template
+    name: "${dev} SCD41 Factory Reset"
+    on_press:
+      then:
+        - scd4x.factory_reset: my_scd41
+    entity_category: diagnostic
 
 ###
 
@@ -86,13 +94,16 @@ sensor:
     internal: true
 
   - platform: scd4x
+    id: my_scd41
     ambient_pressure_compensation_source: bme_ha
     co2:
-      name: "${dev} CO2"
+      name: "${dev} SCD41 CO2"
     temperature:
-      name: "${dev} Temperature"
+      name: "${dev} SCD41 Temperature"
+      accuracy_decimals: 1
     humidity:
-      name: "${dev} Humidity"
+      name: "${dev} SCD41 Humidity"
+      accuracy_decimals: 1
 
 ## ## ##
 
