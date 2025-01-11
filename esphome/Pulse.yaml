@@ -11,18 +11,18 @@ globals:
      restore_value: yes
      initial_value: '0.001' 
 
-#deep_sleep:
-#  id: sleep1
-#  run_duration: 40s
-#  sleep_duration: 5min
-#  wakeup_pin: 7
-#  wakeup_pin_mode: KEEP_AWAKE
+deep_sleep:
+  id: sleep1
+  run_duration: 40s
+  sleep_duration: 5min
+  wakeup_pin: 7
+  wakeup_pin_mode: KEEP_AWAKE
 
 esphome:
   name: ${name}
   project:
     name: easyhan.pulse-hc
-    version: "1.19"
+    version: "1.22"
   on_boot:
     priority: 1000
     then:
@@ -108,13 +108,20 @@ button:
     name: "${dev} ESP Restart"
 
   - platform: template
-    name: "${dev} HC Reset"
+    name: "${dev} ESP Prevent Sleep"
     on_press:
       then:
-        - lambda: |-
-            digitalWrite(17, HIGH);
-            delay(1);
-            digitalWrite(17, LOW);
+        - deep_sleep.prevent: sleep1
+
+
+#  - platform: template
+#    name: "${dev} HC Reset"
+#    on_press:
+#      then:
+#        - lambda: |-
+#            digitalWrite(17, HIGH);
+#            delay(1);
+#            digitalWrite(17, LOW);
 
 ## ## ##
 
@@ -174,26 +181,29 @@ sensor:
         | (qq_b << 1)
         |  qq_a
         );
+        // led blink on
+        digitalWrite(39, LOW);
+        //
         uint16_t inc = hc_pulse;
         // sum HC4040
-        if (hc_pulse >= 3) {
+        if (hc_pulse >= 1) {
           float total = id(cubic);
           id(cubic) = total + (hc_pulse / 1000.0);
+          delay(10);
           id(water_total).update();
           // reset
-          //digitalWrite(17, HIGH);
-          delay(1);
-          //digitalWrite(17, LOW);
+          digitalWrite(17, HIGH);
+          delay(10);
+          digitalWrite(17, LOW);
         }
-        // led blink
-        digitalWrite(39, LOW);
-        delay(30);
+        // led blink off
+        delay(10);
         digitalWrite(39, HIGH);
         // value
         return inc;
     accuracy_decimals: 0
     state_class: measurement
-    update_interval: 10s
+    update_interval: 15s
     icon: "mdi:information"
 
 ###
@@ -208,7 +218,7 @@ sensor:
     device_class: water
     state_class: total_increasing
     unit_of_measurement: "m³"
-    update_interval: 10s
+    update_interval: 15s
 
 ###
 
@@ -217,6 +227,7 @@ sensor:
     accuracy_decimals: 0
     lambda: return esp_sleep_get_wakeup_cause();
     icon: "mdi:information"
+    update_interval: 15s
 
 ###
 
@@ -242,6 +253,7 @@ sensor:
     on_value:
       then:
         - lambda: id(adc_in_v).publish_state(x/257.2580645161);
+    update_interval: 15s
 
 ###
 
@@ -257,12 +269,14 @@ sensor:
     icon: mdi:chip
     state_class: measurement
     entity_category: diagnostic
+    update_interval: 15s
 
   - platform: wifi_signal
     name: "${dev} ESP Signal"
     unit_of_measurement: "dB"
     state_class: measurement
     entity_category: diagnostic
+    update_interval: 15s
 
   - platform: uptime
     name: "${dev} ESP Uptime"
@@ -272,6 +286,7 @@ sensor:
     accuracy_decimals: 1
     device_class: ""
     entity_category: diagnostic
+    update_interval: 15s
 
 ### ### ###
 
