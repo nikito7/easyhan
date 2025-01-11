@@ -22,7 +22,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.pulse-hc
-    version: "1.18"
+    version: "1.19"
   on_boot:
     priority: 1000
     then:
@@ -107,6 +107,15 @@ button:
   - platform: restart
     name: "${dev} ESP Restart"
 
+  - platform: template
+    name: "${dev} HC Reset"
+    on_press:
+      then:
+        - lambda: |-
+            digitalWrite(17, HIGH);
+            delay(1);
+            digitalWrite(17, LOW);
+
 ## ## ##
 
 # number: 12 id: qq_a
@@ -154,7 +163,7 @@ sensor:
         hc_pulse = (
           (qq_l << 11)
         | (qq_k << 10)
-        | (qq_i << 9)
+        | (qq_j << 9)
         | (qq_i << 8)
         | (qq_h << 7)
         | (qq_g << 6)
@@ -172,9 +181,9 @@ sensor:
           id(cubic) = total + (hc_pulse / 1000.0);
           id(water_total).update();
           // reset
-          digitalWrite(17, HIGH);
+          //digitalWrite(17, HIGH);
           delay(1);
-          digitalWrite(17, LOW);
+          //digitalWrite(17, LOW);
         }
         // led blink
         digitalWrite(39, LOW);
