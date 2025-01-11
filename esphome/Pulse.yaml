@@ -298,7 +298,7 @@ number:
     id: water_set
     set_action:
       - lambda: |-
-          if ( x > 0 ) {
+          if ( x > 0.005 ) {
             id(cubic) = x;
             id(water_total).update();
           }
