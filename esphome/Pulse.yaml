@@ -11,18 +11,18 @@ globals:
      restore_value: yes
      initial_value: '0.001' 
 
-deep_sleep:
-  id: sleep1
-  run_duration: 40s
-  sleep_duration: 5min
-  wakeup_pin: 7
-  wakeup_pin_mode: KEEP_AWAKE
+#deep_sleep:
+#  id: sleep1
+#  run_duration: 40s
+#  sleep_duration: 5min
+#  wakeup_pin: 7
+#  wakeup_pin_mode: KEEP_AWAKE
 
 esphome:
   name: ${name}
   project:
     name: easyhan.pulse-hc
-    version: "1.22"
+    version: "1.23"
   on_boot:
     priority: 1000
     then:
@@ -107,11 +107,11 @@ button:
   - platform: restart
     name: "${dev} ESP Restart"
 
-  - platform: template
-    name: "${dev} ESP Prevent Sleep"
-    on_press:
-      then:
-        - deep_sleep.prevent: sleep1
+#  - platform: template
+#    name: "${dev} ESP Prevent Sleep"
+#    on_press:
+#      then:
+#        - deep_sleep.prevent: sleep1
 
 
 #  - platform: template
