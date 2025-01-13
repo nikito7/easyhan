@@ -1,0 +1,18 @@
+alias: Pulse Anti Sleep
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - sensor.pulse_adc_in_raw
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+conditions: []
+actions:
+  - action: button.press
+    metadata: {}
+    data: {}
+    target:
+      entity_id: button.pulse_esp_prevent_sleep
+mode: single
