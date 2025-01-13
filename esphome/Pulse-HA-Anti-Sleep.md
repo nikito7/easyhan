@@ -1,3 +1,4 @@
+```yaml
 alias: Pulse Anti Sleep
 description: ""
 triggers:
@@ -16,3 +17,4 @@ actions:
     target:
       entity_id: button.pulse_esp_prevent_sleep
 mode: single
+```
