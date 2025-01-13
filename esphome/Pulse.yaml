@@ -11,18 +11,18 @@ globals:
      restore_value: yes
      initial_value: '0.001' 
 
-#deep_sleep:
-#  id: sleep1
-#  run_duration: 40s
-#  sleep_duration: 5min
-#  wakeup_pin: 7
-#  wakeup_pin_mode: KEEP_AWAKE
+deep_sleep:
+  id: sleep1
+  run_duration: 55s
+  sleep_duration: 5min
+  wakeup_pin: 7
+  wakeup_pin_mode: KEEP_AWAKE
 
 esphome:
   name: ${name}
   project:
     name: easyhan.pulse-hc
-    version: "1.23"
+    version: "1.24"
   on_boot:
     priority: 1000
     then:
@@ -91,7 +91,7 @@ logger:
   #level: verbose
 
 api:
-  reboot_timeout: 30min
+  reboot_timeout: 0min
 
 ota:
   - platform: esphome
@@ -107,11 +107,11 @@ button:
   - platform: restart
     name: "${dev} ESP Restart"
 
-#  - platform: template
-#    name: "${dev} ESP Prevent Sleep"
-#    on_press:
-#      then:
-#        - deep_sleep.prevent: sleep1
+  - platform: template
+    name: "${dev} ESP Prevent Sleep"
+    on_press:
+      then:
+        - deep_sleep.prevent: sleep1
 
 
 #  - platform: template
@@ -281,9 +281,9 @@ sensor:
   - platform: uptime
     name: "${dev} ESP Uptime"
     filters:
-      - lambda: return x/3600;
-    unit_of_measurement: "h"
-    accuracy_decimals: 1
+      - lambda: return x;
+    unit_of_measurement: "s"
+    accuracy_decimals: 0
     device_class: ""
     entity_category: diagnostic
     update_interval: 15s
