@@ -22,9 +22,9 @@ esphome:
   name: ${name}
   project:
     name: easyhan.pulse-hc
-    version: "1.25"
+    version: "1.29"
   on_boot:
-    priority: 1000
+    priority: 500
     then:
       - lambda: |-
           pinMode(5, INPUT_PULLDOWN);
@@ -281,9 +281,9 @@ sensor:
   - platform: uptime
     name: "${dev} ESP Uptime"
     filters:
-      - lambda: return x;
-    unit_of_measurement: "s"
-    accuracy_decimals: 0
+      - lambda: return x/3600.0;
+    unit_of_measurement: "h"
+    accuracy_decimals: 2
     device_class: ""
     entity_category: diagnostic
     update_interval: 10s
