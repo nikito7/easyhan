@@ -1,6 +1,6 @@
 # EB3
 # ESP32-C6 / Easy HAN B5
-# Tested on: 2024.10.1
+# Tested on: 2024.12.1
 # Active development yaml
 
 substitutions:
@@ -26,7 +26,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.17"
+    version: "1.18"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -42,15 +42,15 @@ esp32:
   framework:
     type: esp-idf
     version: 5.3.1
-    source: https://github.com/tasmota/esp-idf/releases/download/v5.3.1.241016/esp-idf-v5.3.1.zip
+    source: https://github.com/tasmota/esp-idf/releases/download/v5.3.1.241024/esp-idf-v5.3.1.zip
     platform_version: 6.9.0
     sdkconfig_options:
       CONFIG_ESPTOOLPY_FLASHSIZE_8MB: y
 
-i2c:
-  sda: 6
-  scl: 7
-  scan: false # prevent bootloop
+#i2c: ### fail in 2024.12
+#  sda: 6
+#  scl: 7
+#  scan: false # prevent bootloop
 
 #esp32:
 #  board: adafruit_feather_esp32s3 # N4 R2
@@ -161,14 +161,14 @@ modbus_controller:
 
 sensor:
 
-  - platform: aht10
-    variant: AHT20
-    temperature:
-      name: "${dev} AHT Temperature"
-      accuracy_decimals: 1
-    humidity:
-      name: "${dev} AHT Humidity"
-      accuracy_decimals: 1
+#  - platform: aht10
+#    variant: AHT20
+#    temperature:
+#      name: "${dev} AHT Temperature"
+#      accuracy_decimals: 1
+#    humidity:
+#      name: "${dev} AHT Humidity"
+#      accuracy_decimals: 1
 
 #  - platform: template
 #    name: "${dev} Adc In"
