@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.27"
+    version: "1.29"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
@@ -32,7 +32,7 @@ wifi:
   ap:
     ssid: "Easy-HAN-${dev}"
     password: edpbox123
-    ap_timeout: 15s # change me
+    ap_timeout: 20s # change me
 
 captive_portal:
 
@@ -65,8 +65,8 @@ wmbus:
 
 ###
 
-esp32_ble_tracker:
-bluetooth_proxy:
+#esp32_ble_tracker:
+#bluetooth_proxy:
 
 ###
 
