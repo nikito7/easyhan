@@ -8,6 +8,10 @@ Configurar WiFi via hotspot
 
 ![easyhan.pt esphome](./wifi-2.jpg)
 
+Insistir caso dê erro
+
+![easyhan.pt esphome](./wifi-2.1.jpg)
+
 3.
 
 ![easyhan.pt esphome](./wifi-3.jpg)
