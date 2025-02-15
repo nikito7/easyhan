@@ -6,8 +6,8 @@
 modbus:
 
   - name: edpbox2
-    type: rtuovertcp
-    #type: tcp
+    #type: rtuovertcp
+    type: tcp
     host: 10.1.0.200
     port: 9502
     delay: 1
