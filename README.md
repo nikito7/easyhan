@@ -1,4 +1,4 @@
-# Easy HAN ®
+# Easy HAN ® Portugal
 
 Smart IoT Devices
 
