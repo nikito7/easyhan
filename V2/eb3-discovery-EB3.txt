@@ -128,6 +128,6 @@ Publish2 homeassistant/sensor/nikito7-EB3/lpnet/config {"name":"LP Net","uniq_id
 
 ; ICP
 
-Publish2 homeassistant/sensor/nikito7-EB3/icp/config {"name":"ICP Status","uniq_id":"EB3_ICP","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.ICP|int(0) %%} {%% if x == 0 %%} {{ 'Closed' }} {%% elif x == 1 %%} {{ 'Open' }} {%% elif x == 2 %%} {{ 'Ready' }} {%% endif %%}","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
+Publish2 homeassistant/sensor/nikito7-EB3/icp/config {"name":"ICP Status","uniq_id":"EB3_ICP","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.ICP|int(0) %%} {%% if x == 0 %%} {{ 'Open' }} {%% elif x == 1 %%} {{ 'Closed' }} {%% elif x == 2 %%} {{ 'Ready' }} {%% endif %%}","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
 
 ; EOF
