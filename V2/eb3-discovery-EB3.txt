@@ -1,4 +1,4 @@
-; 2024.07.13.0017
+; 2025.03.20
 
 ; button
 
@@ -125,5 +125,9 @@ Publish2 homeassistant/sensor/nikito7-EB3/ErrCode/config {"name":"MB Error Code"
 Publish2 homeassistant/sensor/nikito7-EB3/ErrTime/config {"name":"MB Error Time","uniq_id":"EB3_MB_Error_Time","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.ErrTime|string }} {%% endif %%}","ic":"mdi:chip","dev":{"ids":"nikito7-EB3"}}
 
 Publish2 homeassistant/sensor/nikito7-EB3/lpnet/config {"name":"LP Net","uniq_id":"EB3_LP_Net","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% if value_json.EB3 is defined %%} {{ value_json.EB3.qs|float(0) }} {%% endif %%}","unit_of_meas":"kWh/15m","stat_cla":"measurement","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
+
+; ICP
+
+Publish2 homeassistant/sensor/nikito7-EB3/icp/config {"name":"ICP Status","uniq_id":"EB3_ICP","stat_t":"tele/edpbox3/SENSOR","val_tpl":"{%% set x = value_json.EB3.ICP|int(0) %%} {%% if x == 0 %%} {{ 'Closed' }} {%% elif x == 1 %%} {{ 'Open' }} {%% elif x == 2 %%} {{ 'Ready' }} {%% endif %%}","ic":"mdi:counter","dev":{"ids":"nikito7-EB3"}}
 
 ; EOF
