@@ -1,0 +1,1253 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB_EB8",
+      "label": "InfluxDB EB8",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    },
+    {
+      "name": "VAR_HANBUCKET",
+      "type": "constant",
+      "label": "HanBucket",
+      "value": "1000-EB8",
+      "description": ""
+    },
+    {
+      "name": "VAR_HANDEVICE",
+      "type": "constant",
+      "label": "HanDevice",
+      "value": "edpbox8",
+      "description": ""
+    },
+    {
+      "name": "VAR_HANSENSOR",
+      "type": "constant",
+      "label": "HanSensor",
+      "value": "eb3",
+      "description": ""
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "barchart",
+      "name": "Bar chart",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.5.2"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "easyhan.pt dashboard\nInfluxdb V2 / Flux",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "easyhan.pt",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://easyhan.pt"
+    }
+  ],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB_EB8}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*api1 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L1"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*api2 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L2"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*api3 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L3"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*api value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "API"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> last()\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"api\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> last()\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"api1\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> last()\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"api2\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> last()\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"api3\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "D"
+        }
+      ],
+      "title": "Active Power Import",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB_EB8}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*ape1 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L1"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*ape2 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L2"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*ape3 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L3"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*ape value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "APE"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> last()\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"ape\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "A"
+        },
+        {
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> last()\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"ape1\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "B",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          }
+        },
+        {
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> last()\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"ape2\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "C",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          }
+        },
+        {
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> last()\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"ape3\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "D",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          }
+        }
+      ],
+      "title": "Active Power Export",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB_EB8}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*tei value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Import"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*tee value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Export"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 5
+      },
+      "id": 7,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.78,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "normal",
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Time",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"tei\" and\r\n    r._field == \"value\" and\r\n    r._value != 0.0 and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )\r\n  |> aggregateWindow(every: 1h, fn: max)\r\n  |> difference()\r\n  |> yield(name: \"sum\")\r\n\r\n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"tee\" and\r\n    r._field == \"value\" and\r\n    r._value != 0.0 and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )\r\n  |> aggregateWindow(every: 1h, fn: max)\r\n  |> difference()\r\n  |> yield(name: \"sum\")\r\n\r\n",
+          "refId": "B"
+        }
+      ],
+      "title": "Total Energy",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB_EB8}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 300000,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*api1 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L1"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*api2 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L2"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*api3 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L3"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*api value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "API"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"api\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"api1\" and\r\n    r._field == \"value\"\r\n  )",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"api2\" and\r\n    r._field == \"value\"\r\n  )",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"api3\" and\r\n    r._field == \"value\"\r\n  )",
+          "refId": "D"
+        }
+      ],
+      "title": "Active Power Import",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB_EB8}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 300000,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "volt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*vl1 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L1"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*vl2 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L2"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*vl3 value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "L3"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 20
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"vl1\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"vl2\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop:v.timeRangeStop)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"vl3\" and\r\n    r._field == \"value\" and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )",
+          "refId": "C"
+        }
+      ],
+      "title": "Voltage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB_EB8}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*tei value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Import"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*tee value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Export"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 27
+      },
+      "hideTimeOverride": false,
+      "id": 9,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.78,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "normal",
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Time",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"tei\" and\r\n    r._field == \"value\" and\r\n    r._value != 0.0 and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )\r\n  |> aggregateWindow(every: 24h, fn: max)\r\n  |> difference()\r\n  |> yield(name: \"sum\")\r\n\r\n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"tee\" and\r\n    r._field == \"value\" and\r\n    r._value != 0.0 and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )\r\n  |> aggregateWindow(every: 24h, fn: max)\r\n  |> difference()\r\n  |> yield(name: \"sum\")\r\n\r\n",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": "1w/d",
+      "title": "Total Energy",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB_EB8}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*tei value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Import"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*tee value*/"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Export"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 34
+      },
+      "hideTimeOverride": false,
+      "id": 10,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.78,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "normal",
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Time",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"tei\" and\r\n    r._field == \"value\" and\r\n    r._value != 0.0 and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )\r\n  |> aggregateWindow(every: 1d, fn: max)\r\n  |> difference()\r\n  |> yield(name: \"sum\")\r\n\r\n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB_EB8}"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${HanBucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) =>\r\n    r._measurement == \"tee\" and\r\n    r._field == \"value\" and\r\n    r._value != 0.0 and\r\n    r.device == \"${HanDevice}\" and\r\n    r.sensor == \"${HanSensor}\"\r\n  )\r\n  |> aggregateWindow(every: 1d, fn: max)\r\n  |> difference()\r\n  |> yield(name: \"sum\")\r\n\r\n",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": "1M/d",
+      "title": "Total Energy",
+      "type": "barchart"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 40,
+  "tags": [
+    "HAN",
+    "EDPBOX",
+    "EMI"
+  ],
+  "templating": {
+    "list": [
+      {
+        "hide": 2,
+        "name": "HanBucket",
+        "query": "${VAR_HANBUCKET}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_HANBUCKET}",
+          "text": "${VAR_HANBUCKET}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_HANBUCKET}",
+            "text": "${VAR_HANBUCKET}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "HanDevice",
+        "query": "${VAR_HANDEVICE}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_HANDEVICE}",
+          "text": "${VAR_HANDEVICE}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_HANDEVICE}",
+            "text": "${VAR_HANDEVICE}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "HanSensor",
+        "query": "${VAR_HANSENSOR}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_HANSENSOR}",
+          "text": "${VAR_HANSENSOR}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_HANSENSOR}",
+            "text": "${VAR_HANSENSOR}",
+            "selected": false
+          }
+        ]
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "nowDelay": "10s",
+    "refresh_intervals": [
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "HAN Lite EB3",
+  "uid": "adp954tsac8hsc",
+  "version": 81,
+  "weekStart": ""
+}
