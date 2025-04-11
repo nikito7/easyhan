@@ -1,20 +1,30 @@
-Product function:
+**Product function:**
+
   Generic modbus to WiFi converter.
 
-Market:
+**Market:**
+
   Portugal.
 
-PCB board design:
+**PCB board design:**
+
   Coimbra, Portugal.
 
-PCB board manufacturing, components source and SMT assembly:
+**PCB board manufacturing, components source and SMT assembly:**
+
   China.
 
-Final prototype assembly:
+**Final prototype assembly:**
+
   Coimbra, Portugal.
 
-Status of development:
-  Final prototype.
-  Inital certification.
+**Status of development:**
+
+  Final prototype.<br>
+  Initial certification.
+
+**Models:**
+
+  E5 and B5.
 
 todo.
