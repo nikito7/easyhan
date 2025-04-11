@@ -1,6 +1,8 @@
+# Links
+
 https://europa.eu/youreurope/business/product-requirements/labels-markings/ce-marking/index_en.htm
 
-
+https://www2.gov.pt/en/fichas-de-enquadramento/reconhecimento-mutuo-de-mercadorias-em-portugal
 
 
 # Technical documentation (draft)
