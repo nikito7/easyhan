@@ -1,10 +1,22 @@
+# Declaration of Conformity (draft)
+
+
 **Product function:**
 
   Generic modbus to WiFi converter.
 
-**Market:**
+**Product names and models:**
 
-  Portugal.
+- Easy HAN ® E5 WiFi
+- Easy HAN ® B5 WiFi
+
+**Product version**:
+
+  5.4.1
+
+**Markets:**
+
+  Portugal, EU.
 
 **PCB board design:**
 
@@ -12,7 +24,7 @@
 
 **PCB board manufacturing, components source and SMT assembly:**
 
-  China.
+  JLCPCB, China.
 
 **Final prototype assembly:**
 
@@ -20,11 +32,8 @@
 
 **Status of development:**
 
-  Final prototype.<br>
-  Initial certification.
+  Final prototype.
 
-**Models:**
 
-  E5 and B5.
+2025-04-11
 
-todo.
