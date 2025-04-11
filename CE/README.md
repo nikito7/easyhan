@@ -1,4 +1,4 @@
-# Declaration of Conformity (draft)
+# Technical documentation (draft)
 
 
 **Product function:**
