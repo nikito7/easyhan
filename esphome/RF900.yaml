@@ -39,9 +39,15 @@ captive_portal:
 ###
 
 external_components:
-#  - source: github://SzczepanLeon/esphome-components@main
+#
+# arduino v4
+#
+  - source: github://SzczepanLeon/esphome-components@version_4
 #  - source: github://nikito7/__wmbus@arrow1
-  - source: github://nikito7/__wmbus@main
+#  - source: github://nikito7/__wmbus@main
+#
+# version 5 uses esp-idf !!
+#
     refresh: 0d
     components: [ wmbus ]
 
