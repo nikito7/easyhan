@@ -1,10 +1,10 @@
 # Easy HAN ® Portugal
 
-Smart IoT Devices
+> Smart IoT Devices
 
-- [```bridge``` rtuovertcp modbus tcp](./bridge/)
+- [```bridge``` rtuovertcp modbus tcp](./tasmota/bridge/)
 
-- [```edpbox``` contadores inteligentes](./edpbox/)
+- [```edpbox V1``` contadores inteligentes](./V1/)
 
 - [```edpbox V2``` contadores inteligentes](./V2/)
 
@@ -12,8 +12,4 @@ Smart IoT Devices
 
 - [```lorawan``` ttn edpbox han](./lorawan/)
 
-# Dev
 
-https://github.com/nikito7/edpbox-dev
-
-Easy HAN ® RS485
