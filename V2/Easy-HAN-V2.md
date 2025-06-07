@@ -8,7 +8,7 @@ Tasmota > Consoles > Console
 
 1.
 
-![Easy HAN](../edpbox/img/howto-1.jpg)
+![Easy HAN](../V1/img/howto-1.jpg)
 
 (linha única. caso o copy-paste não funcione correctamente, corrigir primeiro)
 
@@ -46,7 +46,7 @@ Restart 1;
 
 2. 
 
-![Easy HAN](../edpbox/img/howto-2.jpg)
+![Easy HAN](../V1/img/howto-2.jpg)
 
 (linha única)
 
@@ -79,15 +79,15 @@ https://u.easyhan.pt/v2/setup-v2/
 
 HAN-V2-*****.zip
 
-![files](../edpbox/img/files0823a.jpg)
+![files](../V1/img/files0823a.jpg)
 
-![Easy HAN](../edpbox/img/files0823b.jpg)
+![Easy HAN](../V1/img/files0823b.jpg)
 
 4. OTA Upgrade
 
 ```http://u.easyhan.pt/v2/tasmota-4M.bin.gz```
 
-![Easy HAN](../edpbox/img/howto-4.jpg)
+![Easy HAN](../V1/img/howto-4.jpg)
 
 ...
 
