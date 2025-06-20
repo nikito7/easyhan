@@ -8,7 +8,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.29"
+    version: "1.31"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
@@ -42,9 +42,11 @@ external_components:
 #
 # arduino wmbus v4
 #
+##
 #  - source: github://SzczepanLeon/esphome-components@version_4
 #  - source: github://nikito7/__wmbus@arrow1
   - source: github://nikito7/__wmbus@main
+##
 #
 # version 5 uses esp-idf !!
 #
