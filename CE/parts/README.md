@@ -1,1 +1,5 @@
-Extra Parts
+Extra Parts:
+
+- Capacitor 4700uF
+
+
