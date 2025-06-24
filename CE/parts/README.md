@@ -1,5 +1,5 @@
 Extra Parts:
 
-- Capacitor 4700uF
+- Capacitor 4700uF Solid
 
 
