@@ -16,7 +16,7 @@ O ficheiro só é aplicado aos 30 segundos depois de iniciado.
 # HAN V2
 
 
-https://github.com/nikito7/edpbox-dev/tree/dev/tasmota/xdrv100
+https://github.com/nikito7/han-dev/tree/dev/tasmota/xdrv100
 
 EB1:
 https://u.easyhan.pt/v2/setup-v2/
