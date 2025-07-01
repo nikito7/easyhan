@@ -12,12 +12,12 @@ esphome:
   comment: ${device_description}
   project:
     name: "DAIKIN.BRY88AB151K"
-    version: "1.01"
+    version: "1.02"
     # name_add_mac_suffix: true
   includes:
-    - daikin_cm1106.h
+    - Daikin_cm1106.h
     # - pm2005.h          # For PM2005 module
-    - daikin_pm2105.h          # For PM2105 module
+    - Daikin_pm2105.h          # For PM2105 module
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/Daikin-202412.yaml@dev
