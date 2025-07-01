@@ -1,4 +1,4 @@
-# Easy HAN ® Smart Solutions
+# Easy HAN ®
 
 > Smart IoT Devices
 
@@ -13,3 +13,4 @@
 - [```lorawan``` ttn edpbox han](./lorawan/)
 
 
+(c) Sansana Smart Solutions (ssn.pt)
