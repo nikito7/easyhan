@@ -1,0 +1,376 @@
+# Daikin
+# pip install esphome==2024.12.4
+
+substitutions:
+  devicename: "daikin-air-sensor-1"
+  dev: "daikin-1"
+  friendly_name: "Daikin Air Sensor 1"
+  device_description: "DAIKIN Air Sensor BRY88AB151K"
+
+esphome:
+  name: $devicename
+  comment: ${device_description}
+  project:
+    name: "DAIKIN.BRY88AB151K"
+    version: "1.01"
+    # name_add_mac_suffix: true
+  includes:
+    - daikin_cm1106.h
+    # - pm2005.h          # For PM2005 module
+    - daikin_pm2105.h          # For PM2105 module
+
+dashboard_import:
+  package_import_url: github://nikito7/easyhan/esphome/Daikin-202412.yaml@dev
+  import_full_config: true
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+  flash_size: 4MB
+
+logger:
+  baud_rate: 0
+  level: debug
+  #level: info
+
+###
+
+esp32_ble_tracker:
+bluetooth_proxy:
+
+###
+
+wifi:
+  output_power: 15db
+  #use_address: static-t1 # ota upload issues
+
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  #password: 12345678
+
+  # Enable fallback hotspot (captive portal) 
+  # in case wifi connection fails
+  ap:
+    ssid: "${dev}"
+    password: "12345678"
+    ap_timeout: 20s # change me
+
+captive_portal:
+
+web_server:
+  port: 80
+  version: 2
+
+api:
+  reboot_timeout: 30min
+
+ota:
+  platform: esphome
+
+time:
+  - platform: homeassistant
+    id: esptime
+
+uart:
+- id: cm1106_uart
+  rx_pin: GPIO16
+  tx_pin: GPIO17
+  baud_rate: 9600
+
+###
+
+sensor:
+- platform: wifi_signal
+  name: "${friendly_name} Wifi Signal"
+  update_interval: 30s
+- platform: uptime
+  name: "${friendly_name} Uptime"
+  id: daikin_uptime
+  update_interval: 30s
+  on_raw_value:
+    then:
+      - text_sensor.template.publish:
+          id: uptime_human
+          state: !lambda |-
+            int seconds = round(id(daikin_uptime).raw_state);
+            int days = seconds / (24 * 3600);
+            seconds = seconds % (24 * 3600);
+            int hours = seconds / 3600;
+            seconds = seconds % 3600;
+            int minutes = seconds /  60;
+            seconds = seconds % 60;
+            return (
+              (days ? String(days) + "d " : "") +
+              (hours ? String(hours) + "h " : "") +
+              (minutes ? String(minutes) + "m " : "") +
+              (String(seconds) + "s")
+            ).c_str();
+
+- platform: template
+  id: esp_memory
+  icon: mdi:memory
+  name: "${friendly_name} Free Memory"
+  lambda: return heap_caps_get_free_size(MALLOC_CAP_INTERNAL) / 1024;
+  unit_of_measurement: 'kB'
+  state_class: measurement
+  entity_category: "diagnostic"
+
+- platform: custom
+  lambda: |-
+    auto cm1106Sensor = new CM1106Sensor(id(cm1106_uart), 10000);
+    App.register_component(cm1106Sensor);
+    return {cm1106Sensor};
+  sensors:
+  - name: "${friendly_name} CO2"
+    id: daikinco2
+    accuracy_decimals: 0
+    unit_of_measurement: "ppm"
+    device_class: carbon_dioxide
+    on_value_range:                       #CO2 LED always on when CO2 is below 1000
+      - below: 1000
+        then:
+          - output.turn_on: ledco2
+      - above: 1000                       #CO2 LED blink slowly when CO2 is above 1000 but below 2000
+        below: 2000
+        then:
+        - while:
+            condition:
+              sensor.in_range:
+                id: daikinco2
+                above: 1000
+                below: 2000
+            then:
+            - output.turn_on: ledco2
+            - delay: 500ms
+            - output.turn_off: ledco2
+            - delay: 500ms
+      - above: 2000                       #CO2 LED blink quickly when CO2 is above 2000
+        then:
+        - while:
+            condition:
+              sensor.in_range:
+                id: daikinco2
+                above: 2000
+            then:
+            - output.turn_on: ledco2
+            - delay: 200ms
+            - output.turn_off: ledco2
+            - delay: 200ms
+
+- platform: custom
+  lambda: |-
+    auto pmsensor = new pm2005();
+    App.register_component(pmsensor);
+    return {pmsensor->vpm1, pmsensor->vpm25, pmsensor->vpm10};
+  sensors:
+  - name: "${friendly_name} PM1"
+    id: daikinpm1
+    unit_of_measurement: "µg/m³"
+    accuracy_decimals: 0
+    device_class: pm1
+  - name: "${friendly_name} PM2.5"
+    id: daikinpm25
+    unit_of_measurement: "µg/m³"
+    accuracy_decimals: 0
+    device_class: pm25
+    on_value_range:                       #PM2.5 LED always on when PM2.5 is below 35
+      - below: 35
+        then:
+          - output.turn_on: ledpm25
+      - above: 35                         #PM2.5 LED blink slowly when PM2.5 is above 35 but below 75
+        below: 75
+        then:
+        - while:
+            condition:
+              sensor.in_range:
+                id: daikinpm25
+                above: 35
+                below: 75
+            then:
+            - output.turn_on: ledpm25
+            - delay: 500ms
+            - output.turn_off: ledpm25
+            - delay: 500ms
+      - above: 75                         #PM2.5 LED blink quickly when PM2.5 is above 75
+        then:
+        - while:
+            condition:
+              sensor.in_range:
+                id: daikinpm25
+                above: 75
+            then:
+            - output.turn_on: ledpm25
+            - delay: 200ms
+            - output.turn_off: ledpm25
+            - delay: 200ms
+  - name: "${friendly_name} PM10"
+    id: daikinpm10
+    unit_of_measurement: "µg/m³"
+    accuracy_decimals: 0
+    device_class: pm10
+
+- platform: hdc1080
+  i2c_id: sgp30_bus
+  temperature:
+    name: "${friendly_name} Temperature"
+    filters:
+      - offset: -5.0 # original was -4.0
+    id: temperature
+  humidity:
+    name: "${friendly_name} Humidity"
+    filters:
+      - offset: 6.0
+    id: humidity
+  update_interval: 30s
+
+- platform: sgp30
+  i2c_id: sgp30_bus
+  eco2:
+    name: "${friendly_name} eCO2"
+    accuracy_decimals: 1
+#    internal: true
+  tvoc:
+    name: "${friendly_name} TVOC"
+    id: daikintvocppb
+    filters:
+#      - lambda: return x * 0.0023;        #ppd -> mg/m³
+      - lambda: return x * 2.3;        #ppd -> µg/m³
+      - exponential_moving_average:
+          alpha: 0.1
+          send_every: 10
+          send_first_at: 1
+#    unit_of_measurement: "mg/m³"
+    unit_of_measurement: "µg/m³"
+    device_class: volatile_organic_compounds
+#    accuracy_decimals: 2
+    accuracy_decimals: 0
+    on_value_range:                       #TVOC LED always on when TVOC is below 35
+      - below: 500
+        then:
+          - output.turn_on: ledtvoc
+      - above: 500                         #TVOC LED blink slowly when TVOC is above 35 but below 75
+        below: 700
+        then:
+        - while:
+            condition:
+              sensor.in_range:
+                id: daikinpm25
+                above: 500
+                below: 700
+            then:
+            - output.turn_on: ledtvoc
+            - delay: 500ms
+            - output.turn_off: ledtvoc
+            - delay: 500ms
+      - above: 700                         #TVOC LED blink quickly when TVOC is above 75
+        then:
+        - while:
+            condition:
+              sensor.in_range:
+                id: daikinpm25
+                above: 700
+            then:
+            - output.turn_on: ledtvoc
+            - delay: 200ms
+            - output.turn_off: ledtvoc
+            - delay: 200ms
+  compensation:
+    temperature_source: temperature
+    humidity_source: humidity
+  store_baseline: yes
+  address: 0x58
+  update_interval: 1s
+
+###
+
+switch:
+- platform: custom
+  lambda: |-
+    auto cm1106Calib = new CM1106CalibrateSwitch(id(cm1106_uart));
+    App.register_component(cm1106Calib);
+    return {cm1106Calib};
+  switches:
+  - id: calibration
+    internal: true
+
+status_led:
+  pin:
+    number: 25
+    inverted: True
+
+button:
+  - platform: restart
+    name: "${friendly_name} Restart"
+  - platform: template
+    name: "${friendly_name} CO2 Calibration"
+    on_press:
+      then:
+        - switch.turn_on: calibration
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO34
+    id: RESET
+    internal: true
+    on_press:
+    # After pressing the RESET button on the back, 
+    # the CO2 indicator light is on, and after ten minutes,
+    # set the ambient CO2 concentration as the reference
+    # 400ppm and turn off the CO2 indicator light
+      then:
+        - output.turn_on: ledco2
+        - delay: 10min
+        - switch.turn_on: calibration
+        - delay: 10s
+        - output.turn_on: ledco2
+
+i2c:
+- id: PM25_bus
+  sda: 23
+  scl: 22
+  scan: true
+- id: sgp30_bus
+  sda: 19
+  scl: 21
+  scan: true
+
+output:
+  - platform: gpio  #DAIKIN Air Sensor CO2 LED
+    pin: GPIO4
+    id: ledco2
+  - platform: gpio  #DAIKIN Air Sensor TVOC LED
+    pin: GPIO32
+    id: ledtvoc
+  - platform: gpio  #DAIKIN Air Sensor PM2.5 LED
+    pin: GPIO33
+    id: ledpm25
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      icon: "mdi:ip-outline"
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      icon: "mdi:router-wireless"
+    mac_address:
+      name: "${friendly_name} MAC Address"
+      icon: "mdi:lan"
+  - platform: version
+    name: "${friendly_name} FW Version"
+
+  - platform: version
+    name: "${dev} ESPHome Version"
+    hide_timestamp: true
+    entity_category: diagnostic
+
+  # human readable update text sensor from sensor:uptime
+  - platform: template
+    name: "${friendly_name} Uptime Human Readable"
+    id: uptime_human
+    icon: mdi:clock-start
+
+######
+# EOF
+
