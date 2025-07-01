@@ -13,4 +13,7 @@
 - [```lorawan``` ttn edpbox han](./lorawan/)
 
 
+<hr>
+<b>
 (c) Sansana Smart Solutions (ssn.pt)
+</b>
