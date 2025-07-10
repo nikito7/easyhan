@@ -16,7 +16,7 @@ esphome:
       - switch.turn_on: led_pin
   project:
     name: easyhan.e5-reed
-    version: "1.01"
+    version: "1.03"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/Reed-E5.yaml@dev
@@ -86,6 +86,18 @@ switch:
     pin:
       number: 2
       inverted: yes
+
+### ### ###
+
+binary_sensor:
+
+  - platform: gpio
+    pin:
+      number: 5
+      mode:
+        input: true
+        pullup: true
+    name: "${dev} Reed 1"
 
 ### ### ###
 
