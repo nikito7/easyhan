@@ -1,4 +1,5 @@
 # RF900 868 915
+# Arduino Framework
 
 substitutions:
   dev: RF
@@ -8,7 +9,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.31"
+    version: "1.32"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
@@ -114,7 +115,7 @@ sensor:
 ##
 
   - platform: wmbus
-    meter_id: 0x12345678
+    meter_id: 0x22334455
     type: izar
     key: ""
     #key: "00000000000000000000000000000000"
