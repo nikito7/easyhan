@@ -1,6 +1,6 @@
 >D 48
 
-ver=20102
+ver=20104
 EBx="EB3"
 C="Net."
 date=""
@@ -159,6 +159,7 @@ res=fw(date+",L1,L2,L3\n" fr)
 endif
 ;
 endif
+; disable if you need
 res=fw(vts fr)
 print CSV: Updating %vtf%
 fc(fr)
@@ -209,6 +210,7 @@ if res==0
 then
 res=fw(date+",Import,Export\n" fr)
 endif
+; disable if you need
 res=fw(chs fr)
 print CSV: Updating %chf%
 fc(fr)
@@ -234,6 +236,7 @@ res=fw("Date,Import Inc,Export Inc\n" fr)
 endif
 ;
 ; LP csv
+; disable if you need
 res=fw(lps fr)
 print CSV: Updating %lpf%
 ;
@@ -277,15 +280,6 @@ endif
 
 $<div id="chart1" style="width:95%%;height:250px;padding:0px;"></div><br><br>
 $gc(lt ipwrm epwrm "wr" "Import" "Export" strm)
-$var options = {
-$chartArea:{left:50,width:'80%%'},
-$width:'100%%',legend:'none',
-$title:'Potência (W) (~10min)',
-$};
-$gc(e)
-
-$<div id="chart2" style="width:95%%;height:250px;padding:0px;"></div><br><br>
-$gc(T ipwrm epwrm "wr" "Import" "Export" strm)
 $var options = {
 $chartArea:{left:50,width:'80%%'},
 $width:'100%%',legend:'none',
