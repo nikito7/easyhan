@@ -1,6 +1,6 @@
 >D 48
 
-ver=20043
+ver=20101
 EBx="EB3"
 C="Net."
 date=""
@@ -60,7 +60,7 @@ vt3=0
 
 >B
 
-tper=30
+tper=33
 =>SerialLog 0
 
 >E
@@ -108,7 +108,21 @@ tper=10
 =>UfsRun config.txt
 }
 
-if cnt==60
+if (upsecs%57==0 and cnt>51)
+{
+;
+if (mqtts>0)
+{
+print MQTT: OK
+}
+else
+{
+print MQTT: Error!
+}
+;
+}
+
+if cnt==63
 {
 =>UfsRun discovery-EB3.txt
 }
@@ -119,14 +133,14 @@ cnt+=1
 }
 
 if chg[ss]>0
-and cnt>30
+and cnt>31
 then
 ipwrm=ipwr
 epwrm=epwr
 endif
 
 if upsecs%600==0
-and cnt>30
+and cnt>32
 then
 ;
 vts=s(2.0hh)+":"+s(2.0mm)+","+s(0vt1)+","+s(0vt2)+","+s(0vt3)+"\n"
