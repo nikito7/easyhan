@@ -33,7 +33,7 @@
 1,010320x18SSssSSss@i0:10,W dmd,,*,1
 1,010320x22SSssSSss@i0:10,W dmd peak,,*,1
 1,010320x26SSssSSss@i0:1000,PF,,*,3
-1,010320x28SSssSSss@i0:10,Freq,Hz,*,1
+1,010320x30SSss@i0:10,Freq,Hz,*,1
 1,=h<hr>
 
 #
