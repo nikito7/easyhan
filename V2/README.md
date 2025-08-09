@@ -5,8 +5,8 @@ Criar o ficheiro config.txt
 
 ```js
 HanDelayWait 1000
-HanDelayError 35000
-HanTimeout 2000
+HanDelayError 5000
+HanTimeout 1500
 HanRestart 0
 TelePeriod 10
 ```
