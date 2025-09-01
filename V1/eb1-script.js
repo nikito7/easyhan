@@ -1,6 +1,6 @@
 >D 48
 
-ver=10314
+ver=10315
 EBx="EB1"
 C="Net."
 PF="Factor"
@@ -337,9 +337,9 @@ $gc(e)
 
 ; 2D @i8
 
-1,01040CUUuuUUuu@i8:1000,%TE% T1 Vazio Export ,kWh,TEET1,3
-1,01040Cx4UUuuUUuu@i8:1000,%TE% T2 Ponta Export ,kWh,TEET2,3
-1,01040Cx8UUuuUUuu@i8:1000,%TE% T3 Cheias Export ,kWh,TEET3,3
+1,01040Cu32@i8:1000,Export T1 Vazio ,kWh,TEET1,3
+1,01040Cx4u32@i8:1000,Export T2 Ponta ,kWh,TEET2,3
+1,01040Cx8u32@i8:1000,Export T3 Cheias ,kWh,TEET3,3
 
 1,=h<br>
 
