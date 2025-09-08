@@ -1,5 +1,6 @@
 # RF900 868 915
 # Arduino Framework
+# Last working version: pip install esphome==2025.6.3 ?
 
 substitutions:
   dev: RF
@@ -9,7 +10,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.32"
+    version: "1.33"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
@@ -44,12 +45,12 @@ external_components:
 # arduino wmbus v4
 #
 ##
-#  - source: github://SzczepanLeon/esphome-components@version_4
+  - source: github://SzczepanLeon/esphome-components@version_4
 #  - source: github://nikito7/__wmbus@arrow1
-  - source: github://nikito7/__wmbus@main
+#  - source: github://nikito7/__wmbus@main
 ##
 #
-# version 5 uses esp-idf !!
+# version 5 uses esp-idf and lora chip !!
 #
     refresh: 0d
     components: [ wmbus ]
