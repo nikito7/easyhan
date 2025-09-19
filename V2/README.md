@@ -18,7 +18,7 @@ O ficheiro só é aplicado aos 30 segundos depois de iniciado.
 HanSkip 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 
 
-```
+```js
 1 - EB Type
 2 - EMI Info
 3 - Contract
@@ -35,6 +35,14 @@ HanSkip 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 14 - Ciclo. Tarifa.
 15 - ICP Status
 ```
+
+Apenas Watts:
+
+```js
+HanSkip 1,1,1,1,1,1,0,1,1,1,1,1,1,1,1
+```
+
+Pára todas as funções extra do Easy HAN. 
 
 # HAN V2
 
