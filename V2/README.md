@@ -15,8 +15,10 @@ O ficheiro só é aplicado aos 30 segundos depois de iniciado.
 
 # HanSkip
 
-HanSkip
+HanSkip 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 
+
+```
 1 - EB Type
 2 - EMI Info
 3 - Contract
@@ -32,7 +34,7 @@ HanSkip
 13 - Load Profile
 14 - Ciclo. Tarifa.
 15 - ICP Status
-
+```
 
 # HAN V2
 
