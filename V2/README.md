@@ -13,6 +13,27 @@ TelePeriod 10
 
 O ficheiro só é aplicado aos 30 segundos depois de iniciado.
 
+# HanSkip
+
+HanSkip
+
+1 - EB Type
+2 - EMI Info
+3 - Contract
+4 - LP ID
+5 - Clock
+6 - Voltage. Current.
+7 - Power. Power Factor mono.
+8 - Power Factor tri. Frequency mono.
+9 - kWh Energy Tarifas
+10 - kWh Total Energy
+11 - kWh L1 L2 L3 
+12 - Reserved
+13 - Load Profile
+14 - Ciclo. Tarifa.
+15 - ICP Status
+
+
 # HAN V2
 
 
