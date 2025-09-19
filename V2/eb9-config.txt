@@ -1,3 +1,4 @@
 HanDelayWait 1000
 HanDelayError 5000
 HanTimeout 1500
+HanSkip 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
