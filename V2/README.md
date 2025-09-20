@@ -9,6 +9,7 @@ HanDelayError 5000
 HanTimeout 1500
 HanRestart 0
 TelePeriod 10
+HanSkip 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 ```
 
 O ficheiro só é aplicado aos 30 segundos depois de iniciado.
