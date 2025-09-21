@@ -32,9 +32,8 @@ logger:
 
 ###
 
-# Disable after first flash, if it don't needed.
-esp32_ble_tracker:
-bluetooth_proxy:
+#esp32_ble_tracker:
+#bluetooth_proxy:
 
 ###
 
