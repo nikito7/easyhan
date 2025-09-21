@@ -7,7 +7,7 @@ substitutions:
   device_description: "DAIKIN Air Sensor BRY88AB151K"
 
 esphome:
-  name: $devicename
+  name: ${devicename}-idf
   comment: ${device_description}
   name_add_mac_suffix: true
   project:
@@ -16,13 +16,13 @@ esphome:
 
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/Daikin-Air-Sensor.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/Daikin-Air-Sensor-IDF.yaml@dev
   import_full_config: true
 
 esp32:
   board: esp32dev
   framework:
-    type: arduino
+    type: esp-idf
   flash_size: 4MB
 
 logger:
@@ -32,8 +32,8 @@ logger:
 
 ###
 
-#esp32_ble_tracker:
-#bluetooth_proxy:
+esp32_ble_tracker:
+bluetooth_proxy:
 
 ###
 
@@ -102,28 +102,11 @@ sensor:
 - platform: wifi_signal
   name: "${friendly_name} Wifi Signal"
   update_interval: 30s
+
 - platform: uptime
   name: "${friendly_name} Uptime"
   id: daikin_uptime
   update_interval: 30s
-  on_raw_value:
-    then:
-      - text_sensor.template.publish:
-          id: uptime_human
-          state: !lambda |-
-            int seconds = round(id(daikin_uptime).raw_state);
-            int days = seconds / (24 * 3600);
-            seconds = seconds % (24 * 3600);
-            int hours = seconds / 3600;
-            seconds = seconds % 3600;
-            int minutes = seconds /  60;
-            seconds = seconds % 60;
-            return (
-              (days ? String(days) + "d " : "") +
-              (hours ? String(hours) + "h " : "") +
-              (minutes ? String(minutes) + "m " : "") +
-              (String(seconds) + "s")
-            ).c_str();
 
 - platform: template
   id: esp_memory
@@ -359,3 +342,4 @@ text_sensor:
 
 ######
 # EOF
+
