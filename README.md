@@ -1,6 +1,6 @@
 # Easy HAN ®
 
-> Smart IoT Devices
+Smart IoT Devices
 
 - [```bridge``` rtuovertcp modbus tcp](./tasmota/bridge/)
 
@@ -13,7 +13,5 @@
 - [```lorawan``` ttn edpbox han](./lorawan/)
 
 
-<hr>
-<b>
-(c) Sansana Smart Solutions (ssn.pt)
-</b>
+
+
