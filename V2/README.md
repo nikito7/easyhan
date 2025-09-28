@@ -48,7 +48,7 @@ Tudo a cada 5min (script);
 ```js
 ;>S
 ;...
-if (upsecs%300==0 and cnt>100)
+if (upsecs%300==0 and upsecs>100)
 {
 =>BackLog HanSkip 0,0; Delay 200; HanSkip 1,1,1,1,1,1,0,1,1,1,1,1,1,1,1
 }
