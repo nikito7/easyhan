@@ -42,6 +42,11 @@ Apenas Watts:
 ```js
 HanSkip 1,1,1,1,1,1,0,1,1,1,1,1,1,1,1
 ```
+Realtime Netmetering (qs):
+
+```js
+HanSkip 1,1,1,1,0,1,0,1,1,0,1,1,1,1,1
+```
 
 Tudo a cada 5min (script);
 
