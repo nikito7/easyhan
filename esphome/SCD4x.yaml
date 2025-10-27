@@ -2,10 +2,11 @@
 
 substitutions:
   dev: T45
-  name: scd4x
+  name: "t45-scd4x"
 
 esphome:
   name: ${name}
+  friendly_name: "${dev}"
   project:
     name: easyhan.scd4x
     version: "1.03"
@@ -23,7 +24,7 @@ esp32:
 
 wifi:
   output_power: 15db
-  #use_address: 10.1.0.39
+  #use_address: t45-scd4x
 
   ssid: !secret wifi_ssid
   password: !secret wifi_password
@@ -64,16 +65,29 @@ api:
   reboot_timeout: 30min
 
 button:
+
   - platform: restart
-    name: "${dev} ESP Restart"
+    name: "ESP Restart"
     entity_category: diagnostic
 
   - platform: template
-    name: "${dev} SCD41 Factory Reset"
+    name: "SCD41 Factory Reset"
     on_press:
       then:
         - scd4x.factory_reset: my_scd41
     entity_category: diagnostic
+
+  - platform: template
+    name: "SCD41 Forced Calibration"
+    on_press:
+      then:
+        - scd4x.perform_forced_calibration:
+            # Global Monthly Mean CO₂
+            # https://gml.noaa.gov/ccgg/trends/global.html
+            value: 426
+            id: my_scd41
+    entity_category: diagnostic
+
 
 ###
 
@@ -97,18 +111,18 @@ sensor:
     id: my_scd41
     ambient_pressure_compensation_source: bme_ha
     co2:
-      name: "${dev} SCD41 CO2"
+      name: "SCD41 CO2"
     temperature:
-      name: "${dev} SCD41 Temperature"
+      name: "SCD41 Temperature"
       accuracy_decimals: 1
     humidity:
-      name: "${dev} SCD41 Humidity"
+      name: "SCD41 Humidity"
       accuracy_decimals: 1
 
 ## ## ##
 
   - platform: template
-    name: "${dev} Adc In"
+    name: "Adc In"
     id: adc_in_v
     accuracy_decimals: 2
     device_class: voltage
@@ -116,7 +130,7 @@ sensor:
     state_class: measurement
 
   - platform: adc
-    name: "${dev} Adc In raw" # ESP32-S3 PCB
+    name: "Adc In raw" # ESP32-S3 PCB
     raw: true
     pin: 1
     attenuation: 0dB
@@ -133,7 +147,7 @@ sensor:
 ###
 
   - platform: template
-    name: "${dev} ESP Free Heap"
+    name: "ESP Free Heap"
     lambda: |-
       // arduino
       float heap = ESP.getFreeHeap();
@@ -146,13 +160,13 @@ sensor:
     entity_category: diagnostic
 
   - platform: wifi_signal
-    name: "${dev} ESP Signal"
+    name: "ESP Signal"
     unit_of_measurement: "dB"
     state_class: measurement
     entity_category: diagnostic
 
   - platform: uptime
-    name: "${dev} ESP Uptime"
+    name: "ESP Uptime"
     filters:
       - lambda: return x/3600;
     unit_of_measurement: "h"
@@ -168,7 +182,7 @@ sensor:
 text_sensor:
 
   - platform: version
-    name: "${dev} ESPHome Version"
+    name: "ESPHome Version"
     hide_timestamp: true
     entity_category: diagnostic
 
