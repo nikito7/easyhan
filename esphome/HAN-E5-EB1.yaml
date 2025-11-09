@@ -132,6 +132,7 @@ modbus_controller:
     command_throttle: 1000ms
     setup_priority: -10
     offline_skip_updates: 8
+    max_cmd_retries: 0
 
 sensor:
 
