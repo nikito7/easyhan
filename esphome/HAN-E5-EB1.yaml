@@ -25,7 +25,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.e5-edpbox1
-    version: "1.05"
+    version: "1.06"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB1.yaml@dev
