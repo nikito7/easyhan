@@ -3,8 +3,8 @@
 # Soil Sensor RS485
 
 substitutions:
-  dev: T44
-  name: t44x04soil
+  dev: "T44 Soil"
+  name: "t44-soil"
 
 #deep_sleep:
 #  id: sleep1
@@ -13,11 +13,11 @@ substitutions:
 
 esphome:
   name: ${name}
-  #friendly_name: ${dev}
+  friendly_name: ${dev}
   #name_add_mac_suffix: true
   project:
     name: easyhan.soil-rs485
-    version: "1.21"
+    version: "1.31"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/t44-x04-soil.yaml@dev
@@ -30,11 +30,10 @@ esp32:
   framework:
     type: arduino
   flash_size: 8MB
-  variant: esp32s3
 
 wifi:
   output_power: 15db
-  use_address: 10.1.0.33
+  use_address: t44-soil
 
   ssid: !secret wifi_ssid
   password: !secret wifi_password
@@ -57,7 +56,8 @@ web_server:
   local: true
   
 logger:
-  level: debug
+  #level: debug
+  level: very_verbose
 
 api:
   reboot_timeout: 30min
@@ -71,10 +71,10 @@ time:
 
 button:
   - platform: restart
-    name: "${dev} ESP Restart"
+    name: "ESP Restart"
 
 #  - platform: template
-#    name: "${dev} ESP Prevent Sleep"
+#    name: "ESP Prevent Sleep"
 #    on_press:
 #      then:
 #        - deep_sleep.prevent: sleep1
@@ -105,7 +105,11 @@ uart:
 #define HAN_RX 4
 
   id: modbus_serial
-  rx_pin: 17
+  rx_pin:
+    number: 17
+    mode:
+      input: true
+      pullup: true
   tx_pin: 15
   baud_rate: 4800
   stop_bits: 1
@@ -117,18 +121,20 @@ modbus:
   send_wait_time: 500ms
 
 modbus_controller:
-  - id: edpbox
-    update_interval: 30s
+  - id: master1
+    update_interval: 7s
     address: 0x1
     command_throttle: 500ms
     setup_priority: -10
+    max_cmd_retries: 0
 
 ####
 
 number:
 
   - platform: modbus_controller
-    name: "${dev} Soil Set Temp Calibration"
+    modbus_controller_id: master1
+    name: "Set Temp Calibration"
     address: 0x0050
     value_type: U_WORD
     multiply: 10.0
@@ -140,7 +146,8 @@ number:
     device_class: temperature
 
   - platform: modbus_controller
-    name: "${dev} Soil Set Humidity Calibration"
+    modbus_controller_id: master1
+    name: "Set Humidity Calibration"
     address: 0x0051
     value_type: U_WORD
     multiply: 10.0
@@ -158,7 +165,7 @@ sensor:
 ####
 
   - platform: dallas_temp
-    name: "${dev} DS18B20 Aquarium Temp"
+    name: "DS18B20 Aquarium Temp"
     unit_of_measurement: "°C"
     device_class: temperature
     state_class: measurement
@@ -169,7 +176,8 @@ sensor:
 ####
 
   - platform: modbus_controller
-    name: "${dev} Soil Humidity"
+    modbus_controller_id: master1
+    name: "Humidity"
     address: 0x0000
     register_type: read
     value_type: U_WORD
@@ -181,7 +189,8 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Soil Temperature"
+    modbus_controller_id: master1
+    name: "Temperature"
     address: 0x0001
     register_type: read
     value_type: S_WORD
@@ -195,7 +204,8 @@ sensor:
 ##
 
   - platform: modbus_controller
-    name: "${dev} Soil Temp Calibration"
+    modbus_controller_id: master1
+    name: "Temp Calibration"
     address: 0x0050
     register_type: read
     value_type: U_WORD
@@ -207,7 +217,8 @@ sensor:
     device_class: temperature
 
   - platform: modbus_controller
-    name: "${dev} Soil Humidity Calibration"
+    modbus_controller_id: master1
+    name: "Humidity Calibration"
     address: 0x0051
     register_type: read
     value_type: U_WORD
@@ -219,7 +230,8 @@ sensor:
     device_class: humidity
 
   - platform: modbus_controller
-    name: "${dev} Soil Device ID"
+    modbus_controller_id: master1
+    name: "Device ID"
     address: 0x07D0
     register_type: read
     value_type: U_WORD
@@ -228,7 +240,8 @@ sensor:
     icon: mdi:chip
 
   - platform: modbus_controller
-    name: "${dev} Soil Baud Rate"
+    modbus_controller_id: master1
+    name: "Baud Rate"
     address: 0x07D1
     register_type: read
     value_type: U_WORD
@@ -239,7 +252,7 @@ sensor:
 ####
 
   - platform: template
-    name: "${dev} Adc In"
+    name: "Adc In"
     id: adc_in_v
     accuracy_decimals: 2
     device_class: voltage
@@ -247,7 +260,7 @@ sensor:
     state_class: measurement
 
   - platform: template
-    name: "${dev} Battery"
+    name: "Battery"
     id: batt
     filters:
       - calibrate_linear:
@@ -264,7 +277,7 @@ sensor:
     state_class: measurement
 
   - platform: adc
-    name: "${dev} Adc In raw"
+    name: "Adc In raw"
     raw: true
     pin: 1
     attenuation: 0dB
@@ -284,7 +297,7 @@ sensor:
 ###
 
   - platform: template
-    name: "${dev} ESP Free Heap"
+    name: "ESP Free Heap"
     lambda: |-
       float heap = ESP.getFreeHeap();
       // float heap = esp_get_free_heap_size();
@@ -296,13 +309,13 @@ sensor:
     update_interval: 10s
 
   - platform: wifi_signal
-    name: "${dev} ESP Signal"
+    name: "ESP Signal"
     unit_of_measurement: "dB"
     state_class: measurement
     update_interval: 10s
 
   - platform: uptime
-    name: "${dev} ESP Uptime"
+    name: "ESP Uptime"
     filters:
       - lambda: return x/3600.0;
     unit_of_measurement: "h"
@@ -315,7 +328,7 @@ sensor:
 text_sensor:
 
   - platform: version
-    name: "${dev} ESPHome Version"
+    name: "ESPHome Version"
     hide_timestamp: true
 
 
