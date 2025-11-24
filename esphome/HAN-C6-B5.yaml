@@ -1,11 +1,11 @@
 # EB3
 # ESP32-C6 / Easy HAN B5
-# Tested on: 2024.12.1
+# Tested on: 2025.11 not tested yet!!
 # Active development yaml
 
 substitutions:
-  dev: EB99
-  name: eb99
+  dev: "EB99"
+  name: "eb99"
 
 interval:
   - interval: 12s
@@ -18,6 +18,7 @@ interval:
 
 esphome:
   name: ${name}
+  friendly_name: "${dev}"
   on_boot:
     priority: -500
     then:
@@ -26,7 +27,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.18"
+    version: "1.31"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -41,9 +42,6 @@ esp32:
   variant: esp32c6
   framework:
     type: esp-idf
-    version: 5.3.1
-    source: https://github.com/tasmota/esp-idf/releases/download/v5.3.1.241024/esp-idf-v5.3.1.zip
-    platform_version: 6.9.0
     sdkconfig_options:
       CONFIG_ESPTOOLPY_FLASHSIZE_8MB: y
 
@@ -104,7 +102,7 @@ time:
 
 button:
   - platform: restart
-    name: "${dev} ESP Restart"
+    name: "ESP Restart"
 
 ###
 
@@ -117,7 +115,7 @@ switch:
       inverted: no # C6 no
 
   - platform: template
-    name: "${dev} ESP Polling"
+    name: "ESP Polling"
     id: "edpbox_polling"
     optimistic: yes
 
@@ -196,7 +194,7 @@ sensor:
 ###
 
   - platform: template
-    name: "${dev} ESP Free Heap"
+    name: "ESP Free Heap"
     lambda: |-
       // arduino
       //float heap = ESP.getFreeHeap();
@@ -209,13 +207,13 @@ sensor:
     entity_category: diagnostic
 
   - platform: wifi_signal
-    name: "${dev} ESP Signal"
+    name: "ESP Signal"
     unit_of_measurement: "dB"
     state_class: measurement
     entity_category: diagnostic
 
   - platform: uptime
-    name: "${dev} ESP Uptime"
+    name: "ESP Uptime"
     filters:
       - lambda: return x/3600;
     unit_of_measurement: "h"
@@ -228,7 +226,7 @@ sensor:
 ### Voltage & Current ###
 
   - platform: modbus_controller
-    name: "${dev} Voltage L1"
+    name: "Voltage L1"
     address: 0x006C
     unit_of_measurement: "V"
     register_type: read
@@ -245,7 +243,7 @@ sensor:
         - switch.turn_off: led_pin
 
   - platform: modbus_controller
-    name: "${dev} Current L1"
+    name: "Current L1"
     address: 0x006D
     unit_of_measurement: "A"
     register_type: read
@@ -269,7 +267,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Current L2"
+    name: "Current L2"
     address: 0x006F
     unit_of_measurement: "A"
     register_type: read
@@ -281,7 +279,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Voltage L3"
+    name: "Voltage L3"
     address: 0x0070
     unit_of_measurement: "V"
     register_type: read
@@ -293,7 +291,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Current L3"
+    name: "Current L3"
     address: 0x0071
     unit_of_measurement: "A"
     register_type: read
@@ -305,7 +303,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Current"
+    name: "Current"
     address: 0x0072
     unit_of_measurement: "A"
     register_type: read
@@ -319,7 +317,7 @@ sensor:
 ### Active Power & Export ###
 
   - platform: modbus_controller
-    name: "${dev} Active Power L1"
+    name: "Active Power L1"
     address: 0x0073
     register_type: read
     value_type: U_DWORD
@@ -331,7 +329,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Active Power L1 Export"
+    name: "Active Power L1 Export"
     address: 0x0074
     register_type: read
     value_type: U_DWORD
@@ -355,7 +353,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Active Power L2 Export"
+    name: "Active Power L2 Export"
     address: 0x0076
     register_type: read
     value_type: U_DWORD
@@ -367,7 +365,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Active Power L3"
+    name: "Active Power L3"
     address: 0x0077
     register_type: read
     value_type: U_DWORD
@@ -379,7 +377,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Active Power L3 Export"
+    name: "Active Power L3 Export"
     address: 0x0078
     register_type: read
     value_type: U_DWORD
@@ -391,7 +389,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Active Power Import"
+    name: "Active Power Import"
     address: 0x0079
     register_type: read
     value_type: U_DWORD
@@ -403,7 +401,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Active Power Export"
+    name: "Active Power Export"
     address: 0x007A
     register_type: read
     value_type: U_DWORD
@@ -422,7 +420,7 @@ sensor:
 ### Power Factor & Frequency ###
 
   - platform: modbus_controller
-    name: "${dev} Power Factor"
+    name: "Power Factor"
     address: 0x007B
     unit_of_measurement: ""
     register_type: read
@@ -446,7 +444,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Power Factor L2"
+    name: "Power Factor L2"
     address: 0x007D
     unit_of_measurement: ""
     register_type: read
@@ -458,7 +456,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Power Factor L3"
+    name: "Power Factor L3"
     address: 0x007E
     unit_of_measurement: ""
     register_type: read
@@ -470,7 +468,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Frequency"
+    name: "Frequency"
     address: 0x007F
     unit_of_measurement: "Hz"
     register_type: read
@@ -484,7 +482,7 @@ sensor:
 ### Total Energy Tariffs ###
 
   - platform: modbus_controller
-    name: "${dev} T1 Vazio"
+    name: "T1 Vazio"
     address: 0x0026
     register_type: read
     value_type: U_DWORD
@@ -498,7 +496,7 @@ sensor:
     device_class: energy
 
   - platform: modbus_controller 
-    name: "${dev} T2 Ponta"
+    name: "T2 Ponta"
     address: 0x0027
     register_type: read
     value_type: U_DWORD
@@ -512,7 +510,7 @@ sensor:
     device_class: energy
 
   - platform: modbus_controller
-    name: "${dev} T3 Cheias"
+    name: "T3 Cheias"
     address: 0x0028
     register_type: read
     value_type: U_DWORD
@@ -528,7 +526,7 @@ sensor:
 ### Total Energy ###
 
   - platform: modbus_controller
-    name: "${dev} Import"
+    name: "Import"
     skip_updates: 4
     address: 0x0016
     register_type: read
@@ -543,7 +541,7 @@ sensor:
     device_class: energy
 
   - platform: modbus_controller
-    name: "${dev} Export"
+    name: "Export"
     address: 0x0017
     register_type: read
     value_type: U_DWORD
@@ -559,7 +557,7 @@ sensor:
 ### Total Energy L ###
 
   - platform: modbus_controller
-    name: "${dev} Import L1"
+    name: "Import L1"
     address: 0x001C
     skip_updates: 4
     register_type: read
@@ -574,7 +572,7 @@ sensor:
     device_class: energy
 
   - platform: modbus_controller
-    name: "${dev} Import L2"
+    name: "Import L2"
     address: 0x001D
     register_type: read
     value_type: U_DWORD
@@ -588,7 +586,7 @@ sensor:
     device_class: energy
 
   - platform: modbus_controller
-    name: "${dev} Import L3"
+    name: "Import L3"
     address: 0x001E
     register_type: read
     value_type: U_DWORD
@@ -604,7 +602,7 @@ sensor:
 ### Contract ###
 
   - platform: modbus_controller
-    name: "${dev} Contract T1"
+    name: "Contract T1"
     address: 0x000C
     register_type: read
     value_type: U_DWORD
@@ -618,7 +616,7 @@ sensor:
     icon: mdi:flash
 
   - platform: modbus_controller
-    name: "${dev} Contract T4"
+    name: "Contract T4"
     address: 0x000F
     register_type: read
     value_type: U_DWORD
@@ -639,7 +637,7 @@ sensor:
 ### Load Profile ###
 
   - platform: template
-    name: "${dev} LP Import Inc"
+    name: "LP Import Inc"
     id: lpid9
     accuracy_decimals: 3
     filters:
@@ -649,7 +647,7 @@ sensor:
     icon: mdi:counter
 
   - platform: template
-    name: "${dev} LP Export Inc"
+    name: "LP Export Inc"
     id: lpid10
     accuracy_decimals: 3
     filters:
@@ -662,14 +660,14 @@ sensor:
 #######
 
   - platform: template
-    name: "${dev} EMI Code"
+    name: "EMI Code"
     icon: mdi:chip
     accuracy_decimals: 0
     id: emi_code
     entity_category: diagnostic
 
   - platform: modbus_controller
-    name: "${dev} EMI Year"
+    name: "EMI Year"
     custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
     register_count: 1
     response_size: 25
@@ -781,12 +779,12 @@ globals:
 text_sensor:
 
   - platform: version
-    name: "${dev} ESPHome Version"
+    name: "ESPHome Version"
     hide_timestamp: true
     entity_category: diagnostic
 
   - platform: template
-    name: "${dev} ESP Clock"
+    name: "ESP Clock"
     icon: mdi:clock
     lambda: |-
       char str[25];
@@ -888,7 +886,7 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    name: "${dev} Tariff"
+    name: "Tariff"
     register_type: read
     address: 0x000B
     force_new_range: true    #####
@@ -906,37 +904,37 @@ text_sensor:
 #######
 
   - platform: template
-    name: "${dev} EMI Name"
+    name: "EMI Name"
     icon: mdi:chip
     id: emi_name
     entity_category: diagnostic
 
   - platform: template
-    name: "${dev} EMI Fw1"
+    name: "EMI Fw1"
     icon: mdi:chip
     id: emi_fw1
     entity_category: diagnostic
 
   - platform: template
-    name: "${dev} EMI Fw2"
+    name: "EMI Fw2"
     icon: mdi:chip
     id: emi_fw2
     entity_category: diagnostic
 
   - platform: template
-    name: "${dev} EMI Fw3"
+    name: "EMI Fw3"
     icon: mdi:chip
     id: emi_fw3
     entity_category: diagnostic
 
   - platform: template
-    name: "${dev} EMI Err F"
+    name: "EMI Err F"
     icon: mdi:chip
     id: emi_errF
     entity_category: diagnostic
 
   - platform: template
-    name: "${dev} EMI Err S"
+    name: "EMI Err S"
     icon: mdi:chip
     id: emi_errS
     entity_category: diagnostic
