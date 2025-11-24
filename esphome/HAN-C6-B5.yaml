@@ -27,7 +27,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.31"
+    version: "1.32"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -134,7 +134,11 @@ uart:
 #define HAN_RX 4
 
   id: modbus_serial
-  rx_pin: 4
+  rx_pin:
+    number: 4
+    mode:
+      input: true
+      pullup: true
   tx_pin: 5
   baud_rate: 9600
   stop_bits: 1
