@@ -10,7 +10,7 @@ esphome:
   name: ${name}
   project:
     name: easyhan.rf900
-    version: "1.33"
+    version: "1.34"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
