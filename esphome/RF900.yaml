@@ -1,17 +1,18 @@
 # RF900 868 915
 # Arduino Framework
-# Last working version: pip install esphome==2025.6.3 ?
+# Last working version: 
+# - pip install esphome==2025.6.3 !!
 
 substitutions:
   dev: RF
-  name: rf900
+  name: rf900-cc
 
 esphome:
   name: ${name}
   friendly_name: "${dev}"
   project:
-    name: easyhan.rf900
-    version: "1.35"
+    name: easyhan.rf900-cc
+    version: "1.37"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/RF900.yaml@dev
