@@ -10,7 +10,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "1.01"
+    version: "1.03"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -27,13 +27,13 @@ wifi:
   #use_address: 10.1.0.39
 
   ssid: !secret wifi_ssid
-  #password: !secret wifi_password
-  password: edpbox123
+  password: !secret wifi_password
+  #password: edpbox123
 
   ap:
     ssid: "Easy-HAN-${dev}"
     password: edpbox123
-    ap_timeout: 20s # change me
+
 
 captive_portal:
 
@@ -71,7 +71,7 @@ time:
 
 button:
   - platform: restart
-    name: "${dev} ESP Restart"
+    name: "ESP Restart"
 
 ###
 
@@ -128,7 +128,7 @@ sensor:
 ##
   - platform: wmbus_meter
     parent_id: water_meter
-    name: "${dev} Test Izar Signal"
+    name: "Test Izar Signal"
     field: rssi
     accuracy_decimals: 0
     unit_of_measurement: "dBm"
@@ -139,7 +139,7 @@ sensor:
 
   - platform: wmbus_meter
     parent_id: water_meter
-    name: "${dev} Test Izar Total"
+    name: "Test Izar Total"
     field: "total"
     accuracy_decimals: 3
     unit_of_measurement: "m³"
@@ -152,7 +152,7 @@ sensor:
 ###
 
   - platform: template
-    name: "${dev} ESP Free Heap"
+    name: "ESP Free Heap"
     lambda: |-
       // arduino
       //float heap = ESP.getFreeHeap();
@@ -165,13 +165,13 @@ sensor:
     entity_category: diagnostic
 
   - platform: wifi_signal
-    name: "${dev} ESP Signal"
+    name: "ESP Signal"
     unit_of_measurement: "dB"
     state_class: measurement
     entity_category: diagnostic
 
   - platform: uptime
-    name: "${dev} ESP Uptime"
+    name: "ESP Uptime"
     filters:
       - lambda: return x/3600;
     unit_of_measurement: "h"
@@ -187,7 +187,7 @@ sensor:
 text_sensor:
 
   - platform: version
-    name: "${dev} ESPHome Version"
+    name: "ESPHome Version"
     hide_timestamp: true
     entity_category: diagnostic
 
