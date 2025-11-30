@@ -10,7 +10,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "1.03"
+    version: "1.04"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -31,7 +31,7 @@ wifi:
   #password: edpbox123
 
   ap:
-    ssid: "Easy-HAN-${dev}"
+    ssid: "Easy-HAN-${dev}-IDF"
     password: edpbox123
 
 
