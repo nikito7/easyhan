@@ -10,7 +10,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "1.04"
+    version: "1.05"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -42,6 +42,10 @@ captive_portal:
 external_components:
   - source: github://SzczepanLeon/esphome-components@main
     refresh: 0d
+    components:
+    - wmbus_common
+    - wmbus_radio
+    - wmbus_meter
 
 ###
 
