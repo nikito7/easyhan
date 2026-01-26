@@ -1,11 +1,14 @@
 # EB3
 # ESP32-C6 / Easy HAN B5
-# Tested on: 2025.11.1 IDF
+# Tested on: 2025.11.2 IDF
+# Bugs: possible overflows
 # Active development yaml
 
 substitutions:
-  dev: "EB99"
-  name: "eb99"
+  #dev: "EB99"
+  #name: "eb99"
+  dev: "EB3"
+  name: "eb3"
 
 interval:
   - interval: 12s
@@ -27,7 +30,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.32"
+    version: "1.34"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -75,7 +78,7 @@ captive_portal:
 
 ###
 
-# ainda não funciona no C6
+# ainda não funciona no C6 ?
 #esp32_ble_tracker:
 #bluetooth_proxy:
 
@@ -112,6 +115,7 @@ switch:
     pin:
       number: 2
       inverted: no # C6 no
+                   # esp07s yes
 
   - platform: template
     name: "ESP Polling"
@@ -161,15 +165,6 @@ modbus_controller:
 ###
 
 sensor:
-
-#  - platform: aht10
-#    variant: AHT20
-#    temperature:
-#      name: "${dev} AHT Temperature"
-#      accuracy_decimals: 1
-#    humidity:
-#      name: "${dev} AHT Humidity"
-#      accuracy_decimals: 1
 
 #  - platform: template
 #    name: "${dev} Adc In"
@@ -330,6 +325,7 @@ sensor:
     device_class: power
     unit_of_measurement: "W"
     state_class: measurement
+    force_new_range: true
 
   - platform: modbus_controller
     name: "Active Power L1 Export"
@@ -433,6 +429,7 @@ sensor:
       - multiply: 0.001
     device_class: power_factor
     state_class: measurement
+    force_new_range: true
 
   - platform: modbus_controller
     name: "${dev} Power Factor L1"
