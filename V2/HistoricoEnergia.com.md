@@ -32,7 +32,7 @@ HePF=EB3#PF
 ```
 >S
 ...
-if (upsecs%33==0 and cnt>22)
+if (upsecs%33==0 and cnt>40)
 {
 print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss% T:%1.0HeT%
 ->WebQuery http://api.historicoenergia.com/api/webhook/mqtt?deviceId=%HeID%&token=%HeTOK% POST {"P":%0ipwr%,"V":%1vt1%,"T":%0HeT%,"E1":%2HeE1%,"E2":%2HeE2%,"E3":%2HeE3%,"F":%1HeF%,"PF":%HePF%,"I":%1HeI%}
