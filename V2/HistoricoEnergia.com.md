@@ -55,4 +55,16 @@ print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss% T:%1.0HeT%
 }
 ```
 
+# Script E5 básico
+
+```
+>S
+...
+if (upsecs%33==0 and cnt>40)
+{
+print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss%
+->WebQuery http://api.historicoenergia.com/api/webhook/mqtt?deviceId=DEVICE&token=TOKEN POST {"P":%0ipwr%,"V":%1vt1%}
+}
+```
+
 # EOF
