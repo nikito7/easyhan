@@ -3,9 +3,12 @@
 https://historicoenergia.com
 
 # Script B5
+
 ```
 >D 48
 ...
+```
+```js
 HeTOK="token"
 HeID="ebhan"
 HeT=-1
@@ -22,6 +25,8 @@ EB3:
 ```
 >T
 ...
+```
+```js
 HeT=EB3#Tariff
 HeE1=EB3#TET1
 HeE2=EB3#TET2
@@ -36,6 +41,8 @@ EB1:
 ```
 >T
 ...
+```
+```js
 HeT=EB1#Tariff
 HeE1=EB1#TET1
 HeE2=EB1#TET2
@@ -48,6 +55,8 @@ HePF=EB1#PF
 ```
 >S
 ...
+```
+```js
 if (upsecs%33==0 and cnt>40)
 {
 print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss% T:%1.0HeT%
@@ -60,6 +69,8 @@ print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss% T:%1.0HeT%
 ```
 >S
 ...
+```
+```js
 if (upsecs%33==0 and cnt>40)
 {
 print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss%
