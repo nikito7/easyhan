@@ -64,7 +64,7 @@ print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss% T:%1.0HeT%
 }
 ```
 
-# Script E5 básico
+# Script E5 basico
 
 ```
 >S
