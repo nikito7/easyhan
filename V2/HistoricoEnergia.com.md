@@ -9,6 +9,7 @@ https://historicoenergia.com
 ...
 ```
 ```js
+;
 TOK="token"
 ID="ebhan"
 T=0
@@ -27,6 +28,7 @@ EB3:
 ...
 ```
 ```js
+;
 T=EB3#Tariff
 E1=EB3#TET1
 E2=EB3#TET2
@@ -43,6 +45,7 @@ EB1:
 ...
 ```
 ```js
+;
 T=EB1#Tariff
 E1=EB1#TET1
 E2=EB1#TET2
@@ -71,7 +74,7 @@ print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss%
 ...
 ```
 ```js
-if (upsecs%33==0 and cnt>40)
+if (upsecs%181==0 and cnt>40)
 {
 print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss%
 ->WebQuery http://api.historicoenergia.com/api/webhook/mqtt?deviceId=DEVICE&token=TOKEN POST {"P":%0ipwr%,"V":%1vt1%}
