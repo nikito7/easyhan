@@ -1,6 +1,9 @@
 >D 48
 
-ver=103
+TOK="token"
+ID="ebhan"
+;
+ver=104
 date=""
 time=""
 wfc=""
@@ -15,8 +18,6 @@ vt1=0
 vt2=0
 vt3=0
 ;
-TOK="token"
-ID="ebhan"
 T=0
 E1=0
 E2=0
@@ -37,23 +38,20 @@ wfp=WifiPower
 
 >T
 
-ipwr=EB3#API
-epwr=EB3#APE
-vt1=EB3#VL1
-vt2=EB3#VL2
-vt3=EB3#VL3
-hh=EB3#HH
-mm=EB3#MM
-ss=EB3#SS
+ipwr=EB?#API
+epwr=EB?#APE
+vt1=EB?#VL1
+vt2=EB?#VL2
+vt3=EB?#VL3
 ;
-T=EB3#Tariff
-E1=EB3#TET1
-E2=EB3#TET2
-E3=EB3#TET3
-I=EB3#CL
+T=EB?#Tariff
+E1=EB?#TET1
+E2=EB?#TET2
+E3=EB?#TET3
+I=EB?#CL
 ;I=EB1#CL1
-F=EB3#FR
-PF=EB3#PF
+F=EB?#FR
+PF=EB?#PF
   
 >S
 
@@ -89,6 +87,8 @@ cnt+=1
 @<br>
 
 ; EOF V2
+
+
 
 
 
