@@ -2,8 +2,9 @@
 
 TOK="token"
 ID="ebhan"
+update=181
 ;
-ver=104
+ver=105
 date=""
 time=""
 wfc=""
@@ -38,24 +39,24 @@ wfp=WifiPower
 
 >T
 
-ipwr=EB?#API
-epwr=EB?#APE
-vt1=EB?#VL1
-vt2=EB?#VL2
-vt3=EB?#VL3
+ipwr=EB3#API
+epwr=EB3#APE
+vt1=EB3#VL1
+vt2=EB3#VL2
+vt3=EB3#VL3
 ;
-T=EB?#Tariff
-E1=EB?#TET1
-E2=EB?#TET2
-E3=EB?#TET3
-I=EB?#CL
+T=EB3#Tariff
+E1=EB3#TET1
+E2=EB3#TET2
+E3=EB3#TET3
+I=EB3#CL
 ;I=EB1#CL1
-F=EB?#FR
-PF=EB?#PF
-  
+F=EB3#FR
+PF=EB3#PF
+
 >S
 
-if (upsecs%tper==0 and cnt>40)
+if (upsecs%update==0 and cnt>40)
 {
 print historicoenergia.com
 ->WebQuery http://api.historicoenergia.com/api/webhook/mqtt?deviceId=%ID%&token=%TOK% POST {"P":%0ipwr%,"V":%1vt1%,"T":%0T%,"E1":%2E1%,"E2":%2E2%,"E3":%2E3%,"F":%1F%,"PF":%PF%,"I":%1I%}
