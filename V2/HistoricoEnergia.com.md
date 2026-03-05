@@ -2,6 +2,8 @@
 
 https://historicoenergia.com
 
+Acrescentar os blocos de código ao Script, no sitio correcto.
+
 # Script B5
 
 ```
