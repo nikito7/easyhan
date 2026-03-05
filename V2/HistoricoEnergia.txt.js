@@ -15,6 +15,15 @@ vt1=0
 vt2=0
 vt3=0
 ;
+TOK="token"
+ID="ebhan"
+T=0
+E1=0
+E2=0
+E3=0
+F=0
+I=0
+PF=0
 
 >B
 
@@ -36,8 +45,22 @@ vt3=EB3#VL3
 hh=EB3#HH
 mm=EB3#MM
 ss=EB3#SS
-
+;
+T=EB3#Tariff
+E1=EB3#TET1
+E2=EB3#TET2
+E3=EB3#TET3
+I=EB3#CL
+F=EB3#FR
+PF=EB3#PF
+  
 >S
+
+if (upsecs%181==0 and cnt>40)
+{
+print historicoenergia.com
+->WebQuery http://api.historicoenergia.com/api/webhook/mqtt?deviceId=%ID%&token=%TOK% POST {"P":%0ipwr%,"V":%1vt1%,"T":%0T%,"E1":%2E1%,"E2":%2E2%,"E3":%2E3%,"F":%1F%,"PF":%PF%,"I":%1I%}
+}
 
 time=st(tstamp T 2)
 date=st(tstamp T 1)
