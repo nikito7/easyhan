@@ -1,6 +1,6 @@
 >D 48
 
-ver=102
+ver=103
 date=""
 time=""
 wfc=""
@@ -85,7 +85,7 @@ cnt+=1
 @<b>Init </b> %0cnt% %% <b> TelePeriod </b> %0tper% <b> Version </b> %0ver%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% dBm <b> Topic </b> %topic%
 @<br>
-@<a target="_blank" href="https://historicoenergia.com">historicoenergia.com</a>
+@<a target="_blank" href="https://historicoenergia.com"><b>historicoenergia.com</b></a>
 @<br>
 
 ; EOF V2
