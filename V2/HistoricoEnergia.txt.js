@@ -57,7 +57,7 @@ PF=EB3#PF
   
 >S
 
-if (upsecs%181==0 and cnt>40)
+if (upsecs%tper==0 and cnt>40)
 {
 print historicoenergia.com
 ->WebQuery http://api.historicoenergia.com/api/webhook/mqtt?deviceId=%ID%&token=%TOK% POST {"P":%0ipwr%,"V":%1vt1%,"T":%0T%,"E1":%2E1%,"E2":%2E2%,"E3":%2E3%,"F":%1F%,"PF":%PF%,"I":%1I%}
@@ -85,8 +85,15 @@ cnt+=1
 @<b>Init </b> %0cnt% %% <b> TelePeriod </b> %0tper% <b> Version </b> %0ver%
 @<b>Wifi </b> %wfc% <b> Power </b> %0wfp% dBm <b> Topic </b> %topic%
 @<br>
-<br>
-<a href="https://historicoenergia.com">historicoenergia.com</a>
-<br>
+@<a target="_blank" href="https://historicoenergia.com">historicoenergia.com</a>
+@<br>
 
 ; EOF V2
+
+
+
+
+
+
+
+
