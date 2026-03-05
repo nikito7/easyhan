@@ -27,7 +27,7 @@ PF=0
 
 >B
 
-tper=181
+tper=11
 =>SerialLog 0
 
 >E
@@ -51,6 +51,7 @@ E1=EB3#TET1
 E2=EB3#TET2
 E3=EB3#TET3
 I=EB3#CL
+;I=EB1#CL1
 F=EB3#FR
 PF=EB3#PF
   
