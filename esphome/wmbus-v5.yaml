@@ -1,4 +1,4 @@
-# Wmbus V5 - LoRa chip
+# Wmbus V5 - CC - Izar
 # IDF Framework
 
 substitutions:
@@ -17,7 +17,8 @@ dashboard_import:
   import_full_config: true
 
 esp32:
-  board: heltec_wifi_lora_32_V2
+  # board: heltec_wifi_lora_32_V2
+  board: esp32-s3-devkitc-1
   flash_size: 8MB
   framework:
     type: esp-idf
@@ -26,8 +27,8 @@ wifi:
   output_power: 15db
   #use_address: 10.1.0.39
 
-  ssid: !secret wifi_ssid
-  password: !secret wifi_password
+  #ssid: !secret wifi_ssid
+  #password: !secret wifi_password
   #password: edpbox123
 
   ap:
@@ -80,20 +81,29 @@ button:
 ###
 
 spi:
-  clk_pin:
-    number: GPIO5
-    ignore_strapping_warning: true
-  mosi_pin: GPIO27
-  miso_pin: GPIO19
+  clk_pin: GPIO35
+  mosi_pin: GPIO37
+  miso_pin: GPIO38
+  # ---
+  #clk_pin:
+  #  number: GPIO5
+  #  ignore_strapping_warning: true
+  #mosi_pin: GPIO27
+  #miso_pin: GPIO19
 
 wmbus_common:
     drivers: all
 
 wmbus_radio:
-  radio_type: SX1276
-  cs_pin: GPIO18
-  reset_pin: GPIO14
-  irq_pin: GPIO35
+  radio_type: CC1101
+  cs_pin: GPIO36
+  irq_pin: GPIO33 # gdo0
+  frequency: 868.95MHz
+  # ---
+  #radio_type: SX1276
+  #cs_pin: GPIO18
+  #reset_pin: GPIO14
+  #irq_pin: GPIO35
   on_frame:
     - then:
         - logger.log:
@@ -120,7 +130,8 @@ wmbus_meter:
 output:
   - platform: gpio
     id: status_led
-    pin: GPIO25
+    pin: GPIO39
+    #pin: GPIO25
 
 
 ###
@@ -152,6 +163,29 @@ sensor:
     icon: "mdi:counter"
 
 ## ## ##
+
+  - platform: template
+    name: "Adc In"
+    id: adc_in_v
+    accuracy_decimals: 2
+    device_class: voltage
+    unit_of_measurement: "V"
+    state_class: measurement
+
+  - platform: adc
+    name: "Adc In raw" # ESP32-S3 PCB
+    raw: true
+    pin: 1
+    attenuation: 0dB
+    samples: 8
+    accuracy_decimals: 0
+    device_class: ""
+    unit_of_measurement: "raw"
+    icon: mdi:information
+    state_class: measurement
+    on_value:
+      then:
+        - lambda: id(adc_in_v).publish_state(x/257.2580645161);
 
 ###
 
