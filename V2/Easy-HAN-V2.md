@@ -93,9 +93,12 @@ HAN-V2-*****.zip
 
 5. Enable Script
 
+Na consola:
+
 ```js
 Backlog0 Script 1; SaveData 9; Restart 1;
 ```
+Enter
 
 <hr>
 
