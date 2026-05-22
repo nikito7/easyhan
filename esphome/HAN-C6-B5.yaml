@@ -49,7 +49,7 @@ wifi:
   #password: edpbox123
 
   ap:
-    ssid: "Easy-HAN-EB99}"
+    ssid: "Easy-HAN-EB99"
     password: edpbox123
 
 captive_portal:
