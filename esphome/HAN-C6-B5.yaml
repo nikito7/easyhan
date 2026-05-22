@@ -1,17 +1,11 @@
 # EB3
 # ESP32-C6 / Easy HAN B5
-# Tested on: 2025.11.2 IDF
+# Tested on: .... IDF
 # Bugs: possible overflows
 # Active development yaml
 
-substitutions:
-  #dev: "EB99"
-  #name: "eb99"
-  dev: "EB3"
-  name: "eb3"
-
 interval:
-  - interval: 12s
+  - interval: 15s
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
@@ -20,8 +14,8 @@ interval:
           }
 
 esphome:
-  name: ${name}
-  friendly_name: "${dev}"
+  name: han-b5-eb3
+  friendly_name: HAN
   on_boot:
     priority: -500
     then:
@@ -30,7 +24,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.34"
+    version: "1.35"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -45,22 +39,6 @@ esp32:
   variant: esp32c6
   framework:
     type: esp-idf
-    sdkconfig_options:
-      CONFIG_ESPTOOLPY_FLASHSIZE_8MB: y
-
-#i2c: ### fail in 2024.12
-#  sda: 6
-#  scl: 7
-#  scan: false # prevent bootloop
-
-#esp32:
-#  board: adafruit_feather_esp32s3 # N4 R2
-#  #board: esp32-s3-devkitc-1 # N8
-#  #board: esp32-c6-devkitc-1
-#  framework:
-#    type: arduino
-#  #flash_size: 8MB
-#  variant: esp32s3
 
 wifi:
   output_power: 15db
@@ -71,10 +49,19 @@ wifi:
   #password: edpbox123
 
   ap:
-    ssid: "Easy-HAN-${dev}"
+    ssid: "Easy-HAN-EB99}"
     password: edpbox123
 
 captive_portal:
+
+###
+
+# Example OpenThread component configuration
+#network:
+#  enable_ipv6: true
+#
+#openthread:
+#  tlv: 0e0800....
 
 ###
 
@@ -166,29 +153,6 @@ modbus_controller:
 
 sensor:
 
-#  - platform: template
-#    name: "${dev} Adc In"
-#    id: adc_in_v
-#    accuracy_decimals: 2
-#    device_class: voltage
-#    unit_of_measurement: "V"
-#    state_class: measurement
-
-#  - platform: adc
-#    name: "${dev} Adc In raw" # ESP32-S3 PCB
-#    raw: true
-#    pin: 1
-#    attenuation: 0dB
-#    samples: 20
-#    accuracy_decimals: 0
-#    device_class: ""
-#    unit_of_measurement: "raw"
-#    state_class: measurement
-#    update_interval: 10s
-#    on_value:
-#      then:
-#        - lambda: id(adc_in_v).state / 257.2580645161;
-
 ###
 
   - platform: template
@@ -253,7 +217,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Voltage L2"
+    name: "Voltage L2"
     address: 0x006E
     unit_of_measurement: "V"
     register_type: read
@@ -340,7 +304,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Active Power L2"
+    name: "Active Power L2"
     address: 0x0075
     register_type: read
     value_type: U_DWORD
@@ -432,7 +396,7 @@ sensor:
     force_new_range: true
 
   - platform: modbus_controller
-    name: "${dev} Power Factor L1"
+    name: "Power Factor L1"
     address: 0x007C
     unit_of_measurement: ""
     register_type: read
@@ -797,7 +761,7 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    name: "${dev} Clock"
+    name: "Clock"
     register_type: read
     address: 0x0001
     register_count: 1
@@ -821,7 +785,7 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    name: "${dev} LP Date Time"
+    name: "LP Date Time"
     custom_command: [0x1, 0x44, 0x0, 0x1]
     register_count: 1
     response_size: 42
@@ -862,7 +826,7 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    name: "${dev} LP IDs"
+    name: "LP IDs"
     custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
     register_count: 1
     response_size: 14
