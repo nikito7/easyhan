@@ -1,4 +1,6 @@
-# EB3
+############
+# EB3 Lite #
+############
 # ESP32-C6 / Easy HAN B5
 # Tested on: .... IDF
 # Bugs: possible overflows
@@ -20,14 +22,14 @@ esphome:
     priority: -500
     then:
       - switch.turn_on: led_pin
-      - delay: 5s
+      - delay: 7s
       - switch.turn_on: edpbox_polling
   project:
-    name: easyhan.edpbox3-c6-b5
-    version: "1.39"
+    name: easyhan.eb3-c6-b5-lite
+    version: "1.41"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-Lite.yaml@dev
   import_full_config: true
 
 #esp8266:
@@ -284,7 +286,7 @@ sensor:
     device_class: power
     unit_of_measurement: "W"
     state_class: measurement
-    force_new_range: true
+    force_new_range: true #####
 
   - platform: modbus_controller
     name: "Active Power L1 Export"
@@ -437,6 +439,11 @@ sensor:
       - multiply: 0.1
     icon: "mdi:pulse"
     state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Total Energy Tariffs ###
 
@@ -481,6 +488,11 @@ sensor:
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Total Energy ###
 
@@ -511,6 +523,12 @@ sensor:
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
 
 ### Total Energy L ###
 
@@ -555,6 +573,11 @@ sensor:
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Contract ###
 
@@ -577,146 +600,6 @@ sensor:
         - switch.turn_on: led_pin
         - delay: 30ms
         - switch.turn_off: led_pin
-
-### Load Profile ###
-
-  - platform: template
-    name: "LP Import Inc"
-    id: lpid9
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-    unit_of_measurement: "kWh/15m"
-    state_class: measurement
-    icon: mdi:counter
-
-  - platform: template
-    name: "LP Export Inc"
-    id: lpid10
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-    unit_of_measurement: "kWh/15m"
-    state_class: measurement
-    icon: mdi:counter
-
-#######
-
-  - platform: template
-    name: "EMI Code"
-    icon: mdi:chip
-    accuracy_decimals: 0
-    id: emi_code
-    entity_category: diagnostic
-
-  - platform: modbus_controller
-    skip_updates: 4 ###
-    name: "EMI Year"
-    custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
-    register_count: 1
-    response_size: 25
-    lambda: |-
-      char hFw1[12];
-      char hFw2[12];
-      char hFw3[12];
-      char _emi[20];
-
-      uint32_t hMnfC = (data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3]);
-      uint16_t hMnfY = (data[4] << 8 | data[5]);
-
-      sprintf(hFw1, "%c%c%c%c%c",
-              data[6],
-              data[7],
-              data[8],
-              data[9],
-              data[10]);
-
-      sprintf(hFw2, "%c%c%c%c%c",
-              data[11],
-              data[12],
-              data[13],
-              data[14],
-              data[15]);
-
-      sprintf(hFw3, "%c%c%c%c%c",
-              data[16],
-              data[17],
-              data[18],
-              data[19],
-              data[20]);
-
-      id(emi_fw1).publish_state(hFw1);
-      id(emi_fw2).publish_state(hFw2);
-      id(emi_fw3).publish_state(hFw3);
-      id(emi_code).publish_state(hMnfC);
-
-      switch (hMnfC) {
-        case 6623491:
-          sprintf(_emi, "%s", "T Janz GPRS");
-          break;
-        case 6750210:
-          sprintf(_emi, "%s", "M Landis+Gyr S3");
-          break;
-        case 6754306:
-          sprintf(_emi, "%s", "T Landis+Gyr S3");
-          break;
-        case 6754307:
-          sprintf(_emi, "%s", "T Landis+Gyr S5");
-          break;
-        case 11010050:
-          sprintf(_emi, "%s", "M Sagem CX1000-6");
-          break;
-        case 11010051:
-          sprintf(_emi, "%s", "M Sagem S212");
-          break;
-        case 11014146:
-          sprintf(_emi, "%s", "T Sagem CX2000-9");
-          break;
-        case 16973825:
-          sprintf(_emi, "%s", "? Ziv ???");
-          break;
-        case 16977920:
-          sprintf(_emi, "%s", "T Ziv 5CTD-E2F");
-          break;
-        case 18481154:
-          sprintf(_emi, "%s", "M Kaifa MA109P");
-          break;
-        case 18481156:
-          sprintf(_emi, "%s", "M Kaifa MA109H");
-          break;
-        default:
-          sprintf(_emi, "%s", "? ??? ???");
-      }
-
-      id(emi_name).publish_state(_emi);
-
-      return hMnfY;
-
-      // eof
-    ## lambda eof
-    accuracy_decimals: 0
-    icon: mdi:calendar
-    entity_category: diagnostic
-
-
-### ### ###
-
-globals:
-
-   - id: idx3
-     type: int
-     restore_value: no
-     initial_value: '0' 
-
-   - id: idx4
-     type: int
-     restore_value: no
-     initial_value: '0'
-
-   - id: idx6
-     type: int
-     restore_value: no
-     initial_value: '0'
 
 ### ### ###
 
@@ -781,123 +664,11 @@ text_sensor:
         else if (x == "2,0") z = "Ponta";
         else if (x == "3,0") z = "Cheias";
         return {z};
-
-###
-
-  - platform: modbus_controller
-    skip_updates: 4 ###
-    name: "LP IDs"
-    custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
-    register_count: 1
-    response_size: 14
-    lambda: |-
-      char lpindex[25];
-      sprintf(lpindex,"%d,%d,%d,%d,%d,%d",
-          data[2],
-          data[3],
-          data[4],
-          data[5],
-          data[6],
-          data[7]);
-      id(idx3) = data[2];
-      id(idx4) = data[3];
-      id(idx6) = data[5];
-      return {lpindex};
-      // eof
-    icon: mdi:chip
-    entity_category: diagnostic
-
-###
-
-  - platform: modbus_controller
-    skip_updates: 4 ###
-    name: "LP Date Time"
-    custom_command: [0x1, 0x44, 0x0, 0x1]
-    register_count: 1
-    response_size: 42
-    lambda: |-
-      uint8_t _emi_err1 = data[0];
-      uint8_t _emi_err2 = data[1];
-      uint16_t lpYY = (data[2] << 8 | data[3]);
-      uint8_t lpMT = data[4];
-      uint8_t lpDD = data[5];
-      uint8_t lpHH = data[7];
-      uint8_t lpMM = data[8];
-      // ###
-      if (id(idx3) == 9) {
-      // ###
-      uint32_t lp3g = (data[15] << 24 | data[16] << 16 | data[17] << 8 | data[18]);
-      uint32_t lp4g = (data[19] << 24 | data[20] << 16 | data[21] << 8 | data[22]);
-      uint32_t lp6g = (data[27] << 24 | data[28] << 16 | data[29] << 8 | data[30]); 
-      id(lpid9).publish_state(lp3g);
-      //
-      if (id(idx4) == 10) {
-      id(lpid10).publish_state(lp4g);
-      }
-      if (id(idx6) == 10) {
-      id(lpid10).publish_state(lp6g);
-      }
-      // ###
-      }
-      // ###
-      //
-      //  new LP 2026 16bits id20 id24
-      //
-      if (id(idx3) == 20) {
-      uint32_t lp3g = (data[15] << 8 | data[16]);
-      uint32_t lp4g = (data[17] << 8 | data[18]);
-      id(lpid9).publish_state(lp3g);
-      id(lpid10).publish_state(lp4g);
-      }
-      // 
-      char _emi_err[12];
-      sprintf(_emi_err,"0x%0X",_emi_err1);
-      id(emi_errF).publish_state(_emi_err);
-      sprintf(_emi_err,"0x%0X",_emi_err2);
-      id(emi_errS).publish_state(_emi_err);
-      //
-      char lpclk[25];
-      sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
-      return {lpclk};
-    icon: mdi:calendar
-
-#######
-
-  - platform: template
-    name: "EMI Name"
-    icon: mdi:chip
-    id: emi_name
-    entity_category: diagnostic
-
-  - platform: template
-    name: "EMI Fw1"
-    icon: mdi:chip
-    id: emi_fw1
-    entity_category: diagnostic
-
-  - platform: template
-    name: "EMI Fw2"
-    icon: mdi:chip
-    id: emi_fw2
-    entity_category: diagnostic
-
-  - platform: template
-    name: "EMI Fw3"
-    icon: mdi:chip
-    id: emi_fw3
-    entity_category: diagnostic
-
-  - platform: template
-    name: "EMI Err F"
-    icon: mdi:chip
-    id: emi_errF
-    entity_category: diagnostic
-
-  - platform: template
-    name: "EMI Err S"
-    icon: mdi:chip
-    id: emi_errS
-    entity_category: diagnostic
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 #######
 # eof #
