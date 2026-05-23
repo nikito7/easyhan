@@ -24,7 +24,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.38"
+    version: "1.39"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -820,13 +820,13 @@ text_sensor:
       uint8_t lpDD = data[5];
       uint8_t lpHH = data[7];
       uint8_t lpMM = data[8];
-      //
+      // ###
       if (id(idx3) == 9) {
+      // ###
       uint32_t lp3g = (data[15] << 24 | data[16] << 16 | data[17] << 8 | data[18]);
       uint32_t lp4g = (data[19] << 24 | data[20] << 16 | data[21] << 8 | data[22]);
       uint32_t lp6g = (data[27] << 24 | data[28] << 16 | data[29] << 8 | data[30]); 
       id(lpid9).publish_state(lp3g);
-      }
       //
       if (id(idx4) == 10) {
       id(lpid10).publish_state(lp4g);
@@ -834,6 +834,9 @@ text_sensor:
       if (id(idx6) == 10) {
       id(lpid10).publish_state(lp6g);
       }
+      // ###
+      }
+      // ###
       //
       //  new LP 2026 16bits id20 id24
       //
