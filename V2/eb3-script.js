@@ -1,16 +1,13 @@
 >D 48
 
-ver=20104
+ver=20105
 EBx="EB3"
 C="Net."
 date=""
 time=""
-clk=""
-old=""
 wfc=""
 wfp=0
 cnt=0
-wtd=0
 hh=0
 mm=0
 ss=0
@@ -113,16 +110,18 @@ if (upsecs%57==0 and cnt>51)
 ;
 if (mqtts>0)
 {
-print MQTT: OK
+tmp=mqtts
+print MQTT: OK %0tmp%
 }
 else
 {
-print MQTT: Error!
+tmp=mqtts
+print MQTT: Error! %0tmp%
 }
 ;
 }
 
-if cnt==63
+if cnt==44
 {
 =>UfsRun discovery-EB3.txt
 }
