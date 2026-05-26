@@ -4,11 +4,8 @@
 # Bugs: possible overflows
 # Active development yaml
 
-substitutions:
-  HanDelay: 1500ms
-
 interval:
-  - interval: 15s
+  - interval: 20s
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
@@ -74,8 +71,7 @@ web_server:
   version: 3
   
 logger:
-  #level: debug
-  level: verbose # modbus
+  level: debug
 
 api:
   reboot_timeout: 30min
@@ -136,13 +132,13 @@ modbus:
   flow_control_pin: 3
   id: modbus1
   uart_id: modbus_serial
-  send_wait_time: ${HanDelay}
+  send_wait_time: 1000ms
 
 modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
-    command_throttle: ${HanDelay}
+    command_throttle: 1500ms
     setup_priority: -10
     offline_skip_updates: 8
     max_cmd_retries: 0
@@ -289,6 +285,7 @@ sensor:
 ### Active Power & Export ###
 
   - platform: modbus_controller
+    force_new_range: true       ### ###
     name: "Active Power L1"
     address: 0x0073
     register_type: read
@@ -299,7 +296,6 @@ sensor:
     device_class: power
     unit_of_measurement: "W"
     state_class: measurement
-    force_new_range: true
 
   - platform: modbus_controller
     name: "Active Power L1 Export"
@@ -578,7 +574,7 @@ sensor:
 ### Contract ###
 
   - platform: modbus_controller
-    skip_updates: 20 ### ###
+    skip_updates: 20            ### ###
     name: "Contract T1"
     address: 0x000C
     register_type: read
@@ -633,7 +629,7 @@ sensor:
     entity_category: diagnostic
 
   - platform: modbus_controller
-    skip_updates: 30 ### ###
+    skip_updates: 30            ### ###
     name: "EMI Year"
     custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
     register_count: 1
@@ -791,10 +787,10 @@ text_sensor:
 ###
 
   - platform: modbus_controller
+    force_new_range: true        ### ###
     name: "Tariff"
     register_type: read
     address: 0x000B
-    force_new_range: true    #####
     register_count: 1
     response_size: 2
     raw_encode: COMMA
@@ -809,7 +805,7 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    skip_updates: 20 ### ###
+    skip_updates: 20            ### ###
     name: "LP IDs"
     custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
     register_count: 1
@@ -925,3 +921,4 @@ text_sensor:
 #######
 # eof #
 #######
+
