@@ -132,13 +132,13 @@ modbus:
   flow_control_pin: 3
   id: modbus1
   uart_id: modbus_serial
-  send_wait_time: 1000ms
+  send_wait_time: 750ms ### A: < B
 
 modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
-    command_throttle: 1500ms
+    command_throttle: 1000ms ### B: > A
     setup_priority: -10
     offline_skip_updates: 8
     max_cmd_retries: 0
@@ -399,7 +399,11 @@ sensor:
       - multiply: 0.001
     device_class: power_factor
     state_class: measurement
-    force_new_range: true
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
   - platform: modbus_controller
     name: "Power Factor L1"
@@ -452,6 +456,11 @@ sensor:
           ignore_out_of_range: true
     icon: "mdi:pulse"
     state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Total Energy Tariffs ###
 
@@ -496,6 +505,11 @@ sensor:
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Total Energy ###
 
@@ -526,6 +540,11 @@ sensor:
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Total Energy L ###
 
@@ -570,6 +589,11 @@ sensor:
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Contract ###
 
@@ -716,7 +740,11 @@ sensor:
     accuracy_decimals: 0
     icon: mdi:calendar
     entity_category: diagnostic
-
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### ### ###
 
@@ -801,7 +829,11 @@ text_sensor:
         else if (x == "2,0") z = "Ponta";
         else if (x == "3,0") z = "Cheias";
         return {z};
-
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 ###
 
   - platform: modbus_controller
@@ -826,6 +858,11 @@ text_sensor:
       // eof
     icon: mdi:chip
     entity_category: diagnostic
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ###
 
@@ -879,6 +916,11 @@ text_sensor:
       sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
       return {lpclk};
     icon: mdi:calendar
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 #######
 
