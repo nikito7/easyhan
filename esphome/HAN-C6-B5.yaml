@@ -4,6 +4,9 @@
 # Bugs: possible overflows
 # Active development yaml
 
+substitutions:
+  HanDelay: 1500ms
+
 interval:
   - interval: 15s
     then:
@@ -24,7 +27,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.39"
+    version: "1.41"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -133,13 +136,13 @@ modbus:
   flow_control_pin: 3
   id: modbus1
   uart_id: modbus_serial
-  send_wait_time: 1500ms
+  send_wait_time: ${HanDelay}
 
 modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
-    command_throttle: 1000ms
+    command_throttle: ${HanDelay}
     setup_priority: -10
     offline_skip_updates: 8
     max_cmd_retries: 0
@@ -191,6 +194,10 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - clamp:
+          min_value: 150
+          max_value: 300
+          ignore_out_of_range: true
     device_class: voltage
     state_class: measurement
     on_value:
@@ -220,6 +227,10 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - clamp:
+          min_value: 150
+          max_value: 300
+          ignore_out_of_range: true
     device_class: voltage
     state_class: measurement
 
@@ -244,6 +255,10 @@ sensor:
     accuracy_decimals: 1
     filters:
      - multiply: 0.1
+     - clamp:
+         min_value: 150
+         max_value: 300
+         ignore_out_of_range: true
     device_class: voltage
     state_class: measurement
 
@@ -435,6 +450,10 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - clamp:
+          min_value: 45
+          max_value: 65
+          ignore_out_of_range: true
     icon: "mdi:pulse"
     state_class: measurement
 
@@ -559,7 +578,7 @@ sensor:
 ### Contract ###
 
   - platform: modbus_controller
-    skip_updates: 4 ###
+    skip_updates: 20 ### ###
     name: "Contract T1"
     address: 0x000C
     register_type: read
@@ -569,6 +588,10 @@ sensor:
     accuracy_decimals: 2
     filters:
       - multiply: 0.001
+      - clamp:
+          min_value: 1
+          max_value: 100
+          ignore_out_of_range: true
     unit_of_measurement: "kVA"
     state_class: measurement
     icon: mdi:flash
@@ -610,7 +633,7 @@ sensor:
     entity_category: diagnostic
 
   - platform: modbus_controller
-    skip_updates: 4 ###
+    skip_updates: 30 ### ###
     name: "EMI Year"
     custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
     register_count: 1
@@ -727,6 +750,7 @@ text_sensor:
   - platform: version
     name: "ESPHome Version"
     hide_timestamp: true
+    hide_hash: true
     entity_category: diagnostic
 
   - platform: template
@@ -785,7 +809,7 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    skip_updates: 4 ###
+    skip_updates: 20 ### ###
     name: "LP IDs"
     custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
     register_count: 1
@@ -810,7 +834,6 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    skip_updates: 4 ###
     name: "LP Date Time"
     custom_command: [0x1, 0x44, 0x0, 0x1]
     register_count: 1
