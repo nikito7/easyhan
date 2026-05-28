@@ -8,9 +8,9 @@ Smart IoT Devices
 
 - [```edpbox V2``` contadores inteligentes](./V2/)
 
-- [```growatt``` inversor solar](./tasmpta/growatt/)
+- [```growatt``` inversor solar](./tasmota/growatt/)
 
-- [```lorawan``` ttn edpbox han](./taamota/lorawan/)
+- [```lorawan``` ttn edpbox han](./misc/lorawan/)
 
 
 
