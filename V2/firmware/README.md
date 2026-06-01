@@ -1,4 +1,7 @@
-Last: http://u.easyhan.pt/v2/
+Last:
+
+- http://u.easyhan.pt/v2/
+- https://github.com/nikito7/nikito7.github.io/tree/dev/pt.easyhan.u/v2
 
 # 7.274
 
