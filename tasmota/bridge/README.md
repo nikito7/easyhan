@@ -15,10 +15,10 @@ RTU over TCP:
 
 ![easyhan.pt](./bridge-01-rtutcp.jpg)
 
-https://github.com/nikito7/easyhan/blob/dev/bridge/Bridge-RTUoverTCP.js
+https://github.com/nikito7/easyhan/blob/dev/tasmota/bridge/Bridge-RTUoverTCP.js
 
 Modbus TCP:
 
 ![easyhan.pt](./bridge-02-tcp.jpg)
 
-https://github.com/nikito7/easyhan/blob/dev/bridge/Bridge-ModbusTCP.js
+https://github.com/nikito7/easyhan/blob/dev/tasmota/bridge/Bridge-ModbusTCP.js
