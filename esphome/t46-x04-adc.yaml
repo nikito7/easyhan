@@ -1,39 +1,35 @@
 # X04v1.3
 # ESP32-S3 N8
 
-substitutions:
-  dev: X04v1
-  name: x04v1
-
 esphome:
-  name: ${name}
+  name: "t46-x04-adc"
+  friendly_name: "T46 X04 ADC"
 
 esp32:
-  #board: adafruit_feather_esp32s3 # N4 R2
-  board: esp32-s3-devkitc-1 # N8
-  #board: esp32-c6-devkitc-1
+  board: esp32-s3-devkitm-1
   framework:
-    type: arduino
+    type: esp-idf
   flash_size: 8MB
   variant: esp32s3
 
 wifi:
   output_power: 15db
   
-  ssid: !secret wifi_ssid
-  password: !secret wifi_key
-  
-  ap:
-    ssid: "Easy-HAN-${dev}"
-    password: edpbox123
-    ap_timeout: 15s # change me
-
-captive_portal:
+  networks:
+  - ssid: !secret wifi_ssid
+    password: !secret wifi_password
+  - ssid: "ssn-7"
+    password: !secret wifi_password
 
 ###
 
+esp32_ble:
+  max_connections: 5
+
 esp32_ble_tracker:
+
 bluetooth_proxy:
+  #connection_slots: 1
 
 ###
 
@@ -55,7 +51,7 @@ time:
 
 button:
   - platform: restart
-    name: "${dev} ESP Restart"
+    name: "ESP Restart"
 
 interval:
   - interval: 5s
@@ -80,12 +76,12 @@ sensor:
 ####
 
   - platform: dallas_temp
-    name: "${dev} DS18B20 Temperature"
+    name: "DS18B20 Temperature"
 
 ####
 
   - platform: adc
-    name: "${dev} Adc In raw"
+    name: "A1 In raw"
     id: adc_in
     raw: true
     pin: 1
@@ -98,7 +94,7 @@ sensor:
     update_interval: 5s
 
   - platform: template
-    name: "${dev} Adc In"
+    name: "A1 In"
     lambda: |-
       return  id(adc_in).state / 257.2580645161;
     accuracy_decimals: 2
@@ -109,7 +105,7 @@ sensor:
 ###
 
   - platform: adc
-    name: "${dev} Adc A2 raw"
+    name: "A2 raw"
     id: adc_a2
     raw: true
     pin: 2
@@ -123,19 +119,11 @@ sensor:
 
 
 # 4-20ma Water Level // Resistor 47 Ohm = <1V
-# Tasmota: ESP8266 raw: 323   // 6*1V: 1.89V  // meters: 0.38m
+# Tasmota: ESP8266 raw: 323
 # ESPHome S3       raw: 1265 
 
-# Tasmota # ESPHome # Div y/x
-# 323     # 1265    # 3.916408
-# 360     # 1360    # 3.777777
-# 387     # 1621    # 4.188630
-# 498     # 1920    # 3.855421
-# 536     # 2182    # 4.070895
-# 646     # 2570    # 3.978328
-
   - platform: template
-    name: "${dev} Adc A2"
+    name: "A2 tpl"
     lambda: |-
       return  id(adc_a2).state * 3.9; // to fix
     accuracy_decimals: 2
@@ -146,7 +134,7 @@ sensor:
 ###
 
   - platform: template
-    name: "${dev} ESP Free Heap"
+    name: "ESP Free Heap"
     lambda: |-
       float heap = ESP.getFreeHeap();
       // float heap = esp_get_free_heap_size();
@@ -156,12 +144,12 @@ sensor:
     state_class: measurement
 
   - platform: wifi_signal
-    name: "${dev} ESP Signal"
+    name: "ESP Signal"
     unit_of_measurement: "dB"
     state_class: measurement
 
   - platform: uptime
-    name: "${dev} ESP Uptime"
+    name: "ESP Uptime"
     filters:
       - lambda: return x/3600;
     unit_of_measurement: "h"
@@ -175,7 +163,7 @@ sensor:
 text_sensor:
 
   - platform: template
-    name: "${dev} ESP Clock"
+    name: "ESP Clock"
     icon: mdi:clock
     lambda: |-
       char str[25];
@@ -191,4 +179,3 @@ text_sensor:
 #######
 # eof #
 #######
-
