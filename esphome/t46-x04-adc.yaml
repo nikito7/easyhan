@@ -54,7 +54,7 @@ button:
     name: "ESP Restart"
 
 interval:
-  - interval: 5s
+  - interval: 1s
     then:
       - switch.turn_on: led_pin
       - delay: 30ms
@@ -104,7 +104,7 @@ sensor:
     raw: true
     pin: 2
     attenuation: 0dB
-    samples: 20
+    samples: 10
     accuracy_decimals: 0
     device_class: ""
     unit_of_measurement: "raw"
@@ -117,6 +117,7 @@ sensor:
 # ESPHome S3
 # raw: 787	0.18v	0.0002287166	0.0m
 # raw: 1551	x	x		2.20m
+# raw: 2114	x	x		4.40m  max real.
 
   - platform: template
     name: "A2 In"
@@ -133,11 +134,13 @@ sensor:
     lambda: |-
       return  id(adc_a2).state;
     filters:
+      - filter_out: nan
       - calibrate_linear:
          method: exact
          datapoints:
           - 787 -> 0.0
           - 1551 -> 2.20
+          - 2114 -> 4.40
     accuracy_decimals: 2
     device_class: distance
     unit_of_measurement: "m"
