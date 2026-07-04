@@ -104,16 +104,15 @@ sensor:
     raw: true
     pin: 2
     attenuation: 0dB
-    samples: 10
+    samples: 20
     accuracy_decimals: 0
     device_class: ""
     unit_of_measurement: "raw"
     state_class: measurement
-    update_interval: 10s
+    update_interval: 5s
 
 
-# 4-20ma Water Level // Resistor 47 Ohm = <1V
-# Tasmota: ESP8266 raw: 323
+# 4-20ma Water Level 10m // Resistor 47 Ohm = <1V
 # ESPHome S3
 # raw: 787	0.18v	0.0002287166	0.0m
 # raw: 1551	x	x		2.20m
@@ -141,11 +140,18 @@ sensor:
           - 787 -> 0.0
           - 1551 -> 2.20
           - 2114 -> 4.40
+      - median:
+          window_size: 5
+          send_every: 5
+          send_first_at: 5
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
     accuracy_decimals: 2
     device_class: distance
     unit_of_measurement: "m"
     state_class: measurement
-    update_interval: 10s
+    update_interval: 5s
 
 ###
 
