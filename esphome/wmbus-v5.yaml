@@ -1,4 +1,6 @@
-# Wmbus V5 - CC - Izar
+# Wmbus V5
+# CC / LoRa
+# Izar / Arrow
 # IDF Framework
 
 substitutions:
@@ -10,7 +12,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "1.05"
+    version: "1.07"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -41,7 +43,8 @@ captive_portal:
 ###
 
 external_components:
-  - source: github://SzczepanLeon/esphome-components@main
+#  - source: github://SzczepanLeon/esphome-components@main
+  - source: github://nikito7/__wmbus@arrow-v5
     refresh: 0d
     components:
     - wmbus_common
@@ -122,8 +125,10 @@ wmbus_radio:
 wmbus_meter:
   - id: water_meter
     meter_id: 0x22334455
+    #meter_id: !secret meter_id
     type: izar
     key: "00000000000000000000000000000000"
+    #key: !secret meter_key
     mode: 
       - T1
 
