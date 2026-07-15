@@ -12,7 +12,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "1.07"
+    version: "5.07"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -43,7 +43,7 @@ captive_portal:
 ###
 
 external_components:
-#  - source: github://SzczepanLeon/esphome-components@main
+  #- source: github://SzczepanLeon/esphome-components@main
   - source: github://nikito7/__wmbus@arrow-v5
     refresh: 0d
     components:
@@ -84,10 +84,11 @@ button:
 ###
 
 spi:
+  # --- cc ---
   clk_pin: GPIO35
   mosi_pin: GPIO37
   miso_pin: GPIO38
-  # ---
+  # --- lora ---
   #clk_pin:
   #  number: GPIO5
   #  ignore_strapping_warning: true
@@ -95,9 +96,11 @@ spi:
   #miso_pin: GPIO19
 
 wmbus_common:
-    drivers: all
+    #drivers: all
+    drivers: [izar]
 
 wmbus_radio:
+  # ---
   radio_type: CC1101
   cs_pin: GPIO36
   irq_pin: GPIO33 # gdo0
@@ -112,6 +115,7 @@ wmbus_radio:
         - logger.log:
             format: "RSSI: %ddBm T: %s (%d)"
             args: [ frame->rssi(), frame->as_hex().c_str(), frame->data().size() ]
+        - lambda: id(meter_rssi).publish_state(frame->rssi());
     - then:
         - repeat:
             count: 3
@@ -146,10 +150,9 @@ sensor:
 ## ## ##
 
 ##
-  - platform: wmbus_meter
-    parent_id: water_meter
+  - platform: template
     name: "Test Izar Signal"
-    field: rssi
+    id: meter_rssi
     accuracy_decimals: 0
     unit_of_measurement: "dBm"
     device_class: "signal_strength"
@@ -160,7 +163,7 @@ sensor:
   - platform: wmbus_meter
     parent_id: water_meter
     name: "Test Izar Total"
-    field: "total"
+    field: "total_m3"
     accuracy_decimals: 3
     unit_of_measurement: "m³"
     device_class: "water"
