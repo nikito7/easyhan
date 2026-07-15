@@ -1,6 +1,7 @@
 # Wmbus V5
 # CC / LoRa
 # Izar / Arrow
+# CC + Arrow OK.
 # IDF Framework
 
 substitutions:
@@ -12,7 +13,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "5.07"
+    version: "5.08"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -96,8 +97,7 @@ spi:
   #miso_pin: GPIO19
 
 wmbus_common:
-    #drivers: all
-    drivers: [izar]
+    drivers: all
 
 wmbus_radio:
   # ---
