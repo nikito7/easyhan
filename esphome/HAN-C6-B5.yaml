@@ -5,7 +5,7 @@
 # Active development yaml
 
 interval:
-  - interval: 30s
+  - interval: 12s
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
@@ -24,7 +24,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.41"
+    version: "1.51"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -34,9 +34,9 @@ dashboard_import:
 #  board: esp07s
 
 esp32:
-  board: esp32-c6-devkitc-1
   flash_size: 8MB
   variant: esp32c6
+  toolchain: platformio
   framework:
     type: esp-idf
 
@@ -133,13 +133,12 @@ modbus:
   flow_control_pin: 3
   id: modbus1
   uart_id: modbus_serial
-  send_wait_time: 1000ms    ###
+  turnaround_time: 1000ms
 
 modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
-    command_throttle: 2000ms   ###
     setup_priority: -10
     offline_skip_updates: 4
     max_cmd_retries: 0
@@ -968,3 +967,4 @@ text_sensor:
 #######
 # eof #
 #######
+
