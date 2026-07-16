@@ -1,6 +1,6 @@
 # EB3
 # ESP32-C6 / Easy HAN B5
-# Tested on: .... IDF
+# Tested on: 2026.07
 # Bugs: possible overflows
 # Active development yaml
 
@@ -24,7 +24,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "1.51"
+    version: "2.03"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -36,7 +36,6 @@ dashboard_import:
 esp32:
   flash_size: 8MB
   variant: esp32c6
-  toolchain: platformio
   framework:
     type: esp-idf
 
@@ -134,13 +133,15 @@ modbus:
   id: modbus1
   uart_id: modbus_serial
   turnaround_time: 1000ms
+  send_wait_time: 1500ms
 
 modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
     setup_priority: -10
-    offline_skip_updates: 4
+    command_throttle: 1000ms
+    offline_skip_updates: 5
     max_cmd_retries: 0
 
 ###
@@ -190,10 +191,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
-      - clamp:
-          min_value: 150
-          max_value: 300
-          ignore_out_of_range: true
+      - filter_out: nan
     device_class: voltage
     state_class: measurement
     on_value:
@@ -211,6 +209,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - filter_out: nan
     device_class: current
     state_class: measurement
 
@@ -223,10 +222,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
-      - clamp:
-          min_value: 150
-          max_value: 300
-          ignore_out_of_range: true
+      - filter_out: nan
     device_class: voltage
     state_class: measurement
 
@@ -239,6 +235,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - filter_out: nan
     device_class: current
     state_class: measurement
 
@@ -251,10 +248,7 @@ sensor:
     accuracy_decimals: 1
     filters:
      - multiply: 0.1
-     - clamp:
-         min_value: 150
-         max_value: 300
-         ignore_out_of_range: true
+     - filter_out: nan
     device_class: voltage
     state_class: measurement
 
@@ -266,7 +260,8 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 1
     filters:
-     - multiply: 0.1
+      - multiply: 0.1
+      - filter_out: nan
     device_class: current
     state_class: measurement
 
@@ -278,6 +273,7 @@ sensor:
     value_type: U_WORD
     filters:
       - multiply: 0.1
+      - filter_out: nan
     accuracy_decimals: 1
     device_class: current
     state_class: measurement
@@ -450,10 +446,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
-      - clamp:
-          min_value: 45
-          max_value: 65
-          ignore_out_of_range: true
+      - filter_out: nan
     icon: "mdi:pulse"
     state_class: measurement
     on_value:
@@ -474,6 +467,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -488,6 +482,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -502,6 +497,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -523,6 +519,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -537,6 +534,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -558,6 +556,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -572,6 +571,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -586,6 +586,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -608,10 +609,7 @@ sensor:
     accuracy_decimals: 2
     filters:
       - multiply: 0.001
-      - clamp:
-          min_value: 1
-          max_value: 100
-          ignore_out_of_range: true
+      - filter_out: nan
     unit_of_measurement: "kVA"
     state_class: measurement
     icon: mdi:flash
@@ -629,6 +627,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh/15m"
     state_class: measurement
     icon: mdi:counter
@@ -639,6 +638,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh/15m"
     state_class: measurement
     icon: mdi:counter
@@ -877,18 +877,17 @@ text_sensor:
     response_size: 42
     lambda: |-
       uint8_t _emi_err1 = data[0];
-      uint8_t _emi_err2 = data[1];
-      uint16_t lpYY = (data[2] << 8 | data[3]);
-      uint8_t lpMT = data[4];
-      uint8_t lpDD = data[5];
-      uint8_t lpHH = data[7];
-      uint8_t lpMM = data[8];
+      uint16_t lpYY = (data[1] << 8 | data[2]);
+      uint8_t lpMT = data[3];
+      uint8_t lpDD = data[4];
+      uint8_t lpHH = data[6];
+      uint8_t lpMM = data[7];
       // ###
       if (id(idx3) == 9) {
       // ###
-      uint32_t lp3g = (data[15] << 24 | data[16] << 16 | data[17] << 8 | data[18]);
-      uint32_t lp4g = (data[19] << 24 | data[20] << 16 | data[21] << 8 | data[22]);
-      uint32_t lp6g = (data[27] << 24 | data[28] << 16 | data[29] << 8 | data[30]); 
+      uint32_t lp3g = (data[14] << 24 | data[15] << 16 | data[16] << 8 | data[17]);
+      uint32_t lp4g = (data[18] << 24 | data[19] << 16 | data[20] << 8 | data[21]);
+      uint32_t lp6g = (data[26] << 24 | data[27] << 16 | data[28] << 8 | data[29]); 
       id(lpid9).publish_state(lp3g);
       //
       if (id(idx4) == 10) {
@@ -904,16 +903,14 @@ text_sensor:
       //  new LP 2026 16bits id20 id24
       //
       if (id(idx3) == 20) {
-      uint32_t lp3g = (data[15] << 8 | data[16]);
-      uint32_t lp4g = (data[17] << 8 | data[18]);
+      uint32_t lp3g = (data[14] << 8 | data[15]);
+      uint32_t lp4g = (data[16] << 8 | data[17]);
       id(lpid9).publish_state(lp3g);
       id(lpid10).publish_state(lp4g);
       }
       // 
       char _emi_err[12];
       sprintf(_emi_err,"0x%0X",_emi_err1);
-      id(emi_errF).publish_state(_emi_err);
-      sprintf(_emi_err,"0x%0X",_emi_err2);
       id(emi_errS).publish_state(_emi_err);
       //
       char lpclk[25];
@@ -950,12 +947,6 @@ text_sensor:
     name: "EMI Fw3"
     icon: mdi:chip
     id: emi_fw3
-    entity_category: diagnostic
-
-  - platform: template
-    name: "EMI Err F"
-    icon: mdi:chip
-    id: emi_errF
     entity_category: diagnostic
 
   - platform: template
