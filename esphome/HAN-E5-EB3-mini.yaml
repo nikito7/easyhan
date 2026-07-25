@@ -533,57 +533,6 @@ sensor:
 
 ### Total Energy L ###
 
-  - platform: modbus_controller
-    force_new_range: true       ### ###
-    name: "Import L1"
-    address: 0x001C
-    register_type: read
-    value_type: U_DWORD
-    register_count: 1
-    response_size: 4
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-      - filter_out: nan
-    unit_of_measurement: "kWh"
-    state_class: total_increasing
-    device_class: energy
-
-  - platform: modbus_controller
-    name: "Import L2"
-    address: 0x001D
-    register_type: read
-    value_type: U_DWORD
-    register_count: 1
-    response_size: 4
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-      - filter_out: nan
-    unit_of_measurement: "kWh"
-    state_class: total_increasing
-    device_class: energy
-
-  - platform: modbus_controller
-    name: "Import L3"
-    address: 0x001E
-    register_type: read
-    value_type: U_DWORD
-    register_count: 1
-    response_size: 4
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-      - filter_out: nan
-    unit_of_measurement: "kWh"
-    state_class: total_increasing
-    device_class: energy
-    on_value:
-      - then:
-        - switch.turn_on: led_pin
-        - delay: 30ms
-        - switch.turn_off: led_pin
-
 ### Contract ###
 
   - platform: modbus_controller
@@ -611,24 +560,12 @@ sensor:
 
 
 #######
+
+
+
 ### ### ###
 
-globals:
 
-   - id: idx3
-     type: int
-     restore_value: no
-     initial_value: '0' 
-
-   - id: idx4
-     type: int
-     restore_value: no
-     initial_value: '0'
-
-   - id: idx6
-     type: int
-     restore_value: no
-     initial_value: '0'
 
 ### ### ###
 
@@ -704,10 +641,12 @@ text_sensor:
         - delay: 30ms
         - switch.turn_off: led_pin
 ###
+
+
+
 ###
 #######
 
 #######
 # eof #
 #######
-
