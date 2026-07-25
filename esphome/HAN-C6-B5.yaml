@@ -20,11 +20,11 @@ esphome:
     priority: -500
     then:
       - switch.turn_on: led_pin
-      - delay: 5s
+      - delay: 7s
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "2.05"
+    version: "2.07"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -38,6 +38,8 @@ esp32:
   variant: esp32c6
   framework:
     type: esp-idf
+    advanced:
+      loop_task_stack_size: 32768
 
 wifi:
   output_power: 15db
@@ -57,8 +59,8 @@ captive_portal:
 
 ### ### ###
 
-network:
-  enable_ipv6: true
+#network:
+#  enable_ipv6: true
 
 #openthread:
 #  tlv: !secret thread_tlv
@@ -281,7 +283,6 @@ sensor:
 ### Active Power & Export ###
 
   - platform: modbus_controller
-    force_new_range: true       ### ###
     name: "Active Power L1"
     address: 0x0073
     register_type: read
@@ -458,7 +459,6 @@ sensor:
 ### Total Energy Tariffs ###
 
   - platform: modbus_controller
-    force_new_range: true       ### ###
     name: "T1 Vazio"
     address: 0x0026
     register_type: read
@@ -548,7 +548,6 @@ sensor:
 ### Total Energy L ###
 
   - platform: modbus_controller
-    force_new_range: true       ### ###
     name: "Import L1"
     address: 0x001C
     register_type: read
@@ -601,7 +600,7 @@ sensor:
 ### Contract ###
 
   - platform: modbus_controller
-    skip_updates: 10            ### ###
+    skip_updates: 11            ### ###
     name: "Contract T1"
     address: 0x000C
     register_type: read
@@ -655,7 +654,7 @@ sensor:
     entity_category: diagnostic
 
   - platform: modbus_controller
-    skip_updates: 10            ### ###
+    skip_updates: 14            ### ###
     name: "EMI Year"
     custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
     register_count: 1
@@ -664,7 +663,7 @@ sensor:
       char hFw1[12];
       char hFw2[12];
       char hFw3[12];
-      char _emi[20];
+      char _emi[24];
 
       uint32_t hMnfC = (data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3]);
       uint16_t hMnfY = (data[4] << 8 | data[5]);
@@ -787,7 +786,7 @@ text_sensor:
     name: "ESP Clock"
     icon: mdi:clock
     lambda: |-
-      char str[25];
+      char str[36];
       time_t currTime = id(esptime).now().timestamp;
       strftime(str, sizeof(str), "%H:%M:%S", localtime(&currTime));
       return {str};
@@ -809,7 +808,7 @@ text_sensor:
         hh = data[5];
         mm = data[6];
         ss = data[7];
-        char ebclk[20];
+        char ebclk[24];
         sprintf(ebclk,"%02d:%02d:%02d",hh,mm,ss);
         return {ebclk};
     on_value:
@@ -843,13 +842,13 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    skip_updates: 10            ### ###
+    skip_updates: 17            ### ###
     name: "LP IDs"
     custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
     register_count: 1
     response_size: 14
     lambda: |-
-      char lpindex[25];
+      char lpindex[36];
       sprintf(lpindex,"%d,%d,%d,%d,%d,%d",
           data[2],
           data[3],
@@ -915,7 +914,7 @@ text_sensor:
       sprintf(_emi_err,"0x%0X",_emi_err1);
       id(emi_errS).publish_state(_emi_err);
       //
-      char lpclk[25];
+      char lpclk[36];
       sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
       return {lpclk};
     icon: mdi:calendar
