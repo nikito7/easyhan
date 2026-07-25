@@ -1,16 +1,8 @@
 # EB3
-# Easy HAN E5 esp8266
-# não testado
-
-
-substitutions:
-  #dev: "EB99"
-  #name: "eb99"
-  dev: "EB3e5"
-  name: "eb3e5"
+# Bugs: possible overflows
 
 interval:
-  - interval: 12s
+  - interval: 15s
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
@@ -19,8 +11,8 @@ interval:
           }
 
 esphome:
-  name: ${name}
-  friendly_name: "${dev}"
+  name: han-eb3
+  friendly_name: HAN
   on_boot:
     priority: -500
     then:
@@ -28,8 +20,8 @@ esphome:
       - delay: 5s
       - switch.turn_on: edpbox_polling
   project:
-    name: easyhan.edpbox3-esp8266
-    version: "1.34"
+    name: easyhan.edpbox3-e5
+    version: "2.05"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB3.yaml@dev
@@ -38,41 +30,34 @@ dashboard_import:
 esp8266:
   board: esp07s
 
-#esp32:
-#  board: esp32-c6-devkitc-1
-#  flash_size: 8MB
-#  variant: esp32c6
-#  framework:
-#    type: esp-idf
-#    sdkconfig_options:
-#      CONFIG_ESPTOOLPY_FLASHSIZE_8MB: y
 
 
 wifi:
   output_power: 15db
-  use_address: 10.1.0.46
+  use_address: 10.1.0.53
+  #use_address: "fd6a:7ff7:c70:1:70fc:f12c:7c8d:6f80"
 
+  #ssid: ssn-7
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   #password: edpbox123
 
   ap:
-    ssid: "Easy-HAN-${dev}"
+    ssid: "Easy-HAN-EB99"
     password: edpbox123
 
 captive_portal:
 
-###
+### ### ###
 
+
+### ### ###
 
 web_server:
   local: true
   version: 3
   
-# não usar com web_server
-#logger:
-#  level: debug
-#  baud_rate: 0
+
 
 api:
   reboot_timeout: 30min
@@ -97,7 +82,7 @@ switch:
     pin:
       number: 2
       inverted: yes # C6 no
-                    # esp07s yes
+                   # esp07s yes
 
   - platform: template
     name: "ESP Polling"
@@ -119,7 +104,11 @@ uart:
 #define HAN_RX 4
 
   id: modbus_serial
-  rx_pin: 3
+  rx_pin:
+    number: 3
+    mode:
+      input: true
+      pullup: true
   tx_pin: 1
   baud_rate: 9600
   stop_bits: 1
@@ -129,14 +118,15 @@ modbus:
   flow_control_pin: 16
   id: modbus1
   uart_id: modbus_serial
+  turnaround_time: 1000ms
   send_wait_time: 1500ms
 
 modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
-    command_throttle: 900ms
     setup_priority: -10
+    command_throttle: 1000ms
     offline_skip_updates: 8
     max_cmd_retries: 0
 
@@ -187,6 +177,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - filter_out: nan
     device_class: voltage
     state_class: measurement
     on_value:
@@ -204,11 +195,12 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - filter_out: nan
     device_class: current
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Voltage L2"
+    name: "Voltage L2"
     address: 0x006E
     unit_of_measurement: "V"
     register_type: read
@@ -216,6 +208,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - filter_out: nan
     device_class: voltage
     state_class: measurement
 
@@ -228,6 +221,7 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - filter_out: nan
     device_class: current
     state_class: measurement
 
@@ -240,6 +234,7 @@ sensor:
     accuracy_decimals: 1
     filters:
      - multiply: 0.1
+     - filter_out: nan
     device_class: voltage
     state_class: measurement
 
@@ -251,7 +246,8 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 1
     filters:
-     - multiply: 0.1
+      - multiply: 0.1
+      - filter_out: nan
     device_class: current
     state_class: measurement
 
@@ -263,6 +259,7 @@ sensor:
     value_type: U_WORD
     filters:
       - multiply: 0.1
+      - filter_out: nan
     accuracy_decimals: 1
     device_class: current
     state_class: measurement
@@ -270,6 +267,7 @@ sensor:
 ### Active Power & Export ###
 
   - platform: modbus_controller
+    force_new_range: true       ### ###
     name: "Active Power L1"
     address: 0x0073
     register_type: read
@@ -280,7 +278,6 @@ sensor:
     device_class: power
     unit_of_measurement: "W"
     state_class: measurement
-    force_new_range: true
 
   - platform: modbus_controller
     name: "Active Power L1 Export"
@@ -295,7 +292,7 @@ sensor:
     state_class: measurement
 
   - platform: modbus_controller
-    name: "${dev} Active Power L2"
+    name: "Active Power L2"
     address: 0x0075
     register_type: read
     value_type: U_DWORD
@@ -384,10 +381,14 @@ sensor:
       - multiply: 0.001
     device_class: power_factor
     state_class: measurement
-    force_new_range: true
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
   - platform: modbus_controller
-    name: "${dev} Power Factor L1"
+    name: "Power Factor L1"
     address: 0x007C
     unit_of_measurement: ""
     register_type: read
@@ -431,12 +432,19 @@ sensor:
     accuracy_decimals: 1
     filters:
       - multiply: 0.1
+      - filter_out: nan
     icon: "mdi:pulse"
     state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Total Energy Tariffs ###
 
   - platform: modbus_controller
+    force_new_range: true       ### ###
     name: "T1 Vazio"
     address: 0x0026
     register_type: read
@@ -446,6 +454,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -460,6 +469,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -474,15 +484,20 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Total Energy ###
 
   - platform: modbus_controller
     name: "Import"
-    skip_updates: 4
     address: 0x0016
     register_type: read
     value_type: U_DWORD
@@ -491,6 +506,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -505,16 +521,22 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Total Energy L ###
 
   - platform: modbus_controller
+    force_new_range: true       ### ###
     name: "Import L1"
     address: 0x001C
-    skip_updates: 4
     register_type: read
     value_type: U_DWORD
     register_count: 1
@@ -522,6 +544,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -536,6 +559,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
@@ -550,29 +574,22 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh"
     state_class: total_increasing
     device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### Contract ###
 
   - platform: modbus_controller
+    skip_updates: 10            ### ###
     name: "Contract T1"
     address: 0x000C
-    register_type: read
-    value_type: U_DWORD
-    register_count: 3 # ranges optimization
-    response_size: 12 # 
-    accuracy_decimals: 2
-    filters:
-      - multiply: 0.001
-    unit_of_measurement: "kVA"
-    state_class: measurement
-    icon: mdi:flash
-
-  - platform: modbus_controller
-    name: "Contract T4"
-    address: 0x000F
     register_type: read
     value_type: U_DWORD
     register_count: 1
@@ -580,6 +597,7 @@ sensor:
     accuracy_decimals: 2
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kVA"
     state_class: measurement
     icon: mdi:flash
@@ -597,6 +615,7 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh/15m"
     state_class: measurement
     icon: mdi:counter
@@ -607,10 +626,10 @@ sensor:
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
+      - filter_out: nan
     unit_of_measurement: "kWh/15m"
     state_class: measurement
     icon: mdi:counter
-
 
 #######
 
@@ -622,6 +641,7 @@ sensor:
     entity_category: diagnostic
 
   - platform: modbus_controller
+    skip_updates: 10            ### ###
     name: "EMI Year"
     custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
     register_count: 1
@@ -708,7 +728,11 @@ sensor:
     accuracy_decimals: 0
     icon: mdi:calendar
     entity_category: diagnostic
-
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ### ### ###
 
@@ -733,9 +757,16 @@ globals:
 
 text_sensor:
 
+### ### ###
+
+#  - platform: openthread_info
+#    role:
+#      name: "Thread Device Role"
+
   - platform: version
     name: "ESPHome Version"
     hide_timestamp: true
+    hide_hash: true
     entity_category: diagnostic
 
   - platform: template
@@ -752,7 +783,7 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    name: "${dev} Clock"
+    name: "Clock"
     register_type: read
     address: 0x0001
     register_count: 1
@@ -776,48 +807,30 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    name: "${dev} LP Date Time"
-    custom_command: [0x1, 0x44, 0x0, 0x1]
+    force_new_range: true        ### ###
+    name: "Tariff"
+    register_type: read
+    address: 0x000B
     register_count: 1
-    response_size: 42
+    response_size: 2
+    raw_encode: COMMA
+    icon: mdi:counter
     lambda: |-
-      uint8_t _emi_err1 = data[0];
-      uint8_t _emi_err2 = data[1];
-      uint16_t lpYY = (data[2] << 8 | data[3]);
-      uint8_t lpMT = data[4];
-      uint8_t lpDD = data[5];
-      uint8_t lpHH = data[7];
-      uint8_t lpMM = data[8];
-      uint32_t lp3g = (data[15] << 24 | data[16] << 16 | data[17] << 8 | data[18]);
-      uint32_t lp4g = (data[19] << 24 | data[20] << 16 | data[21] << 8 | data[22]);
-      uint32_t lp6g = (data[27] << 24 | data[28] << 16 | data[29] << 8 | data[30]); 
-      //
-      if (id(idx3) == 9) {
-      id(lpid9).publish_state(lp3g);
-      }
-      //
-      if (id(idx4) == 10) {
-      id(lpid10).publish_state(lp4g);
-      }
-      if (id(idx6) == 10) {
-      id(lpid10).publish_state(lp6g);
-      }
-      // 
-      char _emi_err[12];
-      sprintf(_emi_err,"0x%0X",_emi_err1);
-      id(emi_errF).publish_state(_emi_err);
-      sprintf(_emi_err,"0x%0X",_emi_err2);
-      id(emi_errS).publish_state(_emi_err);
-      //
-      char lpclk[25];
-      sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
-      return {lpclk};
-    icon: mdi:calendar
-
+        auto z = "Null";
+        if (x == "1,0") z = "Vazio";
+        else if (x == "2,0") z = "Ponta";
+        else if (x == "3,0") z = "Cheias";
+        return {z};
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 ###
 
   - platform: modbus_controller
-    name: "${dev} LP IDs"
+    skip_updates: 10            ### ###
+    name: "LP IDs"
     custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
     register_count: 1
     response_size: 14
@@ -837,24 +850,66 @@ text_sensor:
       // eof
     icon: mdi:chip
     entity_category: diagnostic
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 ###
 
   - platform: modbus_controller
-    name: "Tariff"
-    register_type: read
-    address: 0x000B
-    force_new_range: true    #####
+    name: "LP Date Time"
+    custom_command: [0x1, 0x44, 0x0, 0x1]
     register_count: 1
-    response_size: 2
-    raw_encode: COMMA
-    icon: mdi:counter
+    response_size: 42
     lambda: |-
-        auto z = "Null";
-        if (x == "1,0") z = "Vazio";
-        else if (x == "2,0") z = "Ponta";
-        else if (x == "3,0") z = "Cheias";
-        return {z};
+      uint8_t _emi_err1 = data[0];
+      uint16_t lpYY = (data[1] << 8 | data[2]);
+      uint8_t lpMT = data[3];
+      uint8_t lpDD = data[4];
+      uint8_t lpHH = data[6];
+      uint8_t lpMM = data[7];
+      // ###
+      if (id(idx3) == 9) {
+      // ###
+      uint32_t lp3g = (data[14] << 24 | data[15] << 16 | data[16] << 8 | data[17]);
+      uint32_t lp4g = (data[18] << 24 | data[19] << 16 | data[20] << 8 | data[21]);
+      uint32_t lp6g = (data[26] << 24 | data[27] << 16 | data[28] << 8 | data[29]); 
+      id(lpid9).publish_state(lp3g);
+      //
+      if (id(idx4) == 10) {
+      id(lpid10).publish_state(lp4g);
+      }
+      if (id(idx6) == 10) {
+      id(lpid10).publish_state(lp6g);
+      }
+      // ###
+      }
+      // ###
+      //
+      //  new LP 2026 16bits id20 id24
+      //
+      if (id(idx3) == 20) {
+      uint32_t lp3g = (data[14] << 8 | data[15]);
+      uint32_t lp4g = (data[16] << 8 | data[17]);
+      id(lpid9).publish_state(lp3g);
+      id(lpid10).publish_state(lp4g);
+      }
+      // 
+      char _emi_err[12];
+      sprintf(_emi_err,"0x%0X",_emi_err1);
+      id(emi_errS).publish_state(_emi_err);
+      //
+      char lpclk[25];
+      sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
+      return {lpclk};
+    icon: mdi:calendar
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
 
 #######
 
@@ -883,12 +938,6 @@ text_sensor:
     entity_category: diagnostic
 
   - platform: template
-    name: "EMI Err F"
-    icon: mdi:chip
-    id: emi_errF
-    entity_category: diagnostic
-
-  - platform: template
     name: "EMI Err S"
     icon: mdi:chip
     id: emi_errS
@@ -897,3 +946,4 @@ text_sensor:
 #######
 # eof #
 #######
+
