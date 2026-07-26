@@ -1,8 +1,15 @@
-# Wmbus V5
-# CC / LoRa
-# Izar / Arrow
-# CC + Arrow OK.
+# Wmbus V5 (esphome 2026.7.2)
+# Chip: CC1101 / LoRa
+# Meter: Izar / Arrow
 # IDF Framework
+# Tested:
+# CC + Arrow OK.
+
+external_components:
+  #- source: github://SzczepanLeon/esphome-components@main
+  - source: github://nikito7/__wmbus@arrow-v5
+    refresh: 0d
+    components: [wmbus_common, wmbus_radio, wmbus_meter]
 
 substitutions:
   dev: WMBUS
@@ -13,7 +20,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "5.08"
+    version: "5.11"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -35,22 +42,11 @@ wifi:
   #password: edpbox123
 
   ap:
-    ssid: "Easy-HAN-${dev}-IDF"
+    ssid: "Easy-HAN-${dev}"
     password: edpbox123
 
 
 captive_portal:
-
-###
-
-external_components:
-  #- source: github://SzczepanLeon/esphome-components@main
-  - source: github://nikito7/__wmbus@arrow-v5
-    refresh: 0d
-    components:
-    - wmbus_common
-    - wmbus_radio
-    - wmbus_meter
 
 ###
 
