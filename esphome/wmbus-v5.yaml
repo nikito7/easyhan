@@ -1,13 +1,15 @@
-# Wmbus V5 (esphome 2026.7.2)
+# Wmbus V5 (ESPHome >= 2026.7.2)
 # Chip: CC1101 / LoRa
 # Meter: Izar / Arrow
 # IDF Framework
 # Tested:
 # CC + Arrow OK.
+# LoRa + Izar OK.
 
 external_components:
+  - source: github://nikito7/__wmbus@arrow-v5-main
   #- source: github://SzczepanLeon/esphome-components@main
-  - source: github://nikito7/__wmbus@arrow-v5
+  #- source: github://nikito7/__wmbus@arrow-v5
     refresh: 0d
     components: [wmbus_common, wmbus_radio, wmbus_meter]
 
@@ -20,7 +22,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "5.11"
+    version: "5.12"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
