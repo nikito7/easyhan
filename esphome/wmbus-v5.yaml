@@ -7,8 +7,7 @@
 # LoRa + Izar OK.
 
 external_components:
-  - source: github://nikito7/__wmbus@arrow-v5-main
-  #- source: github://SzczepanLeon/esphome-components@main
+  - source: github://SzczepanLeon/esphome-components@main
   #- source: github://nikito7/__wmbus@arrow-v5
     refresh: 0d
     components: [wmbus_common, wmbus_radio, wmbus_meter]
@@ -44,7 +43,7 @@ wifi:
   #password: edpbox123
 
   ap:
-    ssid: "Easy-HAN-${dev}"
+    ssid: "Easy-HAN-Wmbus"
     password: edpbox123
 
 
