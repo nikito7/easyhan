@@ -24,7 +24,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "2.07"
+    version: "2.08"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -72,8 +72,8 @@ web_server:
   local: true
   version: 3
   
-logger:
-  level: debug
+#logger:
+#  level: debug
 
 api:
   reboot_timeout: 30min
@@ -142,7 +142,6 @@ modbus_controller:
     update_interval: never
     address: 0x1
     setup_priority: -10
-    command_throttle: 1000ms
     offline_skip_updates: 8
     max_cmd_retries: 0
 
