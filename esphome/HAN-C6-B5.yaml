@@ -24,7 +24,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "2.11"
+    version: "2.12"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
@@ -752,20 +752,9 @@ sensor:
 
 globals:
 
-   - id: idx3
-     type: int
-     restore_value: no
-     initial_value: '0' 
-
-   - id: idx4
-     type: int
-     restore_value: no
-     initial_value: '0'
-
-   - id: idx6
-     type: int
-     restore_value: no
-     initial_value: '0'
+   - id: idx
+     type: int[20]
+     restore_value: no 
 
 ### ### ###
 
@@ -811,6 +800,7 @@ text_sensor:
         ss = data[7];
         char ebclk[24];
         sprintf(ebclk,"%02d:%02d:%02d",hh,mm,ss);
+        ESP_LOGI("HAN", "Clock: %s Size: %d", ebclk, data[0]);
         return {ebclk};
     on_value:
       - then:
@@ -857,9 +847,12 @@ text_sensor:
           data[5],
           data[6],
           data[7]);
-      id(idx3) = data[2];
-      id(idx4) = data[3];
-      id(idx6) = data[5];
+      id(idx)[2] = data[2];
+      id(idx)[3] = data[3];
+      id(idx)[4] = data[4];
+      id(idx)[5] = data[5];
+      id(idx)[6] = data[6];
+      id(idx)[7] = data[7];
       return {lpindex};
       // eof
     icon: mdi:chip
@@ -884,27 +877,27 @@ text_sensor:
       uint8_t lpDD = data[4];
       uint8_t lpHH = data[6];
       uint8_t lpMM = data[7];
-      // ###
-      if (id(idx3) == 9) {
-      // ###
+      // ### A
+      if (id(idx)[3] == 9) {
+      // ### A
       uint32_t lp3g = (data[14] << 24 | data[15] << 16 | data[16] << 8 | data[17]);
       uint32_t lp4g = (data[18] << 24 | data[19] << 16 | data[20] << 8 | data[21]);
       uint32_t lp6g = (data[26] << 24 | data[27] << 16 | data[28] << 8 | data[29]); 
       id(lpid9).publish_state(lp3g);
       //
-      if (id(idx4) == 10) {
+      if (id(idx)[4] == 10) {
       id(lpid10).publish_state(lp4g);
       }
-      if (id(idx6) == 10) {
+      if (id(idx)[6] == 10) {
       id(lpid10).publish_state(lp6g);
       }
-      // ###
+      // ### A
       }
-      // ###
+      // ### A
       //
       //  new LP 2026 16bits id20 id24
       //
-      if (id(idx3) == 20) {
+      if (id(idx)[3] == 20) {
       uint32_t lp3g = (data[14] << 8 | data[15]);
       uint32_t lp4g = (data[16] << 8 | data[17]);
       id(lpid9).publish_state(lp3g);
