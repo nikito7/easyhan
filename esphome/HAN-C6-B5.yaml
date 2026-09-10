@@ -840,19 +840,21 @@ text_sensor:
     response_size: 14
     lambda: |-
       char lpindex[36];
-      sprintf(lpindex,"%d,%d,%d,%d,%d,%d",
+      sprintf(lpindex,"%d,%d,%d,%d,%d,%d,%d,%d",
+          data[0],
+          data[1],
           data[2],
           data[3],
           data[4],
           data[5],
           data[6],
           data[7]);
-      id(idx)[2] = data[2];
-      id(idx)[3] = data[3];
-      id(idx)[4] = data[4];
-      id(idx)[5] = data[5];
-      id(idx)[6] = data[6];
-      id(idx)[7] = data[7];
+      id(idx)[3] = data[2];
+      id(idx)[4] = data[3];
+      id(idx)[5] = data[4];
+      id(idx)[6] = data[5];
+      id(idx)[7] = data[6];
+      id(idx)[8] = data[7];
       return {lpindex};
       // eof
     icon: mdi:chip
