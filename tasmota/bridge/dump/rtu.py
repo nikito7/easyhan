@@ -17,7 +17,7 @@ FILE_DIR   = "./zz-"        # directory to save data
 
 ######################################################################
 
-FILE_NAME     = (FILE_DIR +
+FILE_NAME     = os.path.basename(FILE_DIR +
                 "{:0>2d}".format(datetime.datetime.today().year)  +
                 "{:0>2d}".format(datetime.datetime.today().month) +
                 "-loadprofile.txt")               # create a file name to save data locally
@@ -73,7 +73,10 @@ def get_data(data):
 ### ### ### 
 
 # get the register to be read from command line
-lpline = int(sys.argv[1])
+try:
+    lpline = int(sys.argv[1])
+except (IndexError, ValueError):
+    sys.exit("\nPlease provide a valid integer register number.\n")
 
 if lpline < 1 or lpline > 7000:
     sys.exit("\nThe register number is out of range.\n")
