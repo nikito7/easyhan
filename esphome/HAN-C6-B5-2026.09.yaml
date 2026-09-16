@@ -1,10 +1,10 @@
 # EB3
 # ESP32-C6 / Easy HAN B5
-# Tested on: 2026.8.2
+# Tested on: Not Tested !!
 # Active development yaml
 
 interval:
-  - interval: 12s
+  - interval: 30s
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
@@ -15,7 +15,7 @@ interval:
 esphome:
   name: han-b5-eb3
   friendly_name: HAN
-  min_version: 2026.8.2
+  min_version: 2026.9.0
   on_boot:
     priority: -500
     then:
@@ -24,10 +24,10 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "2.15"
+    version: "3.01"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-2026-09.yaml@dev
   import_full_config: true
 
 #esp8266:
@@ -146,6 +146,7 @@ modbus_controller:
     setup_priority: -10
     offline_skip_updates: 5
     max_cmd_retries: 0
+    continuous: true
 
 ###
 
@@ -288,7 +289,6 @@ sensor:
     address: 0x0073
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 0
     device_class: power
@@ -300,7 +300,6 @@ sensor:
     address: 0x0074
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 0
     device_class: power
@@ -312,7 +311,6 @@ sensor:
     address: 0x0075
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 0
     device_class: power
@@ -324,7 +322,6 @@ sensor:
     address: 0x0076
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 0
     device_class: power
@@ -336,7 +333,6 @@ sensor:
     address: 0x0077
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 0
     device_class: power
@@ -348,7 +344,6 @@ sensor:
     address: 0x0078
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 0
     device_class: power
@@ -360,7 +355,6 @@ sensor:
     address: 0x0079
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 0
     device_class: power
@@ -372,7 +366,6 @@ sensor:
     address: 0x007A
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 0
     device_class: power
@@ -464,7 +457,6 @@ sensor:
     address: 0x0026
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 3
     filters:
@@ -479,7 +471,6 @@ sensor:
     address: 0x0027
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 3
     filters:
@@ -494,7 +485,6 @@ sensor:
     address: 0x0028
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 3
     filters:
@@ -516,7 +506,6 @@ sensor:
     address: 0x0016
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 3
     filters:
@@ -531,7 +520,6 @@ sensor:
     address: 0x0017
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 3
     filters:
@@ -553,7 +541,6 @@ sensor:
     address: 0x001C
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 3
     filters:
@@ -568,7 +555,6 @@ sensor:
     address: 0x001D
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 3
     filters:
@@ -583,7 +569,6 @@ sensor:
     address: 0x001E
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 3
     filters:
@@ -601,12 +586,10 @@ sensor:
 ### Contract ###
 
   - platform: modbus_controller
-    skip_updates: 11            ### ###
     name: "Contract T1"
     address: 0x000C
     register_type: read
     value_type: U_DWORD
-    register_count: 1
     response_size: 4
     accuracy_decimals: 2
     filters:
@@ -667,10 +650,8 @@ sensor:
     entity_category: diagnostic
 
   - platform: modbus_controller
-    skip_updates: 14            ### ###
     name: "EMI Year"
-    custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
-    register_count: 1
+    custom_pdu: [0x4, 0x0, 0x3, 0x0, 0x4]
     response_size: 25
     lambda: |-
       char hFw1[12];
@@ -801,7 +782,6 @@ text_sensor:
     name: "Clock"
     register_type: read
     address: 0x0001
-    register_count: 1
     response_size: 12
     icon: mdi:clock
     lambda: |-
@@ -822,11 +802,10 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    force_new_range: true        ### ###
+    reuse_previous_range: false    ####
     name: "Tariff"
     register_type: read
     address: 0x000B
-    register_count: 1
     response_size: 2
     icon: mdi:counter
     lambda: |-
@@ -843,10 +822,8 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    skip_updates: 17            ### ###
     name: "LP IDs"
-    custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
-    register_count: 1
+    custom_pdu: [0x4, 0x0, 0x80, 0x0, 0x1]
     response_size: 14
     lambda: |-
       char lpindex[36];
@@ -879,8 +856,7 @@ text_sensor:
 
   - platform: modbus_controller
     name: "LP Date Time"
-    custom_command: [0x1, 0x44, 0x0, 0x1]
-    register_count: 1
+    custom_pdu: [0x44, 0x0, 0x1]
     response_size: 42
     lambda: |-
       ESP_LOGI("HAN", "LP Date Time data[0]: 0x%02X", data[0]);
