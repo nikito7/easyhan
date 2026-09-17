@@ -8,7 +8,6 @@ interval:
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
-              id(esp_clock).update();
               id(edpbox).update();
           }
 
@@ -24,7 +23,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "3.01"
+    version: "3.02"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-2026-09.yaml@dev
@@ -73,7 +72,7 @@ web_server:
   version: 3
   
 logger:
-  #level: verbose
+  level: verbose
   #level: debug
   #baud_rate: 0 # esp8266
 
@@ -146,7 +145,7 @@ modbus_controller:
     setup_priority: -10
     offline_skip_updates: 5
     max_cmd_retries: 0
-    continuous: true
+    #continuous: true
 
 ###
 
@@ -301,6 +300,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -323,6 +323,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -334,6 +335,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -345,6 +347,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -356,6 +359,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -367,6 +371,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -472,6 +477,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -486,6 +492,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -507,6 +514,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -521,6 +529,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -556,6 +565,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -570,6 +580,7 @@ sensor:
     register_type: read
     value_type: U_DWORD
     response_size: 4
+    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -785,13 +796,16 @@ text_sensor:
     response_size: 12
     icon: mdi:clock
     lambda: |-
+        //
+        id(esp_clock).update();
+        //
         uint8_t hh, mm, ss;
         hh = data[5];
         mm = data[6];
         ss = data[7];
         char ebclk[24];
         sprintf(ebclk,"%02d:%02d:%02d",hh,mm,ss);
-        ESP_LOGI("HAN", "Clock %s", ebclk);
+        ESP_LOGW("HAN", "Clock %s", ebclk);
         return {ebclk};
     on_value:
       - then:
@@ -859,7 +873,7 @@ text_sensor:
     custom_pdu: [0x44, 0x0, 0x1]
     response_size: 42
     lambda: |-
-      ESP_LOGI("HAN", "LP Date Time data[0]: 0x%02X", data[0]);
+      ESP_LOGW("HAN", "LP Date Time data[0]: 0x%02X", data[0]);
       uint8_t _emi_err1 = data[0];
       uint16_t lpYY = (data[1] << 8 | data[2]);
       uint8_t lpMT = data[3];
