@@ -23,7 +23,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "3.02"
+    version: "3.03"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-2026-09.yaml@dev
@@ -101,6 +101,17 @@ switch:
       inverted: no # C6 no
                    # esp07s yes
 
+#ifdef ESP8266
+#  digitalWrite(2, LOW);
+
+#elif ESP32C6
+#  digitalWrite(2, HIGH);
+
+#elif ESP32S3
+#  digitalWrite(39, LOW);
+
+
+
   - platform: template
     name: "ESP Polling"
     id: "edpbox_polling"
@@ -108,9 +119,17 @@ switch:
 
 ###
 
-uart:
+#ifdef ESP8266
+#define HAN_DIR 16
+# tx 1
+# rx 3
 
-#ifdef ESP32S3
+#elif HAN_S3_WS485RELAY
+#define HAN_DIR 21
+#define HAN_TX 17
+#define HAN_RX 18
+
+#elif ESP32S3
 #define HAN_DIR 16
 #define HAN_TX 15
 #define HAN_RX 17
@@ -119,6 +138,13 @@ uart:
 #define HAN_DIR 3
 #define HAN_TX 5
 #define HAN_RX 4
+
+#else
+#define HAN_DIR 18
+#define HAN_TX 16
+#define HAN_RX 17
+
+uart:
 
   id: modbus_serial
   rx_pin: 4
