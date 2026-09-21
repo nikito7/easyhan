@@ -130,7 +130,7 @@ uart:
   #stop_bits: 2 # ziv
 
 modbus:
-  flow_control_pin: 3
+  flow_control_pin: 16
   id: modbus1
   uart_id: modbus_serial
   turnaround_time: 1000ms
@@ -284,9 +284,8 @@ sensor:
   - platform: modbus_controller
     name: "Active Power L1"
     address: 0x0073
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8]
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -294,11 +293,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L1 Export"
-    address: 0x0074
-    register_type: read
+    address: 0x0073
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8]
+    offset: 4
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -306,10 +304,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L2"
-    address: 0x0075
-    register_type: read
+    address: 0x0073
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8]
+    offset: 8
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -317,11 +315,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L2 Export"
-    address: 0x0076
-    register_type: read
+    address: 0x0073
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8]
+    offset: 12
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -329,11 +326,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L3"
-    address: 0x0077
-    register_type: read
+    address: 0x0073
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8]
+    offset: 16
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -341,11 +337,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L3 Export"
-    address: 0x0078
-    register_type: read
+    address: 0x0073
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8]
+    offset: 20
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -353,11 +348,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power Import"
-    address: 0x0079
-    register_type: read
+    address: 0x0073
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8]
+    offset: 24
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -365,11 +359,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power Export"
-    address: 0x007A
-    register_type: read
+    address: 0x0073
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8]
+    offset: 28
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -457,10 +450,8 @@ sensor:
 
   - platform: modbus_controller
     name: "T1 Vazio"
-    address: 0x0026
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -471,11 +462,8 @@ sensor:
 
   - platform: modbus_controller 
     name: "T2 Ponta"
-    address: 0x0027
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x27, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -486,11 +474,8 @@ sensor:
 
   - platform: modbus_controller
     name: "T3 Cheias"
-    address: 0x0028
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x28, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -508,11 +493,8 @@ sensor:
 
   - platform: modbus_controller
     name: "Import"
-    address: 0x0016
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x16, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -523,11 +505,8 @@ sensor:
 
   - platform: modbus_controller
     name: "Export"
-    address: 0x0017
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x17, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -545,10 +524,8 @@ sensor:
 
   - platform: modbus_controller
     name: "Import L1"
-    address: 0x001C
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x1C, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -559,11 +536,8 @@ sensor:
 
   - platform: modbus_controller
     name: "Import L2"
-    address: 0x001D
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x1D, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -574,11 +548,8 @@ sensor:
 
   - platform: modbus_controller
     name: "Import L3"
-    address: 0x001E
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x1E, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -596,10 +567,8 @@ sensor:
 
   - platform: modbus_controller
     name: "Contract T1"
-    address: 0x000C
-    register_type: read
+    custom_pdu: [0x4, 0x0, 0x0C, 0x0, 0x1]
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 2
     filters:
       - multiply: 0.001
@@ -789,9 +758,7 @@ text_sensor:
 
   - platform: modbus_controller
     name: "Clock"
-    register_type: read
-    address: 0x0001
-    response_size: 12
+    custom_pdu: [0x4, 0x0, 0x01, 0x0, 0x1]
     icon: mdi:clock
     lambda: |-
         //
