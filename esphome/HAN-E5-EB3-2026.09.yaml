@@ -1,0 +1,958 @@
+# EB3
+# Tested on: ...
+
+interval:
+  - interval: 30s
+    then:
+      - lambda: |-
+          if (id(edpbox_polling).state) {
+              id(edpbox).update();
+          }
+
+esphome:
+  name: han-ble5-eb3
+  friendly_name: HAN
+  min_version: 2026.9.0
+  on_boot:
+    priority: -500
+    then:
+      - switch.turn_on: led_pin
+      - delay: 7s
+      - switch.turn_on: edpbox_polling
+  project:
+    name: easyhan.edpbox3-e5
+    version: "3.02"
+
+dashboard_import:
+  package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB3-2026-09.yaml@dev
+  import_full_config: true
+
+esp8266:
+  board: esp07s
+
+#esp32:
+#  flash_size: 8MB
+#  variant: esp32c6
+#  framework:
+@    type: esp-idf
+#    advanced:
+#      loop_task_stack_size: 32768 # esp32
+
+wifi:
+  output_power: 15db
+  #use_address: 10.1.0.46
+  #use_address: "fd6a:7ff7:c70:1:70fc:f12c:7c8d:6f80"
+
+  #ssid: ssn-7
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  #password: edpbox123
+
+  ap:
+    ssid: "Easy-HAN-EB99"
+    password: edpbox123
+
+captive_portal:
+
+### ### ###
+
+#network:
+#  enable_ipv6: true
+
+#openthread:
+#  tlv: !secret thread_tlv
+#  use_address: "fd6a:7ff7:c70:1:70fc:f12c:7c8d:6f80"
+
+### ### ###
+
+web_server:
+  local: true
+  version: 3
+  
+logger:
+  level: verbose
+  #level: debug
+  baud_rate: 0 # esp8266
+
+api:
+  reboot_timeout: 30min
+
+ota:
+  - platform: esphome
+
+time:
+  - platform: homeassistant
+    id: esptime
+
+button:
+  - platform: restart
+    name: "ESP Restart"
+
+###
+
+switch:
+
+  - platform: gpio
+    id: led_pin
+    pin:
+      number: 2
+      inverted: yes # C6 no
+                   # esp07s yes
+
+  - platform: template
+    name: "ESP Polling"
+    id: "edpbox_polling"
+    optimistic: yes
+
+###
+
+uart:
+
+#ifdef ESP32S3
+#define HAN_DIR 16
+#define HAN_TX 15
+#define HAN_RX 17
+
+#elif ESP32C6
+#define HAN_DIR 3
+#define HAN_TX 5
+#define HAN_RX 4
+
+  id: modbus_serial
+  rx_pin: 3
+  #  number: 4
+  #  mode:
+  #    input: true
+  #    pullup: true
+  tx_pin: 1
+  baud_rate: 9600
+  stop_bits: 1
+  #stop_bits: 2 # ziv
+
+modbus:
+  flow_control_pin: 3
+  id: modbus1
+  uart_id: modbus_serial
+  turnaround_time: 1000ms
+  send_wait_time: 1800ms
+
+modbus_controller:
+  - id: edpbox
+    update_interval: never
+    address: 0x1
+    setup_priority: -10
+    offline_skip_updates: 5
+    max_cmd_retries: 0
+    #continuous: true
+
+###
+
+sensor:
+
+###
+
+  - platform: template
+    name: "ESP Free Heap"
+    lambda: |-
+      // arduino
+      float heap = ESP.getFreeHeap();
+      // idf
+      //float heap = esp_get_free_heap_size();
+      return heap / 1024.0;
+    unit_of_measurement: "kB"
+    icon: mdi:chip
+    state_class: measurement
+    entity_category: diagnostic
+
+  - platform: wifi_signal
+    name: "ESP Signal"
+    unit_of_measurement: "dB"
+    state_class: measurement
+    entity_category: diagnostic
+
+  - platform: uptime
+    name: "ESP Uptime"
+    filters:
+      - lambda: return x/3600;
+    unit_of_measurement: "h"
+    accuracy_decimals: 1
+    device_class: ""
+    entity_category: diagnostic
+
+### ### ###
+
+### Voltage & Current ###
+
+  - platform: modbus_controller
+    name: "Voltage L1"
+    address: 0x006C
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    device_class: voltage
+    state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+  - platform: modbus_controller
+    name: "Current L1"
+    address: 0x006D
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    device_class: current
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Voltage L2"
+    address: 0x006E
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    device_class: voltage
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Current L2"
+    address: 0x006F
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    device_class: current
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Voltage L3"
+    address: 0x0070
+    unit_of_measurement: "V"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+     - multiply: 0.1
+     - filter_out: nan
+    device_class: voltage
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Current L3"
+    address: 0x0071
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    device_class: current
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Current"
+    address: 0x0072
+    unit_of_measurement: "A"
+    register_type: read
+    value_type: U_WORD
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    accuracy_decimals: 1
+    device_class: current
+    state_class: measurement
+
+### Active Power & Export ###
+
+  - platform: modbus_controller
+    name: "Active Power L1"
+    address: 0x0073
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Active Power L1 Export"
+    address: 0x0074
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Active Power L2"
+    address: 0x0075
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Active Power L2 Export"
+    address: 0x0076
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Active Power L3"
+    address: 0x0077
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Active Power L3 Export"
+    address: 0x0078
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Active Power Import"
+    address: 0x0079
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Active Power Export"
+    address: 0x007A
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 0
+    device_class: power
+    unit_of_measurement: "W"
+    state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+### Power Factor & Frequency ###
+
+  - platform: modbus_controller
+    name: "Power Factor"
+    address: 0x007B
+    unit_of_measurement: ""
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    device_class: power_factor
+    state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+  - platform: modbus_controller
+    name: "Power Factor L1"
+    address: 0x007C
+    unit_of_measurement: ""
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    device_class: power_factor
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Power Factor L2"
+    address: 0x007D
+    unit_of_measurement: ""
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    device_class: power_factor
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Power Factor L3"
+    address: 0x007E
+    unit_of_measurement: ""
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+    device_class: power_factor
+    state_class: measurement
+
+  - platform: modbus_controller
+    name: "Frequency"
+    address: 0x007F
+    unit_of_measurement: "Hz"
+    register_type: read
+    value_type: U_WORD
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    icon: "mdi:pulse"
+    state_class: measurement
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+### Total Energy Tariffs ###
+
+  - platform: modbus_controller
+    name: "T1 Vazio"
+    address: 0x0026
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller 
+    name: "T2 Ponta"
+    address: 0x0027
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller
+    name: "T3 Cheias"
+    address: 0x0028
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+### Total Energy ###
+
+  - platform: modbus_controller
+    name: "Import"
+    address: 0x0016
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller
+    name: "Export"
+    address: 0x0017
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+### Total Energy L ###
+
+  - platform: modbus_controller
+    name: "Import L1"
+    address: 0x001C
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller
+    name: "Import L2"
+    address: 0x001D
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+
+  - platform: modbus_controller
+    name: "Import L3"
+    address: 0x001E
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    reuse_previous_range: true    ####
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh"
+    state_class: total_increasing
+    device_class: energy
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+### Contract ###
+
+  - platform: modbus_controller
+    name: "Contract T1"
+    address: 0x000C
+    register_type: read
+    value_type: U_DWORD
+    response_size: 4
+    accuracy_decimals: 2
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kVA"
+    state_class: measurement
+    icon: mdi:flash
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+### Load Profile ###
+
+  - platform: template
+    name: "LP Import Inc"
+    id: lpImport
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh/15m"
+    state_class: measurement
+    icon: mdi:counter
+
+  - platform: template
+    name: "LP Export Inc"
+    id: lpExport
+    accuracy_decimals: 3
+    filters:
+      - multiply: 0.001
+      - filter_out: nan
+    unit_of_measurement: "kWh/15m"
+    state_class: measurement
+    icon: mdi:counter
+
+  - platform: template
+    name: "LP Voltage L1"
+    id: lpVL1
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    device_class: voltage
+    state_class: measurement
+
+
+#######
+
+  - platform: template
+    name: "EMI Code"
+    icon: mdi:chip
+    accuracy_decimals: 0
+    id: emi_code
+    entity_category: diagnostic
+
+  - platform: modbus_controller
+    name: "EMI Year"
+    custom_pdu: [0x4, 0x0, 0x3, 0x0, 0x4]
+    response_size: 25
+    lambda: |-
+      char hFw1[12];
+      char hFw2[12];
+      char hFw3[12];
+      char _emi[24];
+
+      uint32_t hMnfC = (data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3]);
+      uint16_t hMnfY = (data[4] << 8 | data[5]);
+
+      sprintf(hFw1, "%c%c%c%c%c",
+              data[6],
+              data[7],
+              data[8],
+              data[9],
+              data[10]);
+
+      sprintf(hFw2, "%c%c%c%c%c",
+              data[11],
+              data[12],
+              data[13],
+              data[14],
+              data[15]);
+
+      sprintf(hFw3, "%c%c%c%c%c",
+              data[16],
+              data[17],
+              data[18],
+              data[19],
+              data[20]);
+
+      id(emi_fw1).publish_state(hFw1);
+      id(emi_fw2).publish_state(hFw2);
+      id(emi_fw3).publish_state(hFw3);
+      id(emi_code).publish_state(hMnfC);
+
+      switch (hMnfC) {
+        case 6623491:
+          sprintf(_emi, "%s", "T Janz GPRS");
+          break;
+        case 6750210:
+          sprintf(_emi, "%s", "M Landis+Gyr S3");
+          break;
+        case 6754306:
+          sprintf(_emi, "%s", "T Landis+Gyr S3");
+          break;
+        case 6754307:
+          sprintf(_emi, "%s", "T Landis+Gyr S5");
+          break;
+        case 11010050:
+          sprintf(_emi, "%s", "M Sagem CX1000-6");
+          break;
+        case 11010051:
+          sprintf(_emi, "%s", "M Sagem S212");
+          break;
+        case 11014146:
+          sprintf(_emi, "%s", "T Sagem CX2000-9");
+          break;
+        case 16973825:
+          sprintf(_emi, "%s", "? Ziv ???");
+          break;
+        case 16977920:
+          sprintf(_emi, "%s", "T Ziv 5CTD-E2F");
+          break;
+        case 18481154:
+          sprintf(_emi, "%s", "M Kaifa MA109P");
+          break;
+        case 18481156:
+          sprintf(_emi, "%s", "M Kaifa MA109H");
+          break;
+        default:
+          sprintf(_emi, "%s", "? ??? ???");
+      }
+
+      id(emi_name).publish_state(_emi);
+
+      return hMnfY;
+
+      // eof
+    ## lambda eof
+    accuracy_decimals: 0
+    icon: mdi:calendar
+    entity_category: diagnostic
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+### ### ###
+
+globals:
+
+   - id: idx
+     type: int[20]
+     restore_value: no 
+
+### ### ###
+
+text_sensor:
+
+### ### ###
+
+#  - platform: openthread_info
+#    role:
+#      name: "Thread Device Role"
+
+  - platform: version
+    name: "ESPHome Version"
+    hide_timestamp: true
+    hide_hash: true
+    entity_category: diagnostic
+
+  - platform: template
+    name: "ESP Clock"
+    icon: mdi:clock
+    lambda: |-
+      char str[36];
+      time_t currTime = id(esptime).now().timestamp;
+      strftime(str, sizeof(str), "%H:%M:%S", localtime(&currTime));
+      return {str};
+    update_interval: never
+    id: esp_clock
+
+###
+
+  - platform: modbus_controller
+    name: "Clock"
+    register_type: read
+    address: 0x0001
+    response_size: 12
+    icon: mdi:clock
+    lambda: |-
+        //
+        id(esp_clock).update();
+        //
+        uint8_t hh, mm, ss;
+        hh = data[5];
+        mm = data[6];
+        ss = data[7];
+        char ebclk[24];
+        sprintf(ebclk,"%02d:%02d:%02d",hh,mm,ss);
+        ESP_LOGW("HAN", "Clock %s", ebclk);
+        return {ebclk};
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+###
+
+  - platform: modbus_controller
+    reuse_previous_range: false    ####
+    name: "Tariff"
+    register_type: read
+    address: 0x000B
+    response_size: 2
+    icon: mdi:counter
+    lambda: |-
+        auto z = "Null";
+        if (data[0] == 1) z = "Vazio";
+        else if (data[0] == 2) z = "Ponta";
+        else if (data[0] == 3) z = "Cheias";
+        return {z};
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+###
+
+  - platform: modbus_controller
+    name: "LP IDs"
+    custom_pdu: [0x4, 0x0, 0x80, 0x0, 0x1]
+    response_size: 14
+    lambda: |-
+      char lpindex[36];
+      sprintf(lpindex,"%d,%d,%d,%d,%d,%d,%d,%d",
+          data[0],
+          data[1],
+          data[2],
+          data[3],
+          data[4],
+          data[5],
+          data[6],
+          data[7]);
+      id(idx)[3] = data[2];
+      id(idx)[4] = data[3];
+      id(idx)[5] = data[4];
+      id(idx)[6] = data[5];
+      id(idx)[7] = data[6];
+      id(idx)[8] = data[7];
+      return {lpindex};
+      // eof
+    icon: mdi:chip
+    entity_category: diagnostic
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+###
+
+  - platform: modbus_controller
+    name: "LP Date Time"
+    custom_pdu: [0x44, 0x0, 0x1]
+    response_size: 42
+    lambda: |-
+      ESP_LOGW("HAN", "LP Date Time data[0]: 0x%02X", data[0]);
+      uint8_t _emi_err1 = data[0];
+      uint16_t lpYY = (data[1] << 8 | data[2]);
+      uint8_t lpMT = data[3];
+      uint8_t lpDD = data[4];
+      uint8_t lpHH = data[6];
+      uint8_t lpMM = data[7];
+      // ### A
+      if (id(idx)[3] == 9) {
+      // ### A
+      uint32_t lp3g = (data[14] << 24 | data[15] << 16 | data[16] << 8 | data[17]);
+      id(lpImport).publish_state(lp3g);
+      //
+      if (id(idx)[4] == 10) {
+      uint32_t lp4g = (data[18] << 24 | data[19] << 16 | data[20] << 8 | data[21]);
+      id(lpExport).publish_state(lp4g);
+      }
+      if (id(idx)[6] == 10) {
+      uint32_t lp6g = (data[26] << 24 | data[27] << 16 | data[28] << 8 | data[29]); 
+      id(lpExport).publish_state(lp6g);
+      }
+      // ### A
+      }
+      // ### A
+      //
+      //  new LP 2026 16bits id20 id24
+      //
+      if (id(idx)[3] == 20) {
+      uint32_t lp3g = (data[14] << 8 | data[15]);
+      uint32_t lp4g = (data[16] << 8 | data[17]);
+      uint32_t lp5g = (data[18] << 8 | data[19]);
+      id(lpImport).publish_state(lp3g);
+      id(lpExport).publish_state(lp4g);
+      id(lpVL1).publish_state(lp5g);
+      }
+      // 
+      char _emi_err[12];
+      sprintf(_emi_err,"0x%0X",_emi_err1);
+      id(emi_errS).publish_state(_emi_err);
+      //
+      char lpclk[36];
+      sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
+      return {lpclk};
+    icon: mdi:calendar
+    on_value:
+      - then:
+        - switch.turn_on: led_pin
+        - delay: 30ms
+        - switch.turn_off: led_pin
+
+#######
+
+  - platform: template
+    name: "EMI Name"
+    icon: mdi:chip
+    id: emi_name
+    entity_category: diagnostic
+
+  - platform: template
+    name: "EMI Fw1"
+    icon: mdi:chip
+    id: emi_fw1
+    entity_category: diagnostic
+
+  - platform: template
+    name: "EMI Fw2"
+    icon: mdi:chip
+    id: emi_fw2
+    entity_category: diagnostic
+
+  - platform: template
+    name: "EMI Fw3"
+    icon: mdi:chip
+    id: emi_fw3
+    entity_category: diagnostic
+
+  - platform: template
+    name: "EMI Err S"
+    icon: mdi:chip
+    id: emi_errS
+    entity_category: diagnostic
+
+#######
+# eof #
+#######
