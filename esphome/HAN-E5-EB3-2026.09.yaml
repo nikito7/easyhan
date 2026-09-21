@@ -10,7 +10,7 @@ interval:
           }
 
 esphome:
-  name: han-ble5-eb3
+  name: han-e5-eb3
   friendly_name: HAN
   min_version: 2026.9.0
   on_boot:
@@ -24,7 +24,7 @@ esphome:
     version: "3.02"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB3-2026-09.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB3-2026.09.yaml@dev
   import_full_config: true
 
 esp8266:
@@ -34,7 +34,7 @@ esp8266:
 #  flash_size: 8MB
 #  variant: esp32c6
 #  framework:
-@    type: esp-idf
+#    type: esp-idf
 #    advanced:
 #      loop_task_stack_size: 32768 # esp32
 
