@@ -24,10 +24,6 @@ esphome:
     name: easyhan.wmbus
     version: "5.12"
 
-dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
-  import_full_config: true
-
 esp32:
   # board: heltec_wifi_lora_32_V2
   board: esp32-s3-devkitc-1
@@ -83,10 +79,10 @@ button:
 ###
 
 spi:
-  # --- cc ---
-  clk_pin: GPIO35
-  mosi_pin: GPIO37
-  miso_pin: GPIO38
+  # --- h5 cc ---
+  clk_pin: GPIO37
+  mosi_pin: GPIO38
+  miso_pin: GPIO36
   # --- lora ---
   #clk_pin:
   #  number: GPIO5
@@ -98,10 +94,10 @@ wmbus_common:
     drivers: all
 
 wmbus_radio:
-  # ---
+  # --- h5 cc
   radio_type: CC1101
-  cs_pin: GPIO36
-  irq_pin: GPIO33 # gdo0
+  cs_pin: GPIO33
+  irq_pin: GPIO34 # gdo0
   frequency: 868.95MHz
   # ---
   #radio_type: SX1276
