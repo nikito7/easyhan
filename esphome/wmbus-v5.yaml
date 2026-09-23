@@ -22,7 +22,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "5.12"
+    version: "5.14"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -83,10 +83,14 @@ button:
 ###
 
 spi:
-  # --- cc ---
+  # --- rf900 cc ---
   clk_pin: GPIO35
   mosi_pin: GPIO37
   miso_pin: GPIO38
+  # --- h5 cc ---
+  #clk_pin: GPIO37
+  #mosi_pin: GPIO38
+  #miso_pin: GPIO36
   # --- lora ---
   #clk_pin:
   #  number: GPIO5
@@ -95,19 +99,25 @@ spi:
   #miso_pin: GPIO19
 
 wmbus_common:
-    drivers: all
+    drivers:
+      - izar
 
 wmbus_radio:
-  # ---
+  # --- rf900 cc ---
   radio_type: CC1101
   cs_pin: GPIO36
   irq_pin: GPIO33 # gdo0
-  frequency: 868.95MHz
-  # ---
+  # --- h5 cc ---
+  #radio_type: CC1101
+  #cs_pin: GPIO33
+  #irq_pin: GPIO34 # gdo0
+  # --- lora ---
   #radio_type: SX1276
   #cs_pin: GPIO18
   #reset_pin: GPIO14
   #irq_pin: GPIO35
+  # ---
+  frequency: 868.95MHz
   on_frame:
     - then:
         - logger.log:
@@ -119,9 +129,9 @@ wmbus_radio:
             count: 3
             then:
               - output.turn_on: status_led
-              - delay: 100ms
+              - delay: 30ms
               - output.turn_off: status_led
-              - delay: 100ms
+              - delay: 30ms
 
 
 wmbus_meter:
@@ -233,6 +243,7 @@ text_sensor:
   - platform: version
     name: "ESPHome Version"
     hide_timestamp: true
+    hide_hash: true
     entity_category: diagnostic
 
 
