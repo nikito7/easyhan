@@ -14,7 +14,7 @@ interval:
 esphome:
   name: han-b5-eb3
   friendly_name: HAN
-  min_version: 2026.9.0
+  min_version: 2026.9.1
   on_boot:
     priority: -500
     then:
@@ -26,7 +26,7 @@ esphome:
     version: "3.03"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-2026-09.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-2026.09.yaml@dev
   import_full_config: true
 
 #esp8266:
@@ -984,3 +984,4 @@ text_sensor:
 #######
 # eof #
 #######
+
