@@ -1,41 +1,46 @@
 # EB1
-# Tested on: esphome 2026.7.2
-
 
 interval:
-  - interval: 15s
+  - interval: 20s
     then:
       - lambda: |-
           if (id(edpbox_polling).state) {
-              id(esp_clock).update();
               id(edpbox).update();
           }
 
 esphome:
-  name: e5-eb1
+  name: han-e5-eb1
   friendly_name: HAN
+  min_version: 2026.9.1
   on_boot:
     priority: -500
     then:
       - switch.turn_on: led_pin
-      - delay: 5s
+      - delay: 7s
       - switch.turn_on: edpbox_polling
   project:
-    name: easyhan.eb1e5
-    version: "2.05"
+    name: easyhan.edpbox3-e5
+    version: "3.05"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB1.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB1-2026.09.yaml@dev
   import_full_config: true
 
 esp8266:
   board: esp07s
 
-
+#esp32:
+#  flash_size: 8MB
+#  variant: esp32c6
+#  framework:
+#    type: esp-idf
+#    advanced:
+#      loop_task_stack_size: 32768 # esp32
 
 wifi:
   output_power: 15db
   #use_address: 10.1.0.46
+  #use_address: "fd6a:7ff7:c70:1:70fc:f12c:7c8d:6f80"
 
   #ssid: ssn-7
   ssid: !secret wifi_ssid
@@ -50,17 +55,26 @@ captive_portal:
 
 ### ### ###
 
+#network:
+#  enable_ipv6: true
+
+#openthread:
+#  tlv: !secret thread_tlv
+#  use_address: "fd6a:7ff7:c70:1:70fc:f12c:7c8d:6f80"
+
 ### ### ###
 
 web_server:
   local: true
   version: 3
   
-#logger:
-#  level: debug
+logger:
+  level: verbose
+  #level: debug
+  baud_rate: 0 # esp8266
 
 api:
-  reboot_timeout: 30min
+  reboot_timeout: 33min
 
 ota:
   - platform: esphome
@@ -84,6 +98,17 @@ switch:
       inverted: yes # C6 no
                    # esp07s yes
 
+#ifdef ESP8266
+#  digitalWrite(2, LOW);
+
+#elif ESP32C6
+#  digitalWrite(2, HIGH);
+
+#elif ESP32S3
+#  digitalWrite(39, LOW);
+
+
+
   - platform: template
     name: "ESP Polling"
     id: "edpbox_polling"
@@ -91,9 +116,17 @@ switch:
 
 ###
 
-uart:
+#ifdef ESP8266
+#define HAN_DIR 16
+# tx 1
+# rx 3
 
-#ifdef ESP32S3
+#elif HAN_S3_WS485RELAY
+#define HAN_DIR 21
+#define HAN_TX 17
+#define HAN_RX 18
+
+#elif ESP32S3
 #define HAN_DIR 16
 #define HAN_TX 15
 #define HAN_RX 17
@@ -103,8 +136,19 @@ uart:
 #define HAN_TX 5
 #define HAN_RX 4
 
+#else
+#define HAN_DIR 18
+#define HAN_TX 16
+#define HAN_RX 17
+
+uart:
+
   id: modbus_serial
   rx_pin: 3
+  #  number: 4
+  #  mode:
+  #    input: true
+  #    pullup: true
   tx_pin: 1
   baud_rate: 9600
   stop_bits: 1
@@ -115,16 +159,16 @@ modbus:
   id: modbus1
   uart_id: modbus_serial
   turnaround_time: 1000ms
-  send_wait_time: 1500ms
+  send_wait_time: 1800ms
 
 modbus_controller:
   - id: edpbox
     update_interval: never
     address: 0x1
     setup_priority: -10
-    command_throttle: 1000ms
-    offline_skip_updates: 8
+    offline_skip_updates: 3
     max_cmd_retries: 0
+    continuous: true
 
 ###
 
@@ -195,19 +239,18 @@ sensor:
     device_class: current
     state_class: measurement
 
-
 ### Active Power & Export ###
-
-
-
 
   - platform: modbus_controller
     name: "Active Power Import"
-    address: 0x0079
-    register_type: read
+    #address: 0x0079
+    # ---
+    # ---
+    custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
+    offset: 0 # EB1 Type 1
+    address: 0x0079 # range tweak
+    # ---
     value_type: U_DWORD
-    register_count: 1
-    response_size: 4
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -215,11 +258,14 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power Export"
-    address: 0x007A
-    register_type: read
+    #address: 0x007A
+    # ---
+    # ---
+    custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
+    offset: 4 # EB1 Type 1
+    address: 0x0079 # range tweak
+    # ---
     value_type: U_DWORD
-    register_count: 1
-    response_size: 4
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -249,8 +295,6 @@ sensor:
         - delay: 30ms
         - switch.turn_off: led_pin
 
-
-
   - platform: modbus_controller
     name: "Frequency"
     address: 0x007F
@@ -272,13 +316,12 @@ sensor:
 ### Total Energy Tariffs ###
 
   - platform: modbus_controller
-    force_new_range: true       ### ###
     name: "T1 Vazio"
-    address: 0x0026
-    register_type: read
+    #address: 0x0026
+    custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
+    offset: 0
+    address: 0x0026 # range tweak
     value_type: U_DWORD
-    register_count: 1
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -289,11 +332,11 @@ sensor:
 
   - platform: modbus_controller 
     name: "T2 Ponta"
-    address: 0x0027
-    register_type: read
+    #address: 0x0027
+    custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
+    offset: 4
+    address: 0x0026 # range tweak
     value_type: U_DWORD
-    register_count: 1
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -304,11 +347,11 @@ sensor:
 
   - platform: modbus_controller
     name: "T3 Cheias"
-    address: 0x0028
-    register_type: read
+    #address: 0x0028
+    custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
+    offset: 8
+    address: 0x0026 # range tweak
     value_type: U_DWORD
-    register_count: 1
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -326,11 +369,11 @@ sensor:
 
   - platform: modbus_controller
     name: "Import"
-    address: 0x0016
-    register_type: read
+    #address: 0x0016
+    custom_pdu: [0x4, 0x0, 0x16, 0x0, 0x2]
+    offset: 0
+    address: 0x0016 # range tweak
     value_type: U_DWORD
-    register_count: 1
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -341,11 +384,11 @@ sensor:
 
   - platform: modbus_controller
     name: "Export"
-    address: 0x0017
-    register_type: read
+    #address: 0x0017
+    custom_pdu: [0x4, 0x0, 0x16, 0x0, 0x2]
+    offset: 4
+    address: 0x0016 # range tweak
     value_type: U_DWORD
-    register_count: 1
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -365,13 +408,11 @@ sensor:
 ### Contract ###
 
   - platform: modbus_controller
-    skip_updates: 10            ### ###
     name: "Contract T1"
-    address: 0x000C
-    register_type: read
+    #address: 0x000C
+    custom_pdu: [0x4, 0x0, 0x0c, 0x0, 0x1]
+    offset: 0
     value_type: U_DWORD
-    register_count: 1
-    response_size: 4
     accuracy_decimals: 2
     filters:
       - multiply: 0.001
@@ -389,7 +430,7 @@ sensor:
 
   - platform: template
     name: "LP Import Inc"
-    id: lpid9
+    id: lpImport
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -400,7 +441,7 @@ sensor:
 
   - platform: template
     name: "LP Export Inc"
-    id: lpid10
+    id: lpExport
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -408,6 +449,18 @@ sensor:
     unit_of_measurement: "kWh/15m"
     state_class: measurement
     icon: mdi:counter
+
+  - platform: template
+    name: "LP Voltage L1"
+    id: lpVL1
+    unit_of_measurement: "V"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+      - filter_out: nan
+    device_class: voltage
+    state_class: measurement
+
 
 #######
 
@@ -419,16 +472,14 @@ sensor:
     entity_category: diagnostic
 
   - platform: modbus_controller
-    skip_updates: 10            ### ###
     name: "EMI Year"
-    custom_command: [0x1, 0x4, 0x0, 0x3, 0x0, 0x4]
-    register_count: 1
+    custom_pdu: [0x4, 0x0, 0x3, 0x0, 0x4]
     response_size: 25
     lambda: |-
       char hFw1[12];
       char hFw2[12];
       char hFw3[12];
-      char _emi[20];
+      char _emi[24];
 
       uint32_t hMnfC = (data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3]);
       uint16_t hMnfY = (data[4] << 8 | data[5]);
@@ -516,20 +567,9 @@ sensor:
 
 globals:
 
-   - id: idx3
-     type: int
-     restore_value: no
-     initial_value: '0' 
-
-   - id: idx4
-     type: int
-     restore_value: no
-     initial_value: '0'
-
-   - id: idx6
-     type: int
-     restore_value: no
-     initial_value: '0'
+   - id: idx
+     type: int[20]
+     restore_value: no 
 
 ### ### ###
 
@@ -551,7 +591,7 @@ text_sensor:
     name: "ESP Clock"
     icon: mdi:clock
     lambda: |-
-      char str[25];
+      char str[36];
       time_t currTime = id(esptime).now().timestamp;
       strftime(str, sizeof(str), "%H:%M:%S", localtime(&currTime));
       return {str};
@@ -562,19 +602,21 @@ text_sensor:
 
   - platform: modbus_controller
     name: "Clock"
-    register_type: read
-    address: 0x0001
-    register_count: 1
+    #address: 0x0001
+    custom_pdu: [0x4, 0x0, 0x1, 0x0, 0x1]
     response_size: 12
-    raw_encode: HEXBYTES
     icon: mdi:clock
     lambda: |-
+        //
+        id(esp_clock).update();
+        //
         uint8_t hh, mm, ss;
         hh = data[5];
         mm = data[6];
         ss = data[7];
-        char ebclk[20];
+        char ebclk[24];
         sprintf(ebclk,"%02d:%02d:%02d",hh,mm,ss);
+        ESP_LOGW("HAN", "Clock %s", ebclk);
         return {ebclk};
     on_value:
       - then:
@@ -585,19 +627,17 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    force_new_range: true        ### ###
+    reuse_previous_range: false    ####
     name: "Tariff"
     register_type: read
     address: 0x000B
-    register_count: 1
     response_size: 2
-    raw_encode: COMMA
     icon: mdi:counter
     lambda: |-
         auto z = "Null";
-        if (x == "1,0") z = "Vazio";
-        else if (x == "2,0") z = "Ponta";
-        else if (x == "3,0") z = "Cheias";
+        if (data[0] == 1) z = "Vazio";
+        else if (data[0] == 2) z = "Ponta";
+        else if (data[0] == 3) z = "Cheias";
         return {z};
     on_value:
       - then:
@@ -607,23 +647,28 @@ text_sensor:
 ###
 
   - platform: modbus_controller
-    skip_updates: 10            ### ###
     name: "LP IDs"
-    custom_command: [0x1, 0x4, 0x0, 0x80, 0x0, 0x1]
-    register_count: 1
+    custom_pdu: [0x4, 0x0, 0x80, 0x0, 0x1]
     response_size: 14
     lambda: |-
-      char lpindex[25];
-      sprintf(lpindex,"%d,%d,%d,%d,%d,%d",
+      char lpindex[36];
+      sprintf(lpindex,"%d,%d,%d,%d,%d,%d,%d,%d,%d",
+          data[0],
+          data[1],
           data[2],
           data[3],
           data[4],
           data[5],
           data[6],
-          data[7]);
-      id(idx3) = data[2];
-      id(idx4) = data[3];
-      id(idx6) = data[5];
+          data[7],
+          data[8]);
+      id(idx)[3] = data[2];
+      id(idx)[4] = data[3];
+      id(idx)[5] = data[4];
+      id(idx)[6] = data[5];
+      id(idx)[7] = data[6];
+      id(idx)[8] = data[7];
+      id(idx)[9] = data[8];
       return {lpindex};
       // eof
     icon: mdi:chip
@@ -638,48 +683,50 @@ text_sensor:
 
   - platform: modbus_controller
     name: "LP Date Time"
-    custom_command: [0x1, 0x44, 0x0, 0x1]
-    register_count: 1
+    custom_pdu: [0x44, 0x0, 0x1]
     response_size: 42
     lambda: |-
+      ESP_LOGW("HAN", "LP Date Time data[0]: 0x%02X", data[0]);
       uint8_t _emi_err1 = data[0];
       uint16_t lpYY = (data[1] << 8 | data[2]);
       uint8_t lpMT = data[3];
       uint8_t lpDD = data[4];
       uint8_t lpHH = data[6];
       uint8_t lpMM = data[7];
-      // ###
-      if (id(idx3) == 9) {
-      // ###
+      // ### A
+      if (id(idx)[3] == 9) {
+      // ### A
       uint32_t lp3g = (data[14] << 24 | data[15] << 16 | data[16] << 8 | data[17]);
-      uint32_t lp4g = (data[18] << 24 | data[19] << 16 | data[20] << 8 | data[21]);
-      uint32_t lp6g = (data[26] << 24 | data[27] << 16 | data[28] << 8 | data[29]); 
-      id(lpid9).publish_state(lp3g);
+      id(lpImport).publish_state(lp3g);
       //
-      if (id(idx4) == 10) {
-      id(lpid10).publish_state(lp4g);
+      if (id(idx)[4] == 10) {
+      uint32_t lp4g = (data[18] << 24 | data[19] << 16 | data[20] << 8 | data[21]);
+      id(lpExport).publish_state(lp4g);
       }
-      if (id(idx6) == 10) {
-      id(lpid10).publish_state(lp6g);
+      if (id(idx)[6] == 10) {
+      uint32_t lp6g = (data[26] << 24 | data[27] << 16 | data[28] << 8 | data[29]); 
+      id(lpExport).publish_state(lp6g);
       }
-      // ###
+      // ### A
       }
-      // ###
+      // ### A
       //
       //  new LP 2026 16bits id20 id24
       //
-      if (id(idx3) == 20) {
+      if (id(idx)[3] == 20) {
       uint32_t lp3g = (data[14] << 8 | data[15]);
       uint32_t lp4g = (data[16] << 8 | data[17]);
-      id(lpid9).publish_state(lp3g);
-      id(lpid10).publish_state(lp4g);
+      uint32_t lp5g = (data[18] << 8 | data[19]);
+      id(lpImport).publish_state(lp3g);
+      id(lpExport).publish_state(lp4g);
+      id(lpVL1).publish_state(lp5g);
       }
       // 
       char _emi_err[12];
       sprintf(_emi_err,"0x%0X",_emi_err1);
       id(emi_errS).publish_state(_emi_err);
       //
-      char lpclk[25];
+      char lpclk[36];
       sprintf(lpclk,"%04d-%02d-%02dT%02d:%02d",lpYY,lpMT,lpDD,lpHH,lpMM);
       return {lpclk};
     icon: mdi:calendar
