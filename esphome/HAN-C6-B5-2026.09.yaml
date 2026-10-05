@@ -23,7 +23,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "3.04"
+    version: "3.05"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-2026.09.yaml@dev
@@ -77,7 +77,7 @@ logger:
   #baud_rate: 0 # esp8266
 
 api:
-  reboot_timeout: 30min
+  reboot_timeout: 33min
 
 ota:
   - platform: esphome
@@ -171,7 +171,7 @@ modbus_controller:
     setup_priority: -10
     offline_skip_updates: 5
     max_cmd_retries: 0
-    #continuous: true
+    continuous: true
 
 ###
 
@@ -314,6 +314,7 @@ sensor:
     #address: 0x0073
     custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
     offset: 0 # EB3
+    address: 0x0073 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 0
     device_class: power
@@ -325,6 +326,7 @@ sensor:
     #address: 0x0074
     custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
     offset: 4 # EB3
+    address: 0x0073 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 0
     device_class: power
@@ -336,6 +338,7 @@ sensor:
     #address: 0x0075
     custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
     offset: 8 # EB3
+    address: 0x0073 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 0
     device_class: power
@@ -347,6 +350,7 @@ sensor:
     #address: 0x0076
     custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
     offset: 12 # EB3
+    address: 0x0073 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 0
     device_class: power
@@ -358,6 +362,7 @@ sensor:
     #address: 0x0077
     custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
     offset: 16 # EB3
+    address: 0x0073 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 0
     device_class: power
@@ -369,6 +374,7 @@ sensor:
     #address: 0x0078
     custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
     offset: 20 # EB3
+    address: 0x0073 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 0
     device_class: power
@@ -381,9 +387,11 @@ sensor:
     # ---
     custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
     offset: 24 # EB3
+    address: 0x0073 # range tweak
     # ---
     #custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
     #offset: 0 # EB1 Type 1
+    #address: 0x0079 # range tweak
     # ---
     value_type: U_DWORD
     accuracy_decimals: 0
@@ -397,9 +405,11 @@ sensor:
     # ---
     custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
     offset: 28 # EB3
+    address: 0x0073 # range tweak
     # ---
     #custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
     #offset: 4 # EB1 Type 1
+    #address: 0x0079 # range tweak
     # ---
     value_type: U_DWORD
     accuracy_decimals: 0
@@ -492,6 +502,7 @@ sensor:
     #address: 0x0026
     custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
     offset: 0
+    address: 0x0026 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 3
     filters:
@@ -506,6 +517,7 @@ sensor:
     #address: 0x0027
     custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
     offset: 4
+    address: 0x0026 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 3
     filters:
@@ -520,6 +532,7 @@ sensor:
     #address: 0x0028
     custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
     offset: 8
+    address: 0x0026 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 3
     filters:
@@ -541,6 +554,7 @@ sensor:
     #address: 0x0016
     custom_pdu: [0x4, 0x0, 0x16, 0x0, 0x2]
     offset: 0
+    address: 0x0016 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 3
     filters:
@@ -555,6 +569,7 @@ sensor:
     #address: 0x0017
     custom_pdu: [0x4, 0x0, 0x16, 0x0, 0x2]
     offset: 4
+    address: 0x0016 # range tweak
     value_type: U_DWORD
     accuracy_decimals: 3
     filters:
@@ -576,6 +591,7 @@ sensor:
     #address: 0x001C
     custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
     offset: 0
+    address: 0x001C # range tweak
     value_type: U_DWORD
     accuracy_decimals: 3
     filters:
@@ -590,6 +606,7 @@ sensor:
     #address: 0x001D
     custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
     offset: 4
+    address: 0x001C # range tweak
     value_type: U_DWORD
     accuracy_decimals: 3
     filters:
@@ -604,6 +621,7 @@ sensor:
     #address: 0x001E
     custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
     offset: 8
+    address: 0x001C # range tweak
     value_type: U_DWORD
     accuracy_decimals: 3
     filters:
@@ -865,7 +883,7 @@ text_sensor:
     response_size: 14
     lambda: |-
       char lpindex[36];
-      sprintf(lpindex,"%d,%d,%d,%d,%d,%d,%d,%d",
+      sprintf(lpindex,"%d,%d,%d,%d,%d,%d,%d,%d,%d",
           data[0],
           data[1],
           data[2],
@@ -873,13 +891,15 @@ text_sensor:
           data[4],
           data[5],
           data[6],
-          data[7]);
+          data[7],
+          data[8]);
       id(idx)[3] = data[2];
       id(idx)[4] = data[3];
       id(idx)[5] = data[4];
       id(idx)[6] = data[5];
       id(idx)[7] = data[6];
       id(idx)[8] = data[7];
+      id(idx)[9] = data[8];
       return {lpindex};
       // eof
     icon: mdi:chip
