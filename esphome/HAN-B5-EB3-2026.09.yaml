@@ -22,11 +22,11 @@ esphome:
       - delay: 7s
       - switch.turn_on: edpbox_polling
   project:
-    name: easyhan.edpbox3-c6-b5
+    name: easyhan.edpbox3-b5
     version: "3.05"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-2026.09.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-B5-EB3-2026.09.yaml@dev
   import_full_config: true
 
 #esp8266:
