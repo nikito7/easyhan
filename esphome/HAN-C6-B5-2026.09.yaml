@@ -23,7 +23,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-c6-b5
-    version: "3.03"
+    version: "3.04"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-C6-B5-2026.09.yaml@dev
@@ -311,10 +311,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L1"
-    address: 0x0073
-    register_type: read
+    #address: 0x0073
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    offset: 0 # EB3
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -322,11 +322,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L1 Export"
-    address: 0x0074
-    register_type: read
+    #address: 0x0074
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    offset: 4 # EB3
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -334,10 +333,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L2"
-    address: 0x0075
-    register_type: read
+    #address: 0x0075
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    offset: 8 # EB3
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -345,11 +344,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L2 Export"
-    address: 0x0076
-    register_type: read
+    #address: 0x0076
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    offset: 12 # EB3
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -357,11 +355,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L3"
-    address: 0x0077
-    register_type: read
+    #address: 0x0077
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    offset: 16 # EB3
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -369,11 +366,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power L3 Export"
-    address: 0x0078
-    register_type: read
+    #address: 0x0078
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    offset: 20 # EB3
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -381,11 +377,15 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power Import"
-    address: 0x0079
-    register_type: read
+    #address: 0x0079
+    # ---
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    offset: 24 # EB3
+    # ---
+    #custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
+    #offset: 0 # EB1 Type 1
+    # ---
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -393,11 +393,15 @@ sensor:
 
   - platform: modbus_controller
     name: "Active Power Export"
-    address: 0x007A
-    register_type: read
+    #address: 0x007A
+    # ---
+    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    offset: 28 # EB3
+    # ---
+    #custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
+    #offset: 4 # EB1 Type 1
+    # ---
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 0
     device_class: power
     unit_of_measurement: "W"
@@ -485,10 +489,10 @@ sensor:
 
   - platform: modbus_controller
     name: "T1 Vazio"
-    address: 0x0026
-    register_type: read
+    #address: 0x0026
+    custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
+    offset: 0
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -499,11 +503,10 @@ sensor:
 
   - platform: modbus_controller 
     name: "T2 Ponta"
-    address: 0x0027
-    register_type: read
+    #address: 0x0027
+    custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
+    offset: 4
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -514,11 +517,10 @@ sensor:
 
   - platform: modbus_controller
     name: "T3 Cheias"
-    address: 0x0028
-    register_type: read
+    #address: 0x0028
+    custom_pdu: [0x4, 0x0, 0x26, 0x0, 0x3]
+    offset: 8
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -536,11 +538,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Import"
-    address: 0x0016
-    register_type: read
+    #address: 0x0016
+    custom_pdu: [0x4, 0x0, 0x16, 0x0, 0x2]
+    offset: 0
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -551,11 +552,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Export"
-    address: 0x0017
-    register_type: read
+    #address: 0x0017
+    custom_pdu: [0x4, 0x0, 0x16, 0x0, 0x2]
+    offset: 4
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -573,10 +573,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Import L1"
-    address: 0x001C
-    register_type: read
+    #address: 0x001C
+    custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
+    offset: 0
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -587,11 +587,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Import L2"
-    address: 0x001D
-    register_type: read
+    #address: 0x001D
+    custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
+    offset: 4
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -602,11 +601,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Import L3"
-    address: 0x001E
-    register_type: read
+    #address: 0x001E
+    custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
+    offset: 8
     value_type: U_DWORD
-    response_size: 4
-    reuse_previous_range: true    ####
     accuracy_decimals: 3
     filters:
       - multiply: 0.001
@@ -624,10 +622,10 @@ sensor:
 
   - platform: modbus_controller
     name: "Contract T1"
-    address: 0x000C
-    register_type: read
+    #address: 0x000C
+    custom_pdu: [0x4, 0x0, 0x0c, 0x0, 0x1]
+    offset: 0
     value_type: U_DWORD
-    response_size: 4
     accuracy_decimals: 2
     filters:
       - multiply: 0.001
@@ -817,8 +815,8 @@ text_sensor:
 
   - platform: modbus_controller
     name: "Clock"
-    register_type: read
-    address: 0x0001
+    #address: 0x0001
+    custom_pdu: [0x4, 0x0, 0x1, 0x0, 0x1]
     response_size: 12
     icon: mdi:clock
     lambda: |-
@@ -984,4 +982,3 @@ text_sensor:
 #######
 # eof #
 #######
-
