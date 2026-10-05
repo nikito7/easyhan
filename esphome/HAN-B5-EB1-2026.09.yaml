@@ -1,7 +1,6 @@
 # EB1
 # ESP32-C6 / Easy HAN B5
-# Tested on: 2026.9.1 EB3
-
+# Tested on: ...
 
 interval:
   - interval: 20s
@@ -22,8 +21,8 @@ esphome:
       - delay: 7s
       - switch.turn_on: edpbox_polling
   project:
-    name: easyhan.edpbox3-b5
-    version: "3.05"
+    name: easyhan.edpbox1-b5
+    version: "3.08"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-B5-EB1-2026.09.yaml@dev
@@ -42,6 +41,7 @@ esp32:
 
 wifi:
   output_power: 15db
+  #use_address: han-b5-eb1
   #use_address: 10.1.0.46
   #use_address: "fd6a:7ff7:c70:1:70fc:f12c:7c8d:6f80"
 
@@ -241,7 +241,10 @@ sensor:
       - filter_out: nan
     device_class: current
     state_class: measurement
+
+
 ### Active Power & Export ###
+
   - platform: modbus_controller
     name: "Active Power Import"
     #address: 0x0079
@@ -301,6 +304,7 @@ sensor:
         - switch.turn_on: led_pin
         - delay: 30ms
         - switch.turn_off: led_pin
+
   - platform: modbus_controller
     name: "Frequency"
     address: 0x007F
@@ -409,6 +413,7 @@ sensor:
         - switch.turn_off: led_pin
 
 ### Total Energy L ###
+
 ### Contract ###
 
   - platform: modbus_controller
@@ -423,7 +428,7 @@ sensor:
       - filter_out: nan
     unit_of_measurement: "kVA"
     state_class: measurement
-    icon: mdi:flash
+    device_class: apparent_power
     on_value:
       - then:
         - switch.turn_on: led_pin
