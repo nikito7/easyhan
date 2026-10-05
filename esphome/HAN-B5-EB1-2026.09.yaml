@@ -1,5 +1,7 @@
-# EB3
+# EB1
 # ESP32-C6 / Easy HAN B5
+# Tested on: 2026.9.1 EB3
+
 
 interval:
   - interval: 20s
@@ -10,7 +12,7 @@ interval:
           }
 
 esphome:
-  name: han-b5-eb3
+  name: han-b5-eb1
   friendly_name: HAN
   min_version: 2026.9.1
   on_boot:
@@ -24,7 +26,7 @@ esphome:
     version: "3.05"
 
 dashboard_import:
-  package_import_url: github://nikito7/easyhan/esphome/HAN-B5-EB3-2026.09.yaml@dev
+  package_import_url: github://nikito7/easyhan/esphome/HAN-B5-EB1-2026.09.yaml@dev
   import_full_config: true
 
 #esp8266:
@@ -239,157 +241,18 @@ sensor:
       - filter_out: nan
     device_class: current
     state_class: measurement
-
-  - platform: modbus_controller
-    name: "Voltage L2"
-    address: 0x006E
-    unit_of_measurement: "V"
-    register_type: read
-    value_type: U_WORD
-    accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
-      - filter_out: nan
-    device_class: voltage
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Current L2"
-    address: 0x006F
-    unit_of_measurement: "A"
-    register_type: read
-    value_type: U_WORD
-    accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
-      - filter_out: nan
-    device_class: current
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Voltage L3"
-    address: 0x0070
-    unit_of_measurement: "V"
-    register_type: read
-    value_type: U_WORD
-    accuracy_decimals: 1
-    filters:
-     - multiply: 0.1
-     - filter_out: nan
-    device_class: voltage
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Current L3"
-    address: 0x0071
-    unit_of_measurement: "A"
-    register_type: read
-    value_type: U_WORD
-    accuracy_decimals: 1
-    filters:
-      - multiply: 0.1
-      - filter_out: nan
-    device_class: current
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Current"
-    address: 0x0072
-    unit_of_measurement: "A"
-    register_type: read
-    value_type: U_WORD
-    filters:
-      - multiply: 0.1
-      - filter_out: nan
-    accuracy_decimals: 1
-    device_class: current
-    state_class: measurement
-
 ### Active Power & Export ###
-
-  - platform: modbus_controller
-    name: "Active Power L1"
-    #address: 0x0073
-    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
-    offset: 0 # EB3
-    address: 0x0073 # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 0
-    device_class: power
-    unit_of_measurement: "W"
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Active Power L1 Export"
-    #address: 0x0074
-    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
-    offset: 4 # EB3
-    address: 0x0073 # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 0
-    device_class: power
-    unit_of_measurement: "W"
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Active Power L2"
-    #address: 0x0075
-    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
-    offset: 8 # EB3
-    address: 0x0073 # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 0
-    device_class: power
-    unit_of_measurement: "W"
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Active Power L2 Export"
-    #address: 0x0076
-    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
-    offset: 12 # EB3
-    address: 0x0073 # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 0
-    device_class: power
-    unit_of_measurement: "W"
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Active Power L3"
-    #address: 0x0077
-    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
-    offset: 16 # EB3
-    address: 0x0073 # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 0
-    device_class: power
-    unit_of_measurement: "W"
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Active Power L3 Export"
-    #address: 0x0078
-    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
-    offset: 20 # EB3
-    address: 0x0073 # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 0
-    device_class: power
-    unit_of_measurement: "W"
-    state_class: measurement
-
   - platform: modbus_controller
     name: "Active Power Import"
     #address: 0x0079
     # ---
-    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
-    offset: 24 # EB3
-    address: 0x0073 # range tweak
+    #custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    #offset: 24 # EB3
+    #address: 0x0073 # range tweak
     # ---
-    #custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
-    #offset: 0 # EB1 Type 1
-    #address: 0x0079 # range tweak
+    custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
+    offset: 0 # EB1 Type 1
+    address: 0x0079 # range tweak
     # ---
     value_type: U_DWORD
     accuracy_decimals: 0
@@ -401,13 +264,13 @@ sensor:
     name: "Active Power Export"
     #address: 0x007A
     # ---
-    custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
-    offset: 28 # EB3
-    address: 0x0073 # range tweak
+    #custom_pdu: [0x4, 0x0, 0x73, 0x0, 0x8] # EB3
+    #offset: 28 # EB3
+    #address: 0x0073 # range tweak
     # ---
-    #custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
-    #offset: 4 # EB1 Type 1
-    #address: 0x0079 # range tweak
+    custom_pdu: [0x4, 0x0, 0x79, 0x0, 0x2] # EB1 Type 1
+    offset: 4 # EB1 Type 1
+    address: 0x0079 # range tweak
     # ---
     value_type: U_DWORD
     accuracy_decimals: 0
@@ -438,43 +301,6 @@ sensor:
         - switch.turn_on: led_pin
         - delay: 30ms
         - switch.turn_off: led_pin
-
-  - platform: modbus_controller
-    name: "Power Factor L1"
-    address: 0x007C
-    unit_of_measurement: ""
-    register_type: read
-    value_type: U_WORD
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-    device_class: power_factor
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Power Factor L2"
-    address: 0x007D
-    unit_of_measurement: ""
-    register_type: read
-    value_type: U_WORD
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-    device_class: power_factor
-    state_class: measurement
-
-  - platform: modbus_controller
-    name: "Power Factor L3"
-    address: 0x007E
-    unit_of_measurement: ""
-    register_type: read
-    value_type: U_WORD
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-    device_class: power_factor
-    state_class: measurement
-
   - platform: modbus_controller
     name: "Frequency"
     address: 0x007F
@@ -583,57 +409,6 @@ sensor:
         - switch.turn_off: led_pin
 
 ### Total Energy L ###
-
-  - platform: modbus_controller
-    name: "Import L1"
-    #address: 0x001C
-    custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
-    offset: 0
-    address: 0x001C # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-      - filter_out: nan
-    unit_of_measurement: "kWh"
-    state_class: total_increasing
-    device_class: energy
-
-  - platform: modbus_controller
-    name: "Import L2"
-    #address: 0x001D
-    custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
-    offset: 4
-    address: 0x001C # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-      - filter_out: nan
-    unit_of_measurement: "kWh"
-    state_class: total_increasing
-    device_class: energy
-
-  - platform: modbus_controller
-    name: "Import L3"
-    #address: 0x001E
-    custom_pdu: [0x4, 0x0, 0x1c, 0x0, 0x3]
-    offset: 8
-    address: 0x001C # range tweak
-    value_type: U_DWORD
-    accuracy_decimals: 3
-    filters:
-      - multiply: 0.001
-      - filter_out: nan
-    unit_of_measurement: "kWh"
-    state_class: total_increasing
-    device_class: energy
-    on_value:
-      - then:
-        - switch.turn_on: led_pin
-        - delay: 30ms
-        - switch.turn_off: led_pin
-
 ### Contract ###
 
   - platform: modbus_controller
