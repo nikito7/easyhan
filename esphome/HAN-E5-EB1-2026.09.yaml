@@ -20,7 +20,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-e5
-    version: "3.05"
+    version: "3.08"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-E5-EB1-2026.09.yaml@dev
@@ -419,7 +419,7 @@ sensor:
       - filter_out: nan
     unit_of_measurement: "kVA"
     state_class: measurement
-    icon: mdi:flash
+    device_class: apparent_power
     on_value:
       - then:
         - switch.turn_on: led_pin
