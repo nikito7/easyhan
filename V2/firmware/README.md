@@ -3,6 +3,10 @@ Last:
 - http://u.easyhan.pt/v2/
 - https://github.com/nikito7/nikito7.github.io/tree/dev/pt.easyhan.u/v2
 
+# 7.321
+
+https://github.com/nikito7/han-dev/commits/dev/tasmota/xdrv100?since=2026-10-11&until=2026-10-11
+
 # 7.274
 
 - refresh onetime requests every 15min
