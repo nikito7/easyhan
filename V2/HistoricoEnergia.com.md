@@ -21,6 +21,7 @@ E3=0
 F=0
 I=0
 PF=0
+CT1=0
 ```
 
 EB3:
@@ -38,6 +39,7 @@ E3=EB3#TET3
 I=EB3#CL
 F=EB3#FR
 PF=EB3#PF
+CT1=EB3#CT1
 ```
 
 EB1:
@@ -65,7 +67,7 @@ PF=EB1#PF
 if (upsecs%181==0 and cnt>40)
 {
 print historicoenergia.com %2.0hh%:%2.0mm%:%2.0ss%
-->WebQuery http://api.historicoenergia.com/api/webhook/mqtt?deviceId=%ID%&token=%TOK% POST {"P":%0ipwr%,"V":%1vt1%,"T":%0T%,"E1":%2E1%,"E2":%2E2%,"E3":%2E3%,"F":%1F%,"PF":%PF%,"I":%1I%}
+->WebQuery https://api.historicoenergia.com/api/webhook/mqtt?deviceId=%ID%&token=%TOK% POST {"P":%0ipwr%,"V":%1vt1%,"T":%0T%,"E1":%2E1%,"E2":%2E2%,"E3":%2E3%,"F":%1F%,"PF":%PF%,"I":%1I%,"CT1":%2CT1%}
 }
 ```
 
