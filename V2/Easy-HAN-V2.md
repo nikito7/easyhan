@@ -1,3 +1,6 @@
+⚠️ Geralmente a informação desta página não é necessária.<br>
+⚠️ Basta fazer "reset configuration".
+
 # Easy HAN ® 
 # Firmware V2 
 # ESP8266
