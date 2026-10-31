@@ -23,7 +23,7 @@ esphome:
       - switch.turn_on: edpbox_polling
   project:
     name: easyhan.edpbox3-b5
-    version: "3.08"
+    version: "3.09"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/HAN-B5-EB3-2026.09.yaml@dev
@@ -743,11 +743,17 @@ sensor:
       id(emi_code).publish_state(hMnfC);
 
       switch (hMnfC) {
+        case 6619395:
+          sprintf(_emi, "%s", "M Janz GPRS");
+          break;
         case 6623491:
           sprintf(_emi, "%s", "T Janz GPRS");
           break;
         case 6750210:
           sprintf(_emi, "%s", "M Landis+Gyr S3");
+          break;
+        case 6750211:
+          sprintf(_emi, "%s", "M Landis+Gyr S5");
           break;
         case 6754306:
           sprintf(_emi, "%s", "T Landis+Gyr S3");
@@ -764,17 +770,26 @@ sensor:
         case 11014146:
           sprintf(_emi, "%s", "T Sagem CX2000-9");
           break;
+        case 11014147:
+          sprintf(_emi, "%s", "T Sagem T215 ?");
+          break;
         case 16973825:
-          sprintf(_emi, "%s", "? Ziv ???");
+          sprintf(_emi, "%s", "M Ziv ???");
           break;
         case 16977920:
-          sprintf(_emi, "%s", "T Ziv 5CTD-E2F");
+          sprintf(_emi, "%s", "T Ziv 5CTD E2F");
           break;
         case 18481154:
-          sprintf(_emi, "%s", "M Kaifa MA109P");
+          sprintf(_emi, "%s", "M Kaifa MA109P 54");
+          break;
+        case 18481155:
+          sprintf(_emi, "%s", "M Kaifa MA109P 55");
           break;
         case 18481156:
           sprintf(_emi, "%s", "M Kaifa MA109H");
+          break;
+        case 18482692:
+          sprintf(_emi, "%s", "M Kaifa MA109MP");
           break;
         default:
           sprintf(_emi, "%s", "? ??? ???");
