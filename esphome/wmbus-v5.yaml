@@ -22,7 +22,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "5.14"
+    version: "5.15"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -99,8 +99,10 @@ spi:
   #miso_pin: GPIO19
 
 wmbus_common:
-    drivers:
-      - izar
+    drivers: all
+
+#    drivers:
+#      - izar
 
 wmbus_radio:
   # --- rf900 cc ---
@@ -170,8 +172,18 @@ sensor:
 
   - platform: wmbus_meter
     parent_id: water_meter
-    name: "Test Izar Total"
+    name: "Test Izar Total m3"
     field: "total_m3"
+    accuracy_decimals: 3
+    unit_of_measurement: "m³"
+    device_class: "water"
+    state_class: "total_increasing"
+    icon: "mdi:counter"
+
+  - platform: wmbus_meter
+    parent_id: water_meter
+    name: "Test Izar Total"
+    field: "total"
     accuracy_decimals: 3
     unit_of_measurement: "m³"
     device_class: "water"
