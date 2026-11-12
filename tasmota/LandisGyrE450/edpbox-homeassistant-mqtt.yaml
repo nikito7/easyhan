@@ -1,0 +1,223 @@
+# Home Assistant: MQTT sensors for the EDP Box smart meter (Tasmota SML, JSON under "EB")
+# Put this in configuration.yaml (or a package). Use ONE `mqtt:` key; if you already have one, merge `sensor:` into it.
+# Replace "edp_box" with your Tasmota topic in the two lines marked <-- (first sensor only).
+mqtt:
+  sensor:
+    - name: "Voltage L1"
+      unique_id: edpbox_v1
+      state_topic: &topic "tele/edp_box/SENSOR"   # <--
+      availability: &avail
+        - topic: "tele/edp_box/LWT"   # <--
+          payload_available: "Online"
+          payload_not_available: "Offline"
+      device: &dev
+        identifiers: ["edpbox_han"]
+        name: "Smart Meter"
+        manufacturer: "E-REDES"
+        model: "EDP Box HAN (Modbus)"
+      value_template: "{{ value_json.EB.V1 }}"
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+    - name: "Voltage L2"
+      unique_id: edpbox_v2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.V2 }}"
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+    - name: "Voltage L3"
+      unique_id: edpbox_v3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.V3 }}"
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+    - name: "Current L1"
+      unique_id: edpbox_i1
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.I1 }}"
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+    - name: "Current L2"
+      unique_id: edpbox_i2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.I2 }}"
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+    - name: "Current L3"
+      unique_id: edpbox_i3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.I3 }}"
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+    - name: "Current total"
+      unique_id: edpbox_i
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.I }}"
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+    - name: "Active power"
+      unique_id: edpbox_p
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.P }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+    - name: "Power L1"
+      unique_id: edpbox_p1
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.P1 }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+    - name: "Power L2"
+      unique_id: edpbox_p2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.P2 }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+    - name: "Power L3"
+      unique_id: edpbox_p3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.P3 }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+    - name: "Power factor"
+      unique_id: edpbox_pf
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PF }}"
+      device_class: power_factor
+      state_class: measurement
+    - name: "Power factor L1"
+      unique_id: edpbox_pf1
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PF1 }}"
+      device_class: power_factor
+      state_class: measurement
+    - name: "Power factor L2"
+      unique_id: edpbox_pf2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PF2 }}"
+      device_class: power_factor
+      state_class: measurement
+    - name: "Power factor L3"
+      unique_id: edpbox_pf3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PF3 }}"
+      device_class: power_factor
+      state_class: measurement
+    - name: "Frequency"
+      unique_id: edpbox_f
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.F }}"
+      unit_of_measurement: "Hz"
+      device_class: frequency
+      state_class: measurement
+    - name: "Energy total"
+      unique_id: edpbox_e
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.E }}"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+    - name: "Energy T1 Vazio"
+      unique_id: edpbox_et1
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.ET1 }}"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+    - name: "Energy T2 Ponta"
+      unique_id: edpbox_et2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.ET2 }}"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+    - name: "Energy T3 Cheia"
+      unique_id: edpbox_et3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.ET3 }}"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+    - name: "Max demand"
+      unique_id: edpbox_pmax
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PMax }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+    - name: "Tariff"
+      unique_id: edpbox_tariff
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ {1: 'Vazio', 2: 'Ponta', 3: 'Cheia'}.get(value_json.EB.Tariff | int(0), value_json.EB.Tariff) }}"
+      icon: mdi:calendar-clock
+    - name: "Power limit"
+      unique_id: edpbox_lim
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ (value_json.EB.Lim | float(0) * 1000) | round(0) | int }}"
+      unit_of_measurement: "VA"
+      device_class: apparent_power
+      entity_category: diagnostic
+    - name: "Meter clock"
+      unique_id: edpbox_clock
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: >-
+        {% set e = value_json.EB %}
+        {{ '%04d-%02d-%02d %02d:%02d:%02d' | format(e.Year, e.Month, e.Day, e.Hour, e.Min, e.Sec) }}
+      icon: mdi:clock-outline
+      entity_category: diagnostic

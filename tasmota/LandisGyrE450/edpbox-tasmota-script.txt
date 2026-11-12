@@ -1,0 +1,45 @@
+>D
+>BS
+smlj=0
+tper=30
+=>sensor53 r
+
+>S
+if upsecs>20
+and upsecs<30
+{
+smlj=1
+}
+
+>M 1
++1,3,m,1,9600,EB,1(16),8,r010400010001,r0104006C0007,r010400730007,r0104007B0005,r010400260003,r010400160001,r0104000B0001,r010400120001,r010400220001
+1,01040CUUuu@i0:1,Clock Year,,Year,0
+1,01040Cx2uu@i0:1,Clock Month,,Month,0
+1,01040Cx3uu@i0:1,Clock Day,,Day,0
+1,01040Cx5uu@i0:1,Clock Hour,h,Hour,0
+1,01040Cx6uu@i0:1,Clock Min,m,Min,0
+1,01040Cx7uu@i0:1,Clock Sec,s,Sec,0
+1,01041Cx24UUuuUUuu@i2:1,Active Power,W,P,0
+1,01041CUUuuUUuu@i2:1,Power L1,W,P1,0
+1,01041Cx8UUuuUUuu@i2:1,Power L2,W,P2,0
+1,01041Cx16UUuuUUuu@i2:1,Power L3,W,P3,0
+1,01040EUUuu@i1:10,Voltage L1,V,V1,1
+1,01040Ex4UUuu@i1:10,Voltage L2,V,V2,1
+1,01040Ex8UUuu@i1:10,Voltage L3,V,V3,1
+1,01040Ex2UUuu@i1:10,Current L1,A,I1,1
+1,01040Ex6UUuu@i1:10,Current L2,A,I2,1
+1,01040Ex10UUuu@i1:10,Current L3,A,I3,1
+1,01040Ex12UUuu@i1:10,Current Total,A,I,1
+1,01040AUUuu@i3:1000,Power Factor,pf,PF,3
+1,01040Ax2UUuu@i3:1000,PF L1,pf,PF1,3
+1,01040Ax4UUuu@i3:1000,PF L2,pf,PF2,3
+1,01040Ax6UUuu@i3:1000,PF L3,pf,PF3,3
+1,01040Ax8UUuu@i3:10,Frequency,Hz,F,1
+1,010404UUuuUUuu@i5:1000,Energy Total,kWh,E,3
+1,01040CUUuuUUuu@i4:1000,Energy T1 Vazio,kWh,ET1,3
+1,01040Cx4UUuuUUuu@i4:1000,Energy T2 Ponta,kWh,ET2,3
+1,01040Cx8UUuuUUuu@i4:1000,Energy T3 Cheia,kWh,ET3,3
+1,010402uu@i6:1,Tariff,,Tariff,0
+1,010404UUuuUUuu@i7:1000,Power Limit,kVA,Lim,2
+1,010404UUuuUUuu@i8:1,Max Demand,W,PMax,0
+#

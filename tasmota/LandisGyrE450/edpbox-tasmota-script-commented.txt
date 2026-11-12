@@ -1,0 +1,219 @@
+>D
+; =============================================================================================
+;  E-REDES "EDP BOX" SMART METER  to  TASMOTA SML (ESP8266)  to  MQTT  to  HOME ASSISTANT
+;  Fully commented REFERENCE copy: same code as the compact script, plus explanations.
+;  Created 2026-11-11 for the E-REDES HAN spec DEF-C44-509, edition 2 (JUL 2020).
+; =============================================================================================
+;
+;  SIZE WARNING
+;    This copy is much bigger than the compact script. Tasmota keeps the script in a small buffer
+;    (about 2560 bytes after compression on a default ESP8266 build, up to 8192 characters on
+;    builds with a file system), so the web editor may refuse or truncate this copy. Deploy the
+;    compact script and keep this file as documentation.
+;    Two more limits, both respected by this copy: one line of the M section may not exceed 511
+;    characters, and older firmware (or a build without script variable replacement) reads at most
+;    3000 characters between the M section tag and its closing "#" line, comments included, and
+;    refuses to start SML when the definition is longer.
+;
+;  WHAT IT DOES
+;    The ESP8266 asks the meter's HAN port (RS485, Modbus RTU) for a few registers, one request
+;    every 0.8 s, decodes the replies and publishes 29 numeric values every 30 s as JSON on
+;        tele/{topic}/SENSOR      e.g.  {"Time":"...","EB":{"Year":2026,...,"PMax":4321}}
+;    Nothing is calculated on the ESP: every value is the meter's own register, only scaled to
+;    V / A / W / kWh. Daily totals, cost, net power, percent of limit and so on belong in
+;    Home Assistant.
+;
+;  JSON KEYS (all inside "EB")
+;    Year Month Day Hour Min Sec   meter clock exactly as the meter reports it, as of the last poll
+;    P                       W     active power drawn from the grid, sum of the three phases
+;    P1 P2 P3                W     active power drawn, per phase
+;    V1 V2 V3                V     phase voltage
+;    I1 I2 I3                A     phase current
+;    I                       A     total current of the three phases (the meter's own total register)
+;    PF                      -     power factor, total (0 to 1)
+;    PF1 PF2 PF3             -     power factor per phase
+;    F                       Hz    mains frequency
+;    E                       kWh   accumulated active energy, all tariffs (only ever goes up)
+;    ET1 ET2 ET3             kWh   accumulated active energy per tariff rate 1, 2 and 3
+;    Tariff                  -     tariff rate in force now: 1 Vazio, 2 Ponta, 3 Cheia
+;    Lim                     kVA   power limit (contracted power) in force now; the meter's built-in
+;                                  breaker trips if you stay above it for long enough
+;    PMax                    W     maximum demand recorded by the meter since its last reset of the
+;                                  maximum-demand register
+;    The names Vazio / Ponta / Cheia are the usual convention for a tri-hourly contract; the
+;    meter itself only reports rate numbers 1 to 3.
+;
+;  STATUS
+;    Checked against the E-REDES spec and against synthetic Modbus replies (all 29 values decoded
+;    correctly); not yet run on a live EDP Box. The first thing to check on the real box is that
+;    E-REDES exposes every register used here (see TROUBLESHOOTING at the end of this block).
+;
+;  INSTALLING (the compact script, not this copy)
+;    1. Tasmota build with scripting and the Smart Meter Interface (SML), as in the original script.
+;    2. Configuration, Configure Module: set GPIO1, GPIO3 and GPIO16 to None, then save.
+;    3. Consoles, Edit script: paste the compact script, tick "Script enabled", save, restart.
+;    4. Console: look for lines starting with "SML:". The web page shows the values and the MQTT
+;       topic tele/{topic}/SENSOR is published every 30 s.
+;    5. Home Assistant: add the MQTT YAML file (edpbox-homeassistant-mqtt.yaml) to the configuration
+;       and reload the MQTT entities.
+;
+;  HOW SML WORKS (Tasmota "Smart Meter Interface")
+;    - The M section declares one meter and a list of Modbus requests.
+;    - Tasmota sends the requests in turn, one per period, and every reply is decoded by the
+;      decoder lines that name that request (the "@iN" in each line).
+;    - A decoder line says which bytes of the reply to take, how to scale them, and how to label
+;      them on the Tasmota web page and in the MQTT JSON.
+;
+;  HARDWARE ASSUMED BY THE HEADER LINE
+;    ESP8266 hardware UART0: GPIO3 = RX, GPIO1 = TX. GPIO16 = RS485 driver enable (DE and RE tied
+;    together, HIGH = transmit). RS485 transceiver (for example a MAX485) A and B wires go to the
+;    EDP Box HAN port.
+;    - In Tasmota "Configure Module", GPIO1, GPIO3 and GPIO16 must all be "None"; otherwise SML
+;      refuses to start and logs "Duplicate GPIO".
+;    - SML takes over UART0 and switches the serial log off. UART0 is also the USB serial port of
+;      most boards, so disconnect the RS485 board while flashing over USB.
+;
+;  MODBUS LINK (E-REDES spec DEF-C44-509, edition 2 of JUL 2020)
+;    RTU, 9600 baud, 8N1, slave address 0x01 (spec default), function 0x04 (read input registers).
+;    The FEB 2017 edition specified 2 stop bits (8N2): on an older box with flaky replies, try
+;    the type "mN2" instead of "m" in the header line.
+;    Registers are numbered 0x0001 to 0x00D1 but are NOT all 16 bits wide. A register is 1, 2, 4
+;    or 12 bytes (voltage 2 B, power and energy 4 B, clock 12 B) and the quantity in a request
+;    counts registers, not 16-bit words. The register values come back to back, and an odd total
+;    is padded with one zero byte at the end.
+;    Reply frame:   01 04 {byte count} {data bytes} {crc low} {crc high}
+;    so every decoder line starts with 0104 and the byte count in hex. Tasmota's reply buffer is
+;    48 bytes, which leaves at most 43 data bytes per reply; that is why the requests are small
+;    and there are several of them.
+;
+;  REQUESTS (index = position in the header line; "@iN" in the decoder lines points at it)
+;    i0  r010400010001  reg 0x01        clock, 12 B
+;    i1  r0104006C0007  regs 0x6C-0x72  V1 I1 V2 I2 V3 I3 and total current, 14 B
+;    i2  r010400730007  regs 0x73-0x79  active power +A and -A for L1, L2, L3, then +A total, 28 B
+;                                       (the three -A export values are read but ignored)
+;    i3  r0104007B0005  regs 0x7B-0x7F  PF, PF1, PF2, PF3 and frequency, 10 B
+;    i4  r010400260003  regs 0x26-0x28  active energy of rate 1, 2 and 3, 12 B
+;    i5  r010400160001  reg 0x16        total active energy, 4 B
+;    i6  r0104000B0001  reg 0x0B        tariff in force, 1 B (the reply is padded to 2)
+;    i7  r010400120001  reg 0x12        power limit in force, 4 B
+;    i8  r010400220001  reg 0x22        max demand, 4 B
+;    One full cycle is 9 requests x 0.8 s = 7.2 s, so each value is refreshed about every 7 s.
+;    MQTT publishes the latest values every 30 s.
+;
+;  HEADER LINE, FIELD BY FIELD     +1,3,m,1,9600,EB,1(16),8,r...
+;    +1      meter number 1
+;    3       RX GPIO (UART0 RX)
+;    m       type: Modbus RTU, 8N1
+;    1       option flag; bit 0 (pull-up) only matters for counter meters, no effect here
+;    9600    baud rate; the spec default (the box can be set anywhere from 9600 to 19200)
+;    EB      JSON prefix: the values appear under "EB" (max 7 characters)
+;    1(16)   TX GPIO 1; driver enable on GPIO16, HIGH while sending (write 1(i16) for inverted)
+;    8       pause between requests in units of 100 ms = 0.8 s
+;    r...    the requests. "r" = raw frame, Tasmota appends the CRC; then 01 = slave, 04 = function,
+;            4 hex digits = first register, 4 hex digits = number of registers
+;            example: r010400730007 = registers 0x73 to 0x79
+;
+;  DECODER LINE, FIELD BY FIELD     1,01040Ex4UUuu@i1:10,Voltage L2,V,V2,1
+;    1             meter number
+;    01040E        reply prefix: slave 01, function 04, byte count 0E (14); must match the reply
+;    x4            skip 4 bytes (xx skips 1, xN skips N)
+;    UUuu          read an unsigned 16-bit number, big endian (UUuuUUuu = 32 bit, uu = 8 bit)
+;    @i1           this line decodes the reply of request 1. Needed here because several replies have
+;                  the same length: 0C bytes for the clock and for the per-rate energy, 04 bytes for
+;                  three different registers.
+;    :10           divide the raw number by 10 (230.1 V arrives as 2301)
+;    Voltage L2    label on the Tasmota web page (max 23 characters)
+;    V             unit on the web page (max 7 characters)
+;    V2            key in the MQTT JSON (max 23 characters)
+;    1             decimals; adding 16 would also send the value to MQTT at once each time it is
+;                  decoded, not only every 30 s (not used here)
+;  SML ignores anything after the decimals field, so the notes below are written after a semicolon.
+;
+;  READ BUT NOT PUBLISHED / NOT READ (deliberately)
+;    export (-A) power and energy ..... no energy is exported; the per-phase export power values sit
+;                                       between the import values and are read but ignored
+;    per-phase and reactive energy .... not wanted
+;    limits per tariff ................ a single contracted limit is used (Lim)
+;    breaker (DCP) state, Q and K ..... the state only changes while the supply is cut, when the ESP
+;                                       and Wi-Fi are off too; Q and K are fixed settings
+;    2020-edition extras .............. apparent power (regs 0xAB-0xB2), long-outage and under/over-
+;                                       voltage counters (regs 0xB8-0xD1); only boxes that report HAN
+;                                       protocol version 1 or higher (reg 0x09, bits 5:4) have them
+;
+;  TROUBLESHOOTING
+;    - Console log: look for lines starting with "SML:" after a restart; they say, for instance,
+;      "Duplicate GPIO" (module configuration) or "meter def exceeds" (definition too long).
+;    - Console: "sensor53 d1" dumps the raw frames (the web page stops updating); "sensor53 d0" ends
+;      the dump.
+;    - A 5-byte reply "01 84 xx crc crc" is a Modbus exception: xx = 02 register not supported,
+;      81 access denied (E-REDES controls which registers a box exposes). That value never appears;
+;      delete its decoder line and its request.
+;    - No values at all: check the RS485 A/B polarity, baud rate, slave address and that GPIO1, 3
+;      and 16 are "None" in the module configuration.
+;    - A value missing from the JSON, or stuck at 0, was never received: compare its decoder line
+;      with its request (register, byte count, @iN).
+;    - E and ET1..ET3 are the meter's own registers: they only go up and survive ESP reboots.
+;
+>BS
+; ---- BOOT: runs once, after the sensor drivers have started -----------------------------------
+; Hold back the SML values in the MQTT JSON for now. Until the first replies are in, a value may be
+; missing (recent Tasmota) or 0 (older Tasmota). A bogus 0 followed by the real counter would look
+; like a meter reset to the total_increasing energy sensors of Home Assistant and would add a huge
+; fake consumption.
+smlj=0
+; Publish the sensor JSON (the TelePeriod) every 30 s. Raise it for less MQTT traffic, lower it for
+; finer graphs.
+tper=30
+; Start the SML driver so that it reads the meter definition at the end of this script.
+=>sensor53 r
+
+>S
+; ---- EVERY SECOND ------------------------------------------------------------------------------
+; Release the SML JSON between 20 and 30 s after boot, when every request has been answered at least
+; twice (one cycle takes 7.2 s). Outside that window this block does nothing. It is the only logic
+; left on the ESP: two comparisons per second.
+if upsecs>20
+and upsecs<30
+{
+smlj=1
+}
+
+>M 1
++1,3,m,1,9600,EB,1(16),8,r010400010001,r0104006C0007,r010400730007,r0104007B0005,r010400260003,r010400160001,r0104000B0001,r010400120001,r010400220001
+; i0 clock: reg 0x01 is 12 bytes. Year is 16 bit at +0; then Month +2, Day +3, Hour +5, Min +6, Sec +7
+1,01040CUUuu@i0:1,Clock Year,,Year,0                  ; u16 at +0
+1,01040Cx2uu@i0:1,Clock Month,,Month,0                ; +2
+1,01040Cx3uu@i0:1,Clock Day,,Day,0                    ; +3
+1,01040Cx5uu@i0:1,Clock Hour,h,Hour,0                 ; +5
+1,01040Cx6uu@i0:1,Clock Min,m,Min,0                   ; +6
+1,01040Cx7uu@i0:1,Clock Sec,s,Sec,0                   ; +7
+; i2 power: regs 0x73-0x79, 4 B each: L1 +A, L1 -A, L2 +A, L2 -A, L3 +A, L3 -A, then total +A
+; (+A = drawn from the grid, -A = delivered to the grid; the -A values are not published)
+1,01041Cx24UUuuUUuu@i2:1,Active Power,W,P,0           ; reg 0x79 +A total
+1,01041CUUuuUUuu@i2:1,Power L1,W,P1,0                 ; reg 0x73 +A L1
+1,01041Cx8UUuuUUuu@i2:1,Power L2,W,P2,0               ; reg 0x75 +A L2
+1,01041Cx16UUuuUUuu@i2:1,Power L3,W,P3,0              ; reg 0x77 +A L3
+; i1 volts and amps: regs 0x6C-0x72, 2 B each: V1 I1 V2 I2 V3 I3 and total current; raw value / 10
+1,01040EUUuu@i1:10,Voltage L1,V,V1,1                  ; reg 0x6C
+1,01040Ex4UUuu@i1:10,Voltage L2,V,V2,1                ; reg 0x6E
+1,01040Ex8UUuu@i1:10,Voltage L3,V,V3,1                ; reg 0x70
+1,01040Ex2UUuu@i1:10,Current L1,A,I1,1                ; reg 0x6D
+1,01040Ex6UUuu@i1:10,Current L2,A,I2,1                ; reg 0x6F
+1,01040Ex10UUuu@i1:10,Current L3,A,I3,1               ; reg 0x71
+1,01040Ex12UUuu@i1:10,Current Total,A,I,1             ; reg 0x72 total
+; i3 power factor and frequency: regs 0x7B-0x7F, 2 B each; PF raw / 1000, F raw / 10
+1,01040AUUuu@i3:1000,Power Factor,pf,PF,3             ; reg 0x7B
+1,01040Ax2UUuu@i3:1000,PF L1,pf,PF1,3                 ; reg 0x7C
+1,01040Ax4UUuu@i3:1000,PF L2,pf,PF2,3                 ; reg 0x7D
+1,01040Ax6UUuu@i3:1000,PF L3,pf,PF3,3                 ; reg 0x7E
+1,01040Ax8UUuu@i3:10,Frequency,Hz,F,1                 ; reg 0x7F
+; i5 total energy (reg 0x16) and i4 energy per rate (regs 0x26-0x28): 4 B each, Wh / 1000 = kWh
+1,010404UUuuUUuu@i5:1000,Energy Total,kWh,E,3         ; reg 0x16 Wh to kWh
+1,01040CUUuuUUuu@i4:1000,Energy T1 Vazio,kWh,ET1,3    ; reg 0x26 rate 1
+1,01040Cx4UUuuUUuu@i4:1000,Energy T2 Ponta,kWh,ET2,3  ; reg 0x27 rate 2
+1,01040Cx8UUuuUUuu@i4:1000,Energy T3 Cheia,kWh,ET3,3  ; reg 0x28 rate 3
+; i6 tariff (reg 0x0B, 1 B), i7 power limit (reg 0x12, VA / 1000 = kVA), i8 max demand (reg 0x22, W)
+1,010402uu@i6:1,Tariff,,Tariff,0                      ; reg 0x0B 1 2 3
+1,010404UUuuUUuu@i7:1000,Power Limit,kVA,Lim,2        ; reg 0x12 VA to kVA
+1,010404UUuuUUuu@i8:1,Max Demand,W,PMax,0             ; reg 0x22 W
+#

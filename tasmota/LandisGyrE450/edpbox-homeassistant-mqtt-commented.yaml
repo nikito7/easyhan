@@ -1,0 +1,435 @@
+# =============================================================================================
+#  E-REDES "EDP BOX" SMART METER  -  HOME ASSISTANT MQTT SENSORS
+#  Fully commented REFERENCE copy of edpbox-homeassistant-mqtt.yaml: same entities and same
+#  values, only comments added. Created 2026-11-11 to go with the Tasmota SML script
+#  (edpbox-tasmota-script.txt, E-REDES HAN spec DEF-C44-509 edition 2, JUL 2020).
+# =============================================================================================
+#
+#  WHAT THIS FILE DOES
+#    The Tasmota script publishes the meter values every 30 s as one JSON message:
+#        topic     tele/e-redes/SENSOR            (e-redes = your Tasmota topic)
+#        payload   {"Time":"...","EB":{"Year":2026,...,"P":412,"V1":231.4,...,"PMax":4321}}
+#    Every sensor below reads one key of the "EB" object through a value_template. There are 24
+#    sensors for the 29 values: the six clock fields (Year ... Sec) are joined into one text sensor.
+#    Scaling (for example volts from tenths of a volt) is done in Tasmota. Home Assistant only
+#    applies three presentation tweaks: tariff number to name, kVA to VA, clock fields to one text.
+#
+#  WHERE TO PUT IT
+#    - In configuration.yaml, or in a package file. There must be only ONE "mqtt:" key. If you
+#      already have one, add the entries below to its existing "sensor:" list instead.
+#    - The MQTT integration of Home Assistant must be set up, on the same broker as the Tasmota device.
+#    - Check it (Developer tools, YAML, Check configuration), then reload "Manually configured MQTT
+#      entities" from the same page, or restart Home Assistant.
+#
+#  THE ONE THING TO EDIT
+#    Replace "e-redes" with your Tasmota topic in the two lines marked "<-- CHANGE" in the first
+#    sensor (Tasmota web page: Configuration, Configure MQTT, Topic). The other 23 sensors pick the
+#    topic up through YAML anchors. If you changed the Tasmota FullTopic or its telemetry prefix,
+#    edit the whole topic string, not only the name.
+#
+#  ANATOMY OF A SENSOR ENTRY (the first one is annotated line by line)
+#    name                 text shown in Home Assistant
+#    unique_id            permanent internal id. It ties the sensor to its history and to whatever you
+#                         change in the UI (area, name, icon). Do not edit it after the first start.
+#    state_topic          MQTT topic the value arrives on (the same JSON message for every sensor)
+#    availability         shows the sensor as unavailable when the Tasmota device is offline, using the
+#                         Last Will topic tele/e-redes/LWT (payloads Online and Offline)
+#    device               groups all the sensors under one device, "Smart Meter", in the UI
+#    value_template       small Jinja expression that picks one value out of the JSON message
+#    unit_of_measurement  unit shown with the number
+#    device_class         what the number is (voltage, power, energy ...): icon, unit conversion and
+#                         Energy dashboard support
+#    state_class          measurement = goes up and down; total_increasing = counter that only grows.
+#                         Both make Home Assistant keep long-term statistics.
+#
+#  YAML ANCHORS (&name defines, *name reuses)
+#    The first sensor defines three anchors: &topic (state topic), &avail (availability list) and
+#    &dev (device block). Every other sensor says "state_topic: *topic", "availability: *avail" and
+#    "device: *dev", so the topic and the device exist in exactly one place. Anchors work only
+#    inside one file: if you split the sensors over several files, repeat the three definitions.
+#
+#  UNITS, DEVICE CLASSES AND STATE CLASSES
+#    A device class only works together with a matching unit, which is why every numeric sensor has
+#    both. Power factor is a plain ratio from 0 to 1 and has no unit. The text sensors (Tariff and
+#    Meter clock) have no unit and no classes. Energy sensors use total_increasing: a drop in the
+#    value is treated as a counter reset, never as negative consumption.
+#
+#  ENERGY AND DAILY TOTALS
+#    The ESP no longer calculates daily consumption; Home Assistant does it.
+#    - Settings, Dashboards, Energy, Electricity grid, Add consumption: choose the three sensors
+#      "Energy T1 Vazio", "Energy T2 Ponta" and "Energy T3 Cheia" and give each its own price. Do
+#      NOT also add "Energy total": it is the sum of the three and would be counted twice.
+#      (For a single total with no per-tariff cost, add only "Energy total".)
+#    - Daily or monthly counters for cards and automations: Settings, Devices and services, Helpers,
+#      Create helper, Utility Meter. Pick an energy sensor as source and daily or monthly as cycle.
+#
+#  TROUBLESHOOTING
+#    - Sensors "unavailable": Home Assistant has not seen the word Online on tele/e-redes/LWT. Check
+#      the topic in the two marked lines, and that the Tasmota device is connected to the broker.
+#    - Sensors "unknown": no message with the "EB" object has arrived yet. After a Tasmota restart
+#      the script holds the values back for 20 to 30 s, and the next message follows at the 30 s
+#      telemetry period. To watch the raw message: Settings, Devices and services, MQTT,
+#      Configure, Listen to a topic, tele/e-redes/SENSOR.
+#    - A log warning about a missing key (for example "has no attribute V1") means a message arrived
+#      without that value, usually because the meter did not answer that request. If it keeps
+#      happening, see the troubleshooting block of the Tasmota script.
+#    - Names: Home Assistant puts the device name in front of the sensor name, so entity lists show
+#      "Smart Meter Energy T3 Cheia" (entity id sensor.smart_meter_energy_t3_cheia) while the device
+#      page shows just "Energy T3 Cheia". Names can be changed freely in the UI.
+#    - Duplicates with other names, for example "EB ET3" next to "Energy T3 Cheia": the "EB" ones are
+#      not from this file. The Tasmota integration creates them from Tasmota's own auto-discovery
+#      (sensor name EB plus JSON key ET3); the name: lines of this file do not apply to them. Keep
+#      the sensors of this file and disable the discovered ones: Settings, Devices and services,
+#      Entities, filter by integration Tasmota, search "EB ", select all, Disable selected (or
+#      disable the whole Tasmota device). Deleting them does not stick, because Tasmota announces
+#      itself again at every restart; "SetOption19 1" withdraws the announcement but is reset at
+#      the next boot.
+#    - Wrong magnitudes (10 times too large or small) are a scaling problem in the Tasmota script
+#      (the ":10" and ":1000" divisors), not in this file.
+#
+# =============================================================================================
+
+mqtt:
+  sensor:
+
+    # -------------------------------------------------------------------------------------------
+    #  VOLTAGE
+    # -------------------------------------------------------------------------------------------
+    # Phase voltage in volts, one decimal. JSON keys V1, V2, V3 = meter registers 0x6C, 0x6E, 0x70.
+    # On a single-phase installation the L2 and L3 sensors carry no useful data: delete them.
+
+    # FIRST SENSOR, ANNOTATED LINE BY LINE. All the others repeat the same lines.
+    - name: "Voltage L1"                       # text shown in Home Assistant
+      unique_id: edpbox_v1                     # permanent id: never change it after the first start
+      # "&topic" gives this value an anchor name; the other sensors reuse it as "*topic".
+      state_topic: &topic "tele/e-redes/SENSOR"   # <-- CHANGE e-redes to your Tasmota topic
+      # "&avail" names the whole availability block, reused below as "*avail". The sensor shows as
+      # unavailable while Tasmota publishes Offline on its Last Will topic.
+      availability: &avail
+        - topic: "tele/e-redes/LWT"   # <-- CHANGE e-redes to your Tasmota topic
+          payload_available: "Online"
+          payload_not_available: "Offline"
+      # "&dev" names the device block, reused below as "*dev". The identifiers string ties all the
+      # sensors to one device; name, manufacturer and model are only labels.
+      device: &dev
+        identifiers: ["edpbox_han"]
+        name: "Smart Meter"
+        manufacturer: "E-REDES"
+        model: "EDP Box HAN (Modbus)"
+      # Picks the V1 value out of the "EB" object of the JSON message.
+      value_template: "{{ value_json.EB.V1 }}"
+      unit_of_measurement: "V"                 # unit shown with the number
+      device_class: voltage                    # tells Home Assistant that this is a voltage
+      state_class: measurement                 # goes up and down; long-term statistics are kept
+
+    # Phase 2 voltage (V2, register 0x6E). From here on every sensor repeats the same three
+    # reused lines: state_topic: *topic, availability: *avail and device: *dev.
+    - name: "Voltage L2"
+      unique_id: edpbox_v2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.V2 }}"
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+
+    # Phase 3 voltage (V3, register 0x70).
+    - name: "Voltage L3"
+      unique_id: edpbox_v3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.V3 }}"
+      unit_of_measurement: "V"
+      device_class: voltage
+      state_class: measurement
+
+    # -------------------------------------------------------------------------------------------
+    #  CURRENT
+    # -------------------------------------------------------------------------------------------
+    # Phase current in amperes, one decimal. JSON keys I1, I2, I3 = registers 0x6D, 0x6F, 0x71;
+    # I = the meter's own total over the three phases, register 0x72.
+
+    # Phase 1 current (I1, register 0x6D).
+    - name: "Current L1"
+      unique_id: edpbox_i1
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.I1 }}"
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+
+    # Phase 2 current (I2, register 0x6F).
+    - name: "Current L2"
+      unique_id: edpbox_i2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.I2 }}"
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+
+    # Phase 3 current (I3, register 0x71).
+    - name: "Current L3"
+      unique_id: edpbox_i3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.I3 }}"
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+
+    # Total current over the three phases (I, register 0x72).
+    - name: "Current total"
+      unique_id: edpbox_i
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.I }}"
+      unit_of_measurement: "A"
+      device_class: current
+      state_class: measurement
+
+    # -------------------------------------------------------------------------------------------
+    #  ACTIVE POWER
+    # -------------------------------------------------------------------------------------------
+    # Power drawn from the grid, in whole watts. Export is not read because no energy is fed back.
+    # The total is the meter's own sum of the three per-phase values; phases are not netted against
+    # each other. JSON keys P (register 0x79), P1 (0x73), P2 (0x75), P3 (0x77).
+
+    # Total active power (P, register 0x79): sum of the three phases.
+    - name: "Active power"
+      unique_id: edpbox_p
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.P }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+
+    # Phase 1 active power (P1, register 0x73).
+    - name: "Power L1"
+      unique_id: edpbox_p1
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.P1 }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+
+    # Phase 2 active power (P2, register 0x75).
+    - name: "Power L2"
+      unique_id: edpbox_p2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.P2 }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+
+    # Phase 3 active power (P3, register 0x77).
+    - name: "Power L3"
+      unique_id: edpbox_p3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.P3 }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+
+    # -------------------------------------------------------------------------------------------
+    #  POWER FACTOR
+    # -------------------------------------------------------------------------------------------
+    # Ratio between 0 and 1, three decimals, no unit. JSON keys PF (register 0x7B) and PF1, PF2,
+    # PF3 (0x7C to 0x7E). Without a unit Home Assistant treats it as a plain ratio.
+
+    # Total power factor (PF, register 0x7B).
+    - name: "Power factor"
+      unique_id: edpbox_pf
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PF }}"
+      device_class: power_factor
+      state_class: measurement
+
+    # Phase 1 power factor (PF1, register 0x7C).
+    - name: "Power factor L1"
+      unique_id: edpbox_pf1
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PF1 }}"
+      device_class: power_factor
+      state_class: measurement
+
+    # Phase 2 power factor (PF2, register 0x7D).
+    - name: "Power factor L2"
+      unique_id: edpbox_pf2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PF2 }}"
+      device_class: power_factor
+      state_class: measurement
+
+    # Phase 3 power factor (PF3, register 0x7E).
+    - name: "Power factor L3"
+      unique_id: edpbox_pf3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PF3 }}"
+      device_class: power_factor
+      state_class: measurement
+
+    # -------------------------------------------------------------------------------------------
+    #  FREQUENCY
+    # -------------------------------------------------------------------------------------------
+    # Mains frequency in hertz, one decimal, around 50.0. JSON key F, register 0x7F.
+
+    # Frequency (F, register 0x7F).
+    - name: "Frequency"
+      unique_id: edpbox_f
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.F }}"
+      unit_of_measurement: "Hz"
+      device_class: frequency
+      state_class: measurement
+
+    # -------------------------------------------------------------------------------------------
+    #  ENERGY
+    # -------------------------------------------------------------------------------------------
+    # Accumulated active energy drawn from the grid, in kWh with three decimals (Wh resolution).
+    # These are the meter's own counters: they only go up and are unaffected by restarts of the
+    # ESP or of Home Assistant. state_class total_increasing makes Home Assistant keep long-term
+    # statistics and treat a drop as a counter reset. E = all rates together (register 0x16);
+    # ET1, ET2, ET3 = rates 1, 2, 3 (registers 0x26, 0x27, 0x28), which normally add up to E.
+    # See ENERGY AND DAILY TOTALS at the top of this file for the Energy dashboard.
+
+    # Energy over all tariff rates (E, register 0x16).
+    - name: "Energy total"
+      unique_id: edpbox_e
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.E }}"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+    # Energy in rate 1, Vazio (ET1, register 0x26).
+    - name: "Energy T1 Vazio"
+      unique_id: edpbox_et1
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.ET1 }}"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+    # Energy in rate 2, Ponta (ET2, register 0x27).
+    - name: "Energy T2 Ponta"
+      unique_id: edpbox_et2
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.ET2 }}"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+    # Energy in rate 3, Cheia (ET3, register 0x28).
+    - name: "Energy T3 Cheia"
+      unique_id: edpbox_et3
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.ET3 }}"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+    # -------------------------------------------------------------------------------------------
+    #  MAXIMUM DEMAND
+    # -------------------------------------------------------------------------------------------
+    # Highest demand the meter has recorded since its maximum-demand register was last reset, in
+    # whole watts (JSON key PMax, register 0x22). Unlike the instantaneous power it only goes up
+    # between resets.
+
+    # Maximum demand (PMax, register 0x22).
+    - name: "Max demand"
+      unique_id: edpbox_pmax
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ value_json.EB.PMax }}"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+
+    # -------------------------------------------------------------------------------------------
+    #  TEXT AND DIAGNOSTIC SENSORS
+    # -------------------------------------------------------------------------------------------
+    # Tariff, Power limit and Meter clock are not plain numbers, so each one has a short template.
+
+    # Tariff rate in force now, as text. The meter reports the number 1, 2 or 3 (JSON key Tariff,
+    # register 0x0B). The template looks it up in a small table and, if the number is anything
+    # else, shows the raw number:
+    #     {1: 'Vazio', 2: 'Ponta', 3: 'Cheia'}.get(number, number)
+    # "| int(0)" first turns the JSON value into a whole number (0 when it is missing).
+    # The names follow the labels of the original script (Vazio = off-peak, Ponta = peak, Cheia =
+    # mid-peak); check them against your contract. A text sensor has no unit and no device class,
+    # which makes it easy to use in automations, for example when Tariff is Vazio.
+    - name: "Tariff"
+      unique_id: edpbox_tariff
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ {1: 'Vazio', 2: 'Ponta', 3: 'Cheia'}.get(value_json.EB.Tariff | int(0), value_json.EB.Tariff) }}"
+      icon: mdi:calendar-clock
+
+    # Power limit (contracted power) in force now, the level the meter's built-in breaker enforces.
+    # Tasmota delivers it in kVA with two decimals (JSON key Lim, register 0x12; 6.90 means 6.9 kVA).
+    # The template converts it to whole VA (6900) because the apparent_power device class is
+    # defined in VA. float(0) makes a missing value count as 0. entity_category diagnostic puts it
+    # in the Diagnostic section of the device page, away from the main readings.
+    - name: "Power limit"
+      unique_id: edpbox_lim
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: "{{ (value_json.EB.Lim | float(0) * 1000) | round(0) | int }}"
+      unit_of_measurement: "VA"
+      device_class: apparent_power
+      entity_category: diagnostic
+
+    # The meter's own clock as one text, for example 2026-11-11 23:20:05 (JSON keys Year, Month, Day,
+    # Hour, Min, Sec, register 0x01). The template stores the JSON object in a variable and joins
+    # the six numbers with zero padding (%04d = year, %02d = the rest). Compare it with the real
+    # time once to see whether the meter shows local time or UTC; the tariff schedule runs on it.
+    # The ">-" after value_template: starts a folded block: the two lines below it are joined
+    # into one template without a trailing newline. Comments must never go inside such a block, so
+    # this explanation sits above the sensor.
+    - name: "Meter clock"
+      unique_id: edpbox_clock
+      state_topic: *topic
+      availability: *avail
+      device: *dev
+      value_template: >-
+        {% set e = value_json.EB %}
+        {{ '%04d-%02d-%02d %02d:%02d:%02d' | format(e.Year, e.Month, e.Day, e.Hour, e.Min, e.Sec) }}
+      icon: mdi:clock-outline
+      entity_category: diagnostic
