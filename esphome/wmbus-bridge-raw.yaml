@@ -1,1 +1,203 @@
+# Wmbus Bridge Raw
+# RF900 / CC1101 868
 
+external_components:
+  - source: github://Kustonium/esphome-wmbus-bridge-rawonly@main
+    components: [wmbus_radio]
+    refresh: 0s
+
+substitutions:
+  dev: WMBUS
+  name: wmbus
+
+esphome:
+  name: ${name}
+  friendly_name: ${dev}
+  project:
+    name: easyhan.wmbus-raw
+    version: "1.02"
+
+esp32:
+  # board: heltec_wifi_lora_32_V2
+  board: esp32-s3-devkitc-1
+  flash_size: 8MB
+  framework:
+    type: esp-idf
+
+wifi:
+  output_power: 15db
+  #use_address: 10.1.0.39
+
+  #ssid: !secret wifi_ssid
+  #password: !secret wifi_password
+  #password: edpbox123
+
+  ap:
+    ssid: "Easy-HAN-Wmbus"
+    password: edpbox123
+
+
+captive_portal:
+
+###
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+  port: 1883
+  skip_cert_cn_check: true
+
+###
+
+web_server:
+  local: true
+  version: 3
+  
+logger:
+  id: component_logger
+  #level: debug
+  level: verbose
+
+api:
+  reboot_timeout: 33min
+
+ota:
+  - platform: esphome
+
+time:
+  - platform: homeassistant
+    id: esptime
+
+button:
+  - platform: restart
+    name: "ESP Restart"
+
+###
+
+spi:
+  # --- rf900 cc ---
+  clk_pin: GPIO35
+  mosi_pin: GPIO37
+  miso_pin: GPIO38
+  # --- lora ---
+  #clk_pin:
+  #  number: GPIO5
+  #  ignore_strapping_warning: true
+  #mosi_pin: GPIO27
+  #miso_pin: GPIO19
+
+wmbus_radio:
+  # --- rf900 cc ---
+  radio_type: CC1101
+  cs_pin: GPIO36
+  gdo0_pin: GPIO33 # gdo0
+  gdo2_pin: GPIO34
+  # --- lora ---
+  #radio_type: SX1276
+  #cs_pin: GPIO18
+  #reset_pin: GPIO14
+  #irq_pin: GPIO35
+  # ---
+  frequency: 868.95
+  cc1101_allow_experimental: true
+
+  #listen_mode: t1
+  #listen_mode: c1
+  listen_mode: both
+  listen_mode_filter_after_parse: false
+
+  topic_name: "cc1101"
+  diagnostic_mode: normal
+  diagnostic_summary_interval: 60s
+
+###
+
+output:
+  - platform: gpio
+    id: status_led
+    pin: GPIO39
+    #pin: GPIO25
+
+
+###
+
+sensor:
+
+## ## ##
+
+
+## ## ##
+
+  - platform: template
+    name: "Adc In"
+    id: adc_in_v
+    accuracy_decimals: 2
+    device_class: voltage
+    unit_of_measurement: "V"
+    state_class: measurement
+
+  - platform: adc
+    name: "Adc In raw" # ESP32-S3 PCB
+    raw: true
+    pin: 1
+    attenuation: 0dB
+    samples: 8
+    accuracy_decimals: 0
+    device_class: ""
+    unit_of_measurement: "raw"
+    icon: mdi:information
+    state_class: measurement
+    on_value:
+      then:
+        - lambda: id(adc_in_v).publish_state(x/257.2580645161);
+
+###
+
+  - platform: template
+    name: "ESP Free Heap"
+    lambda: |-
+      // arduino
+      //float heap = ESP.getFreeHeap();
+      // idf
+      float heap = esp_get_free_heap_size();
+      return heap / 1024.0;
+    unit_of_measurement: "kB"
+    icon: mdi:chip
+    state_class: measurement
+    entity_category: diagnostic
+
+  - platform: wifi_signal
+    name: "ESP Signal"
+    unit_of_measurement: "dB"
+    state_class: measurement
+    entity_category: diagnostic
+
+  - platform: uptime
+    name: "ESP Uptime"
+    filters:
+      - lambda: return x/3600;
+    unit_of_measurement: "h"
+    accuracy_decimals: 1
+    device_class: ""
+    entity_category: diagnostic
+
+### ### ###
+
+
+### ### ###
+
+text_sensor:
+
+  - platform: version
+    name: "ESPHome Version"
+    hide_timestamp: true
+    hide_hash: true
+    entity_category: diagnostic
+
+
+###
+
+#######
+# eof #
+#######
