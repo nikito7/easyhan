@@ -7,8 +7,8 @@ external_components:
     refresh: 0s
 
 substitutions:
-  dev: WMBUS
-  name: wmbus
+  dev: WMBUS Raw
+  name: wmbus-raw
 
 esphome:
   name: ${name}
