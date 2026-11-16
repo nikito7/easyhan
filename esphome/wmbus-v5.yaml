@@ -1,11 +1,10 @@
 # Wmbus V5
-# ESPHome 2026.7.3 (clear cache)
+# ESPHome 2026.10.2
 # Chip: CC1101 / LoRa SX1276
 # Meter: Izar / Arrow
 # 
 # Tested:
-# CC + Arrow OK.
-# LoRa + Izar OK.
+# CC + Janz eRegister, aes key, mode C1, driver hydrus
 
 external_components:
   - source: github://SzczepanLeon/esphome-components@main # Izar
@@ -22,7 +21,7 @@ esphome:
   friendly_name: ${dev}
   project:
     name: easyhan.wmbus
-    version: "5.16"
+    version: "5.18"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
@@ -99,7 +98,12 @@ spi:
   #miso_pin: GPIO19
 
 wmbus_common:
-    drivers: all
+    drivers:
+      - hydrus
+      - evo868
+      - izar
+      - itron
+      - flowiq2200
 
 wmbus_radio:
   # --- rf900 cc ---
@@ -137,10 +141,10 @@ wmbus_meter:
   - id: water_meter
     #meter_id: 0x22334455
     meter_id: !secret meter_id
-    type: auto
+    type: hydrus
     #type: izar
     #key: "00000000000000000000000000000000"
-    #key: !secret meter_key
+    key: !secret meter_key
     mode: 
       - T1
       - C1
@@ -160,7 +164,7 @@ sensor:
 
 ##
   - platform: template
-    name: "Test Izar Signal"
+    name: "Wmbus Meter Signal"
     id: meter_rssi
     accuracy_decimals: 0
     unit_of_measurement: "dBm"
@@ -171,7 +175,7 @@ sensor:
 
   - platform: wmbus_meter
     parent_id: water_meter
-    name: "Test Izar Total m3"
+    name: "Wmbus Meter Total m3"
     field: "total_m3"
     accuracy_decimals: 3
     unit_of_measurement: "m³"
@@ -181,7 +185,7 @@ sensor:
 
   - platform: wmbus_meter
     parent_id: water_meter
-    name: "Test Izar Total"
+    name: "Wmbus Meter Total"
     field: "total"
     accuracy_decimals: 3
     unit_of_measurement: "m³"
