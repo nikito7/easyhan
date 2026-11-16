@@ -1,9 +1,8 @@
 # Wmbus V5
-# ESPHome 2026.10.2
 # Chip: CC1101 / LoRa SX1276
-# Meter: Izar / Arrow
+# Meter: Izar T1 / Janz Arrow T1 / Janz eRegister C1
 # 
-# Tested:
+# ESPHome 2026.10.2 Tested:
 # CC + Janz eRegister, aes key, mode C1, driver hydrus
 
 external_components:
@@ -20,8 +19,8 @@ esphome:
   name: ${name}
   friendly_name: ${dev}
   project:
-    name: easyhan.wmbus
-    version: "5.18"
+    name: easyhan.wmbus-v5
+    version: "5.19"
 
 dashboard_import:
   package_import_url: github://nikito7/easyhan/esphome/wmbus-v5.yaml@dev
