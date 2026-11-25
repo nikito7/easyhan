@@ -13,6 +13,4 @@ Smart IoT Devices
 - [```lorawan``` ttn edpbox han](./misc/lorawan/)
 
 
-____
-Sansana Smart Solutions ® Portugal
 
